@@ -24,7 +24,7 @@ export const HS2 = () => {
             <Link to={"/activities"}>Активности</Link>
             <Link to={"/"}>СПА центр</Link>
             <Link to={"/"}>Рестораны</Link>
-            <Link to={"/"}>Услуги отеля</Link>
+            <Link to={"/contacts"}>Услуги отеля</Link>
             <Link to={"/events"}>Мероприятия</Link>
             <Link to={"/zal"}>Конференц залы</Link>
             <Link to={"/actions"}>Акции</Link>

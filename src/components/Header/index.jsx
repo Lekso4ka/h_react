@@ -40,7 +40,7 @@ export const Header = () => {
                 <Icon name="plus"/>
             </HeaderLink>
             <HeaderLink2>
-                Контакты
+                <Link to={"/contacts"}>Контакты</Link>
             </HeaderLink2>
             <HeaderButton>
                 Бронировать
