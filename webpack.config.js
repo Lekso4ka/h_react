@@ -31,7 +31,7 @@ module.exports = () => ({
                 use: ["style-loader", "css-loader"]
             },
             {
-                test: /\.(png|jpg|JPG|gif|woff(2)?|eot|ttf|otf)$/,
+                test: /\.(png|jpg|JPG|gif|woff(2)?|eot|ttf|otf|mp4)$/,
                 type: "asset/resource"
             },
             {

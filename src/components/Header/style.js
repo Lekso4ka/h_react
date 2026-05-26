@@ -3,13 +3,15 @@ import styled from "@emotion/styled"
 export const HeaderBlock = styled.header`
     height: 9.2rem;
     padding: 1.8rem 2.4rem .8rem;
-    background-color: #FFF6F0;
+    //background-color: #FFF6F0;
     color: #2F3034;
+    z-index: 1;
     display: grid;
     grid-template-columns: auto 1fr auto;
     gap: 14rem;
     box-sizing: border-box;
-    position: relative;
+    position: fixed;
+    top: 0;
     &::after {
         height: .1rem;
         background: rgba(150, 40, 31, 0.20);

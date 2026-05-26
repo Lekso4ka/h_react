@@ -2,6 +2,7 @@ import React from 'react';
 import {Global, css} from "@emotion/react";
 
 import Playfair from "./fonts/PlayfairDisplay.ttf"
+import PlayfairIt from "./fonts/PlayfairDisplay-Italic.ttf"
 import Manrope from "./fonts/Manrope.ttf"
 
 const globalSt = css`
@@ -10,6 +11,12 @@ const globalSt = css`
         src: url(${Playfair}) format("truetype");
         font-weight: 400 900;
         font-style: normal;
+    }
+    @font-face {
+        font-family: "Playfair Display";
+        src: url(${PlayfairIt}) format("truetype");
+        font-weight: 400 900;
+        font-style: italic;
     }
     @font-face {
         font-family: "Manrope";

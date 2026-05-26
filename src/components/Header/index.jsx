@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom";
 
 import {Icon} from "../Icon"
 import {
@@ -20,22 +21,22 @@ export const Header = () => {
                 <Icon name="plus"/>
             </HeaderLink>
             <HeaderLink>
-                <span>Активности</span>
+                <Link to={"/activities"}>Активности</Link>
                 <Icon name="plus"/>
             </HeaderLink>
             <HeaderLink>
-                <span>Услуги</span>
+                <Link to={"/zal"}>Услуги</Link>
                 <Icon name="plus"/>
             </HeaderLink>
             <HeaderLink>
-                <span>События</span>
+                <Link to={"/events"}>События</Link>
                 <Icon name="plus"/>
             </HeaderLink>
         </HeaderMenu>
-        <HeaderName>Голден<br/>Тюлип & Тюлип<br/>Инн</HeaderName>
+        <HeaderName><Link to={"/"}>Голден<br/>Тюлип & Тюлип<br/>Инн</Link></HeaderName>
         <HeaderMenu2>
             <HeaderLink>
-                <span>Акции</span>
+                <Link to={"/actions"}>Акции</Link>
                 <Icon name="plus"/>
             </HeaderLink>
             <HeaderLink2>
