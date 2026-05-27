@@ -8,6 +8,7 @@ import { Activities } from "./pages/Activities";
 import { Ev2 } from "./pages/Ev2";
 import { Events } from "./pages/Events";
 import { Home } from "./pages/Home";
+import { Hotel } from "./pages/Hotel";
 import { Room } from "./pages/Room";
 import { Zal } from "./pages/Zal";
 import {Vac} from "./pages/Vac";
@@ -24,8 +25,9 @@ export const App = () => {
             <Route path="/zal"  element={<Zal/>}/>
             <Route path="/actions"  element={<Actions/>}/>
             <Route path="/contacts"  element={<Vac/>}/>
+            <Route path="/hotel/:id"  element={<Hotel/>}/>
         </Routes>
-        <Map/>
+        {/*<Map/>*/}
         <Footer/>
     </div>
 }
