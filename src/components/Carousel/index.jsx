@@ -6,6 +6,7 @@ import { Icon } from "../Icon";
 
 import { Root, Viewport, Track, Slide, SlideImage, Arrow, Chevron, Dots, Dot, Tour } from "./style";
 
+
 gsap.registerPlugin(useGSAP);
 
 const TRANSITION_DURATION = 0.65;
@@ -181,9 +182,9 @@ export const Carousel = ({ images = [], className, autoPlayInterval = DEFAULT_AU
             </Tour>}
             <Viewport ref={viewportRef}>
                 <Track ref={trackRef}>
-                    {slides.map((src, i) => (
-                        <Slide key={`${src}-${i}`}>
-                            <SlideImage src={src} alt="" draggable={false} />
+                    {slides.map((el, i) => (
+                        <Slide key={i}>
+                            <SlideImage pic={el} />
                         </Slide>
                     ))}
                 </Track>

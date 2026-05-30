@@ -34,7 +34,17 @@ export const Trigger = styled.button`
 `;
 
 export const Question = styled.span`
-
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    span {
+        color: var(--Black-2, #2F3034);
+        font-family: "Playfair Display";
+        font-size: 2.4rem;
+        font-style: italic;
+        font-weight: 400;
+        line-height: 110%;
+    }
 `;
 
 export const Button = styled.span`

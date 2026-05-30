@@ -11,7 +11,7 @@ const OPEN_DURATION = 0.45;
 const CLOSE_DURATION = 0.35;
 
 export const Item = ({
-    i, question, answer, reset
+    i, question, tooltip, answer, reset
 }) => {
     const [isOpen, setIsOpen] = useState(false);
     const rootRef = useRef(null);
@@ -87,7 +87,10 @@ export const Item = ({
                 aria-controls={ panelId }
             >
                 <span className="digit">0{ i + 1 }</span>
-                <Question>{ question }</Question>
+                <Question>
+                    { question }
+                    { tooltip && <span>{tooltip}</span>}
+                </Question>
                 <Button aria-hidden="true">
                     <Icon name="bracket"/>
                     <span ref={ iconRef } >

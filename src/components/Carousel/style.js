@@ -1,4 +1,5 @@
 import styled from "@emotion/styled"
+import img from "../../assets/img";
 
 export const Root = styled.div`
 	width: 100%;
@@ -50,10 +51,10 @@ export const Slide = styled.div`
 	height: 100%;
 `;
 
-export const SlideImage = styled.img`
+export const SlideImage = styled.div`
 	width: 100%;
 	height: 100%;
-	object-fit: cover;
+	background: ${({pic}) =>`linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url(${img[pic.img]}) ${pic.pos}` };
 	display: block;
 	user-select: none;
 `;

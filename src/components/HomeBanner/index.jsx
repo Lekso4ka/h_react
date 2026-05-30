@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import { Icon } from "../Icon";
 import { Banner, Content, Line, Hotel, Title } from "./style";
 import video from "../../assets/images/file.mp4"
@@ -14,7 +15,7 @@ export const HomeBanner = () => {
             <Hotel>
                 <h3>Голден тюлип</h3>
                 <span>Комфорт и сервис</span>
-                <button>Выбрать</button>
+                <Link to="/hotel/golden-tulip">Выбрать</Link>
                 <div className="stars">
                     <Icon name="star"/>
                     <Icon name="star"/>
@@ -25,7 +26,7 @@ export const HomeBanner = () => {
             <Hotel>
                 <h3>Тюлип инн</h3>
                 <span>Практичный формат</span>
-                <button>Выбрать</button>
+                <Link to="/hotel/tulip-inn">Выбрать</Link>
                 <div className="stars">
                     <Icon name="star"/>
                     <Icon name="star"/>

@@ -14,6 +14,7 @@ export const Faq = ({ items = [], className, reset= 0 }) => {
                     key={item.id ?? index}
                     i = {index}
                     question={item.name}
+                    tooltip={item.tooltip}
                     answer={item.text}
                     reset={reset}
                 />

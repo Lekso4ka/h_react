@@ -5,7 +5,7 @@ import img from "../../assets/img";
 export const Hero = styled.section`
     height: 76rem;
     position: relative;
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.30) 0%, rgba(0, 0, 0, 0.30) 100%), url(${img.i6}) lightgray 50% / cover no-repeat;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.30) 0%, rgba(0, 0, 0, 0.30) 100%), url(${img.h_banner}) lightgray 50% / cover no-repeat;
     &::before {
         content: "";
         position: absolute;
@@ -124,7 +124,7 @@ export const Section2 = styled.section`
         color: #000;
         text-align: center;
         font-family: "Playfair Display", sans-serif;
-        font-size: 45px;
+        font-size: 4.4rem;
         font-style: normal;
         font-weight: 400;
         line-height: 100%; /* 45px */
@@ -140,9 +140,7 @@ export const Section2 = styled.section`
     .img-right {
         width: 100%;
         height: 104.2rem;
-        background-image: ${({pic2}) => `url(${img[pic2]})`};
-        background-position: center;
-        background-size: cover;
+        background: ${({pic2}) => `url(${img[pic2.pic]}) ${pic2.pos}`};
         //background: url(<path-to-image>) lightgray -318.347px 0px / 168.94% 100% no-repeat, url(<path-to-image>) lightgray 50% / cover no-repeat;
     }
     p {

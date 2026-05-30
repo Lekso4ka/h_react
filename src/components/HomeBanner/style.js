@@ -53,6 +53,8 @@ export const Line = styled.div`
     display: grid;
     grid-template-columns: 61rem 61rem 1fr;
     gap: 2.2rem;
+    position: relative;
+    z-index: 2;
 `
 export const Hotel = styled.div`
     height: 12rem;
@@ -78,7 +80,7 @@ export const Hotel = styled.div`
         line-height: 110%;
         justify-self: flex-end;
     }
-    button {
+    a {
         color: var(--Black-2, #2F3034);
         font-family: "Playfair Display";
         font-size: 1.8rem;

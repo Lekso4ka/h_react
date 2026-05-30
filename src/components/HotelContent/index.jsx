@@ -143,7 +143,7 @@ export const HotelContent = () => {
                     </li>) }
                 </ul>
             </div>
-            <Carousel className="carousel" images={data[id].section_5.carousel.map(el => img[el])}/>
+            <Carousel className="carousel" images={data[id].section_5.carousel}/>
         </Section5>
         <Section6 pic={data[id].section_6.image}>
             <div className="caption">
