@@ -1,7 +1,7 @@
 import React from "react";
 import {createRoot} from "react-dom/client";
 import { App } from "./App";
-import {HashRouter} from "react-router-dom";
+import {BrowserRouter} from "react-router-dom";
 
 import { GlobalStyles } from "./styles/GlobalSt";
 
@@ -19,8 +19,8 @@ const ScrollToTop = () => {
 };
 
 const root = createRoot(document.getElementById("root"));
-root.render(<HashRouter>
+root.render(<BrowserRouter>
     <ScrollToTop />
     <GlobalStyles/>
     <App/>
-</HashRouter>)
+</BrowserRouter>)
