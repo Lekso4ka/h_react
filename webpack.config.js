@@ -5,10 +5,10 @@ const Dotenv = require("dotenv-webpack");
 module.exports = () => ({
     entry: path.resolve(__dirname, "./src/index.js"),
     output: {
-        path: path.resolve(__dirname, "./build"),
+        path: path.resolve(__dirname, "./static"),
         filename: '[name].[contenthash].js',
         clean: true,
-        publicPath: "",
+        publicPath: "/",
         assetModuleFilename: "assets/[hash].[ext]",
     },
     devServer: {

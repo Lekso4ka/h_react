@@ -170,6 +170,11 @@ export const Section3 = styled.section`
         height: .1rem;
         background: rgba(150, 40, 31, 0.20);
     }
+    .line-b {
+        margin: 3.4rem 0 0;
+        height: .1rem;
+        background: rgba(150, 40, 31, 0.20);
+    }
     .content {
         display: grid;
         grid-template-columns: 78.9rem 1fr;
@@ -212,9 +217,9 @@ export const Section3 = styled.section`
         display: flex;
         align-items: baseline;
         justify-content: space-between;
-        opacity: .6;
         color: var(--Black-2, #2F3034);
         cursor: pointer;
+        position: relative;
         .name {
             font-family: "Playfair Display", sans-serif;
             font-size: 3.4rem;
@@ -222,6 +227,7 @@ export const Section3 = styled.section`
             display: flex;
             align-items: flex-start;
             gap: 1rem;
+            opacity: .6;
         }
         sup {
             font-family: Manrope, sans-serif;
@@ -235,19 +241,320 @@ export const Section3 = styled.section`
             display: flex;
             gap: .6rem;
             align-items: center;
+            opacity: .6;
         }
         .divider {
             color: rgba(47, 48, 52, 0.20);
             font-size: 2.6rem;
             font-weight: 200;
             line-height: 1.3;
+            opacity: 1;
         }
         &:not(:last-of-type) {
-            border-bottom: .1rem solid rgba(150, 40, 31, 0.10);;
+            margin-bottom: 1.1rem;
+            &::after {
+                content: "";
+                height: .1rem;
+                width: 100%;
+                position: absolute;
+                bottom: -1rem;
+                background-color: rgba(150, 40, 31, 0.10);
+            }
         }
-        &:hover {
-           opacity: 1;
+        &:not(:last-of-type) {
+            margin-top: 1rem;
         }
         
+        &:hover {
+            .name {
+                opacity: 1;
+            }
+            .variants {
+                opacity: 1;
+            }
+            a {
+                display: flex;
+            }
+        }
+        a {
+            justify-content: center;
+            align-items: center;
+            color: var(--Beige, #FFF6F0);
+            font-size: 1.2rem;
+            font-weight: 600;
+            line-height: normal;
+            letter-spacing: 0.048rem;
+            text-transform: uppercase;
+            width: 12rem;
+            height: 12rem;
+            border-radius: 100%;
+            box-sizing: border-box;
+            border: .1rem solid rgba(255, 246, 240, 0.30);
+            background: var(--Black-2, #2F3034);
+            backdrop-filter: blur(10px);
+            position: absolute;
+            left: 22.1rem;
+            bottom: 2.4rem;
+            display: none;
+        }
     }
 `
+
+export const Section4 = styled.section`
+    padding: 15rem 2.4rem;
+    background-color: var(--Bege-2, #F2ECDE);
+    display: grid;
+    justify-content: center;
+        justify-items: center;
+    position: relative;
+    h2 {
+        width: 122.8rem;
+        color: var(--Black-2, #2F3034);
+        text-align: center;
+        font-family: "Playfair Display", serif;
+        font-size: 5.4rem;
+        font-weight: 400;
+        line-height: normal;
+        letter-spacing: 0.054rem;
+        text-transform: uppercase;
+    }
+    p {
+        padding: 2.6rem 0 6.4rem;
+        width: 70rem;
+        color: var(--Black-2, #2F3034);
+        text-align: center;
+        font-size: 1.8rem;
+        font-weight: 500;
+        line-height: 1.3;
+    }
+    .img-c {
+        width: 61rem;
+        height: 52.4rem;
+        background: ${({pics, pos}) => `url(${img[pics.image_1]}) ${pos.image_1}`};
+        margin-bottom: 4.6rem;
+    }
+    a {
+        color: var(--Black-2, #2F3034);
+        font-family: "Playfair Display", serif;
+        font-size: 1.8rem;
+        font-style: italic;
+        font-weight: 500;
+        line-height: 1.1;
+        text-decoration-line: underline;
+        text-decoration-style: solid;
+        text-decoration-skip-ink: auto;
+        text-decoration-thickness: 10%; /* 1.8px */
+        text-underline-offset: 30%; /* 5.4px */
+        text-underline-position: from-font;
+    }
+    .img-lt {
+        width: 25.4rem;
+        height: 34.4rem;
+        background: ${({pics, pos}) => `url(${img[pics.image_2]}) ${pos.image_2}`};
+        position: absolute;
+        left: 22.1rem;
+        top: 31.4rem;
+    }
+    .img-lb {
+        width: 45.2rem;
+        height: 33.9rem;
+        background: ${({pics, pos}) => `url(${img[pics.image_4]}) ${pos.image_4}`};
+        position: absolute;
+        left: 2.4rem;
+        bottom: 18.9rem;
+    }
+    .img-rt {
+        width: 45.1rem;
+        height: 33.9rem;
+        background: ${({pics, pos}) => `url(${img[pics.image_3]}) ${pos.image_3}`};
+        position: absolute;
+        right: 2.4rem;
+        top: 30.3rem;
+    }
+    .img-rb {
+        width: 25.4rem;
+        height: 34.4rem;
+        background: ${({pics, pos}) => `url(${img[pics.image_5]}) ${pos.image_5}`};
+        position: absolute;
+        right: 22.1rem;
+        bottom: 15rem;
+    }
+`
+
+export const Section5 = styled.section`
+    padding: 12rem 2.4rem;
+    border-bottom: .1rem solid rgba(150, 40, 31, 0.20);
+    display: grid;
+    grid-template-columns: 1fr 124.1rem;
+    gap: 10rem 17.9rem;
+        align-content: flex-start;
+        align-items: flex-start;
+    .caption {
+        display: grid;
+        grid-template-columns: auto auto;
+        gap: 0 8.5rem;
+        align-items: flex-end;
+        color: var(--Green, #55532E);
+        font-size: 1.6rem;
+        font-weight: 500;
+        line-height: 1.3;
+        h2 {
+            color: var(--Black-2, #2F3034);
+            font-family: "Playfair Display", serif;
+            font-size: 4.4rem;
+            font-weight: 400;
+            line-height: 1.1;
+        }
+        .digit {
+            color: var(--Black-2, #2F3034);
+            font-family: "Playfair Display", serif;
+            font-size: 7.4rem;
+            font-weight: 500;
+            line-height: 1.1;
+            text-transform: uppercase;
+        }
+    }
+    .text {
+        display: grid;
+        grid-template-columns: repeat(2, 55.6rem);
+        color: var(--Black-2, #2F3034);
+        font-size: 1.8rem;
+        font-weight: 500;
+        line-height: 1.3;
+        gap: 4.6rem 7.6rem;
+        a {
+            font-family: "Playfair Display", serif;
+            font-style: italic;
+            line-height: 1.1;
+            text-decoration-line: underline;
+            text-decoration-style: solid;
+            text-decoration-skip-ink: auto;
+            text-decoration-thickness: 10%; /* 1.8px */
+            text-underline-offset: 30%; /* 5.4px */
+            text-underline-position: from-font;
+        }
+    }
+    .menu {
+        display: grid;
+        grid-template-columns: 29.4rem auto;
+        gap: 0 2.2rem;
+        align-content: flex-start;
+        .img {
+            height: 31.6rem;
+            background-image: ${({pic}) => `url(${img[pic]})`};
+            background-position: center;
+            background-size: cover;
+        }
+        li {
+            display: grid;
+            padding: 1.6rem 0;
+            border-top: .1rem solid rgba(150, 40, 31, 0.20);
+            color: var(--Black-2, #2F3034);
+            font-size: 1.6rem;
+            font-weight: 500;
+            line-height: 1.3;
+        }
+        .title {
+            display: grid;
+            gap: 4.6rem;
+                align-content: flex-start;
+            h3 {
+                color: #000;
+                font-family: "Playfair Display", serif;
+                font-size: 4.4rem;
+                font-weight: 400;
+                line-height: 1.1;
+            }
+            a {
+                color: var(--Black-2, #2F3034);
+                font-family: "Playfair Display";
+                font-size: 1.8rem;
+                font-style: italic;
+                font-weight: 500;
+                line-height: 110%; /* 19.8px */
+                text-decoration-line: underline;
+                text-decoration-style: solid;
+                text-decoration-skip-ink: auto;
+                text-decoration-thickness: 10%; /* 1.8px */
+                text-underline-offset: 30%; /* 5.4px */
+                text-underline-position: from-font;
+            }
+        }
+    }
+    .carousel {
+        height: 73.6rem;
+    }
+`
+
+
+export const Section6 = styled.section`
+    display: grid;
+    grid-template-columns: 76.7rem 1fr;
+    gap: 6.8rem 18rem;
+    padding: 13rem 2.4rem 15rem;
+    align-content: flex-start;
+    .caption {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+    }
+    h2 {
+        color: #000;
+        text-align: center;
+        font-family: "Playfair Display";
+        font-size: 4.4rem;
+        font-weight: 400;
+        line-height: 110%; /* 48.4px */
+    }
+    .text {
+        display: grid;
+        gap: 2.4rem;
+        grid-template-columns: 45rem 45rem;
+        align-items: flex-start;
+        color: var(--Black-2, #2F3034);
+        font-size: 1.8rem;
+        font-weight: 500;
+        line-height: 130%; /* 23.4px */
+    }
+    .img {
+        height: 42.8rem;
+        background-image: ${({pic}) => `url(${img[pic]})`};
+        background-position: center;
+        background-size: cover;
+    }
+`
+
+export const ServiceItem = styled.div`
+    color: ${({active}) => active ? "#2F3034" : "rgba(47,48,52,0.6)"};
+    font-size: 1.8rem;
+    font-weight: 600;
+    line-height: 110%; /* 19.8px */
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    &::before {
+        content: "";
+        width: 1.2rem;
+        height: 1.2rem;
+        border: .1rem solid #000;
+        position: absolute;
+        box-sizing: border-box;
+        left: -2.2rem;
+        ${({active}) => active ? "background: var(--Black-2, #2F3034);": ""}
+    }
+    &::after {
+        right: -.6rem;
+            transform: translate(100%, 0);
+        bottom: 1.5rem;
+        position: absolute;
+        content: "[ ${({cnt}) => cnt} ]";
+        color: var(--Black-2, #2F3034);
+        font-size: 1.6rem;
+        font-weight: 600;
+        line-height: 120%; /* 19.2px */
+    }
+`
+
+
+

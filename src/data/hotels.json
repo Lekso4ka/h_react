@@ -1,5 +1,5 @@
 {
-  "golden": {
+  "golden-tulip": {
     "name": "Голден Тюлип",
     "name_tooltip": "Комфорт и сервис",
     "stars": 4,
@@ -66,11 +66,20 @@
       "caption": "Комфортный городской отель для отдыха в горах и активных поездок в любое время года",
       "text": "Лаконичные интерьеры, удобные номера и продуманные детали создают спокойную и функциональную атмосферу. От утренних сборов перед выходом на склон до вечера после прогулок по набережной — всё здесь настроено на лёгкость, удобство и ощущение отдыха без лишнего.",
       "events_link": "",
-      "image_1": "i1",
-      "image_2": "i8",
-      "image_3": "i7",
-      "image_4": "i9",
-      "image_5": "i10"
+      "images": {
+        "image_1": "i1",
+        "image_2": "i8",
+        "image_3": "i7",
+        "image_4": "i9",
+        "image_5": "i10"
+      },
+      "image_positions": {
+        "image_1": "-5.9492rem -1.4rem / 119.506% 102.672%",
+        "image_2": "center / cover",
+        "image_3": "center / cover",
+        "image_4": "center / cover",
+        "image_5": "center / cover"
+      }
     },
     "section_5": {
       "caption_1": "Бранше",
@@ -105,49 +114,223 @@
     "section_6": {
       "caption": "Услуги",
       "include": [
-        "",
-        "",
-        "",
-        ""
-      ],
-      "additional": [
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        ""
-      ],
-      "text_1": "Всё, что делает отдых спокойным и продуманным, уже включено в проживание. Мы позаботились о деталях, чтобы вы могли сосредоточиться на главном — отдыхе.",
-      "text_2": "От утреннего пробуждения до восстановления после активного дня — сервисы отеля работают незаметно, создавая ощущение лёгкости и комфорта на протяжении всего пребывания.",
-      "image": "i4",
-      "list": [
         {
           "name": "Мобильный консьерж",
-          "text": ""
+          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
         },
         {
           "name": "Обслуживание в номере",
-          "text": ""
+          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
         },
         {
           "name": "Тренажерный зал",
-          "text": ""
+          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
         },
         {
           "name": "Хаммам и сауна",
-          "text": ""
+          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
+        }
+      ],
+      "additional": [
+        {
+          "name": "Мобильный консьерж",
+          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
+        },
+        {
+          "name": "Обслуживание в номере",
+          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
+        },
+        {
+          "name": "Тренажерный зал",
+          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
+        },
+        {
+          "name": "Хаммам и сауна",
+          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
         },
         {
           "name": "Будильник",
-          "text": ""
+          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
         },
         {
           "name": "Меню здорового сна",
-          "text": ""
+          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
+        },
+        {
+          "name": "Мобильный консьерж",
+          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
         }
+      ],
+      "text_1": "Всё, что делает отдых спокойным и продуманным, уже включено в проживание. Мы позаботились о деталях, чтобы вы могли сосредоточиться на главном — отдыхе.",
+      "text_2": "От утреннего пробуждения до восстановления после активного дня — сервисы отеля работают незаметно, создавая ощущение лёгкости и комфорта на протяжении всего пребывания.",
+      "image": "i4"
+    }
+  },
+  "tulip-inn": {
+    "name": "Тюлип Инн",
+    "name_tooltip": "Практичный формат",
+    "stars": 3,
+    "address": "Россия, г. Сочи, Панорама наб., 2",
+    "text_1": "Тюлип Инн — современный отель с практичным подходом к размещению в центре курорта, на набережной Роза Хутор. Удобное расположение рядом с подъёмниками и ключевыми локациями делает его отличным выбором для активного отдыха и коротких поездок в горы.",
+    "text_2": "Функциональные номера, продуманный сервис и спокойная атмосфера создают комфортные условия для проживания. Отель подходит для путешествий в любое время года — как для катания зимой, так и для летних прогулок и знакомства с природой региона.",
+    "room_link": "",
+    "section_1": {
+      "caption": "Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+      "video_link": ""
+    },
+    "section_2": {
+      "tooltip": "Тулип Инн Роза Хутор",
+      "caption": "Функциональный отель с акцентом на удобство, лаконичность и лёгкость проживания.",
+      "image_1": "i2",
+      "image_2": "i6",
+      "text": "Сдержанный дизайн, продуманная организация пространства и комфорт без лишнего формируют атмосферу спокойного отдыха. От утреннего кофе перед выходом в горы до вечера после насыщенного дня — всё здесь работает на ощущение уюта, простоты и уверенного комфорта."
+    },
+    "section_3": {
+      "caption": "Номера и Сьюты",
+      "size": 36,
+      "guests": 4,
+      "rooms": 1,
+      "variants": [
+        {
+          "id": "standard",
+          "name": "Стандартный номер",
+          "variants": ["Базовый", "Вид на реку", "Вид на гору"]
+        },
+        {
+          "id": "superior",
+          "name": "Улучшенный номер",
+          "variants": []
+        },
+        {
+          "id": "accessible",
+          "name": "Адаптированый номер",
+          "variants": []
+        },
+        {
+          "id": "suite",
+          "name": "Люкс",
+          "variants": ["Стандарт", "Двухкомнатный", "Представительский", "С балконом"]
+        },
+        {
+          "id": "family",
+          "name": "Семейный номер",
+          "variants": []
+        },
+        {
+          "id": "premier",
+          "name": "Премьер",
+          "variants": []
+        },
+        {
+          "id": "premier_plus",
+          "name": "Премьер Плюс",
+          "variants": []
+        }
+      ],
+      "image": "i3"
+    },
+    "section_4": {
+      "caption": "Комфортный городской отель для отдыха в горах и активных поездок в любое время года",
+      "text": "Лаконичные интерьеры, удобные номера и продуманные детали создают спокойную и функциональную атмосферу. От утренних сборов перед выходом на склон до вечера после прогулок по набережной — всё здесь настроено на лёгкость, удобство и ощущение отдыха без лишнего.",
+      "events_link": "",
+      "images": {
+        "image_1": "i1",
+        "image_2": "i8",
+        "image_3": "i7",
+        "image_4": "i9",
+        "image_5": "i10"
+      },
+      "image_positions": {
+        "image_1": "-5.9492rem -1.4rem / 119.506% 102.672%",
+        "image_2": "center / cover",
+        "image_3": "center / cover",
+        "image_4": "center / cover",
+        "image_5": "center / cover"
+      }
+    },
+    "section_5": {
+      "caption_1": "Бранше",
+      "caption_tooltip": "Ресторан Голден Тулип",
+      "guests": 160,
+      "guests_tooltip": "Максимум гостей",
+      "text_1": "Бранч — ресторан с более камерной атмосферой и акцентом на вечерний формат. Продуманный интерьер, мягкий свет и спокойный ритм создают пространство для ужинов, встреч и особых случаев.",
+      "text_2": "Кухня сочетает классические подходы и современную интерпретацию вкусов. В меню — блюда с акцентом на качество и подачу. Это место, где гастрономия становится частью общего впечатления от отдыха.",
+      "caption_2": "Меню",
+      "menu_link": "",
+      "list": [
+        {
+          "text": "Завтрак сервируется",
+          "time": "с 7:00 до 11:00"
+        },
+        {
+          "text": "Ресторан открыт ежедневно",
+          "time": "с 7:00 до 23:00"
+        },
+        {
+          "text": "Меню à la carte",
+          "time": "с 12:00 до 22:00"
+        }
+      ],
+      "image": "i11",
+      "carousel": [
+        "i5",
+        "i5",
+        "i5"
       ]
+    },
+    "section_6": {
+      "caption": "Услуги",
+      "include": [
+        {
+          "name": "Мобильный консьерж",
+          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
+        },
+        {
+          "name": "Обслуживание в номере",
+          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
+        },
+        {
+          "name": "Тренажерный зал",
+          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
+        },
+        {
+          "name": "Хаммам и сауна",
+          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
+        }
+      ],
+      "additional": [
+        {
+          "name": "Мобильный консьерж",
+          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
+        },
+        {
+          "name": "Обслуживание в номере",
+          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
+        },
+        {
+          "name": "Тренажерный зал",
+          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
+        },
+        {
+          "name": "Хаммам и сауна",
+          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
+        },
+        {
+          "name": "Будильник",
+          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
+        },
+        {
+          "name": "Меню здорового сна",
+          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
+        },
+        {
+          "name": "Мобильный консьерж",
+          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
+        }
+      ],
+      "text_1": "Всё, что делает отдых спокойным и продуманным, уже включено в проживание. Мы позаботились о деталях, чтобы вы могли сосредоточиться на главном — отдыхе.",
+      "text_2": "От утреннего пробуждения до восстановления после активного дня — сервисы отеля работают незаметно, создавая ощущение лёгкости и комфорта на протяжении всего пребывания.",
+      "image": "i4"
     }
   }
 }

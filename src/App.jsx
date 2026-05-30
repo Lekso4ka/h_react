@@ -26,6 +26,7 @@ export const App = () => {
             <Route path="/actions"  element={<Actions/>}/>
             <Route path="/contacts"  element={<Vac/>}/>
             <Route path="/hotel/:id"  element={<Hotel/>}/>
+            <Route path="/room/:hotel/:id"  element={<Room/>}/>
         </Routes>
         {/*<Map/>*/}
         <Footer/>
