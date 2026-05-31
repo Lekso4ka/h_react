@@ -4,7 +4,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { Icon } from "../Icon";
 
-import { Root, Viewport, Track, Slide, SlideImage, Arrow, Chevron, Dots, Dot, Tour } from "./style";
+import { Root, Viewport, Track, Slide, SlideImage, Arrow, Dots, Dot, Tour } from "./style";
 
 
 gsap.registerPlugin(useGSAP);

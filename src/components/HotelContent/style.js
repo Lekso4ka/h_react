@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import images from "../../assets/images";
 import img from "../../assets/img";
 
 export const Hero = styled.section`

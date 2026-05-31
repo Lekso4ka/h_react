@@ -9,6 +9,7 @@ export const Banner = styled.section`
     align-content: flex-end;
     box-sizing: border-box;
     overflow: hidden;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.30) 0%, rgba(0, 0, 0, 0.30) 100%);
     video {
         position: absolute;
         top: 0;

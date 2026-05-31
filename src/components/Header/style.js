@@ -34,15 +34,15 @@ export const HeaderBlock = styled.header`
     gap: 14rem;
     box-sizing: border-box;
 
-    &::after {
-        height: .1rem;
-        background: rgba(150, 40, 31, 0.20);
-        width: calc(100% - 4.8rem);
-        content: "";
-        position: absolute;
-        bottom: -.1rem;
-        left: 2.4rem;
-    }
+    //&::after {
+    //    height: .1rem;
+    //    background: rgba(150, 40, 31, 0.20);
+    //    width: calc(100% - 4.8rem);
+    //    content: "";
+    //    position: absolute;
+    //    bottom: -.1rem;
+    //    left: 2.4rem;
+    //}
 `
 export const HeaderMenu = styled.div`
     display: flex;
@@ -134,6 +134,7 @@ export const HeaderLang = styled.div`
 
 export const Drop = styled.div`
 	position: fixed;
+    box-sizing: border-box;
     top: 9.2rem;
 	left: 0;
 	right: 0;

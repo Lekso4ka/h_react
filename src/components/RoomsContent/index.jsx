@@ -1,7 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
-import { getHotelById, getSectionData } from "../../data/hotels";
-import hData from "../../data/hotels.json";
+import { getSectionData } from "../../data/hotels";
 import { Breadcrumbs } from "../Breadcrumbs";
 import { Block } from "./style";
 import { RoomsSection } from "./Section";

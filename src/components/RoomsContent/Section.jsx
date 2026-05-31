@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { getRooms } from "../../data/rooms";
 import { pluralize } from "../../utils/pluralize";
 import { Section } from "./style";
@@ -69,7 +69,6 @@ export const RoomsSection = ({data, h}) => {
                             <span key={v}>{v}</span>
                         </Fragment>)}
                     </div>}
-                    {/*<Link to={`/room/${h}/${el.id}/${el.variants[0] || "default"}`}>[ смотреть ]</Link>*/}
                 </li>) }
             </ul>
         </div>

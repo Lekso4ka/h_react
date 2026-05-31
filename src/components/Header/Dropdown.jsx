@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-import styled from "@emotion/styled";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { BrandPanel } from "./BrandPanel";
@@ -31,6 +30,7 @@ export function Dropdown({
             if (!open || !activeId) {
                 gsap.to(drop, {
                     height: 0,
+                    opacity: 0,
                     duration: 0.32,
                     ease: "power2.inOut",
                     overwrite: true
@@ -41,16 +41,17 @@ export function Dropdown({
                 return;
             }
             
-            gsap.set(drop, { height: "auto" });
+            gsap.set(drop, { height: "auto", opacity: 1 });
             const targetHeight = drop.offsetHeight;
-            gsap.set(drop, { height: 0 });
+            gsap.set(drop, { height: 0, opacity: 0 });
             
             gsap.to(drop, {
                 height: targetHeight,
-                duration: 0.46,
+                duration: 0.60,
                 ease: "power3.out",
                 overwrite: true,
-                onComplete: () => gsap.set(drop, { height: "auto" })
+                onStart: () => gsap.set(drop, {opacity: 1 }),
+                onComplete: () => gsap.set(drop, { height: "auto"})
             });
             
             if (inner) {

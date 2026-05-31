@@ -5,7 +5,6 @@ import {
     Hero,
     Section1,
     Section2,
-    Section3,
     Section4,
     Section5,
     Section6,
@@ -14,13 +13,11 @@ import {
 import { Link, useParams } from "react-router-dom";
 import data from "../../data/hotels.json";
 import { Carousel } from "../Carousel";
-import img from "../../assets/img";
 
 export const HotelContent = () => {
     const { id } = useParams();
     const [service, setService] = useState("include")
     const [faqReset, setFaqReset] = useState(0);
-    const [activeServices, setActiveServices] = useState([]);
     const renderStars = () => {
         const arr = []
         let n = data[id].stars

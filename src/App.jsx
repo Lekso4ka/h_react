@@ -18,8 +18,7 @@ export const App = () => {
     return <div>
         <Header/>
         <Routes>
-            {/*<Route path="/" exec element={<Home/>}/>*/}
-            <Route path="/" element={<Home/>}/>
+            <Route path="/" exec element={<Home/>}/>
             <Route path="/room"  element={<Room/>}/>
             <Route path="/activities/:id"  element={<Activities/>}/>
             <Route path="/events"  element={<Ev2/>}/>
@@ -30,7 +29,7 @@ export const App = () => {
             <Route path="/rooms/:id"  element={<Rooms/>}/>
             <Route path="/room/:hotel/:id/:variant"  element={<Room/>}/>
         </Routes>
-        {/*<Map/>*/}
+        <Map/>
         <Footer/>
     </div>
 }
