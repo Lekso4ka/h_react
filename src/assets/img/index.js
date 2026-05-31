@@ -67,9 +67,21 @@ import m_8_3 from "./4980eaa03fc9f0b060b7b456bce3f0e810ccfec6.jpg"
 import m_9_1 from "./3ddda9ae616cb3957a2746508ae341369b5c1bdc.jpg"
 import m_9_2 from "./a14452b16d9346dcdc0685030ecfa95554bbe59e.jpg"
 import m_9_3 from "./3ddda9ae616cb3957a2746508ae341369b5c1bdc.jpg"
-//import i12 from "."
+import summer_1 from "./e2ef1fe4a8aaa1b530e3134c2fae3d983a4b40d8.png"
+import summer_2 from "./8c65aeb8fa2c6a80c3c61a8bf2ade0c37ca9a244.png"
+import summer_3 from "./1926f7f81594aa0b0b8ae84b307a06a48cf1c920.png"
+import winter_1 from "./d91bc49d3b55a3fa7067c0b242fd1ddf267f3ce9.jpg"
+import winter_2 from "./e01766434fde37e9d8d89d399f0a0d367d572ed9.png"
+import winter_3 from "./3fd3582331c156c3152dffc2d5cd41c2035a3001.png"
+
 
 export default {
+    summer_1,
+    summer_2,
+    summer_3,
+    winter_1,
+    winter_2,
+    winter_3,
     h_banner,
     h_gt_1,
     h_gt_2,

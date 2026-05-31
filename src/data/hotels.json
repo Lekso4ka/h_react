@@ -6,7 +6,7 @@
     "address": "Россия, г. Сочи, Панорама наб., 3",
     "text_1": "Голден Тюлип Роза Хутор — четырёхзвёздочный отель в самом центре курорта, на набережной Роза Хутор. В нескольких минутах от подъёмников и ключевой инфраструктуры, с панорамными видами на горы и удобным доступом ко всем возможностям курорта.",
     "text_2": "Просторные современные номера, продуманный сервис и оснащённые конференц-залы делают отель подходящим как для отдыха, так и для деловых поездок. Комфортная база для зимнего катания, летних маршрутов и мероприятий в горах круглый год.",
-    "room_link": "",
+    "room_link": "/rooms/golden-tulip",
     "section_1": {
       "caption": "Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
       "video_link": ""
@@ -141,24 +141,6 @@
         {
           "name": "Хаммам и сауна",
           "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
-        }
-      ],
-      "additional": [
-        {
-          "name": "Мобильный консьерж",
-          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
-        },
-        {
-          "name": "Обслуживание в номере",
-          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
-        },
-        {
-          "name": "Тренажерный зал",
-          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
-        },
-        {
-          "name": "Хаммам и сауна",
-          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
         },
         {
           "name": "Будильник",
@@ -167,9 +149,35 @@
         {
           "name": "Меню здорового сна",
           "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
+        }
+      ],
+      "additional": [
+        {
+          "name": "Конференц-залы",
+          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
         },
         {
-          "name": "Мобильный консьерж",
+          "name": "Mountain SPA",
+          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
+        },
+        {
+          "name": "Прачечная самообслуживания",
+          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
+        },
+        {
+          "name": "Прачечная и химчистка",
+          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
+        },
+        {
+          "name": "Детский клуб «Кругосветка»",
+          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
+        },
+        {
+          "name": "Детская коляска",
+          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
+        },
+        {
+          "name": "Комната хранения и сушки снаряжения",
           "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
         }
       ],
@@ -185,7 +193,7 @@
     "address": "Россия, г. Сочи, Панорама наб., 2",
     "text_1": "Тюлип Инн — современный отель с практичным подходом к размещению в центре курорта, на набережной Роза Хутор. Удобное расположение рядом с подъёмниками и ключевыми локациями делает его отличным выбором для активного отдыха и коротких поездок в горы.",
     "text_2": "Функциональные номера, продуманный сервис и спокойная атмосфера создают комфортные условия для проживания. Отель подходит для путешествий в любое время года — как для катания зимой, так и для летних прогулок и знакомства с природой региона.",
-    "room_link": "",
+    "room_link": "/rooms/tulip-inn",
     "section_1": {
       "caption": "Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
       "video_link": ""
@@ -219,7 +227,7 @@
         {
           "id": "superior",
           "name": "Улучшенный номер",
-          "variants": []
+          "variants": ["С балконом"]
         },
         {
           "id": "half_suite",
@@ -230,6 +238,11 @@
           "id": "suite",
           "name": "Люкс",
           "variants": ["Стандарт", "Трехкомнатный"]
+        },
+        {
+          "id": "deluxe",
+          "name": "Делюкс",
+          "variants": []
         },
         {
           "id": "family",
@@ -316,31 +329,31 @@
       ],
       "additional": [
         {
-          "name": "Мобильный консьерж",
+          "name": "Конференц-залы",
           "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
         },
         {
-          "name": "Обслуживание в номере",
+          "name": "Mountain SPA",
           "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
         },
         {
-          "name": "Тренажерный зал",
+          "name": "Прачечная самообслуживания",
           "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
         },
         {
-          "name": "Хаммам и сауна",
+          "name": "Прачечная и химчистка",
           "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
         },
         {
-          "name": "Будильник",
+          "name": "Детский клуб «Кругосветка»",
           "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
         },
         {
-          "name": "Меню здорового сна",
+          "name": "Детская коляска",
           "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
         },
         {
-          "name": "Мобильный консьерж",
+          "name": "Комната хранения и сушки снаряжения",
           "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
         }
       ],

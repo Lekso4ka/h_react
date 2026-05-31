@@ -59,6 +59,8 @@ const globalSt = css`
         border: none;
         outline: none;
         cursor: pointer;
+        padding: 0;
+        color: inherit;
     }
 
     ::-webkit-scrollbar {

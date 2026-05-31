@@ -66,48 +66,7 @@ export const HotelContent = () => {
             </div>
             <div className="img-right"/>
         </Section2>
-        <Section3
-            pic={data[id].section_3.image}
-        >
-            <h2>{data[id].section_3.caption}</h2>
-            <div className="line"/>
-            <div className="content">
-                <div>
-                    <div className="tooltips">
-                        <div>
-                            <span className="digit">{data[id].section_3.size}</span>
-                            <span>м<sup>2</sup></span>
-                        </div>
-                        <div>
-                            <span>до</span>
-                            <span className="digit">{data[id].section_3.guests}</span>
-                            <span>гостей</span>
-                        </div>
-                        <div>
-                            <span className="digit">{data[id].section_3.rooms}</span>
-                            <span>комната</span>
-                        </div>
-                    </div>
-                    <div className="img"/>
-                </div>
-                <ul>
-                    { data[id].section_3.variants.map(el => <li key={el.id}>
-                        <div className="name">
-                            {el.name}
-                            {el.variants.length > 0 && <sup>[ {el.variants.length} ]</sup>}
-                        </div>
-                        { el.variants.length > 0 && <div className="variants">
-                            {el.variants.map((v,i) => <Fragment key={v}>
-                                {i !== 0 && <span className="divider">/</span>}
-                                <span key={v}>{v}</span>
-                            </Fragment>)}
-                        </div>}
-                        <Link to={`/room/${id}/${el.id}`}>[ смотреть ]</Link>
-                    </li>) }
-                </ul>
-            </div>
-            <div className="line-b"/>
-        </Section3>
+        
         <Section4 pics={data[id].section_4.images} pos={data[id].section_4.image_positions}>
             <h2>{data[id].section_4.caption}</h2>
             <p>{data[id].section_4.text}</p>
