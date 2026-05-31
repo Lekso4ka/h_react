@@ -104,7 +104,7 @@ export const HotelContent = () => {
             </div>
             <Carousel className="carousel" images={data[id].section_5.carousel}/>
         </Section5>
-        <Section6 pic={data[id].section_6.image}>
+        <Section6 pic={data[id].section_6.image} id="services">
             <div className="caption">
                 <h2>{data[id].section_6.caption}</h2>
                 <ServiceItem

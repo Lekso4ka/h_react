@@ -23,17 +23,17 @@ export const HeaderBlock = styled.header`
     top: 0;
     width: 100%;
     z-index: 1;
-    border-bottom: .1rem solid ${({light}) =>
-    light ? "rgba(150, 40, 31, 0.40)": "transparent"
-};
-    color: ${({light}) => light ? "#2F3034" : "#fff"};
+    color: ${ ({ light }) => light ? "#2F3034" : "#fff" };
+
     svg {
-        fill: ${({light}) => light ? "#2F3034" : "#fff"};
+        fill: ${ ({ light }) => light ? "#2F3034" : "#fff" };
     }
+
     display: grid;
     grid-template-columns: auto 1fr auto;
     gap: 14rem;
     box-sizing: border-box;
+
     &::after {
         height: .1rem;
         background: rgba(150, 40, 31, 0.20);
@@ -142,6 +142,7 @@ export const Drop = styled.div`
 	overflow: hidden;
 	background: #fff6f0;
 	pointer-events: ${(p) => (p.$open ? "auto" : "none")};
+    border-top: .1rem solid rgba(150, 40, 31, 0.40);
     border-bottom: .1rem solid rgba(150, 40, 31, 0.40);
 `;
 
@@ -178,6 +179,9 @@ export const ColumnLink = styled.a`
         letter-spacing: 0.072rem;
         text-transform: uppercase;
     }
+    h4 {
+    
+    }
     .img {
         position: relative;
         padding: 2.4rem;
@@ -197,6 +201,71 @@ export const ColumnLink = styled.a`
             line-height: normal;
             letter-spacing: 0.136rem;
         }
+        .label {
+            color: #fff;
+            font-family: "Playfair Display";
+            font-size: 1.8rem;
+            font-weight: 600;
+            line-height: normal;
+            letter-spacing: 0.072rem;
+            text-transform: uppercase;
+        }
+    }
+`;
+
+export const BrandSection = styled.div`
+    display: grid;
+    grid-template-rows: auto 1fr;
+    ${({cnt}) => `
+        width: ${cnt * 25}%;
+        grid-template-columns: repeat(${cnt}, 1fr);
+    `}
+    border-left: ${(p) => (p.$withLeftBorder ? ".1rem solid rgba(150, 40, 31, 0.40)" : "none")};
+    border-right: .1rem solid rgba(150, 40, 31, 0.40);
+    position: relative;
+    h3 {
+        padding: 2.4rem 2.4rem 1.6rem;
+        color: var(--Red, #96281F);
+        font-family: "Playfair Display";
+        ${({cnt}) => cnt > 1 ?`grid-column-end: span ${cnt};` : ""}
+        font-size: 1.8rem;
+        font-weight: 600;
+        line-height: normal;
+        letter-spacing: 0.072rem;
+        text-transform: uppercase;
+    }
+`;
+export const BrandColumn = styled.div`
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    ${(p) => p.$withLeftBorder ? `&::before {
+        content: "";
+        width: .1rem;
+        height: 2rem;
+        position: absolute;
+        top: 0;
+        background-color: rgba(150, 40, 31, 0.40);
+    }`: ""}
+`;
+
+export const BrandLink = styled.a`
+	display: grid;
+    height: 100%;
+	padding: 2.4rem;
+    box-sizing: border-box;
+    
+    .img {
+        position: relative;
+        padding: 2.4rem;
+        background-color: #D9D9D9;
+        background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.30) 0%, rgba(0, 0, 0, 0.30) 100%), url(${({pic}) => img[pic]});
+        background-position: center;
+        background-size: cover;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        gap: .5rem;
         .label {
             color: #fff;
             font-family: "Playfair Display";

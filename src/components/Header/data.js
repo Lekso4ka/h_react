@@ -6,32 +6,32 @@ export const LEFT_NAV = [
         layout: "hotels",
         brands: [
             {
-                title: "ГОЛДЕН ТЮЛИП",
+                title: "Голден тюлип",
                 items: [
                     {
-                        label: "НОМЕРА И СЬЮТЫ",
-                        href: "/rooms",
-                        image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80"
+                        label: "Номера и сьюты",
+                        href: "/rooms/golden-tulip",
+                        image: "h_gt_3"
                     },
                     {
-                        label: "УСЛУГИ ОТЕЛЯ",
-                        href: "#services",
-                        image: "https://images.unsplash.com/photo-1540555700478-4be289fbbe23?auto=format&fit=crop&w=800&q=80"
+                        label: "Услуги отеля",
+                        href: "/hotel/golden-tulip",
+                        image: "h_gt_13"
                     }
                 ]
             },
             {
-                title: "ТЮЛИП ИНН",
+                title: "Тюлип инн",
                 items: [
                     {
-                        label: "НОМЕРА",
-                        href: "/rooms",
-                        image: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80"
+                        label: "Номера",
+                        href: "/rooms/tulip-inn",
+                        image: "h_ti_3"
                     },
                     {
-                        label: "УСЛУГИ ОТЕЛЯ",
-                        href: "#services",
-                        image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=800&q=80"
+                        label: "Услуги отеля",
+                        href: "/hotel/tulip-inn",
+                        image: "h_ti_13"
                     }
                 ]
             }
@@ -88,41 +88,25 @@ export const RIGHT_NAV = [
         hasMenu: true,
         brands: [
             {
-                title: "ГОЛДЕН ТЮЛИП",
+                title: "Голден тюлип",
                 items: [
                     {
-                        label: "НОМЕРА И СЬЮТЫ",
-                        href: "/rooms",
-                        image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80"
-                    },
-                    {
-                        label: "УСЛУГИ ОТЕЛЯ",
-                        href: "#services",
-                        image: "https://images.unsplash.com/photo-1540555700478-4be289fbbe23?auto=format&fit=crop&w=800&q=80"
+                        label: "Спецпредложения",
+                        href: "#",
+                        image: "h_banner"
                     }
                 ]
             },
             {
-                title: "ТЮЛИП ИНН",
+                title: "Тюлип инн",
                 items: [
                     {
-                        label: "НОМЕРА",
-                        href: "/rooms",
-                        image: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80"
-                    },
-                    {
-                        label: "УСЛУГИ ОТЕЛЯ",
-                        href: "#services",
-                        image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=800&q=80"
+                        label: "Спецпредложения",
+                        href: "#",
+                        image: "h_banner"
                     }
                 ]
             }
-        ],
-        columns: [
-            { title: "РАННЕЕ БРОНИРОВАНИЕ", href: "#", image: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=800&q=80" },
-            { title: "WEEKEND", href: "#", image: "https://images.unsplash.com/photo-1520250497591-112f2c40a3b4?auto=format&fit=crop&w=800&q=80" },
-            { title: "СПА ПАКЕТЫ", href: "#", image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=800&q=80" },
-            { title: "СЕМЕЙНЫЙ ОТДЫХ", href: "#", image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=800&q=80" }
         ]
     },
     {

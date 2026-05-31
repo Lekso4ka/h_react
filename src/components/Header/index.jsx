@@ -5,7 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 
-import {Icon} from "../Icon"
+import { Icon } from "../Icon"
 import { Dropdown } from "./Dropdown";
 import { NavItem } from "./NavItem";
 import {
@@ -30,7 +30,7 @@ gsap.registerPlugin(useGSAP, ScrollTrigger);
 const SCROLL_RANGE = 80;
 const HEADER_HEIGHT = 92;
 
-
+const LIGHT_BG = "#fff6f0";
 
 export const Header = () => {
     const shellRef = useRef(null);
@@ -39,59 +39,113 @@ export const Header = () => {
     const menuOpenRef = useRef(false);
     const navigate = useNavigate();
     const location = useLocation()
+    const isHeroRouteRef = useRef(false);
     
     const [activeMenuId, setActiveMenuId] = useState(null);
     const [scrolled, setScrolled] = useState(false);
-    const [lightHeader, setLightHeader] = useState(scrolled || light.includes(location.pathname));
     const [menuOpen, setMenuOpen] = useState(false);
-    const [lang, setLang] = useState(() =>
-        (document.documentElement.lang || "ru").toLowerCase().startsWith("en") ? "en" : "ru"
-    );
-    
+    const isHeroRoute = !light.includes(location.pathname);
+    const lightHeader = !isHeroRoute || scrolled || menuOpen;
+    isHeroRouteRef.current = isHeroRoute;
     const activeMenu = useMemo(
         () => ALL_MENU_NAV.find((item) => item.id === activeMenuId) ?? null,
         [activeMenuId]
     );
     
+    const applyBg = useCallback(
+        ({ opacity, immediate = false } = {}) => {
+            if (!bgRef.current) return;
+            
+            if (!isHeroRouteRef.current) {
+                gsap.killTweensOf(bgRef.current);
+                gsap.set(bgRef.current, {
+                    backgroundColor: LIGHT_BG,
+                    opacity: 1
+                });
+                return;
+            }
+            
+            const targetOpacity =
+                opacity ?? (scrolledRef.current || menuOpenRef.current ? 1 : 0);
+            
+            gsap.to(bgRef.current, {
+                backgroundColor: LIGHT_BG,
+                opacity: targetOpacity,
+                duration: immediate ? 0 : 0.22,
+                ease: "power2.out",
+                overwrite: true
+            });
+        },
+        []
+    );
+    const closeMenu = useCallback(() => {
+        menuOpenRef.current = false;
+        setMenuOpen(false);
+    }, []);
+    useEffect(() => {
+        scrolledRef.current = false;
+        setScrolled(false);
+        closeMenu();
+        
+        if (!isHeroRoute) {
+            applyBg({ opacity: 1, immediate: true });
+        } else {
+            applyBg({ opacity: 0, immediate: true });
+        }
+        
+        ScrollTrigger.refresh();
+    }, [location.pathname, isHeroRoute, applyBg, closeMenu]);
+    
     useGSAP(
         () => {
             if (!bgRef.current) return;
-            if (lightHeader) return;
-            gsap.set(bgRef.current, { opacity: 0 });
+            
+            gsap.set(bgRef.current, { backgroundColor: LIGHT_BG, opacity: isHeroRoute ? 0 : 1 });
+            
+            if (!isHeroRoute) return undefined;
             
             const trigger = ScrollTrigger.create({
                 start: "top top",
-                end: `+=${SCROLL_RANGE}`,
+                end: `+=${ SCROLL_RANGE }`,
                 scrub: 0.35,
                 onUpdate: (self) => {
-                    if (menuOpenRef.current) return;
-                    gsap.set(bgRef.current, { opacity: self.progress });
+                    if (!isHeroRouteRef.current || menuOpenRef.current) return;
+                    
+                    gsap.set(bgRef.current, {
+                        backgroundColor: LIGHT_BG,
+                        opacity: self.progress
+                    });
                     
                     const next = self.progress > 0.02;
                     if (scrolledRef.current !== next) {
                         scrolledRef.current = next;
+                        setScrolled(next);
                     }
                 }
             });
             
             return () => trigger.kill();
         },
-        { scope: shellRef }
+        { scope: shellRef, dependencies: [isHeroRoute] }
     );
     
     useGSAP(
         () => {
             if (!bgRef.current) return;
-            if (lightHeader) return;
-            if (menuOpen) {
-                gsap.to(bgRef.current, { opacity: 1, duration: 0.22, ease: "power2.out", overwrite: true });
+            
+            if (!isHeroRoute) {
+                applyBg({ immediate: true });
                 return;
             }
-            if (!scrolledRef.current) {
-                gsap.to(bgRef.current, { opacity: 0, duration: 0.22, ease: "power2.out", overwrite: true });
+            
+            if (menuOpen || scrolledRef.current) {
+                applyBg({ opacity: 1 });
+                return;
             }
+            
+            applyBg({ opacity: 0 });
         },
-        { scope: shellRef, dependencies: [menuOpen] }
+        { scope: shellRef, dependencies: [menuOpen, isHeroRoute, applyBg] }
     );
     
     const openMenu = useCallback((id) => {
@@ -102,11 +156,6 @@ export const Header = () => {
         setMenuOpen(true);
     }, []);
     
-    const closeMenu = useCallback(() => {
-        menuOpenRef.current = false;
-        setMenuOpen(false);
-    }, []);
-    
     const handleShellLeave = useCallback(() => {
         closeMenu();
     }, [closeMenu]);
@@ -114,58 +163,68 @@ export const Header = () => {
     const navigateToHash = useCallback(
         (id) => {
             closeMenu();
-            if (window.location.pathname !== "/") {
-                navigate(`/#${id}`);
+            if (location.pathname !== "/") {
+                navigate(`/#${ id }`);
                 return;
             }
             document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
         },
-        [closeMenu, navigate]
+        [closeMenu, navigate, location.pathname]
     );
     
-    const switchLang = useCallback((next) => {
-        setLang(next);
-        //setLanguage(next);
-    }, []);
-    
-    
-    useEffect(() => {
-        if (light.includes(location.pathname)) return;
-        setLightHeader(scrolled)
-        console.log(lightHeader)
-        console.log(location.pathname)
-    }, [scrolled, location.pathname]);
+    const handleDropdownNavigate = useCallback(
+        (href) => {
+            closeMenu();
+            
+            if (!href || href === "#") return;
+            
+            if (href.startsWith("/")) {
+                navigate(href);
+                return;
+            }
+            
+            if (href.startsWith("#")) {
+                const id = href.slice(1);
+                if (location.pathname !== "/") {
+                    navigate(`/#${ id }`);
+                    return;
+                }
+                document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+        },
+        [closeMenu, navigate, location.pathname]
+    );
     
     return <Shell
-        ref={shellRef}
-        onMouseLeave={handleShellLeave}
+        ref={ shellRef }
+        onMouseLeave={ handleShellLeave }
     >
-        <HeaderBlock light={lightHeader}>
+        <HeaderBlock light={ lightHeader }>
             <BarBg
-                ref={bgRef}
-                light={lightHeader}
+                ref={ bgRef }
+                light={ lightHeader }
                 aria-hidden="true"
             />
             <HeaderMenu>
-                {LEFT_NAV.map((item) => <NavItem
-                    light={lightHeader}
-                    key={item.id}
-                    item={item}
-                    active={menuOpen && activeMenuId === item.id}
-                    onEnter={openMenu}
-                    onNavigate={navigateToHash}
-                />)}
+                { LEFT_NAV.map((item) => <NavItem
+                    light={ lightHeader }
+                    key={ item.id }
+                    item={ item }
+                    active={ menuOpen && activeMenuId === item.id }
+                    onEnter={ openMenu }
+                    onNavigate={ navigateToHash }
+                />) }
             </HeaderMenu>
-            <HeaderName light={lightHeader}><Link to={"/"} state={{id: "home"}}>Голден<br/>Тюлип & Тюлип<br/>Инн</Link></HeaderName>
+            <HeaderName><Link to={ "/" } state={ { id: "home" } }>Голден<br/>Тюлип & Тюлип<br/>Инн</Link></HeaderName>
             <HeaderMenu2>
-                {RIGHT_NAV.map((item) => <NavItem
-                    light={lightHeader}
-                    key={item.id}
-                    item={item}
-                    active={menuOpen && activeMenuId === item.id}
-                    onEnter={openMenu}
-                    onNavigate={navigateToHash}
-                />)}
+                { RIGHT_NAV.map((item) => <NavItem
+                    light={ lightHeader }
+                    key={ item.id }
+                    item={ item }
+                    active={ menuOpen && activeMenuId === item.id }
+                    onEnter={ openMenu }
+                    onNavigate={ navigateToHash }
+                />) }
                 <HeaderButton>
                     Бронировать
                 </HeaderButton>
@@ -174,50 +233,46 @@ export const Header = () => {
                     <span>|</span>
                     <span>en</span>
                 </HeaderLang>
-                {/*<LangSwitch aria-label="Выбор языка">*/}
-                {/*    <LangBtn*/}
-                {/*        type="button"*/}
-                {/*        $active={lang === "ru"}*/}
-                {/*        onClick={() => switchLang("ru")}*/}
-                {/*    >*/}
-                {/*        RU*/}
-                {/*    </LangBtn>*/}
-                {/*    <LangDivider aria-hidden="true">|</LangDivider>*/}
-                {/*    <LangBtn*/}
-                {/*        type="button"*/}
-                {/*        $active={lang === "en"}*/}
-                {/*        onClick={() => switchLang("en")}*/}
-                {/*    >*/}
-                {/*        EN*/}
-                {/*    </LangBtn>*/}
-                {/*</LangSwitch>*/}
+                {/*<LangSwitch aria-label="Выбор языка">*/ }
+                {/*    <LangBtn*/ }
+                {/*        type="button"*/ }
+                {/*        $active={lang === "ru"}*/ }
+                {/*        onClick={() => switchLang("ru")}*/ }
+                {/*    >*/ }
+                {/*        RU*/ }
+                {/*    </LangBtn>*/ }
+                {/*    <LangDivider aria-hidden="true">|</LangDivider>*/ }
+                {/*    <LangBtn*/ }
+                {/*        type="button"*/ }
+                {/*        $active={lang === "en"}*/ }
+                {/*        onClick={() => switchLang("en")}*/ }
+                {/*    >*/ }
+                {/*        EN*/ }
+                {/*    </LangBtn>*/ }
+                {/*</LangSwitch>*/ }
             </HeaderMenu2>
         </HeaderBlock>
         
         <Dropdown
-            activeId={activeMenuId}
-            open={menuOpen}
-            columns={activeMenu?.columns ?? []}
-            brands={activeMenu?.brands ?? []}
+            activeId={ activeMenuId }
+            open={ menuOpen }
+            top={ HEADER_HEIGHT }
+            columns={ activeMenu?.columns ?? [] }
+            brands={ activeMenu?.brands ?? [] }
+            onNavigate={ handleDropdownNavigate }
         />
     </Shell>
 }
 
-
-
-
-
-
-
 const Inner = styled.div`
-	position: relative;
-	z-index: 1;
-	height: 100%;
-	display: grid;
-	grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-	align-items: center;
-	gap: 24px;
-	padding: 0 clamp(16px, 3vw, 48px);
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    gap: 24px;
+    padding: 0 clamp(16px, 3vw, 48px);
 `;
 
 const navItemStyles = `
@@ -245,132 +300,132 @@ const navItemStyles = `
 `;
 
 const LeftNav = styled.nav`
-	display: flex;
-	align-items: center;
-	gap: clamp(12px, 2vw, 28px);
-	justify-self: start;
+    display: flex;
+    align-items: center;
+    gap: clamp(12px, 2vw, 28px);
+    justify-self: start;
 
-	@media (max-width: ${(p) => p.theme.breakpoints.xl}px) {
-		gap: 14px;
-	}
+    @media (max-width: ${ (p) => p.theme.breakpoints.xl }px) {
+        gap: 14px;
+    }
 
-	@media (max-width: ${(p) => p.theme.breakpoints.lg}px) {
-		display: none;
-	}
+    @media (max-width: ${ (p) => p.theme.breakpoints.lg }px) {
+        display: none;
+    }
 `;
 
 const RightNav = styled.nav`
-	display: flex;
-	align-items: center;
-	gap: clamp(12px, 2vw, 28px);
+    display: flex;
+    align-items: center;
+    gap: clamp(12px, 2vw, 28px);
 `;
 
 const NavButton = styled.button`
-	${navItemStyles}
-	color: ${(p) => (p.$active ? "#fff" : "rgba(255, 255, 255, 0.88)")};
+    ${ navItemStyles }
+    color: ${ (p) => (p.$active ? "#fff" : "rgba(255, 255, 255, 0.88)") };
 `;
 
 const NavAnchor = styled.a`
-	${navItemStyles}
+    ${ navItemStyles }
 `;
 
 const Plus = styled.span`
-	font-size: 13px;
-	line-height: 1;
-	letter-spacing: 0;
-	opacity: 0.9;
+    font-size: 13px;
+    line-height: 1;
+    letter-spacing: 0;
+    opacity: 0.9;
 `;
 
 const Logo = styled.a`
-	justify-self: center;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: 2px;
-	text-align: center;
-	color: #fff;
-	text-decoration: none;
+    justify-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    text-align: center;
+    color: #fff;
+    text-decoration: none;
 
-	span {
-		font-family: inherit;
-		font-size: clamp(11px, 1vw, 13px);
-		font-weight: 500;
-		line-height: 1.15;
-		letter-spacing: 0.18em;
-		text-transform: uppercase;
-	}
+    span {
+        font-family: inherit;
+        font-size: clamp(11px, 1vw, 13px);
+        font-weight: 500;
+        line-height: 1.15;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+    }
 `;
 
 const RightBlock = styled.div`
-	justify-self: end;
-	display: flex;
-	align-items: center;
-	gap: clamp(12px, 2vw, 24px);
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    gap: clamp(12px, 2vw, 24px);
 
-	@media (max-width: ${(p) => p.theme.breakpoints.lg}px) {
-		gap: 10px;
-	}
+    @media (max-width: ${ (p) => p.theme.breakpoints.lg }px) {
+        gap: 10px;
+    }
 `;
 
 const BookButton = styled.button`
-	border: 0;
-	padding: 12px 18px;
-	background: #8f1d1d;
-	color: #fff;
-	font-family: inherit;
-	font-size: 11px;
-	font-weight: 500;
-	line-height: 1;
-	letter-spacing: 0.14em;
-	text-transform: uppercase;
-	cursor: pointer;
-	transition: background-color 160ms ease, transform 120ms ease;
+    border: 0;
+    padding: 12px 18px;
+    background: #8f1d1d;
+    color: #fff;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 160ms ease, transform 120ms ease;
 
-	&:hover {
-		background: #7a1818;
-	}
+    &:hover {
+        background: #7a1818;
+    }
 
-	&:active {
-		transform: translateY(1px);
-	}
+    &:active {
+        transform: translateY(1px);
+    }
 
-	@media (max-width: ${(p) => p.theme.breakpoints.md}px) {
-		padding: 10px 12px;
-		font-size: 10px;
-	}
+    @media (max-width: ${ (p) => p.theme.breakpoints.md }px) {
+        padding: 10px 12px;
+        font-size: 10px;
+    }
 `;
 
 const LangSwitch = styled.div`
-	display: inline-flex;
-	align-items: center;
-	gap: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
 
-	@media (max-width: ${(p) => p.theme.breakpoints.sm}px) {
-		display: none;
-	}
+    @media (max-width: ${ (p) => p.theme.breakpoints.sm }px) {
+        display: none;
+    }
 `;
 
 const LangBtn = styled.button`
-	border: 0;
-	padding: 0;
-	background: transparent;
-	cursor: pointer;
-	font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-	font-size: 11px;
-	font-weight: 500;
-	line-height: 1;
-	letter-spacing: 0.08em;
-	text-transform: uppercase;
-	color: ${(p) => (p.$active ? "#fff" : "rgba(255, 255, 255, 0.42)")};
-	transition: color 160ms ease;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    cursor: pointer;
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: ${ (p) => (p.$active ? "#fff" : "rgba(255, 255, 255, 0.42)") };
+    transition: color 160ms ease;
 
-	&:hover {
-		color: #fff;
-	}
+    &:hover {
+        color: #fff;
+    }
 `;
 
 const LangDivider = styled.span`
-	color: rgba(255, 255, 255, 0.28);
-	font-size: 11px;
-	line-height: 1;
+    color: rgba(255, 255, 255, 0.28);
+    font-size: 11px;
+    line-height: 1;
 `;

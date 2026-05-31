@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import { Icon } from "../Icon";
 import { HeaderLink, HeaderLink2 } from "./style";
 
-export const NavItem = ({ item, active, onEnter, onNavigate }) => {
+export const NavItem = ({ item, active, onEnter, onNavigate, light }) => {
     const content = (
         <>
             {item.label}
-            {item.hasMenu && <Icon name="plus"/>}
+            {item.hasMenu && <Icon name="plus" color={light ? "#2F3034" : "#fff"}/>}
         </>
     );
     

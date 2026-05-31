@@ -14,7 +14,8 @@ export function Dropdown({
     open,
     top,
     columns = [],
-    brands = []
+    brands = [],
+    onNavigate
 }) {
     const dropRef = useRef(null);
     const innerRef = useRef(null);
@@ -69,8 +70,8 @@ export function Dropdown({
         <Drop ref={dropRef} $top={top} $open={open} aria-hidden={!open}>
             <Inner ref={innerRef} key={activeId}>
                 {columns.length > 0
-                    ? <ColumnsPanel data={columns} />
-                    : <BrandPanel data={brands}/>
+                    ? <ColumnsPanel data={columns} onNavigate={onNavigate}/>
+                    : <BrandPanel data={brands} onNavigate={onNavigate}/>
                 }
             </Inner>
         </Drop>
