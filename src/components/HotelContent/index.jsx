@@ -1,10 +1,11 @@
+import img from "../../assets/img"
 import React, { Fragment, useEffect, useState } from "react";
 import { Faq } from "../Faq";
 import { Icon } from "../Icon";
 import {
     Hero,
     Section1,
-    Section2,
+    Section2, Section3,
     Section4,
     Section5,
     Section6,
@@ -48,7 +49,9 @@ export const HotelContent = () => {
             </div>
             <div className="content">
                 <h2>{data[id].section_1.caption}</h2>
-                <div className="video"></div>
+                <div className="video">
+                    <video src={img[data[id].section_1.video_link]} autoPlay></video>
+                </div>
             </div>
         </Section1>
         <Section2
@@ -63,7 +66,11 @@ export const HotelContent = () => {
             </div>
             <div className="img-right"/>
         </Section2>
-        
+        <Section3 pic={data[id].section_3.bg}>
+            <div className="tooltip">{data[id].name}</div>
+            <h2>{data[id].section_3.caption}</h2>
+            <Link to={data[id].room_link}>К номерам</Link>
+        </Section3>
         <Section4 pics={data[id].section_4.images} pos={data[id].section_4.image_positions}>
             <h2>{data[id].section_4.caption}</h2>
             <p>{data[id].section_4.text}</p>

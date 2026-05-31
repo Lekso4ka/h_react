@@ -76,8 +76,9 @@ import winter_1 from "./d91bc49d3b55a3fa7067c0b242fd1ddf267f3ce9.jpg"
 import winter_2 from "./e01766434fde37e9d8d89d399f0a0d367d572ed9.png"
 import winter_3 from "./3fd3582331c156c3152dffc2d5cd41c2035a3001.png"
 import promo from "./162bd9777cbdda45a962f0928958636b6cd97fbe.png"
-
+import video1 from "./video1.mp4"
 export default {
+    video1,
     promo,
     summer_1,
     summer_2,

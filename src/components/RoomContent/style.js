@@ -1,7 +1,7 @@
 import styled from "@emotion/styled"
 
 export const Block = styled.div`
-    padding: 0 2.4rem 6rem;
+    padding: 0 2.4rem 3.6rem;
     display: grid;
     grid-template-columns: 108.2rem 1fr;
     gap: 18rem;
@@ -20,6 +20,7 @@ export const Caption = styled.div`
     align-items: baseline;
     padding: 3.2rem 0 2.6rem;
     border-bottom: .1rem solid #96281F33;
+
     h1 {
         color: var(--Black-2, #2F3034);
         font-family: "Playfair Display";
@@ -28,11 +29,13 @@ export const Caption = styled.div`
         font-weight: 400;
         line-height: 110%; /* 70.4px */
     }
+
     strong {
         color: var(--Black-2, #2F3034);
         font-size: 2rem;
         font-weight: 400;
         line-height: 110%;
+
         &::first-letter {
             text-transform: lowercase;
         }
@@ -45,7 +48,7 @@ export const TextTop = styled.div`
     grid-template-columns: repeat(2, 1fr);
     gap: 0 2.3rem;
     grid-template-rows: 4rem 12.84rem;
-    
+
     h2 {
         color: var(--Black, #1C1C1C);
         font-size: 2rem;
@@ -54,6 +57,7 @@ export const TextTop = styled.div`
         grid-column-end: span 2;
         align-self: center;
     }
+
     .tl {
         display: flex;
         gap: 1rem;
@@ -66,6 +70,7 @@ export const TextTop = styled.div`
         padding: 1.5rem 0 2.4rem;
         border-bottom: .1rem solid #96281F33;
         position: relative;
+
         span:first-of-type {
             color: var(--Black-2, #2F3034);
             font-size: 7.4rem;
@@ -73,6 +78,7 @@ export const TextTop = styled.div`
             font-weight: 400;
             line-height: 110%; /* 81.4px */
         }
+
         &::after {
             position: absolute;
             content: "";
@@ -83,6 +89,7 @@ export const TextTop = styled.div`
             bottom: 2rem;
         }
     }
+
     .tr {
         display: flex;
         gap: 1rem;
@@ -95,6 +102,7 @@ export const TextTop = styled.div`
         padding: 1.5rem 0 2.4rem .9rem;
         border-bottom: .1rem solid #96281F33;
         position: relative;
+
         span:nth-of-type(2) {
             color: var(--Black-2, #2F3034);
             font-size: 7.4rem;
@@ -103,6 +111,7 @@ export const TextTop = styled.div`
             line-height: 110%; /* 81.4px */
         }
     }
+
     .bl {
         display: flex;
         gap: 1rem;
@@ -114,6 +123,7 @@ export const TextTop = styled.div`
         line-height: 110%; /* 30px */
         padding: 2.4rem 02rem 5.2rem 0;
         position: relative;
+
         &::after {
             position: absolute;
             content: "";
@@ -124,6 +134,7 @@ export const TextTop = styled.div`
             top: 2rem;
         }
     }
+
     .br {
         display: flex;
         gap: 1rem;
@@ -158,6 +169,7 @@ export const SecondaryText = styled.div`
     padding: 0 10.6rem 4rem 3rem;
     border-bottom: .1rem solid rgba(150, 40, 31, 0.20);
     position: relative;
+
     &::before {
         content: "";
         width: 1.4rem;
@@ -173,6 +185,7 @@ export const Options = styled.div`
     padding: 2.4rem 0;
     display: grid;
     gap: 2.4rem;
+
     h2 {
         color: var(--Black-2, #2F3034);
         font-family: "Playfair Display";
@@ -181,11 +194,13 @@ export const Options = styled.div`
         font-weight: 500;
         line-height: 110%; /* 22px */
     }
+
     ul {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 2.2rem;
     }
+
     li {
         color: var(--Black-2, #2F3034);
         font-size: 1.6rem;
@@ -195,6 +210,7 @@ export const Options = styled.div`
         display: flex;
         align-items: center;
         gap: 1.2rem;
+
         svg {
             width: 2.4rem;
         }
@@ -205,6 +221,7 @@ export const ImagesBlock = styled.div`
     padding: 2.8rem 0 0;
     display: grid;
     gap: 2rem;
+    padding-bottom: 2.4rem;
 `
 
 export const Button = styled.button`
@@ -231,6 +248,7 @@ export const List1 = styled.div`
     //height: 2rem;
     //transition: height .2s linear;
     //overflow: hidden;
+
     h2 {
         cursor: pointer;
         //height: 2rem;
@@ -244,26 +262,31 @@ export const List1 = styled.div`
         font-weight: 500;
         line-height: 110%;
         margin-bottom: 2.4rem;
+
         svg {
             transition: transform .2s linear;
             width: 1.4rem;
-            transform: ${({active}) => active ? "rotate(45deg)" : "rotate(0)"}
+            transform: ${ ({ active }) => active ? "rotate(45deg)" : "rotate(0)" }
         }
     }
-    &>ul {
+
+    & > ul {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 4rem 2.3rem;
-        &>li {
+
+        & > li {
             color: var(--Green, #55532E);
             font-size: 1.4rem;
             font-style: normal;
             font-weight: 600;
             line-height: 100%; /* 14px */
+
             div {
                 padding-bottom: 1.8rem;
             }
-            &>ul {
+
+            & > ul {
                 color: var(--Black-2, #2F3034);
                 font-size: 1.6rem;
                 font-style: normal;
@@ -272,7 +295,7 @@ export const List1 = styled.div`
             }
         }
     }
-    
+
 `
 
 export const List2 = styled.div`
@@ -281,6 +304,7 @@ export const List2 = styled.div`
     //height: 2rem;
     transition: height .2s linear;
     overflow: hidden;
+
     h2 {
         cursor: pointer;
         display: flex;
@@ -293,17 +317,20 @@ export const List2 = styled.div`
         font-weight: 500;
         line-height: 110%;
         margin-bottom: 2.4rem;
+
         svg {
             transition: transform .2s linear;
             width: 1.4rem;
-            transform: ${({active}) => active ? "rotate(45deg)" : "rotate(0)"}
+            transform: ${ ({ active }) => active ? "rotate(45deg)" : "rotate(0)" }
         }
     }
+
     ul {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 1.4rem;
         list-style-type: disc;
+
         li {
             margin-left: 2.5rem;
             color: var(--Black-2, #2F3034);
@@ -324,14 +351,15 @@ export const GalleryImage = styled.img`
 `;
 
 export const AsideColumn = styled.div`
-position: relative;
-align-self: start;
+    position: relative;
+    align-self: start;
 `;
 
 export const Info = styled.aside`
-display: flex;
-flex-direction: column;
-will-change: transform;
+    display: flex;
+    flex-direction: column;
+    will-change: transform;
+    padding-bottom: 2.4rem;
 `;
 
 export const AccP = styled.div`

@@ -18,12 +18,14 @@ export const Hero = styled.section`
 `
 export const Section1 = styled.section`
     padding: 6rem 2.4rem 0;
+
     .top {
         display: grid;
         grid-template-columns: 1fr 45.2rem 45.2rem;
         gap: 4.6rem 18rem;
         justify-content: flex-end;
     }
+
     .title {
         grid-template-columns: auto auto;
         align-self: flex-start;
@@ -36,9 +38,11 @@ export const Section1 = styled.section`
         font-size: 1.8rem;
         font-weight: 500;
         line-height: 1.3;
-            &>span {
-                    justify-self: flex-end;
-            }
+
+        & > span {
+            justify-self: flex-end;
+        }
+
         h1 {
             color: #96281F;
             font-family: "Playfair Display", sans-serif;
@@ -49,26 +53,31 @@ export const Section1 = styled.section`
             width: max-content;
         }
     }
+
     .stars {
         display: flex;
         align-items: center;
         gap: .6rem;
         flex: 50%;
+
         svg {
             width: 1.8rem;
             height: 1.8rem;
         }
     }
+
     p {
         color: var(--Black, #1C1C1C);
         font-size: 1.8rem;
         font-weight: 500;
         line-height: 1.3;
     }
+
     p.address {
         color: var(--Black-2, #2F3034);
         line-height: 1.1; /* 19.8px */
     }
+
     a {
         color: #000;
         font-family: "Playfair Display", sans-serif;
@@ -83,12 +92,14 @@ export const Section1 = styled.section`
         text-underline-offset: 30%; /* 5.4px */
         text-underline-position: from-font;
     }
+
     .content {
         padding-top: 15rem;
         width: 152.4rem;
         display: grid;
         gap: 6rem;
         margin: 0 auto;
+
         h2 {
             color: var(--Black, #1C1C1C);
             text-align: center;
@@ -98,9 +109,17 @@ export const Section1 = styled.section`
             line-height: normal;
             text-transform: uppercase;
         }
+
         .video {
             height: 76rem;
             background: rgba(0, 0, 0, 0.20);
+
+            video {
+                    object-fit: cover;
+                border: none;
+                width: 100%;
+                height: 100%;
+            }
         }
     }
 `
@@ -156,7 +175,53 @@ export const Section2 = styled.section`
         line-height: 1.3;
     }
 `
-
+export const Section3 = styled.section`
+    height: 71.5rem;
+    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.40) 0%, rgba(0, 0, 0, 0.40) 100%), url(${ ({ pic }) => img[pic] });
+    background-position: center;
+    background-size: cover;
+        flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+        .tooltip {
+                display: inline-flex;
+                padding: 1.2rem 1.6rem;
+                justify-content: center;
+                align-items: center;
+                border: .1rem solid rgba(255, 246, 240, 0.40);
+                background: #FFF6F0;
+                backdrop-filter: blur(12px);
+                color: var(--Red, #96281F);
+                font-family: "Playfair Display";
+                font-size: 1.8rem;
+                font-weight: 500;
+                line-height: 100%; /* 18px */
+        }
+        h2 {
+                color: var(--Beige, #FFF6F0);
+                text-align: center;
+                font-family: "Playfair Display";
+                font-size: 4.4rem;
+                font-weight: 500;
+                line-height: normal;
+                padding: 1.6rem 0 3.6rem;
+        }
+        a {
+                color: var(--Beige, #FFF6F0);
+                font-family: "Playfair Display";
+                font-size: 1.8rem;
+                font-style: italic;
+                font-weight: 500;
+                line-height: 110%; /* 19.8px */
+                text-decoration-line: underline;
+                text-decoration-style: solid;
+                text-decoration-skip-ink: auto;
+                text-decoration-thickness: 10%; /* 1.8px */
+                text-underline-offset: 30%; /* 5.4px */
+                text-underline-position: from-font;
+        }
+`
 
 export const Section4 = styled.section`
     padding: 15rem 2.4rem;

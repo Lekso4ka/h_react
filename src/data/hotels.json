@@ -9,7 +9,7 @@
     "room_link": "/rooms/golden-tulip",
     "section_1": {
       "caption": "Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-      "video_link": ""
+      "video_link": "video1"
     },
     "section_2": {
       "tooltip": "Голден Тюлип Роза Хутор",
@@ -129,57 +129,143 @@
       "include": [
         {
           "name": "Мобильный консьерж",
-          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
+          "text": "Управляйте услугами отеля прямо со смартфона. Заказывайте уборку номера, будильник, трансфер и другие сервисы в несколько касаний.",
+          "links": [
+            {
+              "href": "",
+              "title": "Открыть сервис"
+            },
+            {
+              "href": "",
+              "title": "Позвонить в службу"
+            }
+          ]
         },
         {
           "name": "Обслуживание в номере",
-          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
+          "text": "Наслаждайтесь завтраком, обедом или ужином в уединении своего номера. В меню представлены блюда европейской кухни, напитки и лёгкие закуски с доставкой прямо к двери.",
+          "links": [
+            {
+              "href": "",
+              "title": "Посмотреть меню"
+            },
+            {
+              "href": "",
+              "title": "Заказать по телефону"
+            }
+          ]
         },
         {
           "name": "Тренажерный зал",
-          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
+          "text": "Современный фитнес-зал с кардио- и силовыми тренажёрами открыт для гостей отеля. Отличное место для поддержания привычного режима тренировок даже во время отдыха.",
+          "links": [
+            {
+              "href": "",
+              "title": "Открыть 3D-тур"
+            }
+          ]
         },
         {
           "name": "Хаммам и сауна",
-          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
+          "text": "После активного дня восстановите силы в хаммаме и сауне. Мягкое тепло помогает расслабиться, снять напряжение и восстановить энергию.",
+          "links": [
+            {
+              "href": "",
+              "title": ""
+            }
+          ]
         },
         {
           "name": "Будильник",
-          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
+          "text": "Если вас ждёт ранний выезд, экскурсия или деловая встреча, сотрудники отеля помогут не пропустить важное событие. Закажите услугу будильника в удобное для вас время.",
+          "links": [
+            {
+              "href": "",
+              "title": ""
+            }
+          ]
         },
         {
           "name": "Меню здорового сна",
-          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
+          "text": "Создайте идеальные условия для отдыха. По запросу доступны различные виды подушек, дополнительные одеяла и аксессуары для комфортного сна.",
+          "links": [
+            {
+              "href": "",
+              "title": ""
+            }
+          ]
         }
       ],
       "additional": [
         {
           "name": "Конференц-залы",
-          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
+          "text": "Площадки различного формата для деловых мероприятий, переговоров, презентаций и корпоративных встреч. Доступны современные технические решения и помощь в организации события.",
+          "links": [
+            {
+              "href": "",
+              "title": ""
+            }
+          ]
         },
         {
           "name": "Mountain SPA",
-          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
+          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta.",
+          "links": [
+            {
+              "href": "",
+              "title": ""
+            }
+          ]
         },
         {
           "name": "Прачечная самообслуживания",
-          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
+          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta.",
+          "links": [
+            {
+              "href": "",
+              "title": ""
+            }
+          ]
         },
         {
           "name": "Прачечная и химчистка",
-          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
+          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta.",
+          "links": [
+            {
+              "href": "",
+              "title": ""
+            }
+          ]
         },
         {
           "name": "Детский клуб «Кругосветка»",
-          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
+          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta.",
+          "links": [
+            {
+              "href": "",
+              "title": ""
+            }
+          ]
         },
         {
           "name": "Детская коляска",
-          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
+          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta.",
+          "links": [
+            {
+              "href": "",
+              "title": ""
+            }
+          ]
         },
         {
           "name": "Комната хранения и сушки снаряжения",
-          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
+          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta.",
+          "links": [
+            {
+              "href": "",
+              "title": ""
+            }
+          ]
         }
       ],
       "text_1": "Всё, что делает отдых спокойным и продуманным, уже включено в проживание. Мы позаботились о деталях, чтобы вы могли сосредоточиться на главном — отдыхе.",
@@ -197,7 +283,7 @@
     "room_link": "/rooms/tulip-inn",
     "section_1": {
       "caption": "Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-      "video_link": ""
+      "video_link": "video1"
     },
     "section_2": {
       "tooltip": "Тулип Инн Роза Хутор",
@@ -313,50 +399,116 @@
       "include": [
         {
           "name": "Мобильный консьерж",
-          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
+          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta.",
+          "links": [
+            {
+              "href": "",
+              "title": ""
+            }
+          ]
         },
         {
           "name": "Будильник",
           "tooltip": "(звонок по запросу)",
-          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
+          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta.",
+          "links": [
+            {
+              "href": "",
+              "title": ""
+            }
+          ]
         },
         {
           "name": "Тренажерный зал",
-          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
+          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta.",
+          "links": [
+            {
+              "href": "",
+              "title": ""
+            }
+          ]
         },
         {
           "name": "Сауна",
-          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
+          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta.",
+          "links": [
+            {
+              "href": "",
+              "title": ""
+            }
+          ]
         }
       ],
       "additional": [
         {
           "name": "Конференц-залы",
-          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
+          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta.",
+          "links": [
+            {
+              "href": "",
+              "title": ""
+            }
+          ]
         },
         {
           "name": "Mountain SPA",
-          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
+          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta.",
+          "links": [
+            {
+              "href": "",
+              "title": ""
+            }
+          ]
         },
         {
           "name": "Прачечная самообслуживания",
-          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
+          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta.",
+          "links": [
+            {
+              "href": "",
+              "title": ""
+            }
+          ]
         },
         {
           "name": "Прачечная и химчистка",
-          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
+          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta.",
+          "links": [
+            {
+              "href": "",
+              "title": ""
+            }
+          ]
         },
         {
           "name": "Детский клуб «Кругосветка»",
-          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
+          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta.",
+          "links": [
+            {
+              "href": "",
+              "title": ""
+            }
+          ]
         },
         {
           "name": "Детская коляска",
-          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
+          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta.",
+          "links": [
+            {
+              "href": "",
+              "title": ""
+            }
+          ]
         },
         {
           "name": "Комната хранения и сушки снаряжения",
-          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta."
+          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta.",
+          "links": [
+            {
+              "href": "",
+              "title": ""
+            }
+          ]
         }
       ],
       "text_1": "Всё, что делает отдых спокойным и продуманным, уже включено в проживание. Мы позаботились о деталях, чтобы вы могли сосредоточиться на главном — отдыхе.",
