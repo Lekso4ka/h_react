@@ -10,6 +10,8 @@ import { Icon } from "../Icon";
 import {Breadcrumbs} from "../Breadcrumbs";
 import { decodeRouteParam, getRoomById } from "../../data/rooms";
 import { Variants } from "../Variants";
+import { RoomAside } from "./Aside";
+import { useRoomInfoPin } from "./hook";
 import {
     AsideColumn, Block,
     Button,
@@ -54,89 +56,18 @@ export const RoomContent = () => {
         if (room[v].images?.length) return room[v].images;
     }, [room[v].images, room.id]);
     
-    useEffect(() => {
-        if (ref1) {
-            const h = ref1.current.scrollHeight;
-            ref1.current.style.height = active1 ? `${ h }px` : `2rem`
-            //ref1.current.scrollIntoView({
-            //    behavior: 'smooth',
-            //    block: 'end',
-            //    inline: 'end'
-            //})
-            active1 ? window.scrollBy({
-                top: h - remToPixels(2),
-                behavior: "smooth"
-            }) : window.scrollBy({
-                top: -(h - remToPixels(8.1)),
-                behavior: "smooth"
-            })
-        }
-    }, [active1]);
-    useEffect(() => {
-        if (ref2) {
-            const h = ref2.current.scrollHeight;
-            ref2.current.style.height = active2 ? `${ h }px` : `2rem`
-            //ref1.current.scrollIntoView({
-            //    behavior: 'smooth',
-            //    block: 'end',
-            //    inline: 'end'
-            //})
-            active2 ? window.scrollBy({
-                top: h - remToPixels(2),
-                behavior: "smooth"
-            }) : window.scrollBy({
-                top: -(h - remToPixels(8.1)),
-                behavior: "smooth"
-            })
-        }
-    }, [active2]);
-    useGSAP(
-        () => {
-            const section = sectionRef.current;
-            const gallery = galleryRef.current;
-            const info = infoRef.current;
-            const aside = asideRef.current;
-            if (!section || !gallery || !info || !aside) return;
-            const mm = gsap.matchMedia();
-
-            mm.add(`(min-width: 320px)`, () => {
-                const syncAsideHeight = () => {
-                    aside.style.minHeight = `${info.offsetHeight}px`;
-                };
-
-                syncAsideHeight();
-
-                const trigger = ScrollTrigger.create({
-                    trigger: section,
-                    start: () => {
-                        syncAsideHeight();
-                        const pinTop = window.innerHeight - info.offsetHeight;
-                        return `top ${pinTop}px`;
-                    },
-                    end: () => {
-                        syncAsideHeight();
-                        const diff = gallery.offsetHeight - info.offsetHeight;
-                        return `+=${Math.max(0, diff)}`;
-                    },
-                    pin: info,
-                    pinSpacing: true,
-                    invalidateOnRefresh: true,
-                    anticipatePin: 1
-                });
-
-                return () => trigger.kill();
-            });
-
-            return () => mm.revert();
-        },
-        { scope: sectionRef, dependencies: [id] }
-    );
+    const { refreshPin, handleAsideLayoutChange } = useRoomInfoPin({
+        sectionRef,
+        galleryRef,
+        infoRef,
+        asideRef,
+        id
+    });
     
     useEffect(() => {
         const gallery = galleryRef.current;
         if (!gallery) return;
         
-        const refresh = () => ScrollTrigger.refresh();
         const images = gallery.querySelectorAll("img");
         let pending = 0;
         
@@ -149,10 +80,10 @@ export const RoomContent = () => {
         
         function onLoad() {
             pending -= 1;
-            if (pending <= 0) refresh();
+            if (pending <= 0) refreshPin();
         }
         
-        const id = requestAnimationFrame(refresh);
+        const id = requestAnimationFrame(() => refreshPin());
         
         return () => {
             cancelAnimationFrame(id);
@@ -161,7 +92,7 @@ export const RoomContent = () => {
                 img.removeEventListener("error", onLoad);
             });
         };
-    }, [id, galleryImages]);
+    }, [id, galleryImages, refreshPin]);
     
     return <Block ref={ sectionRef }>
         <div ref={ galleryRef }>
@@ -190,66 +121,12 @@ export const RoomContent = () => {
             </ImagesBlock>
         </div>
         <AsideColumn ref={ asideRef }>
-            <Info ref={ infoRef }>
-                <TextTop>
-                    <h2>Основные параметры</h2>
-                    <div className={ "tl" }>
-                        <span>{ room[v].size }</span>
-                        <span>м<sup>2</sup></span>
-                    </div>
-                    <div className={ "tr" }>
-                        <span>до</span>
-                        <span>{ room[v].cnt }</span>
-                        м<sup>гостей</sup>
-                    </div>
-                    <div className={ "bl" }>
-                        { room[v].beds }
-                    </div>
-                    <div className={ "br" }>
-                        { room[v].view }
-                    </div>
-                </TextTop>
-                <MainText>
-                    { room[v].text.map((el, i) => <p key={ i }>{ el }</p>) }
-                </MainText>
-                <SecondaryText>
-                    { room[v].tooltip }
-                </SecondaryText>
-                { room[v].options.length > 0 && <Options>
-                    <h2>Оснащение номера</h2>
-                    <ul>
-                        { room[v].options.map(item => <li key={ item }>
-                            <Icon name={ "check-circle" }/>
-                            <span>{ item }</span>
-                        </li>) }
-                    </ul>
-                </Options> }
-                <List1 active={ room[v].options.length === 0 ? true : active1 } ref={ ref1 }>
-                    {/*<div >*/ }
-                    { room[v].options.length > 0 && <h2 onClick={ () => setActive1(!active1) }>
-                        Всё оснащение номера
-                        <Icon name={ "plus" }/>
-                    </h2> }
-                    <ul>
-                        { room[v].all_options.map((el, i) => <li key={ el.title }>
-                            { el.title }
-                            <ul>
-                                { el.list.map((item, j) => <li key={ j }>{ item }</li>) }
-                            </ul>
-                        </li>) }
-                    </ul>
-                </List1>
-                <List2 ref={ ref2 } active={ active2 }>
-                    <h2 onClick={ () => setActive2(!active2) }>
-                        Услуги по запросу
-                        <Icon name={ "plus" }/>
-                    </h2>
-                    <ul>
-                        { room[v].services.map(el => <li key={ el }>{ el }</li>) }
-                    </ul>
-                </List2>
-                <Button>Проверить доступность</Button>
-            </Info>
+            <RoomAside
+                room={room}
+                infoRef={infoRef}
+                v={v}
+                onLayoutChange={handleAsideLayoutChange}
+            />
         </AsideColumn>
     </Block>
 }

@@ -12,6 +12,7 @@ import h_gt_10 from "./11f9b226da3e6e07311e53f837503a3e05323280.png"
 import h_gt_11 from "./11f9b226da3e6e07311e53f837503a3e05323280.png"
 import h_gt_12 from "./11f9b226da3e6e07311e53f837503a3e05323280.png"
 import h_gt_13 from "./09f407aaf973c32d8dd73f7535c9ada576405ab7.png"
+import h_gt_14 from "./51655cfcab94b0bd255ea07a47cf979e63aa2446.png"
 
 import h_ti_1 from "./1a2eb2a6ad55154fbd2a90ba306e66d25915a049.png"
 import h_ti_2 from "./4c9409f6de5eb7e4c75a2f07175b947f0ce80411.png"
@@ -26,6 +27,7 @@ import h_ti_10 from "./bbb0ba5b7800ed589f8ee13e61a3ab6ae392c079.png"
 import h_ti_11 from "./bbb0ba5b7800ed589f8ee13e61a3ab6ae392c079.png"
 import h_ti_12 from "./bbb0ba5b7800ed589f8ee13e61a3ab6ae392c079.png"
 import h_ti_13 from "./09f407aaf973c32d8dd73f7535c9ada576405ab7.png"
+import h_ti_14 from "./51655cfcab94b0bd255ea07a47cf979e63aa2446.png"
 
 import r_ti_1 from "./499c169cb1b219dd6d8c613f610b258e3f692e1e.jpg"
 import r_ti_2 from "./f82c6c976023d6c5187a1dfb53c6acbe286b1466.jpg"
@@ -73,9 +75,10 @@ import summer_3 from "./1926f7f81594aa0b0b8ae84b307a06a48cf1c920.png"
 import winter_1 from "./d91bc49d3b55a3fa7067c0b242fd1ddf267f3ce9.jpg"
 import winter_2 from "./e01766434fde37e9d8d89d399f0a0d367d572ed9.png"
 import winter_3 from "./3fd3582331c156c3152dffc2d5cd41c2035a3001.png"
-
+import promo from "./162bd9777cbdda45a962f0928958636b6cd97fbe.png"
 
 export default {
+    promo,
     summer_1,
     summer_2,
     summer_3,
@@ -96,6 +99,8 @@ export default {
     h_gt_11,
     h_gt_12,
     h_gt_13,
+    h_gt_14,
+    
     h_ti_1,
     h_ti_2,
     h_ti_3,
@@ -109,6 +114,8 @@ export default {
     h_ti_11,
     h_ti_12,
     h_ti_13,
+    h_ti_14,
+    
     r_ti_1,
     r_ti_2,
     r_ti_3,

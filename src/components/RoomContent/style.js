@@ -228,11 +228,12 @@ export const List1 = styled.div`
     padding: 2.4rem 0;
     border-top: .1rem solid rgba(150, 40, 31, 0.20);
     border-bottom: .1rem solid rgba(150, 40, 31, 0.20);
-    height: 2rem;
-    transition: height .2s linear;
-    overflow: hidden;
+    //height: 2rem;
+    //transition: height .2s linear;
+    //overflow: hidden;
     h2 {
         cursor: pointer;
+        //height: 2rem;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -259,6 +260,9 @@ export const List1 = styled.div`
             font-style: normal;
             font-weight: 600;
             line-height: 100%; /* 14px */
+            div {
+                padding-bottom: 1.8rem;
+            }
             &>ul {
                 color: var(--Black-2, #2F3034);
                 font-size: 1.6rem;
@@ -274,7 +278,7 @@ export const List1 = styled.div`
 export const List2 = styled.div`
     padding: 2.4rem 0;
     border-bottom: .1rem solid rgba(150, 40, 31, 0.20);
-    height: 2rem;
+    //height: 2rem;
     transition: height .2s linear;
     overflow: hidden;
     h2 {
@@ -329,3 +333,8 @@ display: flex;
 flex-direction: column;
 will-change: transform;
 `;
+
+export const AccP = styled.div`
+    overflow: hidden;
+    height: 0;
+`
