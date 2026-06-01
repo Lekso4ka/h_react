@@ -1,74 +1,66 @@
 import React from "react";
-import { Block } from "./style";
+import { Block, Bottom, Caption, Left, List, Right, Title } from "./style";
 
 export const Footer = () => {
-    return <Block className="ftr" aria-label="Подвал сайта" data-node-id="206:8401">
-        <p className="ftr__title">Голден тюлип &amp; Тюлип инн</p>
+    return <Block aria-label="Подвал сайта">
+        <Caption>Голден тюлип & Тюлип инн</Caption>
         
-        <div className="ftr__main">
-            <div className="ftr__col ftr__col--sub">
-                <div className="ftr__cap">Рассылка</div>
-                <p className="ftr__subText">
-                    Подпишитесь на рассылку и оставайтесь в курсе новостей и особых предложений.
-                </p>
-                <div className="ftr__fields">
-                    <div className="ftr__field">
-                        <div className="ftr__fieldLabel">Имя</div>
-                        <div className="ftr__line"></div>
-                    </div>
-                    <div className="ftr__field">
-                        <div className="ftr__fieldLabel">Почта</div>
-                        <div className="ftr__line"></div>
-                    </div>
-                </div>
-                <a className="ftr__u" href="#">Подписаться</a>
-                <div className="ftr__agree">
-                    <span className="ftr__check" aria-hidden="true"></span>
-                    <span>
-              Даю свое <span className="ftr__agreeEm">согласие на обработку</span> моих персональных данных в
-              соответствии с <span className="ftr__agreeEm">политикой конфиденциальности</span>.
-            </span>
-                </div>
+        <Left>
+            <Title>Рассылка</Title>
+            <p>Подпишитесь на рассылку и оставайтесь в курсе новостей и особых предложений.</p>
+            <div className="form-row">
+                <label>
+                    <input type="text" placeholder="Имя"/>
+                </label>
+                <label>
+                    <input type="email" placeholder="Почта"/>
+                </label>
             </div>
-            
-            <div className="ftr__cols">
-                <div className="ftrCol">
-                    <div className="ftr__cap ftrCol__t">Отели</div>
-                    <a className="ftrCol__a" href="#">Отель Голден Тюлип</a>
-                    <a className="ftrCol__a" href="#">Отель Тюлип Инн</a>
-                    <a className="ftrCol__a" href="#">Вакансии</a>
-                    <a className="ftrCol__a" href="#">Контакты</a>
-                </div>
-                <div className="ftrCol">
-                    <div className="ftr__cap ftrCol__t">Навигация</div>
-                    <a className="ftrCol__a" href="#">Активности</a>
-                    <a className="ftrCol__a" href="#">Рестораны</a>
-                    <a className="ftrCol__a" href="#">СПА центр</a>
-                    <a className="ftrCol__a" href="#">Услуги отеля</a>
-                    <a className="ftrCol__a" href="#">Мероприятия</a>
-                    <a className="ftrCol__a" href="#">Конференц залы</a>
-                    <a className="ftrCol__a" href="#">Акции</a>
-                    <a className="ftrCol__a" href="#">Афиша</a>
-                </div>
-                <div className="ftrCol">
-                    <div className="ftr__cap ftrCol__t">Информация</div>
-                    <a className="ftrCol__a" href="#">Сотрудничество</a>
-                    <a className="ftrCol__a" href="#">Правила отеля</a>
-                    <a className="ftrCol__a" href="#">Ответы на вопросы</a>
-                </div>
+            <input type="checkbox" id="check"/>
+            <label htmlFor="check"><span>Даю свое <a href="">согласие на обработку</a> моих персональных данных в соответствии с <a href="">политикой конфиденциальности</a>.</span></label>
+            <button>Подписаться</button>
+        </Left>
+        <Right>
+            <div>
+                <Title>Отели</Title>
+                <List>
+                    <a href="/hotel/golden-tulip">Отель Голден Тюлип</a>
+                    <a href="/hotel/tulip-inn">Отель Тюлип Инн</a>
+                    <a href="">Вакансии</a>
+                    <a href="/#contacts">Контакты</a>
+                </List>
+                <Title>СОЦ. СЕТИ</Title>
+                <List>
+                    <a href="">Вконтакте</a>
+                </List>
             </div>
-            
-            <div className="ftr__soc">
-                <div className="ftr__socCap">СОЦ. СЕТИ</div>
-                <div className="ftr__vk">Вконтакте</div>
+            <div>
+                <Title>Навигация</Title>
+                <List>
+                    <a href="">Активности</a>
+                    <a href="">СПА центр</a>
+                    <a href="">Рестораны</a>
+                    <a href="">Услуги отеля</a>
+                    <a href="">Мероприятия</a>
+                    <a href="">Конференц залы</a>
+                    <a href="">Акции</a>
+                    <a href="">Афиша</a>
+                </List>
             </div>
-        </div>
+            <div className="ftrCol">
+                <Title>Информация</Title>
+                <List>
+                    <a href="">Сотрудничество</a>
+                    <a href="">Правила отеля</a>
+                    <a href="">Ответы на вопросы</a>
+                </List>
+            </div>
+        </Right>
         
-        <div className="ftr__bottomLine"></div>
-        <div className="ftr__bottom">
-            <div className="ftr__copy">© 2026 все права защищены</div>
-            <a className="ftr__muted" href="#">политика конфиденциальности</a>
-            <a className="ftr__muted" href="#">правовая информация</a>
-        </div>
+        <Bottom>
+            <span>© 2026 все права защищены</span>
+            <a href="">политика конфиденциальности</a>
+            <a href="">правовая информация</a>
+        </Bottom>
     </Block>
 }
