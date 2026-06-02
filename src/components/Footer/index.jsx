@@ -3,11 +3,11 @@ import { Block, Bottom, Caption, Left, List, Right, Title } from "./style";
 
 export const Footer = () => {
     return <Block aria-label="Подвал сайта">
-        <Caption>Голден тюлип & Тюлип инн</Caption>
+        <Caption>Голден тюлип & Тюлип инн</Caption>
         
         <Left>
             <Title>Рассылка</Title>
-            <p>Подпишитесь на рассылку и оставайтесь в курсе новостей и особых предложений.</p>
+            <p>Подпишитесь на рассылку и оставайтесь в курсе новостей и особых предложений.</p>
             <div className="form-row">
                 <label>
                     <input type="text" placeholder="Имя"/>
@@ -17,7 +17,7 @@ export const Footer = () => {
                 </label>
             </div>
             <input type="checkbox" id="check"/>
-            <label htmlFor="check"><span>Даю свое <a href="">согласие на обработку</a> моих персональных данных в соответствии с <a href="">политикой конфиденциальности</a>.</span></label>
+            <label htmlFor="check"><span>Даю свое <a href="">согласие на обработку</a> моих персональных данных в соответствии с <a href="">политикой конфиденциальности</a>.</span></label>
             <button>Подписаться</button>
         </Left>
         <Right>
@@ -29,10 +29,7 @@ export const Footer = () => {
                     <a href="">Вакансии</a>
                     <a href="/#contacts">Контакты</a>
                 </List>
-                <Title>СОЦ. СЕТИ</Title>
-                <List>
-                    <a href="">Вконтакте</a>
-                </List>
+            
             </div>
             <div>
                 <Title>Навигация</Title>
@@ -53,6 +50,12 @@ export const Footer = () => {
                     <a href="">Сотрудничество</a>
                     <a href="">Правила отеля</a>
                     <a href="">Ответы на вопросы</a>
+                </List>
+            </div>
+            <div>
+                <Title>СОЦ. СЕТИ</Title>
+                <List>
+                    <a href="">Вконтакте</a>
                 </List>
             </div>
         </Right>

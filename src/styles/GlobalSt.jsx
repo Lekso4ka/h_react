@@ -28,7 +28,12 @@ const globalSt = css`
         --Black-2: #2F3034;
     }
     html {
-        font-size: .52vw;
+        font-size: 2.5641vw;
+    }
+    @media (min-width: 576px) {
+        html {
+            font-size: .52vw;
+        }
     }
     body {
         font-family: Manrope, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
