@@ -4,28 +4,49 @@ export const Block = styled.section`
     position: relative;
     background: var(--Gray-1, #565861);
     display: grid;
-    grid-template-rows: 43.825rem 62.9rem;
     overflow: hidden;
+    grid-template-rows: auto 33.2rem;
+    @media (min-width: 576px) {
+        grid-template-rows: 43.825rem 62.9rem;
+    }
+    .map {
+        position: absolute;
+        width: 91.2rem;
+        left: -19.151rem;
+        bottom: 0;
+        @media (min-width: 576px) {
+            position: static;
+            width: 100%;
+        }
+    }
+    
 `
+
 export const Content = styled.div`
-    padding: 7rem 2.4rem 0;
+    padding: 7.8rem 1.6rem 5.1rem;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 6rem 4.1rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3.2rem 2.1rem;
     align-content: flex-start;
     align-items: baseline;
     overflow: hidden;
-
+    @media (min-width: 576px) {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 6rem 4.1rem;
+        padding: 7rem 2.4rem 0;
+    }
     & > * {
         position: relative;
     }
 
     p {
         color: var(--Beige, #FFF6F0);
-        font-size: 2rem;
+        font-size: 1.4rem;
         font-weight: 400;
         line-height: 120%; /* 24px */
-
+        @media (min-width: 576px) {
+            font-size: 2rem;
+        }
         &:not(:first-of-type) {
             &::before {
                 content: "";
@@ -54,9 +75,12 @@ export const Content = styled.div`
         background-color: var(--Beige, #FFF6F0);
         position: absolute;
         left: 0;
-        right: .1rem;
+        right: .6rem;
         bottom: -3rem;
         opacity: .4;
+        @media (min-width: 576px) {
+            right: .1rem;
+        }
     }
 
     div:not(:first-of-type) {
@@ -72,27 +96,40 @@ export const Content = styled.div`
         }
 
         &::after {
-            left: -1.9rem;
+            right: 0;
+            left: -.5rem;
+            
+            @media (min-width: 576px) {
+                left: -1.9rem;
+            }
         }
+        
     }
 
     .title {
         color: var(--Beige, #FFF6F0);
         font-family: "Playfair Display";
-        font-size: 12.4rem;
+        font-size: 5.4rem;
         font-weight: 500;
         line-height: 110%; /* 136.4px */
+        @media (min-width: 576px) {
+            font-size: 12.4rem;
+        }
     }
 
     .tooltip {
         display: inline-flex;
-        padding: 0 0 .8rem 1.4rem;
+        padding: 0 0 .6rem .7rem;
         color: var(--Beige, #FFF6F0);
         font-family: "Playfair Display";
-        font-size: 4.4rem;
+        font-size: 1.8rem;
         font-weight: 500;
         line-height: 110%; /* 48.4px */
         text-transform: lowercase;
+        @media (min-width: 576px) {
+            font-size: 4.4rem;
+            padding: 0 0 .8rem 1.4rem;
+        }
     }
 `
 
@@ -107,6 +144,7 @@ export const Links = styled.div`
     display: grid;
     gap: 1.1rem;
     padding: 1.4rem 0 1.6rem;
+    z-index: 1;
     .links {
         display: grid;
         grid-template-columns: repeat(2, 1fr);

@@ -11,25 +11,27 @@ import { Home } from "./pages/Home";
 import { Hotel } from "./pages/Hotel";
 import { Room } from "./pages/Room";
 import { Rooms } from "./pages/Rooms";
+import { Venue } from "./pages/Venue";
 import { Zal } from "./pages/Zal";
 import {Vac} from "./pages/Vac";
 
 export const App = () => {
     return <div>
-        {/*<Header/>*/}
-        {/*<Routes>*/}
-        {/*    <Route path="/" exec element={<Home/>}/>*/}
-        {/*    <Route path="/room"  element={<Room/>}/>*/}
-        {/*    <Route path="/activities/:id"  element={<Activities/>}/>*/}
-        {/*    <Route path="/events"  element={<Ev2/>}/>*/}
-        {/*    <Route path="/zal"  element={<Zal/>}/>*/}
-        {/*    <Route path="/actions"  element={<Actions/>}/>*/}
-        {/*    <Route path="/contacts"  element={<Vac/>}/>*/}
-        {/*    <Route path="/hotel/:id"  element={<Hotel/>}/>*/}
-        {/*    <Route path="/rooms/:id"  element={<Rooms/>}/>*/}
-        {/*    <Route path="/room/:hotel/:id/:variant"  element={<Room/>}/>*/}
-        {/*</Routes>*/}
-        {/*<Map/>*/}
+        <Header/>
+        <Routes>
+            <Route path="/" exec element={<Home/>}/>
+            <Route path="/room"  element={<Room/>}/>
+            <Route path="/activities/:id"  element={<Activities/>}/>
+            <Route path="/events"  element={<Ev2/>}/>
+            <Route path="/zal"  element={<Zal/>}/>
+            <Route path="/actions"  element={<Actions/>}/>
+            <Route path="/contacts"  element={<Vac/>}/>
+            <Route path="/hotel/:id"  element={<Hotel/>}/>
+            <Route path="/venue/:id"  element={<Venue/>}/>
+            <Route path="/rooms/:id"  element={<Rooms/>}/>
+            <Route path="/room/:hotel/:id/:variant"  element={<Room/>}/>
+        </Routes>
+        <Map/>
         <Footer/>
     </div>
 }

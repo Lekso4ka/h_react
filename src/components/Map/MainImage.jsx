@@ -5,6 +5,7 @@ export const MainImage = () => {
         viewBox="0 0 1920 630"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        className="map"
     >
         <path
             d="M1919.6 0.25H-0.015625V698.997H1919.6V0.25Z"
