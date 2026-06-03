@@ -66,8 +66,8 @@ export const LEFT_NAV = [
         columns: [
             { title: "СПА центр", href: "#", image: "h_banner" },
             { title: "Рестораны", href: "#", image: "h_banner" },
-            { title: "Конференц залы", href: "#", image: "h_banner" },
-            { title: "Мероприятия", href: "#", image: "h_banner" }
+            { title: "Конференц залы", href: "/events/venues", image: "h_banner" },
+            { title: "Мероприятия", href: "/events/default", image: "h_banner" }
         ]
     },
     {

@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import hData from "../../data/hotels.json";
 import img from "../../assets/img";
+import remToPixels from "../../utils/remToPx";
 
 import { Navigate, useParams } from "react-router-dom";
 import gsap from "gsap";
@@ -36,11 +37,6 @@ export const RoomContent = () => {
     const [active2, setActive2] = useState(false)
     const ref1 = useRef()
     const ref2 = useRef()
-    
-    function remToPixels(rem) {
-        const size = parseFloat(getComputedStyle(document.documentElement).fontSize);
-        return rem * size;
-    }
     
     const sectionRef = useRef(null);
     const galleryRef = useRef(null);

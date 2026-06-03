@@ -7,6 +7,7 @@ import { Actions } from "./pages/Actions";
 import { Activities } from "./pages/Activities";
 import { Ev2 } from "./pages/Ev2";
 import { Events } from "./pages/Events";
+import { Events1 } from "./pages/Events1";
 import { Home } from "./pages/Home";
 import { Hotel } from "./pages/Hotel";
 import { Room } from "./pages/Room";
@@ -22,7 +23,7 @@ export const App = () => {
             <Route path="/" exec element={<Home/>}/>
             <Route path="/room"  element={<Room/>}/>
             <Route path="/activities/:id"  element={<Activities/>}/>
-            <Route path="/events"  element={<Ev2/>}/>
+            <Route path="/events/:id"  element={<Events/>}/>
             <Route path="/zal"  element={<Zal/>}/>
             <Route path="/actions"  element={<Actions/>}/>
             <Route path="/contacts"  element={<Vac/>}/>
