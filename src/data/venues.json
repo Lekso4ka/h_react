@@ -91,28 +91,23 @@
     "variants": [
       {
         "name": "Театр",
-        "guests": 60,
-        "pic": "p1"
+        "guests": 60
       },
       {
         "name": "Класс",
-        "guests": 24,
-        "pic": "p1"
+        "guests": 24
       },
       {
         "name": "Банкет",
-        "guests": 36,
-        "pic": "p1"
+        "guests": 36
       },
       {
         "name": "Квадрат",
-        "guests": 32,
-        "pic": "p1"
+        "guests": 32
       },
       {
         "name": "U стиль",
-        "guests": 18,
-        "pic": "p1"
+        "guests": 18
       }
     ],
     "options": [
