@@ -17,11 +17,18 @@ gsap.registerPlugin(useGSAP, ScrollTrigger);
 const venues = [
     "viewpoint",
     "ballroom",
-    "fisht"
+    "fisht",
+    "oshten",
+    "agiba-odin",
+    "agiba-dva",
+    "elbrus",
+    "achishkho",
+    "lounge"
+    
 ]
 const events = [
-    "1",
-    "2"
+    "viewpoint",
+    "lounge"
 ]
 export const EventsContent = ({ isPage }) => {
     const [type, setType] = useState("venues");
@@ -36,8 +43,22 @@ export const EventsContent = ({ isPage }) => {
         }
     }, [event]);
     
+    const scrollToTriggerStart = (triggerElement) => {
+        if (!triggerElement) return;
+        
+        // Получаем позицию начала триггера
+        const triggerRect = triggerElement.getBoundingClientRect();
+        const startPosition = window.scrollY;
+        
+        // Плавно скроллим к началу триггера
+        window.scrollTo({
+            top: triggerRect.top,
+            //behavior: 'smooth'
+        });
+    };
     useEffect(() => {
         ScrollTrigger.refresh();
+        scrollToTriggerStart(galleryRef.current)
     }, [type]);
     
     useGSAP(
@@ -138,7 +159,37 @@ export const EventsContent = ({ isPage }) => {
                                 </div>
                                 <div className="img"/>
                             </Item>)
-                            : <></> }
+                            : events.map(el => <Item key={ el } bg={ vData[el].images[0] }>
+                                <div className="text">
+                                    <h2>{ vData[el].name }</h2>
+                                    <Tour dark link={ vData[el].tour_link }/>
+                                    <div className="line">
+                                        <div>
+                                            <h4>Площадь</h4>
+                                            <div className="digit">
+                                                <span>{ vData[el].size }</span>
+                                                <span className="sign">м<sup>2</sup></span>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <h4>Вместимость</h4>
+                                            <div className="digit">
+                                                <span>{ vData[el].variants.reduce((acc, item) => Math.max(acc, item.guests), 0) || vData[el].guests }</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="list">
+                                        <h4>Мероприятия</h4>
+                                        <ul>
+                                            { vData[el].formats.map(f => <li key={ f }>{ f }</li>) }
+                                        </ul>
+                                    </div>
+                                    <Link to={ `/venue/${ el }` } className="link">
+                                        Подробнее
+                                    </Link>
+                                </div>
+                                <div className="img"/>
+                            </Item>) }
                     </Content>
                 </Section>
             </Block>

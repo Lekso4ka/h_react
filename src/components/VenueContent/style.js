@@ -130,6 +130,7 @@ export const Variant = styled.div`
         font-weight: 500;
         line-height: normal;
         text-transform: uppercase;
+        justify-self: flex-start;
     }
     svg {
         justify-self: center;

@@ -79,7 +79,7 @@ export const VenueContent = () => {
                             dangerouslySetInnerHTML={ { __html: el } }
                         />) }
                     </ul>
-                    <span>предоставим по запросу</span>
+                    {data.formats.length > 0 && <span>предоставим по запросу</span>}
                 </Options>
             </div>
             <Images>
