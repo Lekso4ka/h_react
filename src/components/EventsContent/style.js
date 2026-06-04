@@ -1,14 +1,28 @@
 import styled from "@emotion/styled"
 import img from "../../assets/img"
+
+
+export const Tooltip = styled.div`
+    color: var(--Black-2, #2F3034);
+    font-family: Manrope;
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 120%; /* 19.2px */
+    margin-bottom: 2.6rem;
+    padding-left: 2.4rem;
+    width: 100vw;
+    box-sizing: border-box;
+`
 export const Block = styled.div`
     padding: 0 2.4rem 15rem;
     display: grid;
     gap: 11rem;
     width: 100vw;
     box-sizing: border-box;
-    
-    //overflow: hidden;
+    overflow: hidden;
 `
+
 
 export const Section = styled.section`
     display: grid;

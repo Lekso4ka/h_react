@@ -1,5 +1,6 @@
 import img from "../../assets/img"
 import React, { Fragment, useEffect, useState } from "react";
+import { EventsContent } from "../EventsContent";
 import { Faq } from "../Faq";
 import { Icon } from "../Icon";
 import {

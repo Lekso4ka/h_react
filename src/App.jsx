@@ -23,7 +23,7 @@ export const App = () => {
             <Route path="/" exec element={<Home/>}/>
             <Route path="/room"  element={<Room/>}/>
             <Route path="/activities/:id"  element={<Activities/>}/>
-            <Route path="/events/:id"  element={<Events/>}/>
+            <Route path="/events/:event"  element={<Events/>}/>
             <Route path="/zal"  element={<Zal/>}/>
             <Route path="/actions"  element={<Actions/>}/>
             <Route path="/contacts"  element={<Vac/>}/>
