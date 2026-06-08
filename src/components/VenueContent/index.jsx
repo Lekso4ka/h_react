@@ -2,6 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { getVenueById } from "../../data/venues";
 import { Breadcrumbs } from "../Breadcrumbs";
+import { Lightbox } from "../Lightbox";
 import { Tour } from "../Tour";
 import { Vector } from "../Vector";
 import { Block, Content, Info, InfoItem, Options, Variant, Text, Images, Image, Formats } from "./style";
@@ -91,5 +92,6 @@ export const VenueContent = () => {
             </Images>
             <a href="">Отправить запрос</a>
         </Content>
+        <Lightbox images={data.images} />
     </Block>
 }
