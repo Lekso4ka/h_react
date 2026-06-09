@@ -2,9 +2,10 @@ import React from "react";
 
 export const Arrow = ({
     color = "#FFF6F0",
-    left = true
+    left = true,
+    ...rest
 }) => {
-    return <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 29 31" fill="none">
+    return <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 29 31" fill="none" {...rest}>
         { left
             ? <path
                 d="M15.9262 10.0226L29 1.26763e-06L16.1639 15.6165L29 31L15.9262 21.2105L-6.82621e-07 15.6165L15.9262 10.0226Z"

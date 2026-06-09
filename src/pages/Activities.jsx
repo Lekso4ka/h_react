@@ -1,8 +1,8 @@
 import React from 'react';
-import { AcS } from "../components/AcS";
+import { ActivitiesContent } from "../components/ActivitiesContent";
 
 export const Activities = () => {
     return <>
-        <AcS/>
+        <ActivitiesContent/>
     </>
 }

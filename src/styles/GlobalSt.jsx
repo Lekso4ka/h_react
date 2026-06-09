@@ -4,8 +4,15 @@ import {Global, css} from "@emotion/react";
 import Playfair from "./fonts/PlayfairDisplay.ttf"
 import PlayfairIt from "./fonts/PlayfairDisplay-Italic.ttf"
 import Manrope from "./fonts/Manrope.ttf"
+import GreatVibes from "./fonts/GreatVibes-Regular.ttf"
 
 const globalSt = css`
+    @font-face {
+        font-family: "Great Vibes";
+        src: url(${GreatVibes}) format("truetype");
+        font-weight: 400;
+        font-style: normal;
+    }
     @font-face {
         font-family: "Playfair Display";
         src: url(${Playfair}) format("truetype");
