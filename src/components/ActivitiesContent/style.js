@@ -77,11 +77,12 @@ export const HeroLink = styled.a`
     ${ ({ isActive }) => isActive ? "background: rgba(255, 246, 240, 0.20)" : "" };
     backdrop-filter: blur(8px);
     color: ${ ({ isActive }) => isActive ? "var(--Beige, #FFF6F0)" : "rgba(255, 255, 255, 0.40)" };
-    font-family: "Great Vibes", "Playfair Display";
-    font-size: 2.6rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 100%; /* 26px */
+    color: var(--Beige, #FFF6F0);
+    font-family: "Playfair Display";
+    font-size: 2rem;
+    font-style: italic;
+    font-weight: 500;
+    line-height: normal;
     text-transform: lowercase;
 `
 

@@ -6,18 +6,20 @@ export const Container = styled.nav`
     font-size: 1.4rem;
     font-weight: 500;
     line-height: 100%;
+    align-items: center;
 
     a {
         color: rgba(47, 48, 52, 0.40);
     }
 
-    span {
-        font-size: 2.4rem;
-        font-weight: 200;
-    }
-
     .active {
         font-size: 1.4rem;
         font-weight: 500;
+    }
+    .divider {
+        color: rgba(47, 48, 52, 0.40);
+        font-size: 2.4rem;
+        font-weight: 200;
+        line-height: 100%; /* 24px */
     }
 `
