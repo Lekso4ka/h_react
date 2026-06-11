@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from "@emotion/styled"
-import a1 from "../assets/625b115e2603dcc3097a449b3058c4d8e4953834.png"
-import a2 from "../assets/7465242fdf78ef448e7064122210e6057f60f861.svg"
-import a3 from "../assets/490ebf61c15c288ecb3f07850b0d900472c6ea7d.svg"
-import a5 from "../assets/162bd9777cbdda45a962f0928958636b6cd97fbe.png"
-import a6 from "../assets/51a563dde89853a5217017794ccd78e6842db109.svg"
-import a8 from "../assets/54daff3afe70f3d2b7a8c1ad261a745d400a82d4.png"
+import a1 from "../assets/images/625b115e2603dcc3097a449b3058c4d8e4953834.png"
+import a2 from "../assets/images/7465242fdf78ef448e7064122210e6057f60f861.svg"
+import a3 from "../assets/images/490ebf61c15c288ecb3f07850b0d900472c6ea7d.svg"
+import a5 from "../assets/images/162bd9777cbdda45a962f0928958636b6cd97fbe.png"
+import a6 from "../assets/images/51a563dde89853a5217017794ccd78e6842db109.svg"
+import a8 from "../assets/images/54daff3afe70f3d2b7a8c1ad261a745d400a82d4.png"
 
 
 const Page = styled.div`
