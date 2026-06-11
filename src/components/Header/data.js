@@ -75,8 +75,8 @@ export const LEFT_NAV = [
         label: "События",
         hasMenu: true,
         columns: [
-            { title: "Афиша  Роза Хутор", href: "#", image: "h_banner" },
-            { title: "События курорта", href: "/doings", image: "h_banner" }
+            { title: "Афиша  Роза Хутор", href: "/affiche", image: "do_7" },
+            { title: "События курорта", href: "/doings", image: "do_1" }
         ]
     }
 ];

@@ -4,6 +4,7 @@ import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 import { Map } from "./components/Map";
 import { Activities } from "./pages/Activities";
+import { Affiche } from "./pages/Affiche";
 import { Doings } from "./pages/Doings";
 import { Events } from "./pages/Events";
 import { Home } from "./pages/Home";
@@ -24,6 +25,7 @@ export const App = () => {
             <Route path="/events/:event"  element={<Events/>}/>
             {/* События */}
             <Route path="/doings" element={<Doings/>}/>
+            <Route path="/affiche" element={<Affiche/>}/>
             {/*<Route path="/actions"  element={<Actions/>}/>*/}
             {/*<Route path="/contacts"  element={<Vac/>}/>*/}
             <Route path="/hotel/:id"  element={<Hotel/>}/>
