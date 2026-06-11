@@ -78,6 +78,19 @@ import winter_3 from "./3fd3582331c156c3152dffc2d5cd41c2035a3001.png"
 import promo from "./162bd9777cbdda45a962f0928958636b6cd97fbe.png"
 import video1 from "./video1.mp4"
 import vi_gastro from "./rosa-hotel-gastro-home.mp4"
+
+import do_1 from "./87489baf30ebfc869e74cc76fb0f23c82c007649.png"
+import do_2 from "./c9bfae24334ae3b8dc72ee7bf83d9cdeb71fdb7d.png"
+import do_3 from "./6372e810818bf05fc659d2c3c5b5d09d75c399a6.png"
+import do_4 from "./file-3.mp4"
+import do_5 from "./000cb1df101129e74c6aaed121a605aba53a1add.png"
+import do_6 from "./7e463f919c5bd512d79bc2c1a1210d03b10d620e.png"
+import do_7 from "./f30e4c1585302e99863f5188f93294cf396d1087.png"
+import do_8 from "./463bfc96a8f58489eb7b68e83a3520eea3203107.png"
+import do_9 from "./1b8d18a4c4e50431ce19c5adb82051ba07840dbd.png"
+import do_10 from "./0321b5aa6fb5256795187ebe6ce8479681c1c456.png"
+
+
 export default {
     video1,
     vi_gastro,
@@ -158,5 +171,16 @@ export default {
     m_9_1,
     m_9_2,
     m_9_3,
+    
+    do_1,
+    do_2,
+    do_3,
+    do_4,
+    do_5,
+    do_6,
+    do_7,
+    do_8,
+    do_9,
+    do_10
     
 }

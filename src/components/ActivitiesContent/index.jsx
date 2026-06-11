@@ -5,6 +5,7 @@ import img from "../../assets/img"
 
 import data from "../../data/activities.json";
 import { Icon } from "../Icon";
+import { SingleActivity } from "../SingleActivity";
 import { Tour } from "../Tour";
 import { Block, Btn, Content, Hero, HeroLink, Image, ImgItem, Item, List, Other, VideoContainer } from "./style";
 
@@ -83,11 +84,6 @@ export const ActivitiesContent = () => {
                 <Link className="link" to={""}>Резерв стола</Link>
             </div>
         </VideoContainer>
-        <Other bg={data[other].subImage}>
-            <div className="tooltip">[ Активности ]</div>
-            <h2>{data[other].subTitle}</h2>
-            <p>{data[other].subText}</p>
-            <Link to={`/activities/${other}`}>К активностям</Link>
-        </Other>
+        <SingleActivity name={other}/>
     </>
 }
