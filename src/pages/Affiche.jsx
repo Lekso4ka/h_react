@@ -3,7 +3,7 @@ import { AfficheContent } from "../components/AfficheContent";
 import { Container } from "../components/Container";
 
 export const Affiche = () => {
-    return <Container>
+    return <Container style={{paddingTop: "10.3rem"}}>
         <AfficheContent/>
     </Container>
 }

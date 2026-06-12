@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
 import { Icon } from "../Icon";
 import { Block, Content, ContentBlock } from "./style";
+import { VariantItem } from "./VariantItem";
 
 export const Variants = ({ arr, active, h, id }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -10,10 +11,10 @@ export const Variants = ({ arr, active, h, id }) => {
         <span>Варианты номера</span>
         <Icon name="plus" color="#FFF6F0"/>
         {isOpen && <ContentBlock>
-            {arr.map((item) => <Content
+            {arr.map((item) => <VariantItem
                 key={item}
-                active={active === item}
-                onClick={()=> navigate(`/room/${h}/${id}/${item}`)}>{item}</Content>)}
+                isActive={active === item}
+                clickHandler={()=> navigate(`/room/${h}/${id}/${item}`)}>{item}</VariantItem>)}
         </ContentBlock>}
     </Block>
 }
