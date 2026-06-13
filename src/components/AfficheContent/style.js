@@ -62,7 +62,7 @@ export const Item = styled.article`
 
     .img {
         background-image: linear-gradient(rgba(242, 242, 242, 0.4), rgba(242, 242, 242, 0.4)), url("${ ({ bg }) => img[bg] }");
-        background-position: cwenter;
+        background-position: center;
         background-size: cover;
     }
 
@@ -122,6 +122,7 @@ export const Filter = styled.div`
     right: 0;
     top: -4.4rem;
     align-items: center;
+    z-index: 1;
     .top {
         display: flex;
         justify-content: flex-end;
@@ -131,9 +132,20 @@ export const Filter = styled.div`
         font-weight: 600;
         line-height: 110%; /* 19.8px */
         gap: 1.6rem;
+        align-items: center;
+        cursor: pointer;
         svg {
+            transition: transform .2s linear;
             width: 1.4rem;
             height: 1.4rem;
+            transform: rotate(${({active}) => active ? 45 : 0}deg);
         }
+    }
+    .bottom {
+        border-top: 1px solid #2F3034;
+        margin-top: 1rem;
+        transform: translate(${({active}) => active ? 0 : "calc(100% + 2.4rem)" });
+        transition: transform .2s linear;
+        
     }
 `

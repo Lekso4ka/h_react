@@ -35,7 +35,7 @@ export const Content = styled.div`
     height: 3.8rem;
     padding: 1rem 1.2rem 1rem 4rem;
     align-items: center;
-    color: ${({active}) => active ? "#2F3034" : "#2F303499"};;
+    color: ${({active}) => active ? "#2F3034" : "#2F303499"};
     position: relative;
     box-sizing: border-box;
     border-right: 1px solid #2F3034;
@@ -44,6 +44,16 @@ export const Content = styled.div`
     background: var(--Beige, #FFF6F0);
     backdrop-filter: blur(8px);
     user-select: none;
+    &.affiche {
+        color: var(--Black-2, #2F3034);
+        font-size: 1.6rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 110%;
+        &::before {
+            border-color: #2F3034;
+        }
+    }
     &::before {
         content: "";
         left: 1.2rem;

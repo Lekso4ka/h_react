@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import data from "../../data/affiche.json"
 import { parseDate } from "../../utils/parseDate";
@@ -8,10 +8,27 @@ import { VariantItem } from "../Variants/VariantItem";
 import { Container, Content, Filter, Item, Line } from "./style";
 
 const variants = [
-    ""
+    "Спорт",
+    "Концерты",
+    "Гастрономия",
+    "Фестивали",
+    "Семья и дети",
+    "Экскурсии",
+    "Вечерние события",
+    "Развлечения на курорте"
 ]
 
 export const AfficheContent = () => {
+    const [activeFilter, setActiveFilter] = useState(false)
+    const [filters, setFilters] = useState([])
+    
+    const updFilter = (v) => {
+        if (filters.includes(v)) {
+            setFilters(filters.filter(el => el !== v))
+        } else {
+            setFilters([...filters, v])
+        }
+    }
     return <Container>
         <Line/>
         <Breadcrumbs data={[
@@ -20,16 +37,22 @@ export const AfficheContent = () => {
         ]}/>
         <h1>Чем заняться на Роза Хутор</h1>
         <Content>
-            <Filter>
-                <div className="top">
+            <Filter active={activeFilter}>
+                <div className="top" onClick={() => setActiveFilter(!activeFilter)}>
                     <Icon name={"plus"}/>
                     <span>Фильтр</span>
                 </div>
-                {/*<div className="bottom">*/}
-                {/*    { variants.map(v => <VariantItem>{v}</VariantItem>) }*/}
-                {/*</div>*/}
+                <div className="bottom">
+                    { variants.map(v => <VariantItem
+                        className={"affiche"}
+                        isActive={filters.includes(v)}
+                        clickHandler={() => updFilter(v)}
+                    >
+                        {v}
+                    </VariantItem>) }
+                </div>
             </Filter>
-            {data.map((el, i) => <Item key={i} bg={el.src}>
+            {data.filter(el => filters.length > 0 ? filters.includes(el.variant) : true).map((el, i) => <Item key={i} bg={el.src}>
                 <div className="img"/>
                 <h5>{ el.variant }</h5>
                 <h2>{el.title}</h2>
