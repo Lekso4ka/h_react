@@ -16,7 +16,7 @@ import {
     HeaderName, Shell
 } from "./style";
 
-const dark = ["/", "/hotel/golden-tulip", "/hotel/tulip-inn", "/activities/winter", "/activities/summer", "/actions", "/vacations"]
+const dark = ["/", "/hotel/golden-tulip", "/hotel/tulip-inn", "/activities/winter", "/activities/summer", "/actions", "/vacations", "/wedding"]
 
 import { ALL_MENU_NAV, LEFT_NAV, RIGHT_NAV } from "./data";
 

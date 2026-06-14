@@ -14,6 +14,7 @@ import { Rooms } from "./pages/Rooms";
 import { Venue } from "./pages/Venue";
 import { Actions } from "./pages/Actions";
 import {Vac} from "./pages/Vac";
+import { Wedding } from "./pages/Wedding";
 
 export const App = () => {
     return <div>
@@ -23,6 +24,7 @@ export const App = () => {
             <Route path="/activities/:activity"  element={<Activities/>}/>
             {/* Мероприятия */}
             <Route path="/events/:event"  element={<Events/>}/>
+            <Route path="/wedding"  element={<Wedding/>}/>
             {/* События */}
             <Route path="/doings" element={<Doings/>}/>
             <Route path="/affiche" element={<Affiche/>}/>

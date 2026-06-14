@@ -72,10 +72,17 @@ import m_9_3 from "./3ddda9ae616cb3957a2746508ae341369b5c1bdc.jpg"
 import summer_1 from "./e2ef1fe4a8aaa1b530e3134c2fae3d983a4b40d8.png"
 import summer_2 from "./8c65aeb8fa2c6a80c3c61a8bf2ade0c37ca9a244.png"
 import summer_3 from "./1926f7f81594aa0b0b8ae84b307a06a48cf1c920.png"
+import summer_4 from "./68ed4ee27a76ad0c6400d404dda4e7478eeb6886.jpg"
+import summer_5 from "./3dbee3f46836209171e774d0c7b935f9dffa36f0.jpg"
+import summer_6 from "./b9f94f249ba3029da07ab14a0a228852fae828d8.jpg"
 import winter_1 from "./d91bc49d3b55a3fa7067c0b242fd1ddf267f3ce9.jpg"
 import winter_2 from "./e01766434fde37e9d8d89d399f0a0d367d572ed9.png"
 import winter_3 from "./3fd3582331c156c3152dffc2d5cd41c2035a3001.png"
+import winter_4 from "./40eb33e06d9abd9669801ff2d6a14c0ca2b42707.jpg"
+import winter_5 from "./0f2edee4b4ba1e60a651c3d17593386d52810891.jpg"
+import winter_6 from "./58f9fdd67b746ff365d9988e8ec412dbf4faeea7.jpg"
 import promo from "./162bd9777cbdda45a962f0928958636b6cd97fbe.png"
+import promo_1 from "./54daff3afe70f3d2b7a8c1ad261a745d400a82d4.png"
 import video1 from "./video1.mp4"
 import vi_gastro from "./rosa-hotel-gastro-home.mp4"
 
@@ -90,17 +97,65 @@ import do_8 from "./463bfc96a8f58489eb7b68e83a3520eea3203107.png"
 import do_9 from "./1b8d18a4c4e50431ce19c5adb82051ba07840dbd.png"
 import do_10 from "./0321b5aa6fb5256795187ebe6ce8479681c1c456.png"
 
+import we_1 from "./Свадебный ролик.mp4"
+import we_2 from "./1fab70be3919bc05471ef1395753b1eefee7fcb9.jpg"
+import we_3 from "./46ac77c253d94897732b2afe7a6c1ceaac086e0b.jpg"
+import we_4 from "./3bfe3f656b98e013eda93b3e633e5c98f4f171a2.jpg"
+import we_5 from "./67e65ff490c95a72185bddfeff3c8ef5198937e3.jpg"
+import we_6 from "./befc5c6fb4376548ba80c55318b3a940ed062370.jpg"
+import we_7 from "./0a6b9c919c097d665c58abc20d8c31dac29a9673.jpg"
+import we_7_1 from "./736163b0e7a4193bc499bb910f64a255fe2eda11.png"
+import we_8 from "./158a8e27bb2a493741143a68fa18385f82347256.jpg"
+import we_9 from "./7aca8d9185b76ff269513fd090f332a1b0059c49.jpg"
+import we_10 from "./c1fc0bd41446dca58c27271fb93e80caba4c94d0.jpg"
+import we_11 from "./e8fe469fea652b9fed98ee5df9946a46742148b9.jpg"
+import we_12 from "./bb018b30d8ce3d39421c27aa2b084e2b880376a4.jpg"
+import we_13 from "./dd59de2f4c70cddb9f8d81947ca5f6b216dbf004.jpg"
+import we_14 from "./68e72d70e35a5110138a32df7a71bba9de66fd4e.jpg"
+import we_15 from "./84052b4eb53d60354563d039ee7faa67f7d653ba.jpg"
+import we_16 from "./001e05836c01284f03d1c9fbb317e8a6aa066c24.jpg"
+
+import home_1 from "./026b7865282377ec7a8d72db8a08a5a26e00ec93.png"
+import home_2 from "./7666b08430157c33953014bbde6496128dcc94ff.png"
+import home_3 from "./c170851cca0feaf580e326ac2b83ee7a4ca0f27f.png"
+import home_4 from "./2fb3a1ee2a50a5ebad10e143b54f14f9f8e21c93.png"
+import home_5 from "./51ab12890e0e2818267ed34e49898bd4000e2044.png"
+import home_6 from "./78eb8718463732cea8f72c65069e6f24eada8bd1.png"
+
+import res_1 from "./4ac407277eaac160051a149803bdbb3c59253651.jpg"
+import res_2 from "./72fd6a8bf11d6173d39e96d40fe0ca3d45a070ea.png"
+import res_3 from "./caa4a57602e5b8885a3b6f82263c5280ecabd6e1.png"
+import res_4 from "./722047b1005f60582a57847242cbe3d0e51cc5a6.jpg"
+import res_5 from "./7086cb8896cecf105f1170390c9000de550b9ae8.png"
+
+import vac_1 from "./ca7183388e3891c60bfcbbe6c557cbcf026c23c2.jpg"
+import vac_2 from "./00b11b0806aa106bab97075ebdfb2b9a024e3e3a.png"
+import vac_3 from "./76519af66a3e0275c629696578ac011dab9889dd.jpg"
+import vac_4 from "./4227d1a88d888d873500c2f90bfa97d463a9161e.png"
+import vac_5 from "./6f781a31cfd987a89feae9feba4766bc545c2857.png"
+import vac_6 from "./2bd6630ac55249cf1b40f7638bd33b65a03971e9.png"
+import vac_7 from "./70c25cdcc9c40414e03ced1730e5d980d48c3d00.png"
+import vac_8 from "./62494f4371bb9363d4795898b9c8b6ec3baedf82.png"
+
+
 
 export default {
     video1,
     vi_gastro,
     promo,
+    promo_1,
     summer_1,
     summer_2,
     summer_3,
+    summer_4,
+    summer_5,
+    summer_6,
     winter_1,
     winter_2,
     winter_3,
+    winter_4,
+    winter_5,
+    winter_6,
     h_banner,
     h_gt_1,
     h_gt_2,
@@ -181,6 +236,45 @@ export default {
     do_7,
     do_8,
     do_9,
-    do_10
+    do_10,
     
+    we_1,
+    we_2,
+    we_3,
+    we_4,
+    we_5,
+    we_6,
+    we_7,
+    we_7_1,
+    we_8,
+    we_9,
+    we_10,
+    we_11,
+    we_12,
+    we_13,
+    we_14,
+    we_15,
+    we_16,
+    
+    home_1,
+    home_2,
+    home_3,
+    home_4,
+    home_5,
+    home_6,
+    
+    res_1,
+    res_2,
+    res_3,
+    res_4,
+    res_5,
+    
+    vac_1,
+    vac_2,
+    vac_3,
+    vac_4,
+    vac_5,
+    vac_6,
+    vac_7,
+    vac_8
 }

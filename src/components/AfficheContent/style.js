@@ -30,6 +30,7 @@ export const Line = styled.div`
 
 export const Content = styled.div`
     display: grid;
+    overflow: hidden;
     grid-template-columns: repeat(3, 1fr);
     grid-column-start: 2;
     align-content: flex-start;
