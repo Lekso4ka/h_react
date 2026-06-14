@@ -2,7 +2,8 @@ import styled from "@emotion/styled";
 import img from "../../assets/img";
 
 export const Container = styled.div`
-    padding: 0 2.4rem 15rem;
+    padding: 0 2.4rem ${({ page }) => page ? "15rem" : 0};
+    
 `
 export const Line = styled.div`
     border-top: .1rem solid rgba(150, 40, 31, 0.20);

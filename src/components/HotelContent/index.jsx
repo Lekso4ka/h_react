@@ -1,26 +1,19 @@
 import img from "../../assets/img"
 import React, { Fragment, useEffect, useState } from "react";
-import { EventsContent } from "../EventsContent";
-import { Faq } from "../Faq";
 import { Icon } from "../Icon";
 import { RestaurantContent } from "../RestaurantContent";
+import { ServicesContent } from "../ServicesContent";
 import {
     Hero,
     Section1,
     Section2, Section3,
     Section4,
-    Section5,
-    Section6,
-    ServiceItem
 } from "./style";
 import { Link, useParams } from "react-router-dom";
 import data from "../../data/hotels.json";
-import { Carousel } from "../Carousel";
 
 export const HotelContent = () => {
     const { id } = useParams();
-    const [service, setService] = useState("include")
-    const [faqReset, setFaqReset] = useState(0);
     const renderStars = () => {
         const arr = []
         let n = data[id].stars
@@ -29,10 +22,6 @@ export const HotelContent = () => {
         }
         return arr;
     }
-    
-    useEffect(() => {
-        setFaqReset(faqReset + 1)
-    }, [service])
     return <>
         <Hero/>
         <Section1>
@@ -84,26 +73,7 @@ export const HotelContent = () => {
             <div className="img-rb"/>
         </Section4>
         <RestaurantContent/>
-        <Section6 pic={data[id].section_6.image} id="services">
-            <div className="caption">
-                <h2>{data[id].section_6.caption}</h2>
-                <ServiceItem
-                    cnt={data[id].section_6.include.length}
-                    active={service === "include"}
-                    onClick={() => setService("include")}
-                >Включено</ServiceItem>
-                <ServiceItem
-                    cnt={data[id].section_6.additional.length}
-                    active={service === "additional"}
-                    onClick={() => setService("additional")}
-                >Дополнительно</ServiceItem>
-            </div>
-            <div className="text">
-                <p>{data[id].section_6.text_1}</p>
-                <p>{data[id].section_6.text_2}</p>
-            </div>
-            <div className="img"/>
-            <Faq items={data[id].section_6[service]} reset={faqReset}/>
-        </Section6>
+        <ServicesContent/>
+        
     </>
 }

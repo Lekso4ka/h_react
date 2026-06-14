@@ -3,7 +3,7 @@ import { Container } from "../components/Container";
 import { ServicesContent } from "../components/ServicesContent";
 
 export const Services = () => {
-    return <Container>
-        <ServicesContent></ServicesContent>
+    return <Container style={{paddingTop: "9.2rem"}}>
+        <ServicesContent page={true}></ServicesContent>
     </Container>
 }

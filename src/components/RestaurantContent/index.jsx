@@ -4,7 +4,7 @@ import { getHotels } from "../../data/hotels";
 import data from "../../data/hotels.json";
 import { Breadcrumbs } from "../Breadcrumbs";
 import { Carousel } from "../Carousel";
-import { Section5, ServiceItem } from "../HotelContent/style";
+import { ServiceItem } from "../HotelContent/style";
 import { Container, Line, Section, Tabs } from "./style";
 
 const names = [
@@ -16,12 +16,13 @@ export const RestaurantContent = ({ page }) => {
     const { id } = useParams();
     const navigate = useNavigate();
     const h = getHotels()
-    return <Container>
-        { page && <><Line/>
+    return <Container page={page}>
+        { page && <>
+            <Line/>
             <Breadcrumbs data={ [
                 { text: "Home", link: "/" },
-                { text: "Голден Тулип", link: "/hotel/golden-tulip" },
-                { text: "Ресторан Голден Тулип" }
+                { text: h[id].name, link: `/hotel/${id}` },
+                { text: `Ресторан ${h[id].name}` }
             ] }/>
             <Tabs>
                 { names.map(el => <ServiceItem
