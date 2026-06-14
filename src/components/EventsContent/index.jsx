@@ -24,11 +24,23 @@ const venues = [
     "elbrus",
     "achishkho",
     "lounge"
-    
 ]
 const events = [
-    "viewpoint",
-    "lounge"
+    {
+        id: "wedding",
+        name: "Свадьба в серце гор",
+        size: 250,
+        guests: 100,
+        image: "we_7_1",
+        link: "wedding",
+        list: [
+            "В самом серце Роза Хутор",
+            "Панорамная площадка",
+            "Выездная регистрация",
+            "Комплимент молодоженам",
+            "Скидка на проживание гостей"
+        ]
+    }
 ]
 export const EventsContent = ({ isPage }) => {
     const [type, setType] = useState("venues");
@@ -93,7 +105,8 @@ export const EventsContent = ({ isPage }) => {
     
     return <Container bg={ "#F2ECDE" }  style={{paddingTop: isPage ? "14rem" : "15rem"}}>
         <div ref={ sectionRef }>
-        <div ref={ galleryRef }>
+        {/*<div ref={ galleryRef }>*/}
+        <div>
             { !isPage && <Tooltip>[ MICE ]</Tooltip>}
             <Block>
                 {isPage && <Breadcrumbs data={ [
@@ -159,32 +172,32 @@ export const EventsContent = ({ isPage }) => {
                                 </div>
                                 <div className="img"/>
                             </Item>)
-                            : events.map(el => <Item key={ el } bg={ vData[el].images[0] }>
+                            : events.map(el => <Item key={ el.id } bg={ el.image }>
                                 <div className="text">
-                                    <h2>{ vData[el].name }</h2>
-                                    <Tour dark link={ vData[el].tour_link }/>
+                                    <h2>{ el.name }</h2>
+                                    <Tour dark link={ el.tour_link } style={{visibility: "hidden"}}/>
                                     <div className="line">
                                         <div>
                                             <h4>Площадь</h4>
                                             <div className="digit">
-                                                <span>{ vData[el].size }</span>
+                                                <span>{ el.size }</span>
                                                 <span className="sign">м<sup>2</sup></span>
                                             </div>
                                         </div>
                                         <div>
                                             <h4>Вместимость</h4>
                                             <div className="digit">
-                                                <span>{ vData[el].variants.reduce((acc, item) => Math.max(acc, item.guests), 0) || vData[el].guests }</span>
+                                                <span>{ el.guests}</span>
                                             </div>
                                         </div>
                                     </div>
                                     <div className="list">
-                                        <h4>Мероприятия</h4>
+                                        <h4>Преимущества</h4>
                                         <ul>
-                                            { vData[el].formats.map(f => <li key={ f }>{ f }</li>) }
+                                            { el.list.map(f => <li key={ f }>{ f }</li>) }
                                         </ul>
                                     </div>
-                                    <Link to={ `/venue/${ el }` } className="link">
+                                    <Link to={ `/${ el.link }` } className="link">
                                         Подробнее
                                     </Link>
                                 </div>

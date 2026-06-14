@@ -75,12 +75,12 @@ const globalSt = css`
     }
 
     ::-webkit-scrollbar-track {
-        background-color: #313131;
+        background-color: rgba(255, 255, 255, 0.40);
         position: relative;
     }
 
     ::-webkit-scrollbar-thumb {
-        background: #5e5d5d;
+        background: rgba(150, 40, 31, 0.20);
         border-radius: 4px;
         position: relative;
     }

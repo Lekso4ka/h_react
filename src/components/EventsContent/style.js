@@ -65,7 +65,7 @@ export const Content = styled.div`
     overflow-y: hidden;
     overflow-x: auto;
     height: 57.1rem;
-    width: max-content;
+    //width: max-content;
     will-change: transform;
 `
 export const Item = styled.div`
