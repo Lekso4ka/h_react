@@ -2,7 +2,7 @@ import hotels from "./hotels.json";
 
 
 export function getHotels() {
-    return rooms;
+    return hotels;
 }
 
 export function getHotelById(id) {

@@ -3,6 +3,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import { EventsContent } from "../EventsContent";
 import { Faq } from "../Faq";
 import { Icon } from "../Icon";
+import { RestaurantContent } from "../RestaurantContent";
 import {
     Hero,
     Section1,
@@ -82,33 +83,7 @@ export const HotelContent = () => {
             <div className="img-lb"/>
             <div className="img-rb"/>
         </Section4>
-        <Section5 pic={data[id].section_5.image}>
-            <div className="caption">
-                <span>{data[id].section_5.caption_tooltip}</span>
-                <span>{data[id].section_5.guests_tooltip}</span>
-                <h2>{data[id].section_5.caption_1}</h2>
-                <div className="digit">{data[id].section_5.guests}</div>
-            </div>
-            <div className="text">
-                <p>{data[id].section_5.text_1}</p>
-                <p>{data[id].section_5.text_2}</p>
-                <Link to={""}>Резерв стола</Link>
-            </div>
-            <div className="menu">
-                <div className="img"/>
-                <div className="title">
-                    <h3>{data[id].section_5.caption_2}</h3>
-                    <a href={data[id].section_5.menu_link} target="_blank">Открыть</a>
-                </div>
-                <ul>
-                    {data[id].section_5.list.map((el, i) => <li key={i}>
-                        <span>{el.text}</span>
-                        <span>{el.time}</span>
-                    </li>) }
-                </ul>
-            </div>
-            <Carousel className="carousel" images={data[id].section_5.carousel}/>
-        </Section5>
+        <RestaurantContent/>
         <Section6 pic={data[id].section_6.image} id="services">
             <div className="caption">
                 <h2>{data[id].section_6.caption}</h2>
