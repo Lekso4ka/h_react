@@ -9,8 +9,10 @@ import { Doings } from "./pages/Doings";
 import { Events } from "./pages/Events";
 import { Home } from "./pages/Home";
 import { Hotel } from "./pages/Hotel";
+import { Restaurant } from "./pages/Restaurant";
 import { Room } from "./pages/Room";
 import { Rooms } from "./pages/Rooms";
+import { Services } from "./pages/Services";
 import { Venue } from "./pages/Venue";
 import { Actions } from "./pages/Actions";
 import {Vac} from "./pages/Vac";
@@ -28,12 +30,17 @@ export const App = () => {
             {/* События */}
             <Route path="/doings" element={<Doings/>}/>
             <Route path="/affiche" element={<Affiche/>}/>
-            {/*<Route path="/actions"  element={<Actions/>}/>*/}
-            {/*<Route path="/contacts"  element={<Vac/>}/>*/}
+            
+            <Route path="/stock/:id"  element={<Actions/>}/>
+            <Route path="/services/:id"  element={<Services/>}/>
+            <Route path="/restaurant/:id"  element={<Restaurant/>}/>
+            <Route path="/vacancies"  element={<Vac/>}/>
+            
             <Route path="/hotel/:id"  element={<Hotel/>}/>
             <Route path="/venue/:id"  element={<Venue/>}/>
             <Route path="/rooms/:id"  element={<Rooms/>}/>
             <Route path="/room/:hotel/:id/:variant"  element={<Room/>}/>
+            
         </Routes>
         <Map/>
         <Footer/>

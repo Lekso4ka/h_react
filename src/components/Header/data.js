@@ -15,7 +15,7 @@ export const LEFT_NAV = [
                     },
                     {
                         label: "Услуги отеля",
-                        href: "/hotel/golden-tulip",
+                        href: "/services/golden-tulip",
                         image: "h_gt_13"
                     }
                 ]
@@ -30,7 +30,7 @@ export const LEFT_NAV = [
                     },
                     {
                         label: "Услуги отеля",
-                        href: "/hotel/tulip-inn",
+                        href: "/services/tulip-inn",
                         image: "h_ti_13"
                     }
                 ]
@@ -64,8 +64,8 @@ export const LEFT_NAV = [
         label: "Услуги",
         hasMenu: true,
         columns: [
-            { title: "СПА центр", href: "#", image: "h_banner" },
-            { title: "Рестораны", href: "#", image: "h_banner" },
+            { title: "СПА центр", href: "", image: "h_banner" },
+            { title: "Рестораны", href: "/restaurant/golden-tulip", image: "h_banner" },
             { title: "Конференц залы", href: "/events/venues", image: "h_banner" },
             { title: "Мероприятия", href: "/events/default", image: "h_banner" }
         ]
@@ -92,7 +92,7 @@ export const RIGHT_NAV = [
                 items: [
                     {
                         label: "Спецпредложения",
-                        href: "#",
+                        href: "/stock/golden-tulip",
                         image: "h_banner"
                     }
                 ]
@@ -102,7 +102,7 @@ export const RIGHT_NAV = [
                 items: [
                     {
                         label: "Спецпредложения",
-                        href: "#",
+                        href: "/stock/tulip-inn",
                         image: "h_banner"
                     }
                 ]

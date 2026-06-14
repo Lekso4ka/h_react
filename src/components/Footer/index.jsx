@@ -26,22 +26,22 @@ export const Footer = () => {
                 <List>
                     <a href="/hotel/golden-tulip">Отель Голден Тюлип</a>
                     <a href="/hotel/tulip-inn">Отель Тюлип Инн</a>
-                    <a href="">Вакансии</a>
-                    <a href="/#contacts">Контакты</a>
+                    <a href="/vacancies">Вакансии</a>
+                    <a href="#contacts">Контакты</a>
                 </List>
             
             </div>
             <div>
                 <Title>Навигация</Title>
                 <List>
-                    <a href="">Активности</a>
+                    <a href="/activities/summer">Активности</a>
                     <a href="">СПА центр</a>
-                    <a href="">Рестораны</a>
-                    <a href="">Услуги отеля</a>
-                    <a href="">Мероприятия</a>
-                    <a href="">Конференц залы</a>
-                    <a href="">Акции</a>
-                    <a href="">Афиша</a>
+                    <a href="/restaurant/golden-tulip">Рестораны</a>
+                    <a href="/services/golden-tulip">Услуги отеля</a>
+                    <a href="/events/default">Мероприятия</a>
+                    <a href="/events/venues">Конференц залы</a>
+                    <a href="/stock/golden-tulip">Акции</a>
+                    <a href="/affiche">Афиша</a>
                 </List>
             </div>
             <div className="ftrCol">

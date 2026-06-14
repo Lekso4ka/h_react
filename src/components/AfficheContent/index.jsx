@@ -44,6 +44,7 @@ export const AfficheContent = () => {
                 </div>
                 <div className="bottom">
                     { variants.map(v => <VariantItem
+                        key={v}
                         className={"affiche"}
                         isActive={filters.includes(v)}
                         clickHandler={() => updFilter(v)}

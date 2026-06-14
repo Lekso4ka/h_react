@@ -157,12 +157,9 @@ export const Header = () => {
     
     const navigateToHash = useCallback(
         (id) => {
+            console.log(id)
             closeMenu();
-            if (location.pathname !== "/") {
-                navigate(`/#${ id }`);
-                return;
-            }
-            document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+            document.getElementById(id)?.scrollIntoView({ behavior: "smooth"});
         },
         [closeMenu, navigate, location.pathname]
     );
