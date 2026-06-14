@@ -30,7 +30,6 @@ export const Line = styled.div`
 
 export const Content = styled.div`
     display: grid;
-    //overflow: hidden;
     grid-template-columns: repeat(3, 1fr);
     grid-column-start: 2;
     align-content: flex-start;
@@ -124,6 +123,8 @@ export const Filter = styled.div`
     top: -4.4rem;
     align-items: center;
     z-index: 1;
+    width: max-content;
+    overflow: hidden;
     .top {
         display: flex;
         justify-content: flex-end;
