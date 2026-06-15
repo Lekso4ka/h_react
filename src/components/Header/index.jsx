@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { Icon } from "../Icon";
 
 import { Dropdown } from "./Dropdown";
 import { NavItem } from "./NavItem";
@@ -207,6 +208,7 @@ export const Header = () => {
                     onNavigate={ navigateToHash }
                 />) }
             </HeaderMenu>
+            <Icon name="burger" color={lightHeader ? "#2F3034" : "#fff"}/>
             <HeaderName><Link to={ "/" } state={ { id: "home" } }>Голден<br/>Тюлип & Тюлип<br/>Инн</Link></HeaderName>
             <HeaderMenu2>
                 { RIGHT_NAV.map((item) => <NavItem
