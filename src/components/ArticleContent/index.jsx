@@ -108,29 +108,29 @@ export const ArticleContent = () => {
             </div>
             <div className="img"/>
         </Section6>
-       
-            <Section7>
-                <div className="top">
-                    <div className="text">
-                        <h2>{ a.section_7.caption }</h2>
-                        <p>{ a.section_7.text }</p>
-                    </div>
-                    <ul>
-                        { a.section_7.list.map((el, i) => <li key={ i }>{ el }</li>) }
-                    </ul>
-                    <Link to={ a.section_7.link }>Выбрать отель</Link>
+        
+        <Section7>
+            <div className="top">
+                <div className="text">
+                    <h2>{ a.section_7.caption }</h2>
+                    <p>{ a.section_7.text }</p>
                 </div>
-                <div className="bottom">
-                    <Line/>
-                    <div className="tabs">
-                        { a.section_7.tags.map((el, i) => <Link
-                            key={ i }
-                            to={ el.link }
-                        >{ el.text }</Link>) }
-                    </div>
-                    <Line/>
+                <ul>
+                    { a.section_7.list.map((el, i) => <li key={ i }>{ el }</li>) }
+                </ul>
+                <Link to={ a.section_7.link }>Выбрать отель</Link>
+            </div>
+            <div className="bottom">
+                <Line/>
+                <div className="tabs">
+                    { a.section_7.tags.map((el, i) => <Link
+                        key={ i }
+                        to={ el.link }
+                    >{ el.text }</Link>) }
                 </div>
-            </Section7>
+                <Line/>
+            </div>
+        </Section7>
     </>
     
 }
