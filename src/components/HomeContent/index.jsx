@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { getVenuesCnt } from "../../data";
 import { remToPixels } from "../../utils/remToPx";
-import { HS2 } from "../HS2";
 import { Icon } from "../Icon";
+import { Line } from "../Line";
 import { Tour } from "../Tour";
 import { Hero, HotelCard, Section1, Section2, Section3, Section4, Section5, Section6 } from "./style";
 import img from "../../assets/img"
@@ -29,7 +30,7 @@ export const HomeContent = () => {
     const [activeRest, setActiveRest] = useState(0)
     useEffect(() => {
         if (activeRest === 0)
-            return ;
+            return;
         const ref = restRef.current
         if (ref) {
             for (let i = 0; i < ref.children.length; i++) {
@@ -178,70 +179,142 @@ export const HomeContent = () => {
                 <Link to={ `/activities/${ weather }` }>К активностям</Link>
             </div>
         </Hero>
-        <HS2/>
-        {/*<div style={ { width: 575 } }>*/}
-        {/*    <Section1>*/}
-        {/*    */}
-        {/*    </Section1>*/}
-        {/*    */}
-        {/*    <Section2>*/}
-        {/*    */}
-        {/*    </Section2>*/}
-        {/*    */}
-        {/*    <Section3>*/}
-        {/*    */}
-        {/*    </Section3>*/}
-        {/*</div>*/}
-            
-            <Section4>
-                <video src={img.vi_spa} autoPlay/>
-                <h4>[ СПА центр ]</h4>
-                <h2>Востановите баланс</h2>
-                <div className="line"/>
-                <Link to="">Подробнее</Link>
-            </Section4>
         
-            <Section5
-                bg1={"h_gt_4"}
-                bg2={"h_gt_5"}
-                bg3={"home_5"}
-                bg4={"h_gt_1"}
-                bg5={"h_gt_8"}
-                bg6={"home_6"}
-            >
-                <h2>ДВА ОТЕЛЯ В ЦЕНТРЕ КУРОРТА<br/>ДЛЯ ОТДЫХА В ГОРАХ И АКТИВНЫХ ПОЕЗДОК<br/>В ЛЮБОЕ ВРЕМЯ ГОДА</h2>
-                <p>Современные пространства, продуманные номера и удобное расположение создают комфортную среду для отдыха. От утренних подъёмов на склон до вечерних прогулок по набережной — здесь всё настроено на лёгкость, разнообразие впечатлений и спокойное возвращение в атмосферу уюта.</p>
-                <div className="img img1"/>
-                <div className="img img2"/>
-                <div className="img img3"/>
-                <div className="img img4"/>
-                <div className="img img5"/>
-                <div className="img img6"/>
-                <div className="links">
-                    <Link to="/hotel/golden-tulip">Выбрать Голден</Link>
-                    <Link to="/hotel/tulip-inn">Выбрать Тюлип</Link>
+        <Section1
+            bg1={ "h_banner" }
+            bg2={ "home_1" }
+            bg3={ "home_2" }
+        >
+            <Line/>
+            <h4>[ Атмосфера и пространство ]</h4>
+            <p>Комфортный отдых среди горных склонов курорта.
+                Архитектура отеля продолжает природный пейзаж, а светлые <span>интерьеры, натуральные материалы и выверенные пропорции создают спокойную и сдержанную атмосферу</span>.
+            </p>
+            <div className="img img1"></div>
+            <div className="img img2"></div>
+            <div className="img img3"></div>
+            <div className="tooltip">Архитектура, свет и тишина формируют атмосферу отеля.</div>
+            <Line/>
+        </Section1>
+        
+        <Section2 bg1={ "h_gt_14" } bg2={ "home_3" }>
+            <h4>[ Возможности отеля ]</h4>
+            <nav>
+                <Link to={ `/activities/${ weather }` }>Активности</Link>
+                <Link to="">СПА центр</Link>
+                <Link to="/restaurant/golden-tulip">Рестораны</Link>
+                <Link to="/services/golden-tulip">Услуги отеля</Link>
+                <Link to="/events/default">Мероприятия</Link>
+                <Link to="/events/venues">Конференц залы<span>[ { getVenuesCnt() } ]</span></Link>
+                <Link to="/stock/golden-tulip">Акции</Link>
+                <Link to="/affiche">Афиша</Link>
+            </nav>
+            <div className="list">
+                <div className="room">
+                    <h4>Голден Тюлип</h4>
+                    <h2>Номера и сьюты</h2>
+                    <Link to="/rooms/golden-tulip">К номерам</Link>
                 </div>
-            
-            
-            </Section5>
-            
-            <Section6 bg={restImages[activeRest]} cnt={activeRest}>
-                <h2>{Math.floor(rest.indexOf(restImages[activeRest]) % 4) === 0 ? "Бранше" : "Амстердам"}</h2>
-                <Link className="link" to={`/restaurant/${Math.floor(rest.indexOf(restImages[activeRest]) % 4) === 0 ? "golden-tulip" : "tulip-inn"}`}>О ресторане</Link>
-                <Tour pos className="tour"/>
-                <div className="list-container">
-                    <div className="list" ref={restRef}>
-                        { restImages.map(((el, i) => <img
-                            src={img[el]}
-                            alt=""
-                            onClick={() => setActiveRest(i)}
-                        />)) }
+                <div className="room">
+                    <h4>Тюлип Инн</h4>
+                    <h2>Номера</h2>
+                    <Link to="/rooms/tulip-inn">К номерам</Link>
+                </div>
+            </div>
+        </Section2>
+        <Section3
+            bg1={ weather === "winter" ? "winter_4" : "summer_4" }
+            bg2={ weather === "winter" ? "winter_5" : "summer_5" }
+            bg3={ weather === "winter" ? "winter_6" : "summer_6" }
+            activeBtn={ weather === "winter" ? 2 : 1 }
+        >
+            <Line/>
+            <div className="content">
+                <h4>[ Активности ]</h4>
+                <h2>Почувствуйте ритм гор — <span>от раннего утра до вечера</span></h2>
+                <p>Сезонные маршруты, панорамные виды и продуманные сценарии отдыха помогают сочетать движение и
+                    расслабление в любое время года.</p>
+                <div className="buttons">
+                    <button onClick={ () => setWeather("summer") }>Лето</button>
+                    <button onClick={ () => setWeather("winter") }>зима</button>
+                </div>
+                <Link to={ `/activities/${ weather }` }>К активностям</Link>
+            </div>
+            <div className="list-container">
+                <div className="list">
+                    <div className="item">
+                        <div className="img img1">Зимний ритм</div>
+                        <p>Свежий снег, чистый воздух и подготовленные трассы в нескольких минутах от отеля. От
+                            первых подъёмников до вечернего apres-ski — ваша зимняя история начинается здесь.</p>
+                    </div>
+                    <div className="item">
+                        <div className="img img2">Прогулки в горах</div>
+                        <p>Прогулки по живописным тропам, подъёмы над облаками и тихие панорамные точки.
+                            Замедлитесь, вдохните глубже и позвольте природе задать темп вашему дню.</p>
+                    </div>
+                    <div className="item">
+                        <div className="img img3">Восстановление</div>
+                        <p>Тёплые бассейны, спа-ритуалы и пространства для восстановления. Сбросьте напряжение,
+                            наполнитесь энергией и возвращайтесь к горам обновлёнными.</p>
                     </div>
                 </div>
-                <div className="cnt">
-                    <span className="active">0{rest.indexOf(restImages[activeRest])+1}/</span>
-                    <span>0{rest.length - 1}</span>
+            </div>
+            <Line/>
+        </Section3>
+        
+        <Section4>
+            <video src={ img.vi_spa } autoPlay/>
+            <h4>[ СПА центр ]</h4>
+            <h2>Востановите баланс</h2>
+            <div className="line"/>
+            <Link to="">Подробнее</Link>
+        </Section4>
+        
+        <Section5
+            bg1={ "h_gt_4" }
+            bg2={ "h_gt_5" }
+            bg3={ "home_5" }
+            bg4={ "h_gt_1" }
+            bg5={ "h_gt_8" }
+            bg6={ "home_6" }
+        >
+            <h2>ДВА ОТЕЛЯ В ЦЕНТРЕ КУРОРТА<br/>ДЛЯ ОТДЫХА В ГОРАХ И АКТИВНЫХ ПОЕЗДОК<br/>В ЛЮБОЕ ВРЕМЯ ГОДА</h2>
+            <p>Современные пространства, продуманные номера и удобное расположение создают комфортную среду для отдыха.
+                От утренних подъёмов на склон до вечерних прогулок по набережной — здесь всё настроено на лёгкость,
+                разнообразие впечатлений и спокойное возвращение в атмосферу уюта.</p>
+            <div className="img img1"/>
+            <div className="img img2"/>
+            <div className="img img3"/>
+            <div className="img img4"/>
+            <div className="img img5"/>
+            <div className="img img6"/>
+            <div className="links">
+                <Link to="/hotel/golden-tulip">Выбрать Голден</Link>
+                <Link to="/hotel/tulip-inn">Выбрать Тюлип</Link>
+            </div>
+        
+        
+        </Section5>
+        
+        <Section6 bg={ restImages[activeRest] } cnt={ activeRest }>
+            <h2>{ Math.floor(rest.indexOf(restImages[activeRest]) % 4) === 0 ? "Бранше" : "Амстердам" }</h2>
+            <Link className="link"
+                  to={ `/restaurant/${ Math.floor(rest.indexOf(restImages[activeRest]) % 4) === 0 ? "golden-tulip" : "tulip-inn" }` }>О
+                ресторане</Link>
+            <Tour pos className="tour"/>
+            <div className="list-container">
+                <div className="list" ref={ restRef }>
+                    { restImages.map(((el, i) => <img
+                        src={ img[el] }
+                        alt=""
+                        onClick={ () => setActiveRest(i) }
+                    />)) }
                 </div>
-            </Section6>
+            </div>
+            <div className="cnt">
+                <span className="active">0{ rest.indexOf(restImages[activeRest]) + 1 }/</span>
+                <span>0{ rest.length - 1 }</span>
+            </div>
+        </Section6>
     </>
 }

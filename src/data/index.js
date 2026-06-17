@@ -53,6 +53,10 @@ export function getRoomById(h,r) {
     return rooms[h][r]
 }
 
+export function getVenuesCnt() {
+    return Object.keys(venues).length;
+}
+
 export function getVenues() {
     return venues;
 }
