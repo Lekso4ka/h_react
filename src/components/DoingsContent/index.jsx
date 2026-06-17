@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { SingleActivity } from "../SingleActivity";
 import { Article, BtnBlock, Content, Top } from "./style";
 
@@ -18,6 +18,27 @@ const randomize = (data) => {
 export const DoingsContent = () => {
     const [showAll, setShowAll] = useState(false);
     const [moreData, setMoreData] = useState(false);
+    const location = useLocation();
+    useEffect(() => {
+        const hash = location.hash;
+        if (hash) {
+            const targetId = decodeURIComponent(hash).replace('#', '');
+            
+            setTimeout(() => {
+                const element = document.getElementById(targetId);
+                if (element) {
+                    // Скроллим от самого верха (0) до элемента
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const scrollPosition = elementPosition + window.pageYOffset - 100;
+                    
+                    window.scrollTo({
+                        top: scrollPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            }, 300);
+        }
+    }, [location]);
     
     useEffect(() => {
         const arr = []
@@ -27,7 +48,6 @@ export const DoingsContent = () => {
         }
         while (n--) {
             item = {...randomize(data)};
-            console.log(item)
             item.type = item.type === "article" ? randomize(["article","article","article", "image", "text", "article"]) : item.type;
             item.order = n
             arr.push(item)
@@ -35,12 +55,8 @@ export const DoingsContent = () => {
         setMoreData(arr)
     }, []);
     
-    useEffect(() => {
-        console.log(moreData)
-    }, [moreData]);
     
     const renderArticle = (el, i) => {
-        console.log(el.type)
         switch(el.type) {
             case "image":
                 return <Article key={`art_${i}`} bg={el.src}>
@@ -56,11 +72,11 @@ export const DoingsContent = () => {
                 </Article>
             default:
                 return <Article key={`art_${i}`} bg={el.src}>
-                    <h5>{el.tooltip}</h5>
+                    <h5 id={el.tooltip}>{el.tooltip}</h5>
                     <h3 dangerouslySetInnerHTML={{__html: el.title}}></h3>
                     <div className="img"/>
                     <p dangerouslySetInnerHTML={{__html: el.text}}/>
-                    <Link to={el.link}>Читать</Link>
+                    <Link to={ `/article/${el.id}` }>Читать</Link>
                 </Article>
         }
     }
