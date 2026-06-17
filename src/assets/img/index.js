@@ -85,6 +85,7 @@ import promo from "./162bd9777cbdda45a962f0928958636b6cd97fbe.png"
 import promo_1 from "./54daff3afe70f3d2b7a8c1ad261a745d400a82d4.png"
 import video1 from "./video1.mp4"
 import vi_gastro from "./rosa-hotel-gastro-home.mp4"
+import vi_spa from "./wellness-grading.mp4"
 
 import do_1 from "./87489baf30ebfc869e74cc76fb0f23c82c007649.png"
 import do_2 from "./c9bfae24334ae3b8dc72ee7bf83d9cdeb71fdb7d.png"
@@ -127,6 +128,9 @@ import res_2 from "./72fd6a8bf11d6173d39e96d40fe0ca3d45a070ea.png"
 import res_3 from "./caa4a57602e5b8885a3b6f82263c5280ecabd6e1.png"
 import res_4 from "./722047b1005f60582a57847242cbe3d0e51cc5a6.jpg"
 import res_5 from "./7086cb8896cecf105f1170390c9000de550b9ae8.png"
+import res_6 from "./4ac407277eaac160051a149803bdbb3c59253651.jpg"
+import res_7 from "./72fd6a8bf11d6173d39e96d40fe0ca3d45a070ea.png"
+import res_8 from "./caa4a57602e5b8885a3b6f82263c5280ecabd6e1.png"
 
 import vac_1 from "./ca7183388e3891c60bfcbbe6c557cbcf026c23c2.jpg"
 import vac_2 from "./00b11b0806aa106bab97075ebdfb2b9a024e3e3a.png"
@@ -136,12 +140,16 @@ import vac_5 from "./6f781a31cfd987a89feae9feba4766bc545c2857.png"
 import vac_6 from "./2bd6630ac55249cf1b40f7638bd33b65a03971e9.png"
 import vac_7 from "./70c25cdcc9c40414e03ced1730e5d980d48c3d00.png"
 import vac_8 from "./62494f4371bb9363d4795898b9c8b6ec3baedf82.png"
-
+import video_s from "./file-2.mp4"
+import video_w from "./file.mp4"
 
 
 export default {
     video1,
+    video_w,
+    video_s,
     vi_gastro,
+    vi_spa,
     promo,
     promo_1,
     summer_1,
@@ -268,6 +276,9 @@ export default {
     res_3,
     res_4,
     res_5,
+    res_6,
+    res_7,
+    res_8,
     
     vac_1,
     vac_2,
