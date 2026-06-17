@@ -50,7 +50,7 @@ export const HomeContent = () => {
                     let img = ref.children[i];
                     img.classList.remove("active");
                 }
-            }, 600)
+            }, 800)
         }
     }, [activeRest]);
     return <>
@@ -222,45 +222,88 @@ export const HomeContent = () => {
                 </div>
             </div>
         </Section2>
-        <Section3
-            bg1={ weather === "winter" ? "winter_4" : "summer_4" }
-            bg2={ weather === "winter" ? "winter_5" : "summer_5" }
-            bg3={ weather === "winter" ? "winter_6" : "summer_6" }
-            activeBtn={ weather === "winter" ? 2 : 1 }
-        >
-            <Line/>
-            <div className="content">
-                <h4>[ Активности ]</h4>
-                <h2>Почувствуйте ритм гор — <span>от раннего утра до вечера</span></h2>
-                <p>Сезонные маршруты, панорамные виды и продуманные сценарии отдыха помогают сочетать движение и
-                    расслабление в любое время года.</p>
-                <div className="buttons">
-                    <button onClick={ () => setWeather("summer") }>Лето</button>
-                    <button onClick={ () => setWeather("winter") }>зима</button>
+        { weather === "winter"
+            ? <Section3
+                bg1={ "winter_4" }
+                bg2={ "winter_5" }
+                bg3={ "winter_6" }
+                activeBtn={ 2 }
+            >
+                <Line/>
+                <div className="content">
+                    <h4>[ Активности ]</h4>
+                    <h2>Почувствуйте ритм гор — <span>от раннего утра до вечера</span></h2>
+                    <p>Сезонные маршруты, панорамные виды и продуманные сценарии отдыха помогают сочетать движение и
+                        расслабление в любое время года.</p>
+                    <div className="buttons">
+                        <button onClick={ () => setWeather("summer") }>Лето</button>
+                        <button onClick={ () => setWeather("winter") }>зима</button>
+                    </div>
+                    <Link to={ `/activities/${ weather }` }>К активностям</Link>
                 </div>
-                <Link to={ `/activities/${ weather }` }>К активностям</Link>
-            </div>
-            <div className="list-container">
-                <div className="list">
-                    <div className="item">
-                        <div className="img img1">Зимний ритм</div>
-                        <p>Свежий снег, чистый воздух и подготовленные трассы в нескольких минутах от отеля. От
-                            первых подъёмников до вечернего apres-ski — ваша зимняя история начинается здесь.</p>
-                    </div>
-                    <div className="item">
-                        <div className="img img2">Прогулки в горах</div>
-                        <p>Прогулки по живописным тропам, подъёмы над облаками и тихие панорамные точки.
-                            Замедлитесь, вдохните глубже и позвольте природе задать темп вашему дню.</p>
-                    </div>
-                    <div className="item">
-                        <div className="img img3">Восстановление</div>
-                        <p>Тёплые бассейны, спа-ритуалы и пространства для восстановления. Сбросьте напряжение,
-                            наполнитесь энергией и возвращайтесь к горам обновлёнными.</p>
+                <div className="list-container">
+                    <div className="list">
+                        <div className="item">
+                            <div className="img img1">Зимний ритм</div>
+                            <p>Свежий снег, чистый воздух и подготовленные трассы в нескольких минутах от отеля. От
+                                первых подъёмников до вечернего apres-ski — ваша зимняя история начинается здесь.</p>
+                        </div>
+                        <div className="item">
+                            <div className="img img2">Прогулки в горах</div>
+                            <p>Прогулки по живописным тропам, подъёмы над облаками и тихие панорамные точки.
+                                Замедлитесь, вдохните глубже и позвольте природе задать темп вашему дню.</p>
+                        </div>
+                        <div className="item">
+                            <div className="img img3">Восстановление</div>
+                            <p>Тёплые бассейны, спа-ритуалы и пространства для восстановления. Сбросьте напряжение,
+                                наполнитесь энергией и возвращайтесь к горам обновлёнными.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <Line/>
-        </Section3>
+                <Line/>
+            </Section3>
+            : <Section3
+                bg1={ "summer_4" }
+                bg2={ "summer_5" }
+                bg3={ "summer_6" }
+                activeBtn={ 1 }
+            >
+                <Line/>
+                <div className="content">
+                    <h4>[ Активности ]</h4>
+                    <h2>Поймайте настроение гор — <span>от первых лучей до заката</span></h2>
+                    <p>Летние маршруты, живописные виды и спокойный отдых на высоте помогут наполнить каждый день новыми
+                        впечатлениями и яркими моментами.</p>
+                    <div className="buttons">
+                        <button onClick={ () => setWeather("summer") }>Лето</button>
+                        <button onClick={ () => setWeather("winter") }>зима</button>
+                    </div>
+                    <Link to={ `/activities/${ weather }` }>К активностям</Link>
+                </div>
+                <div className="list-container">
+                    <div className="list">
+                        <div className="item">
+                            <div className="img img1">Треккинг в горах</div>
+                            <p>Откройте для себя живописные маршруты среди горных вершин и альпийских лугов. Выбирайте
+                                лёгкие прогулки или более продолжительные походы, наслаждаясь природой и свежим воздухом
+                                на каждом шагу.</p>
+                        </div>
+                        <div className="item">
+                            <div className="img img2">Аренда яхты</div>
+                            <p>Проведите день в своём ритме: любуйтесь закатами, отдыхайте у воды и наслаждайтесь
+                                атмосферой полного спокойствия. Иногда лучшие впечатления начинаются именно с паузы.</p>
+                        </div>
+                        <div className="item">
+                            <div className="img img3">Хамам и Сауна</div>
+                            <p>ТПосле насыщенного дня восстановите силы в пространстве для отдыха и расслабления. Тепло,
+                                тишина и забота о себе помогут снять напряжение и почувствовать настоящее
+                                обновление.</p>
+                        </div>
+                    </div>
+                </div>
+                <Line/>
+            </Section3>
+        }
         
         <Section4>
             <video src={ img.vi_spa } autoPlay/>

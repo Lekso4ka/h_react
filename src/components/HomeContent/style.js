@@ -595,7 +595,7 @@ export const Section2 = styled.section`
         flex-direction: column;
         align-items: flex-end;
         gap: 1.3rem;
-        padding-right: 9.4rem;
+        padding-right: 8rem;
 
         a {
             color: var(--Black-2, #2F3034);

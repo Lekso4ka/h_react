@@ -23,88 +23,203 @@ export const Block = styled.section`
 `
 
 export const Content = styled.div`
-    padding: 7.8rem 1.6rem 5.1rem;
+    padding: 7.8rem 1.6rem 0;
+    gap: 3.2rem 2.2rem;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 3.2rem 2.1rem;
-    align-content: flex-start;
-    align-items: baseline;
-    overflow: hidden;
+    grid-template-columns: 1fr 1fr;
     @media (min-width: 576px) {
         grid-template-columns: repeat(4, 1fr);
-        gap: 6rem 4.1rem;
-        padding: 7rem 2.4rem 0;
+        padding: 7rem 2.4rem 10rem;
+        gap: 6rem;
+        overflow: hidden;
     }
+
     & > * {
         position: relative;
     }
-
     p {
         color: var(--Beige, #FFF6F0);
+        font-family: Manrope;
         font-size: 1.4rem;
+        font-style: normal;
         font-weight: 400;
-        line-height: 120%; /* 24px */
-        @media (min-width: 576px) {
-            font-size: 2rem;
-        }
-        &:not(:first-of-type) {
-            &::before {
-                content: "";
-                height: 8.3rem;
+        line-height: 120%; /* 16.8px */
+        &:nth-of-type(1) {
+            padding-bottom: 4.7rem;
+            &::after {
                 width: .1rem;
-                background-color: var(--Beige, #FFF6F0);
-                position: absolute;
-                left: -3rem;
-                top: -1rem;
-                opacity: .4;
+                top: .4rem;
+                right: -.6rem;
+                height: 23.2rem;
             }
         }
-
-        &:nth-of-type(3)::before {
-            height: 16.2rem;
+        &:nth-of-type(3) {
+            &::after {
+                width: .1rem;
+                top: .4rem;
+                right: -.6rem;
+                bottom: -1.9rem;
+            }
         }
+        @media (min-width: 576px) {
+            font-size: 2rem;
+            &:nth-of-type(1) {
+                padding-bottom: 0;
+                &::after {
+                    width: .1rem;
+                    top: -1rem;
+                    right: -3rem;
+                    height: auto;
+                    bottom: 0;
+                }
+            }
+            &:nth-of-type(2) {
+                width: 38.5rem;
+            }
+            &:nth-of-type(3) {
+                width: 40rem;
 
-        &:nth-of-type(4)::before {
-            height: 20rem;
+                &::after {
+                    width: .1rem;
+                    top: -1rem;
+                    left: -3rem;
+                    height: 16.2rem;
+                }
+            }
+            &:nth-of-type(4) {
+                &::after {
+                    width: .1rem;
+                    top: -1rem;
+                    height: 20rem;
+                    left: -3rem;
+                }
+            }
         }
     }
-
-    div::after {
+    
+    div::before,
+    p::before,
+    div::after,
+    p::after {
         content: "";
-        height: .1rem;
         background-color: var(--Beige, #FFF6F0);
         position: absolute;
-        left: 0;
-        right: .6rem;
-        bottom: -3rem;
         opacity: .4;
+    }
+    
+    div:nth-of-type(1) {
+        &::after {
+            height: .1rem;
+            left: 0;
+            right: .6rem;
+            bottom: -1.6rem;
+        }
         @media (min-width: 576px) {
-            right: .1rem;
+            &::after {
+                bottom: -3rem;
+                right: -1.9rem;
+            }
         }
     }
 
-    div:not(:first-of-type) {
+    div:nth-of-type(2) {
         &::before {
-            content: "";
-            height: 9.7rem;
             width: .1rem;
-            background-color: var(--Beige, #FFF6F0);
-            position: absolute;
-            left: -3rem;
-            bottom: -1rem;
-            opacity: .4;
+            bottom: .4rem;
+            top: -4.2rem;
+            left: -1.65rem;
         }
 
         &::after {
+            height: .1rem;
+            left: -.4rem;
             right: 0;
-            left: -.5rem;
-            
-            @media (min-width: 576px) {
+            bottom: -1.6rem;
+        }
+        @media (min-width: 576px) {
+            &::before {
+                width: .1rem;
+                bottom: -1rem;
+                top: 4.9rem;
+                left: -2.95rem;
+            }
+            &::after {
+                bottom: -3rem;
+                right: -1.9rem;
                 left: -1.9rem;
             }
         }
-        
     }
+
+    div:nth-of-type(3) {
+        grid-row-start: 3;
+        &::after {
+            height: .1rem;
+            left: 0;
+            right: .6rem;
+            bottom: -1.6rem;
+        }
+        @media (min-width: 576px) {
+            grid-row-start: auto;
+            &::before {
+                width: .1rem;
+                bottom: -1rem;
+                top: 4.9rem;
+                left: -2.95rem;
+            }
+            &::after {
+                bottom: -3rem;
+                right: -1.9rem;
+                left: -1.9rem;
+            }
+        }
+    }
+
+    div:nth-of-type(4) {
+        grid-row-start: 3;
+        &::after {
+            height: .1rem;
+            left: -.4rem;
+            right: 0;
+            bottom: -1.6rem;
+        }
+        @media (min-width: 576px) {
+            grid-row-start: auto;
+            &::before {
+                width: .1rem;
+                bottom: -1rem;
+                top: 4.9rem;
+                left: -2.95rem;
+            }
+            &::after {
+                left: -1.9rem;
+                bottom: -3rem;
+            }
+        }
+    }
+
+    //div:not(:first-of-type) {
+    //    &::before {
+    //        content: "";
+    //        height: 9.7rem;
+    //        width: .1rem;
+    //        background-color: var(--Beige, #FFF6F0);
+    //        position: absolute;
+    //        left: -3rem;
+    //        bottom: -1rem;
+    //        opacity: .4;
+    //    }
+    //
+    //    &::after {
+    //        right: 0;
+    //        left: -.5rem;
+    //
+    //        @media (min-width: 576px) {
+    //            left: -1.9rem;
+    //        }
+    //    }
+    //
+    //}
 
     .title {
         color: var(--Beige, #FFF6F0);

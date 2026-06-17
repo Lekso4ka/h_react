@@ -128,8 +128,9 @@ export const List = styled.ul`
         position: absolute;
         bottom: 8rem;
         display: flex;
+        justify-content: center;
         gap: .4rem;
-        width: max-content;
+        width: 6rem;
     }
     svg {
         position: absolute;
@@ -198,6 +199,7 @@ export const ImgItem = styled.div`
 export const Btn = styled.button`
     width: .8rem;
     height: .8rem;
+    flex-shrink: 0;
     background-color: var(--Red, #96281F);
     opacity: ${({isActive}) => isActive ? 1 : .4};
     
