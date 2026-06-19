@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link as RouterLink } from "react-router-dom";
+import { useCtx } from "../../../Ctx";
 import { ActivityBtn } from "../../../ui/ActivityBtn";
 import { Icon } from "../../../ui/Icon";
 import { Link } from "../../../ui/Link";
@@ -9,12 +9,12 @@ import { Content, HotelCard } from "./style";
 export const Hero = ({weather, setWeather}) => {
     const [actGt, setActGt] = useState(false)
     const [actTi, setActTi] = useState(false)
-    const w = window.outerWidth;
+    const {mob} = useCtx();
     return <Content activeBtn={ weather === "winter" ? 2 : 1 }>
         <Video
             data={["video_w", "video_s"]}
             index={weather === "winter" ? 0 : 1}
-            h={w < 576 ? "84.4rem" : null}
+            h={mob ? "84.4rem" : null}
         ></Video>
         <div className="line"/>
         <div className="buttons">

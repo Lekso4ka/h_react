@@ -9,7 +9,7 @@ export const Content = styled.div`
 
     .line {
         height: 7.6rem;
-        border-bottom: .1rem solid rgba(255, 246, 240, 0.30);
+        border-bottom: .1rem solid ${ ({ theme }) => theme.colors.light_30 }
         margin: 0 1.6rem 3.1rem;
     }
 
@@ -21,9 +21,9 @@ export const Content = styled.div`
 
     h1 {
         padding: 18.6rem 0 1.8rem;
-        color: var(--Beige, #FFF6F0);
+        color: ${ ({ theme }) => theme.colors.light };
         text-align: center;
-        font-family: "Playfair Display";
+        font-family: ${ ({ theme }) => theme.fonts.display };
         font-size: 34px;
         font-style: italic;
         font-weight: 400;
@@ -43,7 +43,7 @@ export const Content = styled.div`
     .divider {
         width: .1rem;
         height: 9rem;
-        background: rgba(255, 255, 255, 0.20);
+        background: ${ ({ theme }) => theme.colors.white_20 };
         margin: 0 auto 2.9rem;
         position: relative;
         overflow: hidden;
@@ -55,7 +55,7 @@ export const Content = styled.div`
             height: 100%;
             top: 0;
             left: 0;
-            background-color: #fff;
+            background-color: ${ ({ theme }) => theme.colors.white };
             transform: translate(0, -100%);
             animation: scroll 2s linear infinite;
             border-radius: .1rem;
@@ -72,7 +72,7 @@ export const Content = styled.div`
         position: absolute;
         right: 4.7rem;
         bottom: 4rem;
-        color: rgba(255, 246, 240, 0.80);
+        color: ${ ({ theme }) => theme.colors.light_80 };
         font-family: "Playfair Display";
         font-size: 2rem;
         font-style: italic;
@@ -89,9 +89,9 @@ export const Content = styled.div`
         from {
             transform: translate(0, -100%);
         }
-            to {
-                    transform: translate(0, 100%);
-            }
+        to {
+            transform: translate(0, 100%);
+        }
     }
 
     @media (min-width: 576px) {
@@ -105,7 +105,6 @@ export const Content = styled.div`
         grid-template-rows: auto auto auto auto 1fr;
         align-content: flex-start;
         padding: 13.6rem 2.9rem 2.4rem;
-        //justify-content: center;
         justify-items: center;
         .activities {
             display: block;
@@ -149,7 +148,7 @@ export const Content = styled.div`
 export const HotelCard = styled.div`
     z-index: 1;
     display: grid;
-    background: var(--Beige, #FFF6F0);
+    background: ${({theme}) => theme.colors.light};
     grid-template-columns: auto auto;
     justify-content: space-between;
     justify-items: flex-start;
@@ -159,7 +158,7 @@ export const HotelCard = styled.div`
     position: relative;
 
     h2 {
-        color: var(--Red, #96281F);
+        color: ${({theme}) => theme.colors.red};
         font-family: "Playfair Display";
         font-size: 2.8rem;
         font-style: normal;
@@ -208,8 +207,8 @@ export const HotelCard = styled.div`
         box-sizing: border-box;
         background: var(--Beige, #FFF6F0);
         padding: 1.8rem 1.6rem 2.6rem;
-            display: grid;
-            grid-template-rows: auto auto auto auto 1fr auto;
+        display: grid;
+        grid-template-rows: auto auto auto auto 1fr auto;
 
         .top {
             display: flex;

@@ -1,10 +1,13 @@
 export const theme = {
     colors: {
         white: "#FFFFFF",
+        white_20: "#FFFFFF33", // rgba(255, 255, 255, 0.20)
         white_40: "#FFFFFF66", // rgba(255, 255, 255, 0.40)
         dark: "#1C1C1C", // Black
         light: "#FFF6F0", // Beige
         light_20: "#FFF6F033", // rgba(255, 246, 240, 0.20)
+        light_30: "#FFF6F04C", // rgba(255, 246, 240, 0.30)
+        light_80: "#FFF6F0CC", // rgba(255, 246, 240, 0.80)
         lavender: "#C0C5E5", // Light lavender
         green: "#55532E", // Green
         text: "#2F3034", // Black 2

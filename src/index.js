@@ -4,6 +4,7 @@ import { BrowserRouter, useLocation } from "react-router-dom";
 import { ThemeProvider } from "@emotion/react";
 
 import { App } from "./App";
+import { ContextProvider } from "./Ctx";
 import { GlobalStyles } from "./styles/GlobalSt";
 import { theme } from "./styles/theme";
 
@@ -19,9 +20,12 @@ const ScrollToTop = () => {
 
 const root = createRoot(document.getElementById("root"));
 root.render(<ThemeProvider theme={ theme }>
-    <BrowserRouter>
-        <ScrollToTop/>
-        <GlobalStyles/>
-        <App/>
-    </BrowserRouter>
+    <ContextProvider>
+        <BrowserRouter>
+            
+            <ScrollToTop/>
+            <GlobalStyles/>
+            <App/>
+        </BrowserRouter>
+    </ContextProvider>
 </ThemeProvider>)
