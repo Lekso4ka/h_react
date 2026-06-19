@@ -5,7 +5,7 @@ import { Link } from "../../../ui/Link";
 import { HorizontalDragRail } from "./HorizontalDragRail";
 import { Content } from "./style";
 
-export const Activities = ({weather}) => {
+export const Activities = ({weather, setWeather}) => {
     return <>{weather === "winter"
         ? <Content
             bg1={ "winter_4" }

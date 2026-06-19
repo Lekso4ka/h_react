@@ -18,6 +18,7 @@ export const HomeContent = () => {
         />
         <Activities
             weather={weather}
+            setWeather={setWeather}
         />
     </>
 }

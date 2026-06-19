@@ -72,6 +72,7 @@ export const HomeContent1 = () => {
         />
         <Activities
             weather={weather}
+            setWeather={setWeather}
         />
         <Section4>
             <video src={ img.vi_spa } autoPlay/>
