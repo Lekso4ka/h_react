@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getArticleById } from "../../data";
-import { Line } from "../Line";
+import { Line } from "../../ui/Line";
 import {
     Carousel,
     CarouselItem,

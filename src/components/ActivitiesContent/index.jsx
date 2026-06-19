@@ -4,7 +4,7 @@ import { useNavigate, useParams, Link } from "react-router-dom";
 import img from "../../assets/img"
 
 import data from "../../data/activities.json";
-import { Icon } from "../Icon";
+import { Icon } from "../../ui/Icon";
 import { SingleActivity } from "../SingleActivity";
 import { Tour } from "../Tour";
 import { Block, Btn, Content, Hero, HeroLink, Image, ImgItem, Item, List, Other, VideoContainer } from "./style";

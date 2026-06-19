@@ -1,15 +1,12 @@
 import React from "react"
 import { EventsContent } from "../components/EventsContent";
-import { HomeBanner } from "../components/HomeBanner";
-import { HomeContent } from "../components/HomeContent";
-import { HS2 } from "../components/HS2";
+import { HomeContent1 } from "../components/HomeContent";
+import { HomeContent } from "../sections/Home";
 
 
 export const Home = () => {
     return <>
-        <HomeContent/>
+        <HomeContent1/>
         <EventsContent/>
-        {/*<HomeBanner/>*/}
-        {/*<HS2/>*/}
     </>
 }

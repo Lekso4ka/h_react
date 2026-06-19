@@ -1,10 +1,10 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { getVenueById } from "../../data/venues";
-import { Breadcrumbs } from "../Breadcrumbs";
+import { Breadcrumbs } from "../../ui/Breadcrumbs";
 import { Lightbox } from "../Lightbox";
 import { Tour } from "../Tour";
-import { Vector } from "../Vector";
+import { Vector } from "../../ui/Vector";
 import { Block, Content, Info, InfoItem, Options, Variant, Text, Images, Image, Formats } from "./style";
 
 export const VenueContent = () => {

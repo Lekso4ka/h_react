@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { Icon } from "../Icon";
+import { Icon } from "../../ui/Icon";
 
 import { Dropdown } from "./Dropdown";
 import { NavItem } from "./NavItem";

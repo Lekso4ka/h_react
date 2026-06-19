@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
-import { Icon } from "../Icon";
+import { Icon } from "../../ui/Icon";
 import { Block, Content, ContentBlock } from "./style";
 import { VariantItem } from "./VariantItem";
 

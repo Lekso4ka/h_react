@@ -2,8 +2,8 @@ import React, { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import data from "../../data/affiche.json"
 import { parseDate } from "../../utils/parseDate";
-import { Breadcrumbs } from "../Breadcrumbs";
-import { Icon } from "../Icon";
+import { Breadcrumbs } from "../../ui/Breadcrumbs";
+import { Icon } from "../../ui/Icon";
 import { VariantItem } from "../Variants/VariantItem";
 import { Container, Content, Filter, Item, Line } from "./style";
 

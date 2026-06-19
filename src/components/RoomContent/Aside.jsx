@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
-import { Icon } from "../Icon";
+import { Icon } from "../../ui/Icon";
 import { AccP, Button, Info, List1, List2, MainText, Options, SecondaryText, TextTop } from "./style";
 
 gsap.registerPlugin(useGSAP);

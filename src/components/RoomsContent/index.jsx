@@ -1,6 +1,6 @@
 import React from "react";
 import { getSectionData } from "../../data/hotels";
-import { Breadcrumbs } from "../Breadcrumbs";
+import { Breadcrumbs } from "../../ui/Breadcrumbs";
 import { Block } from "./style";
 import { RoomsSection } from "./Section";
 

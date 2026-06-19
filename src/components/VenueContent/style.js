@@ -214,7 +214,7 @@ export const Image = styled.div`
     background-position: center;
     background-size: cover;
     height: 59.8rem;
-    cursor: url(${c.v1}), pointer;
+    cursor: url(${c.v1}) 60 60, pointer;
 `
 
 export const Formats = styled.div`

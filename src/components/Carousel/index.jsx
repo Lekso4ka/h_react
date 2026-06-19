@@ -2,7 +2,7 @@
 import React, { useRef, useState, useMemo, useCallback } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { Icon } from "../Icon";
+import { Icon } from "../../ui/Icon";
 
 import { Root, Viewport, Track, Slide, SlideImage, Arrow, Dots, Dot, Tour } from "./style";
 

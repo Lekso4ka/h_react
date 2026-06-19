@@ -1,5 +1,6 @@
 import styled from "@emotion/styled"
 import img from "../../assets/img"
+import c from "../../assets/cursors"
 
 export const Block = styled.div`
     padding: 0 2.4rem 2.8rem;
@@ -68,8 +69,9 @@ export const Section = styled.section`
         align-items: baseline;
         justify-content: space-between;
         color: var(--Black-2, #2F3034);
-        cursor: pointer;
         position: relative;
+        cursor: url("${c.v2}") 60 60, pointer;
+        
         .name {
             font-family: "Playfair Display", sans-serif;
             font-size: 3.4rem;

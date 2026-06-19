@@ -3,7 +3,9 @@ import {Global, css} from "@emotion/react";
 
 import Playfair from "./fonts/PlayfairDisplay.ttf"
 import PlayfairIt from "./fonts/PlayfairDisplay-Italic.ttf"
-import Manrope from "./fonts/Manrope.ttf"
+import Manrope from "./fonts/Manrope.ttf";
+
+import {theme} from "./theme";
 
 const globalSt = css`
     @font-face {
@@ -24,9 +26,6 @@ const globalSt = css`
         font-weight: 200 800;
         font-style: normal;
     }
-    :root {
-        --Black-2: #2F3034;
-    }
     html {
         font-size: 2.5641vw;
     }
@@ -36,12 +35,13 @@ const globalSt = css`
         }
     }
     body {
-        font-family: Manrope, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+        font-family: ${theme.fonts.base};
         margin: 0;
         min-height: 100vh;
-        //overflow: hidden;
-        background-color: #FFF6F0;
-        color: #2F3034;
+        background-color: ${theme.colors.light};
+        color: ${theme.colors.text};
+        font-style: normal;
+        font-weight: 400;
     }
 
     a {
@@ -75,12 +75,12 @@ const globalSt = css`
     }
 
     ::-webkit-scrollbar-track {
-        background-color: rgba(255, 255, 255, 0.40);
+        background-color: ${theme.colors.white_40};
         position: relative;
     }
 
     ::-webkit-scrollbar-thumb {
-        background: rgba(150, 40, 31, 0.20);
+        background-color: ${theme.colors.red_20};
         border-radius: 4px;
         position: relative;
     }

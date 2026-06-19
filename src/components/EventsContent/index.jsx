@@ -2,7 +2,7 @@ import gsap from "gsap";
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { getVenues } from "../../data/venues";
-import { Breadcrumbs } from "../Breadcrumbs";
+import { Breadcrumbs } from "../../ui/Breadcrumbs";
 import { Container } from "../Container";
 import { ServiceItem } from "../HotelContent/style";
 import { Tour } from "../Tour";

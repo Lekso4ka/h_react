@@ -1,6 +1,6 @@
 import img from "../../assets/img"
 import React, { Fragment, useEffect, useState } from "react";
-import { Icon } from "../Icon";
+import { Icon } from "../../ui/Icon";
 import { RestaurantContent } from "../RestaurantContent";
 import { ServicesContent } from "../ServicesContent";
 import {

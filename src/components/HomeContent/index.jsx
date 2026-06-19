@@ -1,12 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
 import { getVenuesCnt } from "../../data";
-import { remToPixels } from "../../utils/remToPx";
-import { Icon } from "../Icon";
-import { Line } from "../Line";
+import { Hero } from "../../sections/Home/Hero";
+import { ActivityBtn } from "../../ui/ActivityBtn";
+import { Icon } from "../../ui/Icon";
+import {Link as RouterLink} from "react-router-dom";
+import { Link } from "../../ui/Link";
+import { Line } from "../../ui/Line";
 import { Tour } from "../Tour";
-import { Hero, HotelCard, Section1, Section2, Section3, Section4, Section5, Section6 } from "./style";
-import img from "../../assets/img"
+import { Section1, Section2, Section3, Section4, Section5, Section6 } from "./style";
+import img from "../../assets/img";
 
 const rest = [
     "res_1",
@@ -20,14 +22,44 @@ const rest = [
     "res_1"
 ]
 
-export const HomeContent = () => {
+export const HomeContent1 = () => {
     const [weather, setWeather] = useState("winter");
-    const [actGt, setActGt] = useState(false)
-    const [actTi, setActTi] = useState(false)
+    const [isVisibleImg, setIsVisibleImg] = useState(false);
+    const imgRef = useRef(null);
+    
     const [restImages, setRestImages] = useState(rest)
     const restRef = useRef()
     
     const [activeRest, setActiveRest] = useState(0)
+    
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        setIsVisibleImg(true);
+                    }, 0);
+                    observer.disconnect(); // Отключаем после первого появления
+                }
+            },
+            {
+                threshold: 0.1,
+                rootMargin: '0px 0px 50px 0px'
+            }
+        );
+        
+        const currentRef = imgRef.current;
+        if (currentRef) {
+            observer.observe(currentRef);
+        }
+        
+        return () => {
+            if (currentRef) {
+                observer.unobserve(currentRef);
+            }
+        };
+    }, []);
+    
     useEffect(() => {
         if (activeRest === 0)
             return;
@@ -54,143 +86,24 @@ export const HomeContent = () => {
         }
     }, [activeRest]);
     return <>
-        <Hero activeBtn={ weather === "winter" ? 2 : 1 }>
-            <video src={ weather === "winter" ? img["video_w"] : img["video_s"] } autoPlay/>
-            <div className="line"/>
-            <div className="buttons">
-                <button
-                    onClick={ () => setWeather("summer") }
-                >Лето
-                </button>
-                <button
-                    onClick={ () => setWeather("winter") }
-                >зима
-                </button>
-            </div>
-            <h1>
-                { weather === "winter" ? "Зима" : "Лето" } на Розе Хутор
-            </h1>
-            <h4>Комфорт или практичность — выберите свой формат проживания</h4>
-            <div className="divider"/>
-            <div className="hotels">
-                <HotelCard active={ actGt }>
-                    <h2>Голден тюлип</h2>
-                    <div className="stars">
-                        <Icon name="star"/>
-                        <Icon name="star"/>
-                        <Icon name="star"/>
-                        <Icon name="star"/>
-                    </div>
-                    <button onClick={ () => setActGt(true) }>Выбрать</button>
-                    <span>Комфорт и сервис</span>
-                    <div className="card">
-                        <div className="content">
-                            <div className="top">
-                                <div className="stars">
-                                    <Icon name="star"/>
-                                    <Icon name="star"/>
-                                    <Icon name="star"/>
-                                    <Icon name="star"/>
-                                </div>
-                                <button onClick={ () => setActGt(false) }>
-                                    закрыть
-                                    <svg viewBox="0 0 22 20" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M0 20V0H3V1.46341H1.23038V18.5366H3V20H0Z" fill="#2F3034"/>
-                                        <rect x="17" y="9" width="2" height="12" transform="rotate(90 17 9)"
-                                              fill="#2F3034"/>
-                                        <path d="M22 20V0H19V1.46341H20.7696V18.5366H19V20H22Z" fill="#2F3034"/>
-                                    </svg>
-                                </button>
-                            </div>
-                            <h2>Голден тюлип</h2>
-                            <p>
-                                Комфорт и сервис
-                                <span>/</span>
-                                <a href="tel:+7(862)2431300">Тел. +7 (862) 243 13 00</a>
-                            </p>
-                            <div className="img"/>
-                            <p className="text">
-                                Голден Тулип Роза Хутор — четырёхзвёздочный отель в самом центре курорта, на набережной
-                                Роза
-                                Хутор. В нескольких минутах от подъёмников и ключевой инфраструктуры, с панорамными
-                                видами на
-                                горы и удобным доступом ко всем возможностям курорта.
-                            </p>
-                            <div className="links">
-                                <Link to="/hotel/golden-tulip">Выбрать отель</Link>
-                                <Link to="/rooms/golden-tulip">Выбрать номер</Link>
-                            </div>
-                        </div>
-                    </div>
-                </HotelCard>
-                <HotelCard active={ actTi }>
-                    <h2>Тюлип инн</h2>
-                    <div className="stars">
-                        <Icon name="star"/>
-                        <Icon name="star"/>
-                        <Icon name="star"/>
-                    </div>
-                    <button onClick={ () => setActTi(true) }>Выбрать</button>
-                    <span>Практичный формат</span>
-                    <div className="card">
-                        <div className="content">
-                            <div className="top">
-                                <div className="stars">
-                                    <Icon name="star"/>
-                                    <Icon name="star"/>
-                                    <Icon name="star"/>
-                                </div>
-                                <button onClick={ () => setActTi(false) }>
-                                    закрыть
-                                    <svg viewBox="0 0 22 20" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M0 20V0H3V1.46341H1.23038V18.5366H3V20H0Z" fill="#2F3034"/>
-                                        <rect x="17" y="9" width="2" height="12" transform="rotate(90 17 9)"
-                                              fill="#2F3034"/>
-                                        <path d="M22 20V0H19V1.46341H20.7696V18.5366H19V20H22Z" fill="#2F3034"/>
-                                    </svg>
-                                </button>
-                            </div>
-                            <h2>Тюлип инн</h2>
-                            <p>
-                                Практичный формат
-                                <span>/</span>
-                                <a href="tel:+7(862)2431300">Тел. +7 (862) 243 13 00</a>
-                            </p>
-                            <div className="img"/>
-                            <p className="text">
-                                Тюлип инн — трёхзвёздочный отель в самом центре курорта, на набережной Роза
-                                Хутор. В нескольких минутах от подъёмников и ключевой инфраструктуры, с панорамными
-                                видами
-                                на горы и удобным доступом ко всем возможностям курорта.
-                            </p>
-                            <div className="links">
-                                <Link to="/hotel/tulip-inn">Выбрать отель</Link>
-                                <Link to="/rooms/tulip-inn">Выбрать номер</Link>
-                            </div>
-                        </div>
-                    </div>
-                </HotelCard>
-            </div>
-            <div className="activities">
-                <span>{ weather === "winter" ? "зима" : "лето" } ‘26</span>
-                <p>Откройте для себя сезон, в котором движение и отдых звучат в одном ритме.</p>
-                <Link to={ `/activities/${ weather }` }>К активностям</Link>
-            </div>
-        </Hero>
         
+        <Hero
+            weather={weather}
+            setWeather={setWeather}
+        />
         <Section1
             bg1={ "h_banner" }
             bg2={ "home_1" }
             bg3={ "home_2" }
+            
+            visible={isVisibleImg}
         >
             <Line/>
             <h4>[ Атмосфера и пространство ]</h4>
             <p>Комфортный отдых среди горных склонов курорта.
-                Архитектура отеля продолжает природный пейзаж, а светлые <span>интерьеры, натуральные материалы и выверенные пропорции создают спокойную и сдержанную атмосферу</span>.
+                Архитектура отеля продолжает природный пейзаж, <span>а светлые интерьеры, натуральные материалы и выверенные пропорции создают спокойную и сдержанную атмосферу</span>.
             </p>
-            <div className="img img1"></div>
+            <div className="img img1" ref={imgRef}></div>
             <div className="img img2"></div>
             <div className="img img3"></div>
             <div className="tooltip">Архитектура, свет и тишина формируют атмосферу отеля.</div>
@@ -200,25 +113,57 @@ export const HomeContent = () => {
         <Section2 bg1={ "h_gt_14" } bg2={ "home_3" }>
             <h4>[ Возможности отеля ]</h4>
             <nav>
-                <Link to={ `/activities/${ weather }` }>Активности</Link>
-                <Link to="">СПА центр</Link>
-                <Link to="/restaurant/golden-tulip">Рестораны</Link>
-                <Link to="/services/golden-tulip">Услуги отеля</Link>
-                <Link to="/events/default">Мероприятия</Link>
-                <Link to="/events/venues">Конференц залы<span>[ { getVenuesCnt() } ]</span></Link>
-                <Link to="/stock/golden-tulip">Акции</Link>
-                <Link to="/affiche">Афиша</Link>
+                <Link
+                    variant="big"
+                    to={ `/activities/${ weather }` }
+                >Активности</Link>
+                <Link
+                    variant="big"
+                    to=""
+                >СПА центр</Link>
+                <Link
+                    variant="big"
+                    to="/restaurant/golden-tulip"
+                >Рестораны</Link>
+                <Link
+                    variant="big"
+                    to="/services/golden-tulip"
+                >Услуги отеля</Link>
+                <Link
+                    variant="big"
+                    to="/events/default"
+                >Мероприятия</Link>
+                <Link
+                    variant="big"
+                    to="/events/venues"
+                >Конференц залы<span>[ { getVenuesCnt() } ]</span></Link>
+                <Link
+                    variant="big"
+                    to="/stock/golden-tulip"
+                >Акции</Link>
+                <Link
+                    variant="big"
+                    to="/affiche"
+                >Афиша</Link>
             </nav>
             <div className="list">
                 <div className="room">
                     <h4>Голден Тюлип</h4>
                     <h2>Номера и сьюты</h2>
-                    <Link to="/rooms/golden-tulip">К номерам</Link>
+                    <Link
+                        color={"light"}
+                        hover={"light"}
+                        to="/rooms/golden-tulip"
+                    >К номерам</Link>
                 </div>
                 <div className="room">
                     <h4>Тюлип Инн</h4>
                     <h2>Номера</h2>
-                    <Link to="/rooms/tulip-inn">К номерам</Link>
+                    <Link
+                        color={"light"}
+                        hover={"light"}
+                        to="/rooms/tulip-inn"
+                    >К номерам</Link>
                 </div>
             </div>
         </Section2>
@@ -236,8 +181,16 @@ export const HomeContent = () => {
                     <p>Сезонные маршруты, панорамные виды и продуманные сценарии отдыха помогают сочетать движение и
                         расслабление в любое время года.</p>
                     <div className="buttons">
-                        <button onClick={ () => setWeather("summer") }>Лето</button>
-                        <button onClick={ () => setWeather("winter") }>зима</button>
+                        <ActivityBtn
+                            active={weather === "summer"}
+                            onClick={ () => setWeather("summer") }
+                            variant={2}
+                        >Лето</ActivityBtn>
+                        <ActivityBtn
+                            active={weather === "winter"}
+                            onClick={ () => setWeather("winter") }
+                            variant={2}
+                        >зима</ActivityBtn>
                     </div>
                     <Link to={ `/activities/${ weather }` }>К активностям</Link>
                 </div>
@@ -275,8 +228,16 @@ export const HomeContent = () => {
                     <p>Летние маршруты, живописные виды и спокойный отдых на высоте помогут наполнить каждый день новыми
                         впечатлениями и яркими моментами.</p>
                     <div className="buttons">
-                        <button onClick={ () => setWeather("summer") }>Лето</button>
-                        <button onClick={ () => setWeather("winter") }>зима</button>
+                        <ActivityBtn
+                            active={weather === "summer"}
+                            onClick={ () => setWeather("summer") }
+                            variant={2}
+                        >Лето</ActivityBtn>
+                        <ActivityBtn
+                            active={weather === "winter"}
+                            onClick={ () => setWeather("winter") }
+                            variant={2}
+                        >зима</ActivityBtn>
                     </div>
                     <Link to={ `/activities/${ weather }` }>К активностям</Link>
                 </div>
@@ -310,7 +271,11 @@ export const HomeContent = () => {
             <h4>[ СПА центр ]</h4>
             <h2>Востановите баланс</h2>
             <div className="line"/>
-            <Link to="">Подробнее</Link>
+            <Link
+                color={"light"}
+                hover={"light"}
+                to=""
+            >Подробнее</Link>
         </Section4>
         
         <Section5
@@ -341,9 +306,12 @@ export const HomeContent = () => {
         
         <Section6 bg={ restImages[activeRest] } cnt={ activeRest }>
             <h2>{ Math.floor(rest.indexOf(restImages[activeRest]) % 4) === 0 ? "Бранше" : "Амстердам" }</h2>
-            <Link className="link"
-                  to={ `/restaurant/${ Math.floor(rest.indexOf(restImages[activeRest]) % 4) === 0 ? "golden-tulip" : "tulip-inn" }` }>О
-                ресторане</Link>
+            <Link
+                className="link"
+                color={"light"}
+                hover={"light"}
+                to={ `/restaurant/${ Math.floor(rest.indexOf(restImages[activeRest]) % 4) === 0 ? "golden-tulip" : "tulip-inn" }` }
+            >О ресторане</Link>
             <Tour pos className="tour"/>
             <div className="list-container">
                 <div className="list" ref={ restRef }>
