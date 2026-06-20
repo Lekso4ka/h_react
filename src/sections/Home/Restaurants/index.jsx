@@ -59,7 +59,7 @@ export const Restaurants = () => {
                     }
                     setRight(false)
                 }
-            }, 800)
+            }, 1000)
         }
     }, [activeRest]);
     const clickHandler = (e, i, a) => {
