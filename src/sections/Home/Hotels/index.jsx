@@ -33,7 +33,7 @@ export const Hotels = () => {
                 });
                 
                 timeline
-                    .to(img1, { scale: 2.5 }, 0)
+                    .to(img1, { scale: 1.52 }, 0)
                     .to(img2, { opacity: 0, duration: 1 }, 0)
                     .to(img2, { scale: 2 }, 0)
                     .to(img2, {  yPercent: -100 }, 0)
@@ -53,7 +53,7 @@ export const Hotels = () => {
                 
                 const trigger = ScrollTrigger.create({
                     trigger: section,
-                    start: "40% center",
+                    start: "center center",
                     //end: () => `+=${window.innerHeight} top`,
                     scrub: 1.5,
                     pin: true,

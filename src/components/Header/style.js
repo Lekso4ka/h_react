@@ -151,7 +151,6 @@ export const HeaderButton = styled.button`
     align-items: center;
     gap: 1rem;
     background: #96281F;
-    backdrop-filter: blur(.8rem);
     color: #FFF6F0;
     text-align: center;
     font-family: "Playfair Display", serif;

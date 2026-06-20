@@ -102,7 +102,7 @@ export const Content = styled.section`
             text-align: center;
             font-size: 1.8rem;
             max-width: 80.3rem;
-            padding: 53.2rem 0 4.4rem;
+            padding: 27rem 0 4.4rem;
         }
 
         .img1 {
