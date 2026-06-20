@@ -1,5 +1,5 @@
 import React from "react";
-import { EventsContent } from "../components/EventsContent";
+import { EventsContent } from "../sections/Events";
 import { HotelContent } from "../components/HotelContent";
 
 export const Hotel = () => {
