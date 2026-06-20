@@ -49,13 +49,15 @@ export const EventsContent = ({ page }) => {
     }, [event]);
     
     return <Container page={ page }>
-        { !page && <Line/> }
+        <Line/>
         { !page && <Tooltip>[ MICE ]</Tooltip> }
         <Block>
-            { page && <Breadcrumbs data={ [
-                { text: "Главная", link: "/" },
-                { text: "Мероприятия" }
-            ] }/> }
+            { page && <div className="bc">
+                <Breadcrumbs data={ [
+                    { text: "Главная", link: "/" },
+                    { text: "Мероприятия" }
+                ] }/>
+            </div> }
             <Top>
                 <h1>Мероприятия и события любого формата, где важны атмосфера и детали.</h1>
                 <p>Проводите встречи, презентации и конференции в удобных залах с продуманной атмосферой.
@@ -83,10 +85,10 @@ export const EventsContent = ({ page }) => {
                     >Мероприятия</SquareItem>
                 </Buttons>
                 <Content cnt={ type === "venues" ? venues.length : events.length }>
-                    { type === "venues"
+                    <div className="wrapper">{ type === "venues"
                         ? <Venues data={ venues }/>
                         : <Events data={ events }/>
-                    }
+                    }</div>
                 </Content>
             </Section>
         </Block>

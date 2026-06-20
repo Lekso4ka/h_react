@@ -7,6 +7,7 @@ export const Link = ({ to, color, hover, children, ...rest }) => {
         hover={ hover }
         to={ to }
         variant="normal"
+        className="link"
         { ...rest }
     >
         { children }

@@ -195,7 +195,6 @@ export function HorizontalDragRail({
 		</Root>
 	);
 }
-import c from "../../../assets/cursors"
 
 const Root = styled.div`
 	width: 100%;

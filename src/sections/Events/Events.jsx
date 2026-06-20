@@ -9,7 +9,7 @@ export const Events = ({ data }) => {
             <div className="text">
                 <h2>{ el.name }</h2>
                 <Tour dark link={ el.tour_link } style={ { visibility: "hidden" } }/>
-                <div className="line">
+                <div className="line2">
                     <div>
                         <h4>Площадь</h4>
                         <div className="digit">

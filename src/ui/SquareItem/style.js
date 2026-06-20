@@ -44,12 +44,11 @@ export const Item = styled.div`
     
     @media (min-width: 576px) {
         font-size: 1.8rem;
+        padding-left: 2.8rem;
         &::before {
             top: auto;
             width: 1.2rem;
             height: 1.2rem;
-            padding-left: 0;
-            left: -2.2rem;
         }
         &::after {
             font-size: 1.6rem;
