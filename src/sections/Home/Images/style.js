@@ -22,7 +22,7 @@ export const Content = styled.section`
     }
 
     .img2 {
-        background-image: url("${ ({ bg2 }) => img[bg2] }");
+        background-image:  url("${ ({ bg2 }) => img[bg2] }");
         height: 48.2rem;
         grid-row-start: 1;
         margin-bottom: 4.8rem;
@@ -83,16 +83,20 @@ export const Content = styled.section`
 
         .img1 {
             height: 68rem;
+            margin-bottom: 0;
         }
 
         .img2 {
             height: 68rem;
             grid-row-start: auto;
+            margin-bottom: 0;
+            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.30) 0%, rgba(0, 0, 0, 0.30) 100%),url("${ ({ bg2 }) => img[bg2] }");
         }
 
         .img3 {
             width: 100%;
             height: 68rem;
+            margin-bottom: 0;
         }
 
         p {
@@ -115,6 +119,7 @@ export const Content = styled.section`
             width: 48.9rem;
             position: absolute;
             left: calc(50% - 24.45rem);
+            padding-bottom: 0;
             bottom: 6.2rem;
         }
     }

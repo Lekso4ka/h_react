@@ -147,6 +147,7 @@ export const HeaderButton = styled.button`
     width: 20rem;
     height: 3.8rem;
     padding: 1rem;
+    box-sizing: border-box;
     justify-content: center;
     align-items: center;
     gap: 1rem;

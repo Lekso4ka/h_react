@@ -6,7 +6,7 @@ export const Content = styled.div`
     min-height: 76rem;
     position: relative;
     background: rgba(0, 0, 0, 0.40);
-
+    overflow: hidden;
     .line {
         height: 7.6rem;
         border-bottom: .1rem solid ${ ({ theme }) => theme.colors.light_30 }
@@ -73,12 +73,13 @@ export const Content = styled.div`
         right: 4.7rem;
         bottom: 4rem;
         color: ${ ({ theme }) => theme.colors.light_80 };
-        font-family: "Playfair Display";
         font-size: 2rem;
         font-style: italic;
         font-weight: 400;
         line-height: 120%; /* 24px */
-
+        span {
+                font-family: "Playfair Display";
+        }
         p {
             font-size: 1.6rem;
             padding: 1.4rem 0 2.2rem; /* 24px */

@@ -35,8 +35,8 @@ export const Images = () => {
     }, []);
     
     return <Content
-        bg1={ "h_banner" }
-        bg2={ "home_1" }
+        bg1={ "home_1" }
+        bg2={ "h_banner" }
         bg3={ "home_2" }
         
         visible={isVisibleImg}
@@ -46,8 +46,8 @@ export const Images = () => {
         <p>Комфортный отдых среди горных склонов курорта.
             Архитектура отеля продолжает природный пейзаж, <span>а светлые интерьеры, натуральные материалы и выверенные пропорции создают спокойную и сдержанную атмосферу</span>.
         </p>
-        <div className="img img1" ref={imgRef}></div>
-        <div className="img img2"></div>
+        <div className="img img1"></div>
+        <div className="img img2" ref={imgRef}></div>
         <div className="img img3"></div>
         <div className="tooltip">Архитектура, свет и тишина формируют атмосферу отеля.</div>
         <Line/>
