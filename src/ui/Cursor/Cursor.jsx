@@ -34,7 +34,8 @@ const Crsr = styled.div`
 	border: 1px solid rgba(255, 246, 240, 0.30);
 	background: rgba(255, 243, 227, 0.3);
 	backdrop-filter: blur(10px);
-	color: var(--Black-2, #2F3034);
+	//color: var(--Black-2, #2F3034);
+	color: #fff;
 	text-align: center;
 	font-family: Manrope;
 	font-size: 1.2rem;
