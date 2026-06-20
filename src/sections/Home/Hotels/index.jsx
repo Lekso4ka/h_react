@@ -13,7 +13,6 @@ export const Hotels = () => {
     const r4 = useRef()
     const r5 = useRef()
     const sectionRef = useRef()
-    const triggerRef = useRef()
     
     useGSAP(
         () => {
@@ -30,45 +29,43 @@ export const Hotels = () => {
             mm.add(`(min-width: 576px)`, () => {
                 
                 const timeline = gsap.timeline({
-                    defaults: { ease: "none", duration: 1 }
+                    defaults: { ease: "power2.inOut", duration: 1 }
                 });
                 
                 timeline
-                    .to(img1, { scale: 3 }, 0)
-                    .to(img2, { opacity: 0, duration: 0.5 }, 0)
+                    .to(img1, { scale: 2.5 }, 0)
+                    .to(img2, { opacity: 0, duration: 1 }, 0)
                     .to(img2, { scale: 2 }, 0)
                     .to(img2, {  yPercent: -100 }, 0)
                     .to(img2, {  xPercent: -100 }, 0)
-                    .to(img3, { opacity: 0, duration: 0.5 }, 0)
+                    .to(img3, { opacity: 0, duration: 1 }, 0)
                     .to(img3, { scale: 2 }, 0)
                     .to(img3, {  yPercent: 100 }, 0)
                     .to(img3, {  xPercent: -100 }, 0)
-                    .to(img4, { opacity: 0, duration: 0.5 }, 0)
+                    .to(img4, { opacity: 0, duration: 1 }, 0)
                     .to(img4, { scale: 2 }, 0)
                     .to(img4, {  yPercent: 200 }, 0)
                     .to(img4, {  xPercent: 100 }, 0)
-                    .to(img5, { opacity: 0, duration: 0.5 }, 0)
+                    .to(img5, { opacity: 0, duration: 1 }, 0)
                     .to(img5, { scale: 2 }, 0)
                     .to(img5, {  yPercent: -200 }, 0)
                     .to(img5, {  xPercent: 100 }, 0)
                 
                 const trigger = ScrollTrigger.create({
                     trigger: section,
-                    start: "top top",
-                    end: () => `+=${window.innerHeight} top`,
-                    scrub: true,
-                    //pin: true,
+                    start: "40% center",
+                    //end: () => `+=${window.innerHeight} top`,
+                    scrub: 1.5,
+                    pin: true,
                     animation: timeline,
                     invalidateOnRefresh: true,
-                    anticipatePin: 1,
+                    //anticipatePin: 1,
                     onLeave: () => section.classList.add("is-complete"),
                     onEnterBack: () => section.classList.remove("is-complete")
                 });
                 
-                triggerRef.current = trigger;
                 
                 return () => {
-                    triggerRef.current = null;
                     trigger.kill();
                     gsap.set([img1, img2, img3, img4, img5], { clearProps: "opacity,scale,transform" });
                 };

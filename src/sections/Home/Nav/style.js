@@ -130,7 +130,7 @@ export const Content = styled.section`
             justify-items: flex-start;
 
             &:hover {
-                background-size: auto 115%;
+                background-size: auto 110%;
             }
 
             transition: background-size 1s;

@@ -10,7 +10,7 @@ export const Nav = ({weather}) => {
             <Link
                 variant="big"
                 to={ `/activities/${ weather }` }
-            >Активности</Link>
+            >Активности<span>[ { getVenuesCnt() } ]</span></Link>
             <Link
                 variant="big"
                 to=""
@@ -18,7 +18,7 @@ export const Nav = ({weather}) => {
             <Link
                 variant="big"
                 to="/restaurant/golden-tulip"
-            >Рестораны</Link>
+            >Рестораны<span>[ 2 ]</span></Link>
             <Link
                 variant="big"
                 to="/services/golden-tulip"
@@ -26,7 +26,7 @@ export const Nav = ({weather}) => {
             <Link
                 variant="big"
                 to="/events/default"
-            >Мероприятия</Link>
+            >Мероприятия<span>[ 1 ]</span></Link>
             <Link
                 variant="big"
                 to="/events/venues"
@@ -34,11 +34,11 @@ export const Nav = ({weather}) => {
             <Link
                 variant="big"
                 to="/stock/golden-tulip"
-            >Акции</Link>
+            >Акции<span>[ { getVenuesCnt() } ]</span></Link>
             <Link
                 variant="big"
                 to="/affiche"
-            >Афиша</Link>
+            >Афиша<span>[ { getVenuesCnt() } ]</span></Link>
         </nav>
         <div className="list">
             <div className="room">

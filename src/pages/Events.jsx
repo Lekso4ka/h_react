@@ -1,6 +1,6 @@
 import React from 'react';
-import { EventsContent } from "../components/EventsContent";
+import { EventsContent } from "../sections/Events";
 
 export const Events = () => {
-    return <EventsContent isPage/>
+    return <EventsContent page/>
 }

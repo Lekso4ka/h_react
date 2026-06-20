@@ -104,7 +104,13 @@ export const Activities = ({weather, setWeather}) => {
                 <Link to={ `/activities/${ weather }` }>К активностям</Link>
             </div>
             <div className="list-container">
-                <div className="list">
+                <Zone ref={zoneRef} $hideCursor={hideNativeCursor}>
+                    {/*<div className="list">*/}
+                    <HorizontalDragRail
+                        customCursor
+                        onDragStart={() => setDragging(true)}
+                        onDragEnd={() => setDragging(false)}
+                    >
                     <div className="item">
                         <div className="img img1">Треккинг в горах</div>
                         <p>Откройте для себя живописные маршруты среди горных вершин и альпийских лугов. Выбирайте
@@ -121,8 +127,16 @@ export const Activities = ({weather, setWeather}) => {
                         <p>ТПосле насыщенного дня восстановите силы в пространстве для отдыха и расслабления. Тепло,
                             тишина и забота о себе помогут снять напряжение и почувствовать настоящее
                             обновление.</p>
-                    </div>
-                </div>
+                    </div></HorizontalDragRail>
+                    {/*</div>*/}
+                    <Cursor
+                        visible={visible}
+                        active={dragging}
+                        x={position.x}
+                        y={position.y}
+                        label={"[ двигать ]"}
+                    />
+                </Zone>
             </div>
             <Line/>
         </Content>
