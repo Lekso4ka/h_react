@@ -5,7 +5,6 @@ import { SquareItem } from "../../ui/SquareItem";
 import { Events } from "./Events";
 import { Venues } from "./Venues";
 import { Block, Buttons, Container, Content, Section, Tooltip, Top } from "./style";
-import { ServiceItem } from "../../components/HotelContent/style";
 import { Breadcrumbs } from "../../ui/Breadcrumbs";
 
 const venues = [
