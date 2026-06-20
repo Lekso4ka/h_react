@@ -12,7 +12,7 @@ export const Content = styled.section`
         background-position: center;
         background-size: cover;
         opacity: ${({ visible }) => visible ? 1 : 0};
-        transition: opacity 2000ms;
+        transition: opacity 4000ms;
     }
 
     .img1 {

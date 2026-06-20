@@ -48,7 +48,7 @@ position: relative;
             object-position: center;
             &.active {
                 opacity: 1;
-                transition: opacity .3s;
+                transition: opacity .6s;
             }
         }
         &::before {
