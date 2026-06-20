@@ -1,11 +1,19 @@
-import React from "react";
+
+import React, { useRef, useState } from "react";
 import { ActivityBtn } from "../../../ui/ActivityBtn";
+import { Cursor, useCursor } from "../../../ui/Cursor";
 import { Line } from "../../../ui/Line";
 import { Link } from "../../../ui/Link";
 import { HorizontalDragRail } from "./HorizontalDragRail";
-import { Content } from "./style";
+import { Content, Zone } from "./style";
+
 
 export const Activities = ({weather, setWeather}) => {
+    const zoneRef = useRef(null);
+    const [dragging, setDragging] = useState(false);
+    const { visible, position } = useCursor({ zoneRef, dragging });
+    
+    const hideNativeCursor = visible || dragging;
     return <>{weather === "winter"
         ? <Content
             bg1={ "winter_4" }
@@ -34,9 +42,13 @@ export const Activities = ({weather, setWeather}) => {
                 <Link to={ `/activities/${ weather }` }>К активностям</Link>
             </div>
             <div className="list-container">
-                
+                <Zone ref={zoneRef} $hideCursor={hideNativeCursor}>
                 {/*<div className="list">*/}
-                    <HorizontalDragRail>
+                    <HorizontalDragRail
+                        customCursor
+                        onDragStart={() => setDragging(true)}
+                        onDragEnd={() => setDragging(false)}
+                    >
                     <div className="item">
                         <div className="img img1">Зимний ритм</div>
                         <p>Свежий снег, чистый воздух и подготовленные трассы в нескольких минутах от отеля. От
@@ -54,6 +66,14 @@ export const Activities = ({weather, setWeather}) => {
                     </div>
                     </HorizontalDragRail>
                 {/*</div>*/}
+                    <Cursor
+                        visible={visible}
+                        active={dragging}
+                        x={position.x}
+                        y={position.y}
+                        label={"[ двигать ]"}
+                    />
+                </Zone>
             </div>
             <Line/>
         </Content>

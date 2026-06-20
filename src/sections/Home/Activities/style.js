@@ -284,3 +284,17 @@ export const Content = styled.section`
 
     }
 `
+
+export const Zone = styled.div`
+	${(p) =>
+    p.$hideCursor
+        ? `
+		cursor: none;
+
+		&,
+		& * {
+			cursor: none !important;
+		}
+	`
+        : ""}
+`;

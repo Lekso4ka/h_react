@@ -122,6 +122,11 @@ import home_3 from "./c170851cca0feaf580e326ac2b83ee7a4ca0f27f.png"
 import home_4 from "./2fb3a1ee2a50a5ebad10e143b54f14f9f8e21c93.png"
 import home_5 from "./51ab12890e0e2818267ed34e49898bd4000e2044.png"
 import home_6 from "./78eb8718463732cea8f72c65069e6f24eada8bd1.png"
+import home_7 from "./3112f6344f038d8ba0e7ca01ec5a323df7e0da74.jpg"
+import home_8 from "./73e3cd451d2ec0a1e27bee5fb14b531805511e9a.jpg"
+import home_9 from "./51ab12890e0e2818267ed34e49898bd4000e2044.png"
+import home_10 from "./3112f6344f038d8ba0e7ca01ec5a323df7e0da74.jpg"
+import home_11 from "./d75b056f36cd68c58fe7c5b8ffe8c9476e3120f9.jpg"
 
 import res_1 from "./4ac407277eaac160051a149803bdbb3c59253651.jpg"
 import res_2 from "./72fd6a8bf11d6173d39e96d40fe0ca3d45a070ea.png"
@@ -270,6 +275,11 @@ export default {
     home_4,
     home_5,
     home_6,
+    home_7,
+    home_8,
+    home_9,
+    home_10,
+    home_11,
     
     res_1,
     res_2,

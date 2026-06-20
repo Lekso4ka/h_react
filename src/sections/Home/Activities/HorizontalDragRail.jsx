@@ -9,7 +9,19 @@ const DRAG_LOCK_PX = 8;
 const MOMENTUM_FACTOR = 0.45;
 const MOMENTUM_DURATION = 0.85;
 
-export function HorizontalDragRail({ children, className, gap = 20, edgePadding }) {
+function isMousePointer(event) {
+	return !event.pointerType || event.pointerType === "mouse";
+}
+
+export function HorizontalDragRail({
+	children,
+	className,
+	gap = 20,
+	edgePadding,
+	customCursor = false,
+	onDragStart,
+	onDragEnd
+}) {
 	const rootRef = useRef(null);
 	const viewportRef = useRef(null);
 	const trackRef = useRef(null);
@@ -79,7 +91,10 @@ export function HorizontalDragRail({ children, className, gap = 20, edgePadding 
 				};
 
 				viewport.setPointerCapture(event.pointerId);
-				viewport.style.cursor = `url(${c.v3}) 60 60, grabbing`;
+				if (!customCursor) viewport.style.cursor = "grabbing";
+				if (customCursor && isMousePointer(event)) onDragStart?.();
+				//viewport.style.cursor = `url(${c.v3}) 60 60, grabbing`;
+				
 			};
 
 			const onPointerMove = (event) => {
@@ -95,7 +110,8 @@ export function HorizontalDragRail({ children, className, gap = 20, edgePadding 
 					if (drag.axis === "y") {
 						viewport.releasePointerCapture(event.pointerId);
 						drag.active = false;
-						viewport.style.cursor = "";
+						if (!customCursor) viewport.style.cursor = "";
+						if (customCursor && isMousePointer(event)) onDragEnd?.();
 						return;
 					}
 				}
@@ -122,7 +138,8 @@ export function HorizontalDragRail({ children, className, gap = 20, edgePadding 
 
 				viewport.releasePointerCapture(event.pointerId);
 				drag.active = false;
-				viewport.style.cursor = "";
+				if (!customCursor) viewport.style.cursor = "";
+				if (customCursor && isMousePointer(event)) onDragEnd?.();
 
 				if (drag.axis === "x") {
 					const projected = xRef.current + drag.velocity * 1000 * MOMENTUM_FACTOR;
@@ -139,7 +156,8 @@ export function HorizontalDragRail({ children, className, gap = 20, edgePadding 
 				if (!drag.active || drag.pointerId !== event.pointerId) return;
 				viewport.releasePointerCapture(event.pointerId);
 				drag.active = false;
-				viewport.style.cursor = "";
+				if (!customCursor) viewport.style.cursor = "";
+				if (customCursor && isMousePointer(event)) onDragEnd?.();
 				applyX(xRef.current, { animate: true });
 				drag.axis = null;
 			};
@@ -164,12 +182,12 @@ export function HorizontalDragRail({ children, className, gap = 20, edgePadding 
 				viewport.removeEventListener("pointercancel", onPointerCancel);
 			};
 		},
-		{ scope: rootRef, dependencies: [children], revertOnUpdate: true }
+		{ scope: rootRef, dependencies: [children, customCursor, onDragStart, onDragEnd], revertOnUpdate: true }
 	);
 
 	return (
 		<Root ref={rootRef} className={className}>
-			<Viewport ref={viewportRef} data-drag-status="grab">
+			<Viewport ref={viewportRef} data-drag-status="grab" $customCursor={customCursor}>
 				<Track ref={trackRef} $gap={gap} $edgePadding={edgePadding}>
 					{children}
 				</Track>
@@ -187,13 +205,13 @@ const Root = styled.div`
 const Viewport = styled.div`
 	overflow: hidden;
 	width: 100%;
-	cursor: url(${c.v3}) 60 60, grab;
+	cursor: ${(p) => (p.$customCursor ? "none" : "grab")};
 	touch-action: pan-y;
 	user-select: none;
 	height: 100%;
 
 	&:active {
-		cursor: url(${c.v3}) 60 60, grabbing;
+		cursor: ${(p) => (p.$customCursor ? "none" : "grabbing")};
 	}
 `;
 
