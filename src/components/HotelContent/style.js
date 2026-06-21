@@ -4,7 +4,7 @@ import img from "../../assets/img";
 export const Hero = styled.section`
     height: 76rem;
     position: relative;
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.30) 0%, rgba(0, 0, 0, 0.30) 100%), url(${ img.h_banner }) lightgray 50% / cover no-repeat;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.30) 0%, rgba(0, 0, 0, 0.30) 100%), url(${ ({ bg }) => img[bg] }) lightgray 50% / cover no-repeat;
 
     &::before {
         content: "";
@@ -184,14 +184,37 @@ export const Section2 = styled.section`
 `
 export const Section3 = styled.section`
     height: 71.5rem;
-    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.40) 0%, rgba(0, 0, 0, 0.40) 100%), url(${ ({ pic }) => img[pic] });
+    background-image: url(${ ({ pic }) => img[pic] });
     background-position: center;
-    background-size: cover;
+    background-size: 100% auto;
     flex-direction: column;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    &:hover {
+        background-size: 110% auto;
+    }
 
+    transition: background-size 1s;
+    &::before {
+        content: "";
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.40);
+        opacity: 1;
+        transition: opacity 1s;
+    }
+
+    &:hover::before {
+        opacity: 0;
+    }
+    & > * {
+        z-index: 1;
+    }
     .tooltip {
         display: inline-flex;
         padding: 1.2rem 1.6rem;

@@ -24,7 +24,7 @@ export const HotelContent = () => {
         return arr;
     }
     return <>
-        <Hero/>
+        <Hero bg={data[id].banner}/>
         <Section1>
             <div className="top">
                 <div className="title">

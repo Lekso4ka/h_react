@@ -1,7 +1,7 @@
 import h_banner from "./625b115e2603dcc3097a449b3058c4d8e4953834.png"
-import h_gt_1 from "./1a2eb2a6ad55154fbd2a90ba306e66d25915a049.png"
-import h_gt_2 from "./625b115e2603dcc3097a449b3058c4d8e4953834.png"
-import h_gt_3 from "./3b46dd2f7d777a41d6dc9bbe56c2b6d5c357dfe2.png"
+import h_gt_1 from "./1a0a871b-f628-4ebb-a839-3579fc15c364.jpg"
+import h_gt_2 from "./216b4d5c-200e-4c2b-a1dc-3d2b488960cc.jpg"
+import h_gt_3 from "./023688bc-a905-42c2-a279-2a9f09c724a3.jpg"
 import h_gt_4 from "./0ecfdbecfd57cea90a870fe5cc0f6dab5b7d8b97.png"
 import h_gt_5 from "./9249fe7ca8acc4254e242c0c5dce6e4fd84cf28c.png"
 import h_gt_6 from "./9587cec590e08d03a105c7423d8c0e2a501fb6f4.png"
@@ -14,9 +14,9 @@ import h_gt_12 from "./11f9b226da3e6e07311e53f837503a3e05323280.png"
 import h_gt_13 from "./09f407aaf973c32d8dd73f7535c9ada576405ab7.png"
 import h_gt_14 from "./51655cfcab94b0bd255ea07a47cf979e63aa2446.png"
 
-import h_ti_1 from "./1a2eb2a6ad55154fbd2a90ba306e66d25915a049.png"
-import h_ti_2 from "./4c9409f6de5eb7e4c75a2f07175b947f0ce80411.png"
-import h_ti_3 from "./3b46dd2f7d777a41d6dc9bbe56c2b6d5c357dfe2.png"
+import h_ti_1 from "./1a0a871b-f628-4ebb-a839-3579fc15c364.jpg"
+import h_ti_2 from "./216b4d5c-200e-4c2b-a1dc-3d2b488960cc.jpg"
+import h_ti_3 from "./899c4304-72c6-41ae-a3eb-3ae4c325b0b5.jpg"
 import h_ti_4 from "./0ecfdbecfd57cea90a870fe5cc0f6dab5b7d8b97.png"
 import h_ti_5 from "./9249fe7ca8acc4254e242c0c5dce6e4fd84cf28c.png"
 import h_ti_6 from "./008739b2b9b28ebba33da0a8b93b3428dec78c27.png"
@@ -176,8 +176,11 @@ import ven_6 from "./1d122508-a922-493b-b74f-636fa5a16886.jpg"
 import ven_7 from "./6dc9fb37-53b5-4351-8a65-3dab89f8daaf.jpg"
 import ven_8 from "./942dbc0a-0c3d-4695-985f-161a5e41c99b.jpg"
 import ven_9 from "./85175b30-54be-4621-831e-60c551b46e07.jpg"
-
+import h_gt_banner from "./b73c5436-84fc-4865-9c1e-10b8c9f4d932.jpg"
+import h_ti_banner from "./7f470a8b-f880-40a0-877d-84fd246a96e8.jpg"
 export default {
+    h_gt_banner,
+    h_ti_banner,
     ven_1,
     ven_2,
     ven_3,
