@@ -149,7 +149,7 @@ export const Content = styled.section`
             font-style: italic;
             font-weight: 400;
             line-height: 100%; /* 16px */
-            text-transform: lowercase;
+			
         }
 
         .img1 {

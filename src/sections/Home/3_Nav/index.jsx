@@ -4,7 +4,7 @@ import { Link } from "../../../ui/Link";
 import { Content } from "./style";
 
 export const Nav = ({weather}) => {
-    return <Content bg1={ "h_gt_14" } bg2={ "home_3" }>
+    return <Content bg1={ "home_nav_1" } bg2={ "home_nav_2" }>
         <h4>[ Возможности отеля ]</h4>
         <nav>
             <Link
@@ -52,7 +52,7 @@ export const Nav = ({weather}) => {
             </div>
             <div className="room">
                 <h4>Тюлип Инн</h4>
-                <h2>Номера</h2>
+                <h2>Номера отеля</h2>
                 <Link
                     color={"light"}
                     hover={"light"}

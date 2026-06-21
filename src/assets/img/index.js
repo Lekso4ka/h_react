@@ -81,6 +81,7 @@ import winter_3 from "./3fd3582331c156c3152dffc2d5cd41c2035a3001.png"
 import winter_4 from "./40eb33e06d9abd9669801ff2d6a14c0ca2b42707.jpg"
 import winter_5 from "./0f2edee4b4ba1e60a651c3d17593386d52810891.jpg"
 import winter_6 from "./58f9fdd67b746ff365d9988e8ec412dbf4faeea7.jpg"
+import winter_7 from "./04607f80-5c5f-480c-a5b5-df574a1d5f6f.jpg"
 import promo from "./162bd9777cbdda45a962f0928958636b6cd97fbe.png"
 import promo_1 from "./54daff3afe70f3d2b7a8c1ad261a745d400a82d4.png"
 import video1 from "./video1.mp4"
@@ -147,9 +148,64 @@ import vac_7 from "./70c25cdcc9c40414e03ced1730e5d980d48c3d00.png"
 import vac_8 from "./62494f4371bb9363d4795898b9c8b6ec3baedf82.png"
 import video_s from "./file-2.mp4"
 import video_w from "./file.mp4"
-
+import home_i_1 from "./f7c83f11-e768-40fa-bd8e-1d5a49ab32e0.jpg"
+import home_i_2 from "./458fced8-9ed4-40bc-90cd-2b0c1a05690b.jpg"
+import home_i_3 from "./876f9b43-e959-45ec-baa9-024d2d9367f5.jpg"
+import home_nav_1 from "./5fae5253-ace6-47c0-a48a-5cdeca8f1565.jpg"
+import home_nav_2 from "./3dcd6eb8-8d38-4c92-b81f-74a7db2ec96a.jpg"
+import home_spa from "./45a1432d-0cc5-48af-afb4-82ffc74dbed3.jpg"
+import home_h_1 from "./ba2fa984-09a1-4f0a-9e82-49f85e556d62.jpg"
+import home_h_2 from "./6d2b4c9b-7b27-4049-aef6-5861a3ce8342.jpg"
+import home_h_3 from "./ce75f2fb-c93d-4bbc-8524-fe9175c89d85.jpg"
+import home_h_4 from "./c54521a0-ef9a-44e4-8283-f4835e0eaf41.jpg"
+import home_h_5 from "./29d29235-dc7e-4549-bdbf-09c95075181f.jpg"
+import home_r_1 from "./fe118ef6-330c-43f1-a088-9f25136a8f30.jpg"
+import home_r_2 from "./0fb84190-86b1-46d8-88ed-f2264ca302bf.jpg"
+import home_r_3 from "./12820f4b-3f0b-4fd1-8093-e6c00a03422a.jpg"
+import home_r_4 from "./b778e91d-f63a-46e9-b33a-6c69f9389a4d.jpg"
+import home_r_5 from "./1b5ef79f-9e3a-49d4-bfe9-3294a02bd8f0.jpg"
+import home_r_6 from "./386c9a94-f311-4e5a-9547-6bb768db6dea.jpg"
+import home_r_7 from "./3d51941b-0dc2-4e68-a278-ee73aa7654f7.jpg"
+import home_r_8 from "./cbba2a35-bf74-467c-bb4d-131887958435.jpg"
+import ven_1 from "./ae503656-e367-4054-b5e0-aba71d1e14f5.jpg"
+import ven_2 from "./61411317-4ccd-4084-a214-096013fd4834.jpg"
+import ven_3 from "./1a3cdc5a-471e-4162-96e4-6df9222cb725.jpg"
+import ven_4 from "./04510083-3f15-4864-b214-9b746847213a.jpg"
+import ven_5 from "./426a7e24-0f7f-4517-9bf0-a53831d2108c.jpg"
+import ven_6 from "./1d122508-a922-493b-b74f-636fa5a16886.jpg"
+import ven_7 from "./6dc9fb37-53b5-4351-8a65-3dab89f8daaf.jpg"
+import ven_8 from "./942dbc0a-0c3d-4695-985f-161a5e41c99b.jpg"
+import ven_9 from "./85175b30-54be-4621-831e-60c551b46e07.jpg"
 
 export default {
+    ven_1,
+    ven_2,
+    ven_3,
+    ven_4,
+    ven_5,
+    ven_6,
+    ven_7,
+    ven_8,
+    ven_9,
+    home_r_1,
+    home_r_2,
+    home_r_3,
+    home_r_4,
+    home_r_5,
+    home_r_6,
+    home_r_7,
+    home_r_8,
+    home_h_1,
+    home_h_2,
+    home_h_3,
+    home_h_4,
+    home_h_5,
+    home_spa,
+    home_nav_1,
+    home_nav_2,
+    home_i_1,
+    home_i_2,
+    home_i_3,
     video1,
     video_w,
     video_s,
@@ -169,6 +225,7 @@ export default {
     winter_4,
     winter_5,
     winter_6,
+    winter_7,
     h_banner,
     h_gt_1,
     h_gt_2,

@@ -17,7 +17,7 @@ export const Activities = ({weather, setWeather}) => {
     return <>{weather === "winter"
         ? <Content
             bg1={ "winter_4" }
-            bg2={ "winter_5" }
+            bg2={ "winter_7" }
             bg3={ "winter_6" }
             activeBtn={ 2 }
         >

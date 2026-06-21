@@ -9,7 +9,7 @@ export const Venues = ({ data }) => {
     const vData = getVenues()
     
     return <>
-        { data.map(el => <Item key={ el } bg={ vData[el].images[0] }>
+        { data.map(el => <Item key={ el } bg={ vData[el].img }>
             <div className="text">
                 <h2>{ vData[el].name }</h2>
                 <Tour dark link={ vData[el].tour_link }/>

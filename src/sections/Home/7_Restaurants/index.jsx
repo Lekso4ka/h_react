@@ -6,14 +6,14 @@ import { Link } from "../../../ui/Link";
 import { Content, Img } from "./style";
 
 const rest = [
-    "res_1",
-    "res_2",
-    "res_3",
-    "res_4",
-    "res_5",
-    "res_6",
-    "res_7",
-    "res_8",
+    "home_r_1",
+    "home_r_2",
+    "home_r_3",
+    "home_r_4",
+    "home_r_5",
+    "home_r_6",
+    "home_r_7",
+    "home_r_8",
 ]
 
 export const Restaurants = () => {

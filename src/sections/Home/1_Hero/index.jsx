@@ -77,7 +77,7 @@ export const Hero = ({weather, setWeather}) => {
                         </p>
                         <div className="links">
                             <Link to="/hotel/golden-tulip">Выбрать отель</Link>
-                            <Link to="/rooms/golden-tulip">Выбрать номер</Link>
+                            <Link to="/rooms/golden-tulip">Номера</Link>
                         </div>
                     </div>
                 </div>
@@ -120,7 +120,7 @@ export const Hero = ({weather, setWeather}) => {
                         </p>
                         <div className="links">
                             <Link to="/hotel/tulip-inn">Выбрать отель</Link>
-                            <Link to="/rooms/tulip-inn">Выбрать номер</Link>
+                            <Link to="/rooms/tulip-inn">Номера</Link>
                         </div>
                     </div>
                 </div>
@@ -128,7 +128,7 @@ export const Hero = ({weather, setWeather}) => {
         </div>
         <div className="activities">
             <span>{ weather === "winter" ? "зима" : "лето" } ‘26</span>
-            <p>Откройте для себя сезон, в котором движение и отдых звучат в одном ритме.</p>
+            <p>Откройте для себя сезон, в котором движение и отдых звучат в одном ритме.</p>
             <Link
                 color={"white"}
                 hover={"white"}

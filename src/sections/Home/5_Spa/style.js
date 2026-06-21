@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import img from "../../../assets/img";
 
 export const Content = styled.section`
     height: 75.4rem;
@@ -8,16 +9,9 @@ export const Content = styled.section`
     align-items: center;
     justify-content: center;
     position: relative;
-    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.30) 0%, rgba(0, 0, 0, 0.30) 100%);
-
-    video {
-        position: absolute;
-        width: 100%;
-        height: 84.4rem;
-        z-index: -1;
-        object-fit: cover;
-        object-position: center;
-    }
+    background-image: url(${ ({ bg }) => img[bg]});
+    background-position: center;
+    background-size: cover;
 
     h4 {
         color: var(--Beige, #FFF6F0);

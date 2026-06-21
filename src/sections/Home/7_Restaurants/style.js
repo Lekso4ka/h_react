@@ -72,7 +72,7 @@ position: relative;
         font-style: normal;
         font-weight: 500;
         line-height: 110%; /* 37.4px */
-        text-transform: uppercase;
+        //text-transform: uppercase;
     }
 
     .list-container {

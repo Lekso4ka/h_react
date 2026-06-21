@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { Activities } from "./Activities";
-import { Hero } from "./Hero";
-import { Hotels } from "./Hotels";
-import { Images } from "./Images";
-import { Nav } from "./Nav";
-import { Restaurants } from "./Restaurants";
-import { Spa } from "./Spa";
+import { Activities } from "./4_Activities";
+import { Hero } from "./1_Hero";
+import { Hotels } from "./6_Hotels";
+import { Images } from "./2_Images";
+import { Nav } from "./3_Nav";
+import { Restaurants } from "./7_Restaurants";
+import { Spa } from "./5_Spa";
 
 export const HomeContent = () => {
     const [weather, setWeather] = useState("winter");

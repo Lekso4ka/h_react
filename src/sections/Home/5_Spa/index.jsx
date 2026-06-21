@@ -1,11 +1,9 @@
 import React from "react";
 import { Link } from "../../../ui/Link";
-import { Video } from "../../../ui/Video";
 import { Content } from "./style";
 
 export const Spa = () => {
-    return <Content>
-        <Video data={ ["vi_spa"] } index={0}/>
+    return <Content bg={"home_spa"}>
         <h4>[ СПА центр ]</h4>
         <h2>Востановите баланс</h2>
         <div className="line"/>
