@@ -129,7 +129,7 @@
       "include": [
         {
           "name": "Мобильный консьерж",
-          "text": "Управляйте услугами отеля прямо со смартфона. Заказывайте уборку номера, будильник, трансфер и другие сервисы в несколько касаний.",
+          "text": "<p>Управляйте услугами отеля прямо со смартфона. Заказывайте уборку номера, будильник, трансфер и другие сервисы в несколько касаний.</p>",
           "links": [
             {
               "href": "",
@@ -143,7 +143,7 @@
         },
         {
           "name": "Обслуживание в номере",
-          "text": "Наслаждайтесь завтраком, обедом или ужином в уединении своего номера. В меню представлены блюда европейской кухни, напитки и лёгкие закуски с доставкой прямо к двери.",
+          "text": "<p>Наслаждайтесь завтраком, обедом или ужином в уединении своего номера. В меню представлены блюда европейской кухни, напитки и лёгкие закуски с доставкой прямо к двери.</p>",
           "links": [
             {
               "href": "",
@@ -157,7 +157,7 @@
         },
         {
           "name": "Тренажерный зал",
-          "text": "Современный фитнес-зал с кардио- и силовыми тренажёрами открыт для гостей отеля. Отличное место для поддержания привычного режима тренировок даже во время отдыха.",
+          "text": "<p>Современный фитнес-зал с кардио- и силовыми тренажёрами открыт для гостей отеля. Отличное место для поддержания привычного режима тренировок даже во время отдыха.</p>",
           "links": [
             {
               "href": "",
@@ -167,31 +167,26 @@
         },
         {
           "name": "Хаммам и сауна",
-          "text": "После активного дня восстановите силы в хаммаме и сауне. Мягкое тепло помогает расслабиться, снять напряжение и восстановить энергию.",
-          "links": [
-            {
-              "href": "",
-              "title": ""
-            }
-          ]
+          "text": "<p>После активного дня восстановите силы в хаммаме и сауне. Мягкое тепло помогает расслабиться, снять напряжение и восстановить энергию.</p><p>Дополнительно:<br/>Время работы: 11:00–23:00</p>",
+          "links": []
         },
         {
           "name": "Будильник",
-          "text": "Если вас ждёт ранний выезд, экскурсия или деловая встреча, сотрудники отеля помогут не пропустить важное событие. Закажите услугу будильника в удобное для вас время.",
+          "text": "<p>Если вас ждёт ранний выезд, экскурсия или деловая встреча, сотрудники отеля помогут не пропустить важное событие. Закажите услугу будильника в удобное для вас время.</p>",
           "links": [
             {
               "href": "",
-              "title": ""
+              "title": "Заказать по телефону"
             }
           ]
         },
         {
           "name": "Меню здорового сна",
-          "text": "Создайте идеальные условия для отдыха. По запросу доступны различные виды подушек, дополнительные одеяла и аксессуары для комфортного сна.",
+          "text": "<p>Создайте идеальные условия для отдыха. По запросу доступны различные виды подушек, дополнительные одеяла и аксессуары для комфортного сна.</p><ul>Доступно:<li>анатомические подушки</li><li>гипоаллергенные подушки</li><li>подушки из гречневой лузги</li><li>пуховые подушки</li><li>топпер повышенной жёсткости</li></ul>",
           "links": [
             {
               "href": "",
-              "title": ""
+              "title": "Заказать по телефону"
             }
           ]
         }
@@ -199,71 +194,45 @@
       "additional": [
         {
           "name": "Конференц-залы",
-          "text": "Площадки различного формата для деловых мероприятий, переговоров, презентаций и корпоративных встреч. Доступны современные технические решения и помощь в организации события.",
+          "text": "<p>Площадки различного формата для деловых мероприятий, переговоров, презентаций и корпоративных встреч. Доступны современные технические решения и помощь в организации события.</p>",
           "links": [
             {
               "href": "",
-              "title": ""
+              "title": "Смотреть площадки"
             }
           ]
         },
         {
-          "name": "Mountain SPA",
-          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta.",
+          "name": "Трансфер",
+          "text": "<p>Комфортный трансфер из аэропорта, железнодорожного вокзала или по курорту. Водитель встретит вас в назначенном месте и поможет с багажом.</p>",
           "links": [
             {
               "href": "",
-              "title": ""
-            }
-          ]
-        },
-        {
-          "name": "Прачечная самообслуживания",
-          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta.",
-          "links": [
-            {
-              "href": "",
-              "title": ""
+              "title": "Заказать трансфер"
             }
           ]
         },
         {
           "name": "Прачечная и химчистка",
-          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta.",
+          "text": "<p>Услуги стирки и профессиональной чистки одежды помогут сохранить вещи в идеальном состоянии во время путешествия или длительного проживания.</p>",
           "links": [
             {
               "href": "",
-              "title": ""
+              "title": "Узнать стоимость"
             }
           ]
         },
         {
-          "name": "Детский клуб «Кругосветка»",
-          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta.",
+          "name": "Mountain Spa",
+          "text": "<p>Профессиональные спа-ритуалы, массажи и программы восстановления для полного расслабления и заботы о себе. Специалисты помогут подобрать процедуру под ваши пожелания.</p>",
           "links": [
             {
               "href": "",
-              "title": ""
-            }
-          ]
-        },
-        {
-          "name": "Детская коляска",
-          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta.",
-          "links": [
+              "title": "Посмотреть услуги"
+            },
             {
               "href": "",
-              "title": ""
-            }
-          ]
-        },
-        {
-          "name": "Комната хранения и сушки снаряжения",
-          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta.",
-          "links": [
-            {
-              "href": "",
-              "title": ""
+              "title": "Позвонить"
             }
           ]
         }
@@ -399,116 +368,98 @@
       "include": [
         {
           "name": "Мобильный консьерж",
-          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta.",
+          "text": "<p>Управляйте услугами отеля прямо со смартфона. Заказывайте уборку номера, будильник, трансфер и другие сервисы в несколько касаний.</p>",
           "links": [
             {
               "href": "",
-              "title": ""
+              "title": "Открыть сервис"
+            },
+            {
+              "href": "",
+              "title": "Позвонить в службу"
             }
           ]
         },
         {
           "name": "Будильник",
-          "tooltip": "(звонок по запросу)",
-          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta.",
+          "text": "<p>Если вас ждёт ранний выезд, экскурсия или деловая встреча, сотрудники отеля помогут не пропустить важное событие. Закажите услугу будильника в удобное для вас время.</p>",
           "links": [
             {
               "href": "",
-              "title": ""
+              "title": "Заказать по телефону"
             }
           ]
         },
         {
           "name": "Тренажерный зал",
-          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta.",
+          "text": "<p>Современный фитнес-зал с кардио- и силовыми тренажёрами открыт для гостей отеля. Отличное место для поддержания привычного режима тренировок даже во время отдыха.</p>",
           "links": [
             {
               "href": "",
-              "title": ""
+              "title": "Открыть 3D-тур"
             }
           ]
         },
         {
           "name": "Сауна",
-          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta.",
-          "links": [
-            {
-              "href": "",
-              "title": ""
-            }
-          ]
+          "text": "<p>После активного дня восстановите силы в сауне. Мягкое тепло помогает расслабиться, снять напряжение и восстановить энергию.</p>",
+          "links": []
         }
       ],
       "additional": [
         {
           "name": "Конференц-залы",
-          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta.",
+          "text": "<p>Площадки различного формата для деловых мероприятий, переговоров, презентаций и корпоративных встреч. Доступны современные технические решения и помощь в организации события.</p>",
           "links": [
             {
               "href": "",
-              "title": ""
-            }
-          ]
-        },
-        {
-          "name": "Mountain SPA",
-          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta.",
-          "links": [
-            {
-              "href": "",
-              "title": ""
-            }
-          ]
-        },
-        {
-          "name": "Прачечная самообслуживания",
-          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta.",
-          "links": [
-            {
-              "href": "",
-              "title": ""
+              "title": "Смотреть площадки"
             }
           ]
         },
         {
           "name": "Прачечная и химчистка",
-          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta.",
+          "text": "<p>Услуги стирки и профессиональной чистки одежды помогут сохранить вещи в идеальном состоянии во время путешествия или длительного проживания.</p>",
           "links": [
             {
               "href": "",
-              "title": ""
+              "title": "Узнать стоимость"
+            }
+          ]
+        },
+        {
+          "name": "Прачечная самообслуживания",
+          "text": "<p>Прачечная оборудована стиральной и сушильной машинами, а также гладильными станциями.<br/>Стоимость пользования уточняйте на стойке приёма и размещения.</p>",
+          "links": []
+        },
+        {
+          "name": "Mountain Spa",
+          "text": "<p>Профессиональные спа-ритуалы, массажи и программы восстановления для полного расслабления и заботы о себе. Специалисты помогут подобрать процедуру под ваши пожелания.</p>",
+          "links": [
+            {
+              "href": "",
+              "title": "Посмотреть услуги"
+            },
+            {
+              "href": "",
+              "title": "Позвонить"
             }
           ]
         },
         {
           "name": "Детский клуб «Кругосветка»",
-          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta.",
-          "links": [
-            {
-              "href": "",
-              "title": ""
-            }
-          ]
+          "text": "<p>Место, где каждый день наполнен играми, творчеством и новыми открытиями. Здесь дети проводят время в компании сверстников, участвуют в мастер-классах и тематических программах под присмотром опытных сотрудников.</p><p>Пока ребёнок увлечён интересными занятиями, родители могут посвятить время отдыху, прогулкам по курорту или активностям в горах. Доступны различные форматы посещения в зависимости от ваших планов на отдых.</p>",
+          "links": []
         },
         {
           "name": "Детская коляска",
-          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta.",
-          "links": [
-            {
-              "href": "",
-              "title": ""
-            }
-          ]
+          "text": "<p>Путешествуйте налегке даже с самыми маленькими гостями. По запросу в отеле доступна детская коляска для прогулок по курорту, набережной и территории Роза Хутор.</p><ul>Дополнительно:<li>предоставляется при наличии свободных колясок</li><li>рекомендуется предварительное бронирование</li></ul>",
+          "links": []
         },
         {
-          "name": "Комната хранения и сушки снаряжения",
-          "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolorum, iure nisi quos suscipit totam veniam. Dicta fugiat ipsa obcaecati quas quo repellendus reprehenderit sequi temporibus. Officia quam, soluta.",
-          "links": [
-            {
-              "href": "",
-              "title": ""
-            }
-          ]
+          "name": "Хранения спортивного снаряжения",
+          "text": "<p>После дня на склонах оставьте экипировку в специальной комнате хранения и сушки. Ваше снаряжение будет готово к следующему выходу в горы, а номер останется свободным от громоздких вещей и зимней экипировки.</p>",
+          "links": []
         }
       ],
       "text_1": "Всё, что делает отдых спокойным и продуманным, уже включено в проживание. Мы позаботились о деталях, чтобы вы могли сосредоточиться на главном — отдыхе.",

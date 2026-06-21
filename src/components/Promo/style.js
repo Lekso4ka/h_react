@@ -63,18 +63,4 @@ export const Item = styled.div`
         line-height: 120%; /* 21.6px */
         padding: 2.6rem 0 4.6rem;
     }
-    a {
-        color: var(--Black-2, #2F3034);
-        font-family: "Playfair Display";
-        font-size: 1.8rem;
-        font-style: italic;
-        font-weight: 500;
-        line-height: 110%; /* 19.8px */
-        text-decoration-line: underline;
-        text-decoration-style: solid;
-        text-decoration-skip-ink: auto;
-        text-decoration-thickness: 10%; /* 1.8px */
-        text-underline-offset: 30%; /* 5.4px */
-        text-underline-position: from-font;
-    }
 `

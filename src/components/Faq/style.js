@@ -73,4 +73,34 @@ export const Inner = styled.div`
     font-weight: 500;
     line-height: 130%;
     padding-bottom: 3.5rem;
+    p:not(:first-of-type) {
+        padding-top: 2.8rem;
+    }
+    ul {
+        padding-top: 2.8rem;
+    }
+    li {
+        display: flex;
+        align-items: center;
+        position: relative;
+        padding-left: .9rem;
+        font-family: Manrope;
+        font-style: normal;
+        line-height: 140%; /* 16.8px */
+
+        &::before {
+            content: "";
+            width: .3rem;
+            height: .3rem;
+            position: absolute;
+            left: 0;
+            border-radius: 50%;
+            background-color: rgba(85, 83, 46, 0.80);
+        }
+    }
+    .links {
+        padding-top: 3.2rem;
+        display: flex;
+        gap: 4.4rem;
+    }
 `;

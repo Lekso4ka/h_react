@@ -1,5 +1,4 @@
 import React from "react";
-import img from "../../../assets/img";
 import { Link } from "../../../ui/Link";
 import { Video } from "../../../ui/Video";
 import { Content } from "./style";

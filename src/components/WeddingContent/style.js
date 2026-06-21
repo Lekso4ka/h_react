@@ -207,15 +207,6 @@ export const Section1 = styled.section`
     }
     a {
         color: var(--Black, #1C1C1C);
-        font-family: "Playfair Display";
-        font-style: italic;
-        line-height: 110%; /* 17.6px */
-        text-decoration-line: underline;
-        text-decoration-style: solid;
-        text-decoration-skip-ink: auto;
-        text-decoration-thickness: 10%; /* 1.6px */
-        text-underline-offset: 30%; /* 4.8px */
-        text-underline-position: from-font;
     }
     .img2 {
         width: calc(100% - 1.2rem);

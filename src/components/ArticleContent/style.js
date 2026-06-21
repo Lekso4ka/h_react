@@ -285,17 +285,6 @@ export const Section3 = styled.section`
 
     a {
         color: var(--Red, #96281F);
-        font-family: "Playfair Display";
-        font-size: 1.6rem;
-        font-style: italic;
-        font-weight: 500;
-        line-height: 110%; /* 17.6px */
-        text-decoration-line: underline;
-        text-decoration-style: solid;
-        text-decoration-skip-ink: auto;
-        text-decoration-thickness: 10%; /* 1.6px */
-        text-underline-offset: 30%; /* 4.8px */
-        text-underline-position: from-font;
     }
 
     @media (min-width: 576px) {
@@ -322,7 +311,7 @@ export const Section3 = styled.section`
             }
             a {
                     display: inline-block;
-                    padding: 0 0 0 63.1rem;
+                    margin: 0 0 0 63.1rem;
             }
     }
 `
@@ -563,17 +552,7 @@ export const Section7 = styled.section`
             color: var(--Black-2, #2F3034);
             a {
                 color: var(--Red, #96281F);
-                font-family: "Playfair Display";
-                font-size: 1.6rem;
-                font-style: italic;
-                font-weight: 500;
-                line-height: 110%; /* 17.6px */
-                text-decoration-line: underline;
-                text-decoration-style: solid;
-                text-decoration-skip-ink: auto;
-                text-decoration-thickness: 10%; /* 1.6px */
-                text-underline-offset: 30%; /* 4.8px */
-                text-underline-position: from-font;
+                width: max-content;
             }
         }
     h2 {
@@ -663,9 +642,6 @@ export const Section7 = styled.section`
             grid-template-columns: 50rem 1fr;
             gap: 4.6rem 13.2rem;
             padding: 6rem 26.8rem 0 18.2rem;
-            a {
-                font-size: 1.8rem;
-            }
         }
         h2 {
             padding-bottom: 5.7rem;

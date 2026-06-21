@@ -44,18 +44,4 @@ export const Section = styled.section`
         font-weight: 400;
         line-height: 120%; /* 24px */
     }
-    a {
-        color: var(--Beige, #FFF6F0);
-        font-family: "Playfair Display";
-        font-size: 1.8rem;
-        font-style: italic;
-        font-weight: 500;
-        line-height: 110%; /* 19.8px */
-        text-decoration-line: underline;
-        text-decoration-style: solid;
-        text-decoration-skip-ink: auto;
-        text-decoration-thickness: 10%; /* 1.8px */
-        text-underline-offset: 30%; /* 5.4px */
-        text-underline-position: from-font;
-    }
 `

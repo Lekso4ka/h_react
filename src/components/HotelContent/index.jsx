@@ -1,6 +1,7 @@
 import img from "../../assets/img"
 import React, { Fragment, useEffect, useState } from "react";
 import { Icon } from "../../ui/Icon";
+import { Video } from "../../ui/Video";
 import { RestaurantContent } from "../RestaurantContent";
 import { ServicesContent } from "../ServicesContent";
 import {
@@ -41,7 +42,7 @@ export const HotelContent = () => {
             <div className="content">
                 <h2>{data[id].section_1.caption}</h2>
                 <div className="video">
-                    <video src={img[data[id].section_1.video_link]} autoPlay></video>
+                    <Video data={ [data[id].section_1.video_link] } index={0}/>
                 </div>
             </div>
         </Section1>

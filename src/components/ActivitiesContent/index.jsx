@@ -5,6 +5,7 @@ import img from "../../assets/img"
 
 import data from "../../data/activities.json";
 import { Icon } from "../../ui/Icon";
+import { Video } from "../../ui/Video";
 import { SingleActivity } from "../SingleActivity";
 import { Tour } from "../Tour";
 import { Block, Btn, Content, Hero, HeroLink, Image, ImgItem, Item, List, Other, VideoContainer } from "./style";
@@ -49,7 +50,7 @@ export const ActivitiesContent = () => {
                             isActive={ activeItems[i] === j }
                         >
                             <h5>{ item.tooltip }</h5>
-                            <h3>{ item.title } { j }</h3>
+                            <h3>{ item.title }</h3>
                             <ImgItem bg={ item.image }/>
                             <p>{ item.text }</p>
                             <Icon
@@ -77,7 +78,7 @@ export const ActivitiesContent = () => {
             <p dangerouslySetInnerHTML={ { __html: data[activity].text_bottom } }/>
         </Block>
         <VideoContainer>
-            <video src={img.vi_gastro} autoPlay/>
+            <Video data={ ["vi_gastro"] } index={0}/>
             <div>
                 <Tour dark link={""} pos style={{top: "2.4rem", right: "2.4rem", left: "auto"}}/>
                 <h2>BRANCHE</h2>

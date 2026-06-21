@@ -3,6 +3,7 @@ import React, { useRef, useState, useId, useEffect } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { Icon } from "../../ui/Icon";
+import { Link } from "../../ui/Link";
 import { Button, Inner, ItemSt, Panel, Question, Trigger } from "./style";
 
 gsap.registerPlugin(useGSAP);
@@ -11,7 +12,7 @@ const OPEN_DURATION = 0.45;
 const CLOSE_DURATION = 0.35;
 
 export const Item = ({
-    i, question, tooltip, answer, reset
+    i, question, tooltip, answer, reset, links
 }) => {
     const [isOpen, setIsOpen] = useState(false);
     const rootRef = useRef(null);
@@ -100,7 +101,12 @@ export const Item = ({
                 </Button>
             </Trigger>
             <Panel ref={ panelRef } id={panelId} role="region" aria-hidden={!isOpen}>
-                <Inner ref={innerRef}>{answer}</Inner>
+                <Inner ref={innerRef}>
+                    <div dangerouslySetInnerHTML={{__html: answer}} />
+                    {links.length > 0 && <div className="links">
+                        {links.map((el, i) => <Link key={i} to={el.href}>{el.title}</Link>) }
+                    </div>}
+                </Inner>
             </Panel>
         </ItemSt>
     );

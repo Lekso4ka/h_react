@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const renderLine = ({variant}) => {
     switch (variant) {

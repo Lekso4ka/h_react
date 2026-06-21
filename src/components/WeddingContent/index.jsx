@@ -1,8 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
-
-import img from "../../assets/img"
+import { Link } from "../../ui/Link";
 import { Icon } from "../../ui/Icon";
+import { Video } from "../../ui/Video";
 import { Hero, Section1, Section2, Section3, Section4, Section5, Section6 } from "./style";
 
 export const WeddingContent = () => {
@@ -11,7 +10,7 @@ export const WeddingContent = () => {
     }
     return <>
         <Hero>
-            <video src={ img.we_1 } autoPlay/>
+            <Video data={ ["we_1"] } index={0}/>
             <h4>МЕСТО ДЛЯ ГЛАВНОГО СОБЫТИЯ</h4>
             <h1>Свадьба в серце гор</h1>
             <p>Панорамные виды, особенная атмосфера и моменты, которые останутся с вами навсегда.</p>

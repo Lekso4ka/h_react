@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { Link } from "../../ui/Link";
 import { SingleActivity } from "../SingleActivity";
 import { Article, BtnBlock, Content, Top } from "./style";
 
@@ -22,7 +23,7 @@ export const DoingsContent = () => {
     useEffect(() => {
         const hash = location.hash;
         if (hash) {
-            const targetId = decodeURIComponent(hash).replace('#', '');
+            const targetId = decodeURIComponent(hash).replace("#", "");
             
             setTimeout(() => {
                 const element = document.getElementById(targetId);
@@ -33,7 +34,7 @@ export const DoingsContent = () => {
                     
                     window.scrollTo({
                         top: scrollPosition,
-                        behavior: 'smooth'
+                        behavior: "smooth"
                     });
                 }
             }, 300);
@@ -47,36 +48,41 @@ export const DoingsContent = () => {
             n = randomize(20)
         }
         while (n--) {
-            item = {...randomize(data)};
-            item.type = item.type === "article" ? randomize(["article","article","article", "image", "text", "article"]) : item.type;
+            item = { ...randomize(data) };
+            item.type = item.type === "article" ? randomize(["article", "article", "article", "image", "text", "article"]) : item.type;
             item.order = n
             arr.push(item)
         }
         setMoreData(arr)
     }, []);
     
-    
     const renderArticle = (el, i) => {
-        switch(el.type) {
+        switch (el.type) {
             case "image":
-                return <Article key={`art_${i}`} bg={el.src}>
+                return <Article key={ `art_${ i }` } bg={ el.src }>
                     <div className="img"/>
                 </Article>
             case "video":
-                return <Article key={`art_${i}`} >
-                    <video src={img[el.src]} autoPlay/>
+                return <Article key={ `art_${ i }` }>
+                    <video
+                        src={ img[el.src] }
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        preload="auto"/>
                 </Article>
             case "text":
-                return <Article key={`art_${i}`} singleText>
-                    <h3 dangerouslySetInnerHTML={{__html: el.text}}></h3>
+                return <Article key={ `art_${ i }` } singleText>
+                    <h3 dangerouslySetInnerHTML={ { __html: el.text } }></h3>
                 </Article>
             default:
-                return <Article key={`art_${i}`} bg={el.src}>
-                    <h5 id={el.tooltip}>{el.tooltip}</h5>
-                    <h3 dangerouslySetInnerHTML={{__html: el.title}}></h3>
+                return <Article key={ `art_${ i }` } bg={ el.src }>
+                    <h5 id={ el.tooltip }>{ el.tooltip }</h5>
+                    <h3 dangerouslySetInnerHTML={ { __html: el.title } }></h3>
                     <div className="img"/>
-                    <p dangerouslySetInnerHTML={{__html: el.text}}/>
-                    <Link to={ `/article/${el.id}` }>Читать</Link>
+                    <p dangerouslySetInnerHTML={ { __html: el.text } }/>
+                    <Link to={ `/article/${ el.id }` }>Читать</Link>
                 </Article>
         }
     }
@@ -87,14 +93,14 @@ export const DoingsContent = () => {
             <h1>События и мероприятия <span>горного курорта</span></h1>
         </Top>
         <Content>
-            {data.map((el, i) => renderArticle(el, i))}
+            { data.map((el, i) => renderArticle(el, i)) }
             <BtnBlock>
-                <button onClick={() => setShowAll(!showAll)}>
-                    {showAll ? "Скрыть в" : "В"}се статьи
+                <button onClick={ () => setShowAll(!showAll) }>
+                    { showAll ? "Скрыть в" : "В" }се статьи
                 </button>
             </BtnBlock>
-            {showAll && moreData.map((el, i) => renderArticle(el, i))}
+            { showAll && moreData.map((el, i) => renderArticle(el, i)) }
         </Content>
-        <SingleActivity name={"summer"}/>
+        <SingleActivity name={ "summer" }/>
     </>
 }

@@ -42,7 +42,7 @@ export const Video = ({ data, index, h }) => {
         }, 300);
     }, [index])
     
-    return <VideoContainer h={h}>
+    return <VideoContainer h={h} className="video">
         { data?.map((video, index) => (
             <VideoWrapper key={ `video_${index}` } active={ activeIndex === index }>
                 <VideoSt

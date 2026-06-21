@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link as RouterLink, useParams } from "react-router-dom";
 import { getArticleById } from "../../data";
 import { Line } from "../../ui/Line";
+import { Link } from "../../ui/Link";
 import {
     Carousel,
     CarouselItem,
@@ -123,10 +124,10 @@ export const ArticleContent = () => {
             <div className="bottom">
                 <Line/>
                 <div className="tabs">
-                    { a.section_7.tags.map((el, i) => <Link
+                    { a.section_7.tags.map((el, i) => <RouterLink
                         key={ i }
                         to={ el.link }
-                    >{ el.text }</Link>) }
+                    >{ el.text }</RouterLink>) }
                 </div>
                 <Line/>
             </div>

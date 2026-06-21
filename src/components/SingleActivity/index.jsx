@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link } from "../../ui/Link";
 import data from "../../data/activities.json";
 import { Section } from "./style";
 
@@ -8,6 +8,10 @@ export const SingleActivity = ({name}) => {
         <div className="tooltip">[ Активности ]</div>
         <h2>{data[name].subTitle}</h2>
         <p>{data[name].subText}</p>
-        <Link to={`/activities/${name}`}>К активностям</Link>
+        <Link
+            color={"light"}
+            hover={"light"}
+            to={`/activities/${name}`}
+        >К активностям</Link>
     </Section>
 }
