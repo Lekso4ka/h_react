@@ -4,6 +4,7 @@ import { Tour } from "../../../components/Tour";
 import { Icon } from "../../../ui/Icon";
 import { Link } from "../../../ui/Link";
 import { Content, Img } from "./style";
+
 const rest = [
     "res_1",
     "res_2",
@@ -17,14 +18,12 @@ const rest = [
 
 export const Restaurants = () => {
     const [restImages, setRestImages] = useState(rest)
-    const [btns, setBtns] = useState([...rest.map((el,index) => ({index, src: el})), {index: 8, src: "res_1"}])
+    const [btns, setBtns] = useState([...rest.map((el, index) => ({ index, src: el })), { index: 8, src: "res_1" }])
     const [right, setRight] = useState(null)
     const [activeBtn, setActiveBtn] = useState(0);
     const restRef = useRef()
     
     const [activeRest, setActiveRest] = useState(0)
-    
-    
     
     useEffect(() => {
         const ref = restRef.current
@@ -32,7 +31,7 @@ export const Restaurants = () => {
             for (let i = 0; i < ref.children.length; i++) {
                 let img = ref.children[i];
                 img.classList.add(right ? "active-r" : "active");
-                if (i!== activeBtn) {
+                if (i !== activeBtn) {
                     img.classList.remove("clicked");
                 }
             }
@@ -78,7 +77,8 @@ export const Restaurants = () => {
     }
     return <Content>
         <div className={ "bg" }>
-            { restImages.map((el, i) => <img className={ activeRest === i ? "active" : "" } key={ i } src={ img[el] } alt=""/>) }
+            { restImages.map((el, i) => <img className={ activeRest === i ? "active" : "" } key={ i } src={ img[el] }
+                                             alt=""/>) }
         </div>
         <h2>{ Math.floor(rest.indexOf(restImages[activeRest]) / 4) === 0 ? "Бранше" : "Амстердам" }</h2>
         <Link
@@ -90,11 +90,11 @@ export const Restaurants = () => {
         <Tour pos className="tour"/>
         <span
             className="arrow"
-              onClick={() => arrowHandler(activeRest === 7 ? 0 : activeRest + 1)}
+            onClick={ () => arrowHandler(activeRest === 7 ? 0 : activeRest + 1) }
         ><Icon name={ "arrow" } color="#FFF"/></span>
         <span
             className="arrow right"
-            onClick={() => arrowHandler(activeRest === 0 ? 7 : activeRest - 1, true)}
+            onClick={ () => arrowHandler(activeRest === 0 ? 7 : activeRest - 1, true) }
         ><Icon name={ "arrow" } left={ false } color="#FFF"/></span>
         <div className="list-container">
             <div className="list" ref={ restRef }>

@@ -1,10 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Tour } from "../../../components/Tour";
+import { Lightbox } from "../../../ui/Lightbox";
 import { Vector } from "../../../ui/Vector";
 import { Content, Info, InfoItem, Options, Variant, Text, Images, Image, Formats } from "./style";
 
 export const Desktop = ({data}) => {
-    
+    const [activeLb, setActiveLb] = useState(false);
+    const [lbIndex, setLbIndex] = useState(0);
+    const close = () => {
+        setActiveLb(false);
+    }
+    const open = (i) => {
+        setActiveLb(true)
+        setLbIndex(i)
+    }
+    useEffect(() => {
+        if (activeLb) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "auto";
+        }
+    }, [activeLb])
     return <Content>
             <h1>{ data.name }</h1>
             <div className="center">
@@ -76,8 +92,14 @@ export const Desktop = ({data}) => {
                 <Text>
                     { data.text.map((el, i) => <p key={ i }>{ el }</p>) }
                 </Text>
-                { data.images.map((el, i) => <Image key={ i } bg={ el }/>) }
+                { data.images.map((el, i) => <Image key={ i } bg={ el } onClick={() => open(i)}/>) }
             </Images>
             <a href="">Отправить запрос</a>
+            <Lightbox
+                data={data.images}
+                active={activeLb}
+                index={lbIndex}
+                close={close}
+            />
         </Content>
 }
