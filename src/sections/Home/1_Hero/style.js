@@ -7,6 +7,7 @@ export const Content = styled.div`
     position: relative;
     background: rgba(0, 0, 0, 0.40);
     overflow: hidden;
+
     .line {
         height: 7.6rem;
         border-bottom: .1rem solid ${ ({ theme }) => theme.colors.light_30 }
@@ -77,12 +78,15 @@ export const Content = styled.div`
         font-style: italic;
         font-weight: 400;
         line-height: 120%; /* 24px */
+
         span {
-                font-family: "Playfair Display";
+            font-family: "Playfair Display";
         }
+
         p {
             font-size: 1.6rem;
             padding: 1.4rem 0 2.2rem; /* 24px */
+            font-style: normal;
         }
     }
 
