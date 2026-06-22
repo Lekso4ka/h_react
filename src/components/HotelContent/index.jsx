@@ -1,5 +1,7 @@
 import img from "../../assets/img"
 import React, { Fragment, useEffect, useState } from "react";
+import { Images } from "../../sections/Hotel/Img";
+import { VideoSection } from "../../sections/Hotel/Video";
 import { Icon } from "../../ui/Icon";
 import { Video } from "../../ui/Video";
 import { RestaurantContent } from "../RestaurantContent";
@@ -39,12 +41,13 @@ export const HotelContent = () => {
                 <p className="address">{data[id].address}</p>
                 <a href={data[id].room_link}>Выбрать номер</a>
             </div>
-            <div className="content">
-                <h2>{data[id].section_1.caption}</h2>
-                <div className="video">
-                    <Video data={ [data[id].section_1.video_link] } index={0}/>
-                </div>
-            </div>
+            <VideoSection data={data[id].section_1}/>
+            {/*<div className="content">*/}
+            {/*    <h2>{data[id].section_1.caption}</h2>*/}
+            {/*    <div className="video">*/}
+            {/*        <Video data={ [data[id].section_1.video_link] } index={0}/>*/}
+            {/*    </div>*/}
+            {/*</div>*/}
         </Section1>
         <Section2
             pic1={data[id].section_2.image_1}
@@ -63,16 +66,17 @@ export const HotelContent = () => {
             <h2>{data[id].section_3.caption}</h2>
             <Link to={data[id].room_link}>К номерам</Link>
         </Section3>
-        <Section4 pics={data[id].section_4.images} pos={data[id].section_4.image_positions}>
-            <h2>{data[id].section_4.caption}</h2>
-            <p>{data[id].section_4.text}</p>
-            <div className="img-c"/>
-            <Link to={data[id].section_4.events_link}>События курорта</Link>
-            <div className="img-lt"/>
-            <div className="img-rt"/>
-            <div className="img-lb"/>
-            <div className="img-rb"/>
-        </Section4>
+        {/*<Section4 pics={data[id].section_4.images} pos={data[id].section_4.image_positions}>*/}
+        {/*    <h2>{data[id].section_4.caption}</h2>*/}
+        {/*    <p>{data[id].section_4.text}</p>*/}
+        {/*    <div className="img-c"/>*/}
+        {/*    <Link to={data[id].section_4.events_link}>События курорта</Link>*/}
+        {/*    <div className="img-lt"/>*/}
+        {/*    <div className="img-rt"/>*/}
+        {/*    <div className="img-lb"/>*/}
+        {/*    <div className="img-rb"/>*/}
+        {/*</Section4>*/}
+        <Images data={data[id].section_4}/>
         <RestaurantContent/>
         <ServicesContent/>
         

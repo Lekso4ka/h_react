@@ -10,7 +10,7 @@
     "room_link": "/rooms/golden-tulip",
     "section_1": {
       "caption": "Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-      "video_link": "video1"
+      "video_link": "video_w"
     },
     "section_2": {
       "tooltip": "Голден Тюлип Роза Хутор",
@@ -259,7 +259,7 @@
     "room_link": "/rooms/tulip-inn",
     "section_1": {
       "caption": "Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-      "video_link": "video1"
+      "video_link": "video_w"
     },
     "section_2": {
       "tooltip": "Тулип Инн Роза Хутор",
