@@ -92,7 +92,7 @@ export const Images = ({data}) => {
         <div className="img img5" ref={r5}/>
         <p>{ data.text }</p>
         <div className="links">
-            <Link to="/events/default">События куррорта</Link>
+            <Link to="#">Перейти к бронированию</Link>
         </div>
     </Content>
 }

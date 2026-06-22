@@ -3,7 +3,6 @@ import React, { Fragment, useEffect, useState } from "react";
 import { Images } from "../../sections/Hotel/Img";
 import { VideoSection } from "../../sections/Hotel/Video";
 import { Icon } from "../../ui/Icon";
-import { Video } from "../../ui/Video";
 import { RestaurantContent } from "../RestaurantContent";
 import { ServicesContent } from "../ServicesContent";
 import {
@@ -12,8 +11,9 @@ import {
     Section2, Section3,
     Section4,
 } from "./style";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import data from "../../data/hotels.json";
+import { Link } from "../../ui/Link"
 
 export const HotelContent = () => {
     const { id } = useParams();
@@ -64,7 +64,11 @@ export const HotelContent = () => {
         <Section3 pic={data[id].section_3.bg}>
             <div className="tooltip">{data[id].name}</div>
             <h2>{data[id].section_3.caption}</h2>
-            <Link to={data[id].room_link}>К номерам</Link>
+            <Link
+                to={data[id].room_link}
+                color={"light"}
+                hover={"light"}
+            >К номерам</Link>
         </Section3>
         {/*<Section4 pics={data[id].section_4.images} pos={data[id].section_4.image_positions}>*/}
         {/*    <h2>{data[id].section_4.caption}</h2>*/}

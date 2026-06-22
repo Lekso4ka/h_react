@@ -119,7 +119,8 @@ export const Content = styled.section`
 
         .room {
             background-position: center;
-            background-size: auto 100%;
+            background-size: 100% auto;
+            background-repeat: no-repeat;
             padding: 3.4rem 4rem;
             display: grid;
             position: relative;
@@ -130,7 +131,7 @@ export const Content = styled.section`
             justify-items: flex-start;
 
             &:hover {
-                background-size: auto 110%;
+                background-size: 110% auto;
             }
 
             transition: background-size 1s;
