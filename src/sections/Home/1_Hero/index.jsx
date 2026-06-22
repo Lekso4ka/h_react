@@ -37,7 +37,7 @@ export const Hero = ({weather, setWeather}) => {
         <h4>Комфорт или практичность — выберите свой формат проживания</h4>
         <div className="divider"/>
         <div className="hotels">
-            <HotelCard active={ actGt }>
+            <HotelCard active={ actGt } bg={"home_gt"}>
                 <h2>Голден тюлип</h2>
                 <div className="stars">
                     <Icon name="star"/>
@@ -82,7 +82,7 @@ export const Hero = ({weather, setWeather}) => {
                     </div>
                 </div>
             </HotelCard>
-            <HotelCard active={ actTi }>
+            <HotelCard active={ actTi } bg={"home_ti"}>
                 <h2>Тюлип инн</h2>
                 <div className="stars">
                     <Icon name="star"/>

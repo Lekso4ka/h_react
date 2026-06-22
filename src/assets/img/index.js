@@ -178,7 +178,10 @@ import ven_8 from "./942dbc0a-0c3d-4695-985f-161a5e41c99b.jpg"
 import ven_9 from "./85175b30-54be-4621-831e-60c551b46e07.jpg"
 import h_gt_banner from "./b73c5436-84fc-4865-9c1e-10b8c9f4d932.jpg"
 import h_ti_banner from "./7f470a8b-f880-40a0-877d-84fd246a96e8.jpg"
+import home_gt from "./ddcc8ed1-27f5-439e-bd96-eb658db62016.jpeg"
+import home_ti  from "./52b44d67-992c-4193-a496-79485a2a2d04.jpeg"
 export default {
+    home_gt, home_ti,
     h_gt_banner,
     h_ti_banner,
     ven_1,

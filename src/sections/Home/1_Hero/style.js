@@ -269,7 +269,7 @@ export const HotelCard = styled.div`
 
         .img {
             height: 27.4rem;
-            background-image: url("${ img.h_banner }");
+            background-image: url("${ ({bg}) => img[bg] }");
             background-size: cover;
             background-position: center;
             margin: 1rem 0 1.4rem;
