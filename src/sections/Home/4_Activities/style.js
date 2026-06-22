@@ -88,7 +88,7 @@ export const Content = styled.section`
         padding: 0 1.6rem;
         display: grid;
         overflow-x: auto;
-        grid-template-columns: repeat(3, 32rem);
+        grid-template-columns: repeat(5, 32rem);
         gap: 3.2rem;
         position: relative;
 
@@ -97,7 +97,7 @@ export const Content = styled.section`
             position: absolute;
             content: "";
             left: 1.6rem;
-            width: 102.4rem;
+            width: 174.4rem;
             height: .1rem;
             background: rgba(150, 40, 31, 0.20);
         }
@@ -242,7 +242,7 @@ export const Content = styled.section`
             }
 
             padding: 0 2.1rem;
-            grid-template-columns: repeat(3, 45.2rem);
+            grid-template-columns: repeat(5, 45.2rem);
             gap: 4.3rem;
             height: 100%;
         }

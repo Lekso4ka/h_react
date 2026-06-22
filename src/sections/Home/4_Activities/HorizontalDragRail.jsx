@@ -227,7 +227,7 @@ const Track = styled.div`
 		position: absolute;
 		content: "";
 		left: 1.6rem;
-		width: 102.4rem;
+		width: 174.4rem;
 		height: .1rem;
 		background: rgba(150, 40, 31, 0.20);
 	}
