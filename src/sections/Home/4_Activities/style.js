@@ -229,6 +229,10 @@ export const Content = styled.section`
 
         .list-container {
             padding: 0;
+			//height: 100%;
+			//& * {
+			//	height: 100%;
+			//}
         }
 
         .list {
@@ -286,6 +290,7 @@ export const Content = styled.section`
 `
 
 export const Zone = styled.div`
+	height: 100%;
 	${(p) =>
     p.$hideCursor
         ? `

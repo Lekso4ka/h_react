@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import img from "../../../assets/img";
 
 export const Content = styled.section`
-    padding: 6rem 2.4rem;
+    padding: 6rem 0rem;
 
     h4 {
         color: var(--Black-2, #2F3034);
@@ -22,7 +22,7 @@ export const Content = styled.section`
         flex-direction: column;
         align-items: flex-end;
         gap: 1.3rem;
-        padding-right: 8rem;
+        padding-right: 9.4rem;
 
         a {
             font-size: 3.4rem;
@@ -51,20 +51,14 @@ export const Content = styled.section`
 
             &::before {
                 position: absolute;
-                right: -2.4rem;
+                right: -1.2rem;
                 content: "/";
                 display: inline-block;
                 font-style: normal;
                 color: #F0EAE6;
-                font-size: 7.4rem;
+                font-size: 3.4rem;
                 font-weight: 400;
-                line-height: inherit;
-                letter-spacing: inherit;
                 transform: translate(100%, 0);
-            }
-
-            &:last-of-type::before {
-                opacity: 0;
             }
 
             &:hover {
@@ -73,6 +67,9 @@ export const Content = styled.section`
 
                 span {
                     opacity: 1;
+                }
+                &::before {
+                    color: var(--Red, #96281F);
                 }
 
             }
