@@ -64,8 +64,8 @@ export const LEFT_NAV = [
         label: "Услуги",
         hasMenu: true,
         columns: [
-            { title: "СПА центр", href: "", image: "h_banner" },
-            { title: "Рестораны", href: "/restaurant/golden-tulip", image: "h_banner" },
+            { title: "СПА центр", href: "", image: "home_spa" },
+            { title: "Рестораны", href: "/restaurant/golden-tulip", image: "home_r_1" },
             { title: "Конференц залы", href: "/events/venues", image: "h_banner" },
             { title: "Мероприятия", href: "/events/default", image: "h_banner" }
         ]
