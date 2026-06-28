@@ -7,9 +7,10 @@ import { Content } from "./style";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
-export const VideoSection = ({data}) => {
+export const VideoSection = ({ data }) => {
     const videoRef = useRef()
     const sectionRef = useRef()
     
@@ -49,7 +50,6 @@ export const VideoSection = ({data}) => {
                     onEnterBack: () => section.classList.remove("is-complete")
                 });
                 
-                
                 return () => {
                     trigger.kill();
                     gsap.set([video], { clearProps: "opacity,scale,transform" });
@@ -63,13 +63,11 @@ export const VideoSection = ({data}) => {
     console.log(data.video_link)
     
     return <Content
-        ref={sectionRef}
+        ref={ sectionRef }
     >
-        <div className="content">
-            <h2>{ data.caption }</h2>
-            <div className="video" ref={videoRef}>
-                <Video data={ [data.video_link] } index={ 0 }/>
-            </div>
+        <h2>{ data.caption }</h2>
+        <div className="vi" ref={ videoRef } >
+            <Video data={ [data.video_link] } index={ 0 } />
         </div>
     </Content>
 }

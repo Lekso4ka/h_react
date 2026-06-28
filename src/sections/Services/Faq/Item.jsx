@@ -2,8 +2,8 @@ import React, { useRef, useState, useId, useEffect } from "react";
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { Icon } from "../../ui/Icon";
-import { Link } from "../../ui/Link";
+import { Icon } from "../../../ui/Icon";
+import { Link } from "../../../ui/Link";
 import { Button, Inner, ItemSt, Panel, Question, Trigger } from "./style";
 
 gsap.registerPlugin(useGSAP);

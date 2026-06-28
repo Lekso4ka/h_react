@@ -1,9 +1,6 @@
 import React from 'react';
-import { Container } from "../components/Container";
-import { ServicesContent } from "../components/ServicesContent";
+import { ServicesContent } from "../sections/Services";
 
 export const Services = () => {
-    return <Container style={{paddingTop: "9.2rem"}}>
-        <ServicesContent page={true}></ServicesContent>
-    </Container>
+    return <ServicesContent page={true}/>
 }

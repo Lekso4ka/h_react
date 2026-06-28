@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getHotels } from "../../data/hotels";
 import { Breadcrumbs } from "../../ui/Breadcrumbs";
-import { Faq } from "../Faq";
+import { Faq } from "../../sections/Services/Faq";
 import { ServiceItem } from "../HotelContent/style";
 import { Container, Line, Tabs, Section } from "./style";
 

@@ -1,10 +1,6 @@
 import React from "react";
-import { EventsContent } from "../sections/Events";
-import { HotelContent } from "../components/HotelContent";
+import { HotelContent } from "../sections/Hotel";
 
 export const Hotel = () => {
-    return <>
-        <HotelContent/>
-        <EventsContent/>
-    </>
+    return <HotelContent/>
 }
