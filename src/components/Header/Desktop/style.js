@@ -1,5 +1,5 @@
 import styled from "@emotion/styled"
-import img from "../../assets/img"
+import img from "../../../assets/img"
 export const Shell = styled.div`
 	position: fixed;
 	top: 0;
@@ -45,21 +45,6 @@ export const HeaderBlock = styled.header`
     //    bottom: -.1rem;
     //    left: 2.4rem;
     //}
-    @media screen and (max-width: 576px) {
-        height: 7.6rem;
-        gap: 2.4rem;
-        padding: 1.5rem 1.2rem 1.5rem 1.6rem;
-        grid-template-rows: auto 1fr auto;
-        align-items: center;
-        grid-auto-flow: dense;
-        &>svg {
-            width: 3.2rem;
-            display: inline-block;
-            padding-bottom: .2rem;
-            grid-column-start: 3;
-            cursor: pointer;
-        }
-    }
 `
 export const HeaderMenu = styled.div`
     display: flex;
@@ -68,9 +53,6 @@ export const HeaderMenu = styled.div`
     gap: 6.8rem;
     position: relative;
     z-index: 1;
-    @media screen and (max-width: 576px) {
-        display: none;
-    }
 `
 export const HeaderMenu2 = styled.div`
     display: flex;
@@ -79,23 +61,6 @@ export const HeaderMenu2 = styled.div`
     gap: 7.2rem;
     position: relative;
     z-index: 1;
-    @media screen and (max-width: 576px) {
-        grid-column-start: 1;
-        grid-row-start: 1;
-        &>:not(:nth-child(4)) {
-            display: none;
-        }
-        &>:nth-child(4) {
-            font-size: 1.6rem;
-            line-height: 98%;
-            &>:nth-child(1) {
-                display: none;
-            }
-            &>:nth-child(2) {
-                display: none;
-            }
-        }
-    }
 `
 export const HeaderLink = styled.button`
     display: grid;
@@ -123,9 +88,7 @@ export const HeaderLink2 = styled.a`
     letter-spacing: 0.072rem;
     text-transform: uppercase;
     cursor: pointer;
-    @media screen and (max-width: 576px) {
-        display: none;
-    }
+    
     
 `
 export const HeaderName = styled.div`
@@ -136,11 +99,7 @@ export const HeaderName = styled.div`
     line-height: 98%; /* 21.56px */
     text-transform: uppercase;
     z-index: 1;
-    @media screen and (max-width: 576px) {
-        font-size: 1.6rem;
-        font-weight: 500;
-        line-height: 100%;
-    }
+    
 `
 export const HeaderButton = styled.button`
     display: flex;
@@ -159,9 +118,7 @@ export const HeaderButton = styled.button`
     font-weight: 500;
     letter-spacing: 0.072rem;
     text-transform: uppercase;
-    @media screen and (max-width: 576px) {
-        display: none;
-    }
+    
 `
 export const HeaderLang = styled.div`
     display: flex;

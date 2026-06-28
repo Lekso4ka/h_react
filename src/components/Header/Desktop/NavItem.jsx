@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Icon } from "../../ui/Icon";
+import { Icon } from "../../../ui/Icon";
 import { HeaderLink, HeaderLink2 } from "./style";
 
 export const NavItem = ({ item, active, onEnter, onNavigate, light }) => {
