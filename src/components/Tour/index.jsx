@@ -7,6 +7,7 @@ export const Tour = ({link, dark, pos, ...rest}) => {
         target="_blank"
         dark={dark}
         pos={pos}
+        className="tour"
         {...rest}
     >
         <span>Тур</span>

@@ -1,8 +1,7 @@
 import React, { Fragment} from "react";
 import { getHotelById } from "../../data";
-import { RestaurantContent } from "../../components/RestaurantContent";
-import data from "../../data/hotels.json";
 import { EventsContent } from "../Events";
+import { RestaurantContent } from "../Restaurant";
 import { ServicesContent } from "../Services";
 import { Caption } from "./1_Caption";
 import { Info } from "./3_Info";

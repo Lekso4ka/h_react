@@ -7,6 +7,7 @@ export const Block = styled.a`
         position: absolute;
         top: 2.4rem;
         left: 3rem;
+        z-index: 2;
     `: "" }
     box-sizing: border-box;
     padding: .8rem 1.2rem;

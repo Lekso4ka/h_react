@@ -24,6 +24,8 @@ export const LinkSt = styled(Link)`
     line-height: 1.1;
     position: relative;
     transition-property: color;
+    display: flex;
+    width: max-content;
     transition-duration: 600ms;
     transition-timing-function: cubic-bezier(0.625, 0.05, 0, 1);
     &::after {

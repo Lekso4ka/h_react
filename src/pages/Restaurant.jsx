@@ -1,9 +1,6 @@
 import React from 'react';
-import { Container } from "../components/Container";
-import { RestaurantContent } from "../components/RestaurantContent";
+import { RestaurantContent } from "../sections/Restaurant";
 
 export const Restaurant = () => {
-    return <Container style={{paddingTop: "9.2rem"}}>
-        <RestaurantContent page={true}></RestaurantContent>
-    </Container>
+    return <RestaurantContent page/>
 }

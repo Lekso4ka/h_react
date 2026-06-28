@@ -3,8 +3,9 @@ import React, { useRef, useState, useMemo, useCallback } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { Icon } from "../../ui/Icon";
+import { Tour } from "../Tour";
 
-import { Root, Viewport, Track, Slide, SlideImage, Arrow, Dots, Dot, Tour } from "./style";
+import { Root, Viewport, Track, Slide, SlideImage, Arrow, Dots, Dot } from "./style";
 
 
 gsap.registerPlugin(useGSAP);
@@ -176,10 +177,7 @@ export const Carousel = ({ images = [], className, autoPlayInterval = DEFAULT_AU
             aria-roledescription="carousel"
             aria-label="Gallery carousel"
         >
-            {tour && <Tour>
-                <span>Тур</span>
-                <span>360°</span>
-            </Tour>}
+            {tour && <Tour pos/>}
             <Viewport ref={viewportRef}>
                 <Track ref={trackRef}>
                     {slides.map((el, i) => (
