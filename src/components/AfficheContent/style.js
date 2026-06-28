@@ -5,10 +5,8 @@ export const Container = styled.div`
     display: grid;
     padding: 0 2.4rem 6rem;
     gap: 2.4rem;
-    grid-template-columns: 1fr 140rem;
     align-content: flex-start;
     h1 {
-        grid-column-end: span 2;
         padding: 6.2rem 0 2.4rem;
         color: #000;
         font-family: "Playfair Display";
@@ -16,25 +14,37 @@ export const Container = styled.div`
         font-style: normal;
         font-weight: 400;
         line-height: 110%; /* 48.4px */
-        width: 35.3rem;
+        
+    }
+    @media (min-width: 576px) {
+        grid-template-columns: 1fr 140rem;
+        h1 {
+            grid-column-end: span 2;
+            width: 35.3rem;
+        }
     }
     
 `
 export const Line = styled.div`
     border-top: .1rem solid rgba(150, 40, 31, 0.20);
-    grid-column-end: span 2;
+    
     &:first-of-type {
         margin-bottom: 1.9rem;
+    }
+    @media (min-width: 576px) {
+        grid-column-end: span 2;
     }
 `
 
 export const Content = styled.div`
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-column-start: 2;
     align-content: flex-start;
     gap: 2.4rem;
     position: relative;
+    @media (min-width: 576px) {
+        grid-template-columns: repeat(3, 1fr);
+        grid-column-start: 2;
+    }
 `
 
 export const Item = styled.article`
@@ -101,9 +111,10 @@ export const Item = styled.article`
         align-self: flex-end;
         width: max-content;
     }
-
-    &:nth-of-type(3n-1) {
-        transform: translate(0, -14.4rem);
+    @media (min-width: 576px) {
+        &:nth-of-type(3n-1) {
+            transform: translate(0, -14.4rem);
+        }
     }
 `
 
