@@ -97,42 +97,5 @@ export const Section4 = styled.section`
 
 
 
-export const ServiceItem = styled.div`
-    color: ${ ({ active }) => active ? "#2F3034" : "rgba(47,48,52,0.6)" };
-    font-size: 1.8rem;
-    font-weight: 600;
-    line-height: 110%; /* 19.8px */
-    position: relative;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-
-    &::before {
-        content: "";
-        width: 1.2rem;
-        height: 1.2rem;
-        border: .1rem solid #000;
-        position: absolute;
-        box-sizing: border-box;
-        left: -2.2rem;
-        ${ ({ active }) => active ? "background: var(--Black-2, #2F3034);" : "" }
-    }
-
-    ${ ({ cnt }) => cnt ? `
-    &::after {
-        right: -.6rem;
-           transform: translate(100%, 0);
-        bottom: 1.5rem;
-        position: absolute;
-        content: "[ ${cnt } ]";
-        color: var(--Black-2, #2F3034);
-        font-size: 1.6rem;
-        font-weight: 600;
-        line-height: 120%; /* 19.2px */
-    }
-` : "" }
-`
-
-
 
 

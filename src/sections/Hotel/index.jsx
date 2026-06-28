@@ -1,6 +1,7 @@
 import React, { Fragment} from "react";
 import { getHotelById } from "../../data";
 import { RestaurantContent } from "../../components/RestaurantContent";
+import data from "../../data/hotels.json";
 import { EventsContent } from "../Events";
 import { ServicesContent } from "../Services";
 import { Caption } from "./1_Caption";
@@ -15,11 +16,11 @@ export const HotelContent = () => {
     const data = getHotelById(id)
     return <>
         <Caption data={data}/>
-        {/*<VideoSection data={data.section_1}/>*/}
-        {/*<Info data={data.section_2}/>*/}
-        {/*<Images data={data.section_4}/>*/}
-        {/*<Rooms/>*/}
-        {/*<RestaurantContent/>*/}
+        <VideoSection data={data.section_1}/>
+        <Info data={data.section_2}/>
+        <Images data={data.section_4}/>
+        <Rooms data={data.section_3} name={data.name}/>
+        <RestaurantContent/>
         <ServicesContent/>
         <EventsContent/>
     </>
