@@ -48,7 +48,6 @@ export const RoomContent = () => {
     if (!room) return <Navigate to={ `/rooms/${ hotel }` } replace/>;
     
     const galleryImages = useMemo(() => {
-        console.log(room[v].images)
         if (room[v].images?.length) return room[v].images;
     }, [room[v].images, room.id]);
     

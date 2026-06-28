@@ -2,7 +2,7 @@ import styled from "@emotion/styled"
 
 export const Block = styled.div`
     display: flex;
-    width: 29.3rem;
+    width: 100%;
     height: 4rem;
     padding: 13px 12px;
     box-sizing: border-box;
@@ -17,11 +17,15 @@ export const Block = styled.div`
     font-weight: 500;
     line-height: 100%;
     position: relative;
+    z-index: 2;
     svg {
         width: 1.4rem;
         height: 1.4rem;
         transition: transform .2s linear;
         transform: ${ ({ active }) => active ? "rotate(45deg)" : "rotate(0)"}
+    }
+    @media (min-width: 576px) {
+        width: 29.3rem;
     }
 `
 export const ContentBlock = styled.div`
