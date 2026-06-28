@@ -21,19 +21,19 @@ export const Caption = ({ data }) => {
             <Line/>
             <div className="divider"/>
         </Hero>
-        {/*<Title>*/}
-        {/*    <div className="title">*/}
-        {/*        {!mob && <div className="stars">*/}
-        {/*            { renderStars() }*/}
-        {/*        </div>}*/}
-        {/*        <span>{ data.name_tooltip }</span>*/}
-        {/*        <h1>{ data.name }</h1>*/}
-        {/*    </div>*/}
-        {/*    <p>{ data.text_1 }</p>*/}
-        {/*    <p>{ data.text_2 }</p>*/}
-        {/*    <p className="address">{ data.address }</p>*/}
-        {/*    <Link to={ data.room_link }>Выбрать номер</Link>*/}
-        {/*</Title>*/}
+        <Title>
+            <div className="title">
+                {!mob && <div className="stars">
+                    { renderStars() }
+                </div>}
+                <span>{ data.name_tooltip }</span>
+                <h1>{ data.name }</h1>
+            </div>
+            <p>{ data.text_1 }</p>
+            <p>{ data.text_2 }</p>
+            <p className="address">{ data.address }</p>
+            <Link to={ data.room_link }>Выбрать номер</Link>
+        </Title>
         
         
     </>
