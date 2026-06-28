@@ -80,7 +80,7 @@ export const NavBlock = styled.div`
     opacity: ${({open}) => open ? 1 : 0};
     background: #fff6f0;
     transition: opacity, .2s;
-    //pointer-events: ${ (p) => (p.$open ? "auto" : "none") };
+    pointer-events: ${ ({open}) => open ? "auto" : "none" };
     
     display: grid;
     grid-template-rows: 1fr auto auto;
