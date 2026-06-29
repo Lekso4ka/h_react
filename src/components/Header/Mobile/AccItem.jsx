@@ -80,6 +80,8 @@ export const AccItem = ({
         { scope: rootRef, dependencies: [isOpen] }
     );
     
+    
+    
     const linkHandler = (e, src) => {
         e.preventDefault();
         navigate(src);

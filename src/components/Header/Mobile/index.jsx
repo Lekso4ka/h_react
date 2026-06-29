@@ -4,7 +4,7 @@ import { Icon } from "../../../ui/Icon";
 import { ALL_MENU_NAV } from "../data";
 import { Dropdown } from "../Desktop/Dropdown";
 import { AccItem } from "./AccItem";
-import { Container, BarBg, NavBlock } from "./style";
+import { Container, BarBg, NavBlock, Button } from "./style";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -37,6 +37,10 @@ export const Mobile = () => {
         () => ALL_MENU_NAV.find((item) => item.id === activeMenuId) ?? null,
         [activeMenuId]
     );
+    
+    useEffect(() => {
+        document.body.style.overflow = menuOpen ? "hidden" : null;
+    }, [menuOpen])
     
     const applyBg = useCallback(
         ({ opacity, immediate = false } = {}) => {
@@ -208,11 +212,18 @@ export const Mobile = () => {
             top={ HEADER_HEIGHT }
             columns={ activeMenu?.columns ?? [] }
         >
+            <div className="nav">
             <nav>
                 {NAV.map(el => el.hasMenu
                     ? <AccItem title={el.label} data={el.columns} key={el.id} close={closeMenu} />
                     : <Link to="" key={el.id} onClick={() => linkHandler(e, el.href)}>{el.label}</Link>)}
             </nav>
+            </div>
+            <div className="address">
+                <h5>Адрес отелей</h5>
+                <p>Россия, Краснодарский край, г. Сочи, Панорама наб., 2-3</p>
+            </div>
+            <Button>Бронировать</Button>
         </NavBlock>
         
     </Container>
