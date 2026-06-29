@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Link } from "../../ui/Link";
-import { SingleActivity } from "../SingleActivity";
+import { SingleActivity } from "../../sections/Activities/SingleActivity";
 import { Article, BtnBlock, Content, Top } from "./style";
 
 import data from "../../data/doings.json";

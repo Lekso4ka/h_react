@@ -1,6 +1,6 @@
 import React from "react";
-import { Link } from "../../ui/Link";
-import data from "../../data/activities.json";
+import { Link } from "../../../ui/Link";
+import data from "../../../data/activities.json";
 import { Section } from "./style";
 
 export const SingleActivity = ({name}) => {

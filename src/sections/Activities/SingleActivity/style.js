@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import img from "../../assets/img";
+import img from "../../../assets/img";
 
 export const Section = styled.section`
     height: 84.4rem;

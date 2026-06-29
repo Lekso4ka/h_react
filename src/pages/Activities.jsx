@@ -1,8 +1,6 @@
 import React from 'react';
-import { ActivitiesContent } from "../components/ActivitiesContent";
+import { ActivitiesContent } from "../sections/Activities";
 
 export const Activities = () => {
-    return <>
-        <ActivitiesContent/>
-    </>
+    return <ActivitiesContent/>
 }
