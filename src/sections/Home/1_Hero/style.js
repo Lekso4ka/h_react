@@ -9,8 +9,8 @@ export const Content = styled.div`
     overflow: hidden;
 
     .line {
-        height: 7.6rem;
-        border-bottom: .1rem solid ${ ({ theme }) => theme.colors.light_30 }
+        height: 7.8rem;
+        border-bottom: .1rem solid ${ ({ theme }) => theme.colors.light_30 };
         margin: 0 1.6rem 3.1rem;
     }
 

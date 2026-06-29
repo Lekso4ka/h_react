@@ -33,6 +33,9 @@ export const Block = styled.div`
         padding: 5.3rem 0 6rem;
         margin: 0 auto;
     }
+    @media (min-width: 576px) {
+    
+    }
 `
 
 export const Hero = styled.section`
