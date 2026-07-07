@@ -87,7 +87,7 @@ import promo_1 from "./54daff3afe70f3d2b7a8c1ad261a745d400a82d4.png"
 import video1 from "./video1.mp4"
 import vi_gastro from "./rosa-hotel-gastro-home.mp4"
 import vi_spa from "./wellness-grading.mp4"
-
+import activity_home from "./activity_home.mp4"
 import do_1 from "./87489baf30ebfc869e74cc76fb0f23c82c007649.png"
 import do_2 from "./c9bfae24334ae3b8dc72ee7bf83d9cdeb71fdb7d.png"
 import do_3 from "./6372e810818bf05fc659d2c3c5b5d09d75c399a6.png"
@@ -193,6 +193,7 @@ export default {
     ven_7,
     ven_8,
     ven_9,
+    activity_home,
     home_r_1,
     home_r_2,
     home_r_3,

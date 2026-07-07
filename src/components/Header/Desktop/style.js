@@ -118,7 +118,10 @@ export const HeaderButton = styled.button`
     font-weight: 500;
     letter-spacing: 0.072rem;
     text-transform: uppercase;
-    
+    transition: background-color .2s;
+    &:hover {
+        background-color: #A03229;
+    }
 `
 export const HeaderLang = styled.div`
     display: flex;
@@ -227,7 +230,7 @@ export const BrandSection = styled.div`
     border-left: ${(p) => (p.$withLeftBorder ? ".1rem solid rgba(150, 40, 31, 0.40)" : "none")};
     border-right: .1rem solid rgba(150, 40, 31, 0.40);
     position: relative;
-    h3 {
+    .h3 {
         padding: 2.4rem 2.4rem 1.6rem;
         color: var(--Red, #96281F);
         font-family: "Playfair Display";
@@ -237,6 +240,10 @@ export const BrandSection = styled.div`
         line-height: normal;
         letter-spacing: 0.072rem;
         text-transform: uppercase;
+        transition: color .2s;
+        &:hover {
+            color: #A03229;
+        }
     }
 `;
 export const BrandColumn = styled.div`

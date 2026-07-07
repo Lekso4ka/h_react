@@ -19,6 +19,10 @@ export const Footer = () => {
             <input type="checkbox" id="check"/>
             <label htmlFor="check"><span>Даю свое <a href="">согласие на обработку</a> моих персональных данных в соответствии с <a href="">политикой конфиденциальности</a>.</span></label>
             <button>Подписаться</button>
+            <div className="address">
+            <Title>Адрес отелей</Title>
+            <p>Россия, Краснодарский край, г. Сочи, Панорама наб., 2-3</p>
+            </div>
         </Left>
         <Right>
             <div>
@@ -27,7 +31,6 @@ export const Footer = () => {
                     <a href="/hotel/golden-tulip">Отель Голден Тюлип</a>
                     <a href="/hotel/tulip-inn">Отель Тюлип Инн</a>
                     <a href="/vacancies">Вакансии</a>
-                    <a href="#contacts">Контакты</a>
                 </List>
             
             </div>
@@ -47,9 +50,8 @@ export const Footer = () => {
             <div className="ftrCol">
                 <Title>Информация</Title>
                 <List>
-                    <a href="">Сотрудничество</a>
+                    <a href="">Правовая информация</a>
                     <a href="">Правила отеля</a>
-                    <a href="">Ответы на вопросы</a>
                 </List>
             </div>
             <div>
@@ -58,12 +60,18 @@ export const Footer = () => {
                     <a href="">Вконтакте</a>
                 </List>
             </div>
+            <div>
+                <Title>Контакты</Title>
+                <List>
+                    <a href="mailto:reservation@gt-hotel.ru">reservation@gt-hotel.ru</a>
+                    <a href="tel:+7(862)2431300">+7 (862) 243-13-00</a>
+                </List>
+            </div>
         </Right>
         
         <Bottom>
             <span>© 2026 все права защищены</span>
             <a href="">политика конфиденциальности</a>
-            <a href="">правовая информация</a>
         </Bottom>
     </Block>
 }

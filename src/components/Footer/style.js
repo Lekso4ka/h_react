@@ -8,14 +8,14 @@ export const Block = styled.footer`
     font-size: 1.4rem;
     font-weight: 500;
     line-height: normal;
-    height: 109.3rem;
+    //height: 109.3rem;
     @media (min-width: 576px) {
         grid-template-rows: auto 1fr auto;
-        height: 72.3rem;
+        //height: 72.3rem;
         padding: 7.5rem 2.4rem 2rem;
         grid-template-columns: repeat(2, 1fr);
         font-size: 1.6rem;
-        gap: 9.2rem;
+        //gap: 9.2rem;
     }
 `
 
@@ -32,7 +32,7 @@ export const Caption = styled.h4`
         grid-column-end: span 2;
         font-size: 11.6rem;
         line-height: 10rem;
-        margin-bottom: 0;
+        margin-bottom: 9.2rem;
     }
 `
 export const Bottom = styled.div`
@@ -114,6 +114,16 @@ export const Left = styled.div`
     padding-bottom: 5rem;
     @media (min-width: 576px) {
         padding-bottom: 0;
+    }
+    .address {
+        padding-top: 6rem;
+        max-width: 29.4rem;
+        p {
+            width: 100%;
+        }
+        @media (min-width: 576px) {
+            padding-top: 5.2rem;
+        }
     }
     p {
         font-size: 1.6rem;

@@ -7,6 +7,7 @@ export const LEFT_NAV = [
         brands: [
             {
                 title: "Голден тюлип",
+                link: "/hotel/golden-tulip",
                 items: [
                     {
                         label: "Номера и сьюты",
@@ -22,6 +23,7 @@ export const LEFT_NAV = [
             },
             {
                 title: "Тюлип инн",
+                link: "/hotel/tulip-inn",
                 items: [
                     {
                         label: "Номера",
@@ -89,6 +91,7 @@ export const RIGHT_NAV = [
         brands: [
             {
                 title: "Голден тюлип",
+                link: "/hotel/golden-tulip",
                 items: [
                     {
                         label: "Спецпредложения",
@@ -99,6 +102,7 @@ export const RIGHT_NAV = [
             },
             {
                 title: "Тюлип инн",
+                link: "hotel/tulip-inn",
                 items: [
                     {
                         label: "Спецпредложения",

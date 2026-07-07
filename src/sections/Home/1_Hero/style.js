@@ -140,11 +140,12 @@ export const Content = styled.div`
         }
 
         .hotels {
+                width: 100%;
             align-self: flex-end;
             justify-self: flex-start;
-            width: max-content;
+            //width: max-content;
             display: grid;
-            grid-template-columns: repeat(2, 61rem);
+            grid-template-columns: repeat(3, 1fr);
             gap: 2.3rem;
         }
     }
@@ -243,7 +244,7 @@ export const HotelCard = styled.div`
         h2 {
             padding: .8rem 0 1.2rem;
             font-size: 3.4rem;
-            font-weight: 500;
+            font-weight: 400;
             line-height: 100%; /* 34px */
             letter-spacing: normal;
         }
@@ -371,6 +372,127 @@ export const HotelCard = styled.div`
                 justify-content: flex-start;
             }
 
+        }
+    }
+`
+
+export const Sticky = styled.button`
+    height: 7.5rem;
+    background-color: #96281F;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 7;
+    color: #FFF6F0;
+    font-family: "Playfair Display";
+    font-weight: 500;
+    font-size: 1.4rem;
+    letter-spacing: .04em;
+    line-height: 1;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity .4s;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 1.2rem;
+        bottom: 1.2rem;
+        left: 1rem;
+        right: 1rem;
+        border: .1rem solid #FFF6F0;
+    }
+`
+export const ActivityCard = styled.div`
+    position: absolute;
+    background: var(--Beige, #FFF6F0);
+    height: 36.4rem;
+    bottom: 6.4rem;
+    left: 1rem;
+    right: 1rem;
+    z-index: 10;
+    padding: 1.2rem 1rem 4.8rem;
+    box-sizing: border-box;
+    opacity: ${ ({ active }) => active ? 1 : 0 };
+    user-select: ${ ({ active }) => active ? "auto" : "none" };
+    transition: opacity 1s;
+    border: 1px solid var(--Green, #55532E);
+
+    .video {
+        position: relative;
+        z-index: 1;
+        height: 20rem;
+
+        & > div {
+            opacity: 1;
+        }
+    }
+
+    p {
+        color: var(--Black-2, #2F3034);
+        font-family: Manrope;
+        font-size: 1.8rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 120%; /* 21.6px */
+        text-align: center;
+            padding: 1.8rem 0 2.4rem;
+    }
+        .text {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: center;
+        }
+        button {
+                position: absolute;
+                top: 2.2rem;
+                right: 2rem;
+                width: 2.4rem;
+                height: 2.4rem;
+                background: var(--Beige, #FFF6F0);
+                z-index: 2;
+                
+                path {
+                        fill: var(--Black-2, #2F3034);
+                }
+        }
+        
+
+    @media (min-width: 576px) {
+        height: 12rem;
+        border: none;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: grid;
+        padding: 10px;
+        grid-template-columns: 23.6rem 1fr auto;
+        gap: 2rem;
+        position: relative;
+        z-index: 8;
+
+        .video {
+            height: 100%;
+        }
+        .text {
+                align-items: flex-start;
+        }
+        
+
+        p {
+            text-align: left;
+                padding: 0;
+        }
+
+        button {
+                position: static;
+            background: var(--Black-2, #2F3034);
+
+            path {
+                fill: var(--Beige, #FFF6F0);
+            }
         }
     }
 `

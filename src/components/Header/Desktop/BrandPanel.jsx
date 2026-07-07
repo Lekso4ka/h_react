@@ -7,7 +7,7 @@ export const BrandPanel = ({ data = [], onNavigate }) => {
         <Grid>
             { data.map((brand, index) => (
                 <BrandSection key={ brand.title } $withLeftBorder={ index === 0 } cnt={ brand.items.length }>
-                    <h3>{ brand.title }</h3>
+                    <Link className="h3" to={brand.link}>{ brand.title }</Link>
                     
                     { brand.items.map((item, itemIndex) => (
                         <BrandColumn key={ item.label } $withLeftBorder={ itemIndex > 0 }>
