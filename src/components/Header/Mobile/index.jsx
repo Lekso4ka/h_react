@@ -9,7 +9,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { NAV } from "./data";
-const dark = ["/", "/hotel/golden-tulip", "/hotel/tulip-inn", "/activities/winter", "/activities/summer", "/actions", "/vacations", "/wedding", "/stock/golden-tulip", "/stock/tulip-inn"]
+const dark = ["/", "/hotel/golden-tulip", "/hotel/tulip-inn", "/activities/winter", "/activities/summer", "/actions", "/vacancies", "/wedding", "/stock/golden-tulip", "/stock/tulip-inn"]
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 

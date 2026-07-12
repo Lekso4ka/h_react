@@ -15,8 +15,8 @@ import { Room } from "./pages/Room";
 import { Rooms } from "./pages/Rooms";
 import { Services } from "./pages/Services";
 import { Stocks } from "./pages/Stocks";
+import { Vacancies } from "./pages/Vacancies";
 import { Venue } from "./pages/Venue";
-import { Vac } from "./pages/Vac";
 import { Wedding } from "./pages/Wedding";
 
 export const App = () => {
@@ -36,7 +36,7 @@ export const App = () => {
             <Route path="/stock/:id" element={ <Stocks/> }/>
             <Route path="/services/:id" element={ <Services/> }/>
             <Route path="/restaurant/:id" element={ <Restaurant/> }/>
-            <Route path="/vacancies" element={ <Vac/> }/>
+            <Route path="/vacancies" element={ <Vacancies/> }/>
             
             <Route path="/hotel/:id" element={ <Hotel/> }/>
             <Route path="/venue/:id" element={ <Venue/> }/>

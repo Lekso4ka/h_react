@@ -4,6 +4,7 @@ import doings from "./doings.json";
 import hotels from "./hotels.json";
 import rooms  from "./rooms.json";
 import stocks from "./stocks.json";
+import vacancies  from "./vacancies.json";
 import venues from "./venues.json";
 
 export const getActivities = () => {
@@ -57,7 +58,9 @@ export function getRooms(h) {
 export function getRoomById(h,r) {
     return rooms[h][r]
 }
-
+export function getVacancies() {
+    return vacancies;
+}
 export function getVenuesCnt() {
     return Object.keys(venues).length;
 }

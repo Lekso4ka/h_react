@@ -137,7 +137,7 @@ import res_5 from "./7086cb8896cecf105f1170390c9000de550b9ae8.png"
 import res_6 from "./4ac407277eaac160051a149803bdbb3c59253651.jpg"
 import res_7 from "./72fd6a8bf11d6173d39e96d40fe0ca3d45a070ea.png"
 import res_8 from "./caa4a57602e5b8885a3b6f82263c5280ecabd6e1.png"
-
+import vac_banner from "./4fgdz6bqumwuh54yvdzej08mbp9sdff3.mp4"
 import vac_1 from "./ca7183388e3891c60bfcbbe6c557cbcf026c23c2.jpg"
 import vac_2 from "./00b11b0806aa106bab97075ebdfb2b9a024e3e3a.png"
 import vac_3 from "./76519af66a3e0275c629696578ac011dab9889dd.jpg"
@@ -193,6 +193,7 @@ export default {
     ven_7,
     ven_8,
     ven_9,
+    vac_banner,
     activity_home,
     home_r_1,
     home_r_2,

@@ -8,7 +8,7 @@ import { nToZero } from "../../utils/parseDate";
 import { Container, Data, Item, Modal } from "./style";
 
 export const StocksContent = () => {
-    const [active, setActive] = useState(0)
+    const [active, setActive] = useState(null)
     const { id } = useParams();
     const { mob } = useCtx()
     const data = getStocks(id)

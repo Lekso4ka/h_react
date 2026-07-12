@@ -408,7 +408,6 @@ export const Section4 = styled.section`
 
 export const Section5 = styled.section`
     padding: 9rem 4rem;
-    color: #fff;
 
     h2 {
         font-family: "Playfair Display";
@@ -434,6 +433,7 @@ export const Section5 = styled.section`
         font-style: italic;
         font-weight: 400;
         line-height: 120%; /* 21.6px */
+        color: #fff;
     }
 
     .img {
