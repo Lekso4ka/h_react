@@ -84,6 +84,14 @@ const globalSt = css`
         border-radius: 4px;
         position: relative;
     }
+    @keyframes scroll {
+        from {
+            transform: translate(0, -100%);
+        }
+        to {
+            transform: translate(0, 100%);
+        }
+    }
 `
 
 export const GlobalStyles = () => <Global styles={globalSt} />

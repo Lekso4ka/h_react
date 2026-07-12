@@ -68,3 +68,5 @@ export const parseDate = (date, variant) => {
             return parseSimple(date)
     }
 }
+
+export {nToZero}

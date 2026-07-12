@@ -3,6 +3,7 @@ import affiche from "./affiche.json";
 import doings from "./doings.json";
 import hotels from "./hotels.json";
 import rooms  from "./rooms.json";
+import stocks from "./stocks.json";
 import venues from "./venues.json";
 
 export const getActivities = () => {
@@ -34,6 +35,10 @@ export function getHotelById(id) {
 
 export function getSectionData(id, s) {
     return hotels[id][s]
+}
+
+export function getStocks(h) {
+    return stocks.filter(el => el.hotels.includes(h))
 }
 
 export function decodeRouteParam(value) {

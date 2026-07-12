@@ -14,8 +14,8 @@ import { Restaurant } from "./pages/Restaurant";
 import { Room } from "./pages/Room";
 import { Rooms } from "./pages/Rooms";
 import { Services } from "./pages/Services";
+import { Stocks } from "./pages/Stocks";
 import { Venue } from "./pages/Venue";
-import { Actions } from "./pages/Actions";
 import { Vac } from "./pages/Vac";
 import { Wedding } from "./pages/Wedding";
 
@@ -33,7 +33,7 @@ export const App = () => {
             <Route path="/article/:article" element={ <Article/> }/>
             <Route path="/affiche" element={ <Affiche/> }/>
             
-            <Route path="/stock/:id" element={ <Actions/> }/>
+            <Route path="/stock/:id" element={ <Stocks/> }/>
             <Route path="/services/:id" element={ <Services/> }/>
             <Route path="/restaurant/:id" element={ <Restaurant/> }/>
             <Route path="/vacancies" element={ <Vac/> }/>

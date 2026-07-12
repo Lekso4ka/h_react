@@ -90,15 +90,6 @@ export const Content = styled.div`
         }
     }
 
-    @keyframes scroll {
-        from {
-            transform: translate(0, -100%);
-        }
-        to {
-            transform: translate(0, 100%);
-        }
-    }
-
     @media (min-width: 576px) {
         min-height: 108rem;
         box-sizing: border-box;

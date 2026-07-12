@@ -57,14 +57,6 @@ export const Hero = styled.div`
             display: none;
         }
     }
-    @keyframes scroll {
-        from {
-            transform: translate(0, -100%);
-        }
-        to {
-            transform: translate(0, 100%);
-        }
-    }
 `
 export const Title = styled.section`
     display: grid;

@@ -118,14 +118,6 @@ export const Hero = styled.section`
             padding: 0;
         }
     }
-    @keyframes scroll {
-        from {
-            transform: translate(0, -100%);
-        }
-        to {
-            transform: translate(0, 100%);
-        }
-    }
 `
 
 
