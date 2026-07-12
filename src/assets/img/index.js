@@ -13,6 +13,14 @@ import h_gt_11 from "./11f9b226da3e6e07311e53f837503a3e05323280.png"
 import h_gt_12 from "./11f9b226da3e6e07311e53f837503a3e05323280.png"
 import h_gt_13 from "./09f407aaf973c32d8dd73f7535c9ada576405ab7.png"
 import h_gt_14 from "./51655cfcab94b0bd255ea07a47cf979e63aa2446.png"
+import h_gt_15 from "./4160f924-afbb-439e-97ec-c3449bb0dd24.jpg"
+import h_gt_16 from "./3c32ef24-b3f1-44bd-8e87-f006ad085d70.jpg"
+import h_gt_17 from "./2a34e010-b016-4bcf-a672-cc9a46ebe481.jpg"
+import h_gt_18 from "./f8bf4db2-855f-4f32-8829-01b9ebf1d8c9.jpg"
+import h_gt_19 from "./f3d26fa8-17b7-40f5-810c-e877a21c0913.jpg"
+import h_gt_20 from "./3de7de6b-1c94-489b-9a23-458a8235ba04.jpg"
+import h_gt_21 from "./325e41e5-bb85-478c-89e4-87a81c0327cb.jpg"
+import h_gt_22 from "./c3a0d16f-af56-4bd4-ab28-3d7b29c9a072.jpg"
 
 import h_ti_1 from "./1a0a871b-f628-4ebb-a839-3579fc15c364.jpg"
 import h_ti_2 from "./216b4d5c-200e-4c2b-a1dc-3d2b488960cc.jpg"
@@ -28,6 +36,14 @@ import h_ti_11 from "./bbb0ba5b7800ed589f8ee13e61a3ab6ae392c079.png"
 import h_ti_12 from "./bbb0ba5b7800ed589f8ee13e61a3ab6ae392c079.png"
 import h_ti_13 from "./09f407aaf973c32d8dd73f7535c9ada576405ab7.png"
 import h_ti_14 from "./51655cfcab94b0bd255ea07a47cf979e63aa2446.png"
+import h_ti_15 from "./1a3c4213-7e14-41d1-bd07-c3aede3a0357.jpg"
+import h_ti_16 from "./63b1be10-5d9e-45bc-b7e1-f03f769c64cc.jpg"
+import h_ti_17 from "./cb92f413-f0e8-4f4b-a492-859e8eaef642.jpg"
+import h_ti_18 from "./9cb275ca-fbb1-4364-a61a-2b56ea266d01.jpg"
+import h_ti_19 from "./f8db104d-4cc3-48e7-ba2c-360b2599fedb.jpg"
+import h_ti_20 from "./b1821505-cd68-4b97-aace-9dbd8d673b45.jpg"
+import h_ti_21 from "./c89ee0be-ff28-494a-bc1f-c3c3102b5bf4.jpg"
+import h_ti_22 from "./45126882-da13-4c04-9b7b-538c2024e5ff.jpg"
 
 import r_ti_1 from "./499c169cb1b219dd6d8c613f610b258e3f692e1e.jpg"
 import r_ti_2 from "./f82c6c976023d6c5187a1dfb53c6acbe286b1466.jpg"
@@ -75,6 +91,11 @@ import summer_3 from "./1926f7f81594aa0b0b8ae84b307a06a48cf1c920.png"
 import summer_4 from "./68ed4ee27a76ad0c6400d404dda4e7478eeb6886.jpg"
 import summer_5 from "./3dbee3f46836209171e774d0c7b935f9dffa36f0.jpg"
 import summer_6 from "./b9f94f249ba3029da07ab14a0a228852fae828d8.jpg"
+import summer_7 from "./c6ef9486-9079-463a-8936-2797920c4fc0.jpg"
+import summer_8 from "./88243f41-c88d-4db5-936c-e0badd8256fc.jpg"
+import summer_9 from "./9d9d0b1f-b381-42ba-b90e-592d247fe525.jpg"
+import summer_10 from "./30925f92-e411-4e74-902a-b1e2d3fd7983.jpg"
+
 import winter_1 from "./d91bc49d3b55a3fa7067c0b242fd1ddf267f3ce9.jpg"
 import winter_2 from "./e01766434fde37e9d8d89d399f0a0d367d572ed9.png"
 import winter_3 from "./3fd3582331c156c3152dffc2d5cd41c2035a3001.png"
@@ -82,6 +103,10 @@ import winter_4 from "./40eb33e06d9abd9669801ff2d6a14c0ca2b42707.jpg"
 import winter_5 from "./0f2edee4b4ba1e60a651c3d17593386d52810891.jpg"
 import winter_6 from "./58f9fdd67b746ff365d9988e8ec412dbf4faeea7.jpg"
 import winter_7 from "./04607f80-5c5f-480c-a5b5-df574a1d5f6f.jpg"
+import winter_8 from "./bc14f9ec-18dd-4c3d-b6d6-dfaf7b6fbc36.jpg"
+import winter_9 from "./299dbb23-13af-4109-af6d-335f14723b46.jpg"
+import winter_10 from "./bc3ce114-2fbb-4cf8-9fba-a81003cb025b.jpg"
+import winter_11 from "./56c9b3b2-0262-43bc-b886-344ccdb986f8.jpg"
 import promo from "./162bd9777cbdda45a962f0928958636b6cd97fbe.png"
 import promo_1 from "./54daff3afe70f3d2b7a8c1ad261a745d400a82d4.png"
 import video1 from "./video1.mp4"
@@ -146,7 +171,7 @@ import vac_5 from "./6f781a31cfd987a89feae9feba4766bc545c2857.png"
 import vac_6 from "./2bd6630ac55249cf1b40f7638bd33b65a03971e9.png"
 import vac_7 from "./70c25cdcc9c40414e03ced1730e5d980d48c3d00.png"
 import vac_8 from "./62494f4371bb9363d4795898b9c8b6ec3baedf82.png"
-import video_s from "./file-2.mp4"
+import video_s from "./video-s.mp4"
 import video_w from "./file.mp4"
 import home_i_1 from "./f7c83f11-e768-40fa-bd8e-1d5a49ab32e0.jpg"
 import home_i_2 from "./458fced8-9ed4-40bc-90cd-2b0c1a05690b.jpg"
@@ -159,6 +184,12 @@ import home_h_2 from "./6d2b4c9b-7b27-4049-aef6-5861a3ce8342.jpg"
 import home_h_3 from "./ce75f2fb-c93d-4bbc-8524-fe9175c89d85.jpg"
 import home_h_4 from "./c54521a0-ef9a-44e4-8283-f4835e0eaf41.jpg"
 import home_h_5 from "./29d29235-dc7e-4549-bdbf-09c95075181f.jpg"
+import home_h_6 from "./923ef149-aecd-476b-a4cd-7cd5f6c88b74.jpg"
+import home_h_7 from "./a78587cb-dfcf-4547-9f4f-cc8cf7863790.jpg"
+import home_h_8 from "./6184687c-35cf-4674-ba07-66b808f3a401.jpg"
+import home_h_9 from "./4d2e34cf-f085-4510-8a24-9ec0ccab420c.jpg"
+import home_h_10 from "./9a9d5143-f360-4dd3-a287-f0a4aba77685.jpg"
+
 import home_r_1 from "./fe118ef6-330c-43f1-a088-9f25136a8f30.jpg"
 import home_r_2 from "./0fb84190-86b1-46d8-88ed-f2264ca302bf.jpg"
 import home_r_3 from "./12820f4b-3f0b-4fd1-8093-e6c00a03422a.jpg"
@@ -180,7 +211,17 @@ import h_gt_banner from "./b73c5436-84fc-4865-9c1e-10b8c9f4d932.jpg"
 import h_ti_banner from "./7f470a8b-f880-40a0-877d-84fd246a96e8.jpg"
 import home_gt from "./ddcc8ed1-27f5-439e-bd96-eb658db62016.jpeg"
 import home_ti  from "./52b44d67-992c-4193-a496-79485a2a2d04.jpeg"
+import vi_gt from "./golden-tulip.mp4"
 export default {
+    vi_gt,
+    winter_8,
+    winter_9,
+    winter_10,
+    winter_11,
+    summer_7,
+    summer_8,
+    summer_9,
+    summer_10,
     home_gt, home_ti,
     h_gt_banner,
     h_ti_banner,
@@ -208,6 +249,11 @@ export default {
     home_h_3,
     home_h_4,
     home_h_5,
+    home_h_6,
+    home_h_7,
+    home_h_8,
+    home_h_9,
+    home_h_10,
     home_spa,
     home_nav_1,
     home_nav_2,
@@ -249,6 +295,14 @@ export default {
     h_gt_12,
     h_gt_13,
     h_gt_14,
+    h_gt_15,
+    h_gt_16,
+    h_gt_17,
+    h_gt_18,
+    h_gt_19,
+    h_gt_20,
+    h_gt_21,
+    h_gt_22,
     
     h_ti_1,
     h_ti_2,
@@ -264,6 +318,14 @@ export default {
     h_ti_12,
     h_ti_13,
     h_ti_14,
+    h_ti_15,
+    h_ti_16,
+    h_ti_17,
+    h_ti_18,
+    h_ti_19,
+    h_ti_20,
+    h_ti_21,
+    h_ti_22,
     
     r_ti_1,
     r_ti_2,

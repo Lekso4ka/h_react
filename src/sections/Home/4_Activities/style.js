@@ -163,6 +163,9 @@ export const Content = styled.section`
         .img3 {
             background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url("${ ({ bg3 }) => img[bg3] }");
         }
+		.img4 {
+			background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url("${ ({ bg4 }) => img[bg4] }");
+		}
     }
 
     @media (min-width: 576px) {

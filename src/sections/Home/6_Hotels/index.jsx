@@ -77,11 +77,11 @@ export const Hotels = () => {
     );
     
     return <Content
-        bg1={ "home_h_1" }
-        bg2={ "home_h_2" }
-        bg3={ "home_h_3" }
-        bg4={ "home_h_5" }
-        bg5={ "home_h_4" }
+        bg1={ "home_h_6" }
+        bg2={ "home_h_7" }
+        bg3={ "home_h_8" }
+        bg4={ "home_h_9" }
+        bg5={ "home_h_10" }
         ref={sectionRef}
     >
         <h2>ДВА ОТЕЛЯ В ЦЕНТРЕ КУРОРТА<br/>ДЛЯ ОТДЫХА В ГОРАХ И АКТИВНЫХ ПОЕЗДОК<br/>В ЛЮБОЕ ВРЕМЯ ГОДА</h2>

@@ -43,7 +43,7 @@ export const Content = styled.section`
     }
 
     .img1 {
-        background-image: url("${ ({ bg1 }) => img[bg1] }");
+        background-image: url("${ ({ bg }) => img[bg[0]] }");
         width: 17.3rem;
         height: 18.2rem;
         right: -1.5rem;
@@ -51,7 +51,7 @@ export const Content = styled.section`
     }
 
     .img2 {
-        background-image: url("${ ({ bg2 }) => img[bg2] }");
+        background-image: url("${ ({ bg }) => img[bg[1]] }");
         width: 26.6rem;
         height: 37.4rem;
         top: 9rem;
@@ -59,7 +59,7 @@ export const Content = styled.section`
     }
 
     .img3 {
-        background-image: url("${ ({ bg3 }) => img[bg3] }");
+        background-image: url("${ ({ bg }) => img[bg[2]] }");
         width: 26.6rem;
         height: 37.4rem;
         top: 97.2rem;
@@ -67,7 +67,7 @@ export const Content = styled.section`
     }
 
     .img4 {
-        background-image: url("${ ({ bg4 }) => img[bg4] }");
+        background-image: url("${ ({ bg }) => img[bg[3]] }");
         width: 17.4rem;
         height: 24.4rem;
         top: 91rem;
@@ -75,7 +75,7 @@ export const Content = styled.section`
     }
 
     .img5 {
-        background-image: url("${ ({ bg5 }) => img[bg5] }");
+        background-image: url("${ ({ bg }) => img[bg[4]] }");
         width: 14.2rem;
         height: 17.2rem;
         top: 119.6rem;

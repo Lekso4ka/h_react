@@ -77,11 +77,7 @@ export const Images = ({data}) => {
     );
     
     return <Content
-        bg1={ "home_h_1" }
-        bg2={ "home_h_2" }
-        bg3={ "home_h_3" }
-        bg4={ "home_h_5" }
-        bg5={ "home_h_4" }
+        bg={ data.images }
         ref={sectionRef}
     >
         <h2>{data.caption}</h2>
