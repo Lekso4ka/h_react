@@ -7,13 +7,7 @@ import { Promo } from "./Promo";
 import { Container } from "./style";
 
 export const RoomContent = () => {
-    const [m, setM] = useState(true);
     const { mob } = useCtx()
-    useEffect(() => {
-        if (mob !== null) {
-            setM(mob);
-        }
-    }, [mob]);
     return <>
         <Container>
         <Line/>

@@ -44,6 +44,9 @@ export const Images = styled.div`
     overflow-x: auto;
     overflow-y: hidden;
     gap: 1rem;
+    .tour {
+        width: 6.2rem;
+    }
     ::-webkit-scrollbar-track {
         margin: 0 1.6rem;
             height: .2rem;
@@ -250,8 +253,8 @@ export const Button = styled.button`
     height: 5.8rem;
     justify-content: center;
     align-items: center;
-    background: var(--Green, #55532E);
-    color: var(--Beige, #FFF6F0);
+    background: #96281F;
+    color: #FFF6F0;
     text-align: center;
     font-family: "Playfair Display";
     font-size: 1.4rem;
@@ -261,6 +264,10 @@ export const Button = styled.button`
     letter-spacing: 0.056rem;
     position: sticky;
     bottom: 0;
+    transition: background-color .2s;
+    &:hover {
+        background-color: #A03229;
+    }
 `
 
 export const AccItemSt = styled.div`

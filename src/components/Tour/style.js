@@ -14,6 +14,7 @@ export const Block = styled.a`
     display: grid;
     background: ${({dark}) => dark ? "var(--Green, #55532E);" : "var(--Beige, #FFF6F0)"};
     color: ${({dark}) => dark ? "var(--Beige, #FFF6F0)" : "#2F3034"};
+    cursor: pointer;
     span:first-of-type {
         font-size: 1.4rem;
         font-weight: 500;

@@ -1,7 +1,8 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getSectionData } from "../../../data/hotels";
 import { getRooms } from "../../../data/rooms";
+import { Cursor, useCursor } from "../../../ui/Cursor";
 import { pluralize } from "../../../utils/pluralize";
 import { Section } from "./style";
 
@@ -11,6 +12,11 @@ export const Desktop = ({h}) => {
     const [guests, setGuests] = useState(data.guests)
     const [rooms, setRooms] = useState(data.rooms)
     const [img, setImg] = useState(data.image)
+    
+    const zoneRef = useRef(null);
+    const [dragging, setDragging] = useState(false);
+    const { visible, position } = useCursor({ zoneRef, dragging });
+    const hideNativeCursor = visible || dragging;
     
     const roomsData = getRooms(h);
     const navigate = useNavigate();
@@ -32,6 +38,7 @@ export const Desktop = ({h}) => {
     
     return <Section
         pic={img}
+        $hideCursor={hideNativeCursor}
     >
         <div className="content">
             <div>
@@ -52,12 +59,14 @@ export const Desktop = ({h}) => {
                 </div>
                 <div className="img"/>
             </div>
-            <ul>
+            <ul ref={zoneRef}>
                 { data.variants.map(el => <li
                     key={el.id}
                     onMouseEnter={() => handleOn(el.id)}
                     onMouseLeave={handleOff}
                     onClick={() => navigate(`/room/${h}/${el.id}/${el.variants[0] || "default"}`)}
+                    onMouseDown={() => setDragging(true)}
+                    onMouseUp={() => setDragging(false)}
                 >
                     <div className="name">
                         {el.name}
@@ -72,5 +81,13 @@ export const Desktop = ({h}) => {
                 </li>) }
             </ul>
         </div>
+        <Cursor
+            visible={ visible }
+            active={ dragging }
+            x={ position.x }
+            y={ position.y }
+            label={ "[ смотреть ]" }
+            dark
+        />
     </Section>
 }

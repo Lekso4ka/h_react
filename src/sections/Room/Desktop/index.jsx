@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import { Tour } from "../../../components/Tour";
 import { useCtx } from "../../../Ctx";
 import hData from "../../../data/hotels.json";
 import img from "../../../assets/img";
@@ -99,6 +100,7 @@ export const Desktop = () => {
                     { v !== "default" && <strong>[ { v } ]</strong> }
                 </Caption>
                 <ImagesBlock>
+                    {room[v].tour_link && <Tour pos link={ room[v].tour_link }/>}
                     { galleryImages.map((src, i) => (
                         <GalleryImage key={ i } src={ img[src] } alt="" loading={ i === 0 ? "eager" : "lazy" }/>
                     )) }

@@ -61,14 +61,26 @@ export const Section = styled.section`
         height: 50.4rem;
         transition: background-image 200ms linear;
     }
+    ul {
+        ${(p) =>
+                p.$hideCursor
+                        ? `
+		cursor: none;
+
+		&,
+		& * {
+			cursor: none !important;
+		}
+	`
+                        : ""}
+    }
     li {
-        padding: 1.4rem 0;
+        padding: 2.4rem 0;
         display: flex;
-        align-items: baseline;
+        align-items: center;
         justify-content: space-between;
         color: var(--Black-2, #2F3034);
         position: relative;
-        cursor: url("${c.v2}") 60 60, pointer;
         
         .name {
             font-family: "Playfair Display", sans-serif;
@@ -101,18 +113,17 @@ export const Section = styled.section`
             opacity: 1;
         }
         &:not(:last-of-type) {
-            margin-bottom: 1.1rem;
             &::after {
                 content: "";
                 height: .1rem;
                 width: 100%;
                 position: absolute;
-                bottom: -1rem;
+                bottom: 0;
                 background-color: rgba(150, 40, 31, 0.10);
             }
         }
-        &:not(:last-of-type) {
-            margin-top: 1rem;
+        &:last-of-type {
+            padding-bottom: 1.4rem;
         }
         
         &:hover {

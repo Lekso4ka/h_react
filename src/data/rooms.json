@@ -8,6 +8,7 @@
         "Вид на гору"
       ],
       "Вид на гору": {
+        "tour_link": "",
         "rooms": 1,
         "size": 25,
         "guests": 2,
@@ -78,6 +79,7 @@
         ]
       },
       "Вид на реку": {
+        "tour_link": "",
         "rooms": 1,
         "size": 25,
         "guests": 2,
@@ -148,6 +150,7 @@
         ]
       },
       "Базовый": {
+        "tour_link": "",
         "rooms": 1,
         "size": 25,
         "guests": 2,
@@ -222,6 +225,7 @@
       "name": "Адаптированый номер",
       "variants": [],
       "default": {
+        "tour_link": "",
         "rooms": 1,
         "size": 27,
         "guests": 3,
@@ -297,6 +301,7 @@
       "name": "Улучшенный номер",
       "variants": [],
       "default": {
+        "tour_link": "#",
         "rooms": 1,
         "size": 36,
         "guests": 4,
@@ -378,6 +383,7 @@
         "С балконом"
       ],
       "Двухкомнатный": {
+        "tour_link": "#",
         "rooms": 2,
         "size": 56,
         "guests": 5,
@@ -452,6 +458,7 @@
         ]
       },
       "Стандарт": {
+        "tour_link": "#",
         "rooms": 1,
         "size": 64,
         "guests": 5,
@@ -526,6 +533,7 @@
         ]
       },
       "Представительский": {
+        "tour_link": "#",
         "rooms": 2,
         "size": 96,
         "guests": 5,
@@ -601,6 +609,7 @@
         ]
       },
       "С балконом": {
+        "tour_link": "#",
         "rooms": 1,
         "size": 65,
         "guests": 5,
@@ -680,6 +689,7 @@
       "name": "Семейный номер",
       "variants": [],
       "default": {
+        "tour_link": "#",
         "rooms": 1,
         "size": 47,
         "guests": 4,
@@ -758,6 +768,7 @@
       "name": "Премьер",
       "variants": [],
       "default": {
+        "tour_link": "#",
         "rooms": 1,
         "size": 27,
         "guests": 3,
@@ -834,6 +845,7 @@
       }
     },
     "premier_plus": {
+      "tour_link": "#",
       "id": "",
       "name": "Премьер Плюс",
       "variants": [],
@@ -923,6 +935,7 @@
         "С балконом"
       ],
       "Базовый": {
+        "tour_link": "",
         "rooms": 1,
         "size": 25,
         "guests": 2,
@@ -988,6 +1001,7 @@
         ]
       },
       "С балконом": {
+        "tour_link": "",
         "rooms": 1,
         "size": 25,
         "guests": 2,
@@ -1053,6 +1067,7 @@
         ]
       },
       "Вид на реку": {
+        "tour_link": "",
         "rooms": 1,
         "size": 25,
         "guests": 2,
@@ -1122,6 +1137,7 @@
       "name": "Адаптированый номер",
       "variants": [],
       "default": {
+        "tour_link": "",
         "rooms": 1,
         "size": 25,
         "guests": 2,
@@ -1193,6 +1209,7 @@
         "С балконом"
       ],
       "С балконом": {
+        "tour_link": "#",
         "rooms": 2,
         "size": 36,
         "guests": 4,
@@ -1269,6 +1286,7 @@
       "name": "Полулюкс",
       "variants": [],
       "default": {
+        "tour_link": "#",
         "rooms": 2,
         "size": 36,
         "guests": 4,
@@ -1348,6 +1366,7 @@
         "Трехкомнатный"
       ],
       "Стандарт": {
+        "tour_link": "#",
         "rooms": 2,
         "size": 36,
         "guests": 4,
@@ -1420,6 +1439,7 @@
         ]
       },
       "Трехкомнатный": {
+        "tour_link": "#",
         "rooms": 3,
         "size": 88,
         "guests": 7,
@@ -1496,6 +1516,7 @@
       "name": "Делюкс",
       "variants": [],
       "default": {
+        "tour_link": "#",
         "rooms": 1,
         "size": 28,
         "guests": 3,
@@ -1574,6 +1595,7 @@
         "C балконом"
       ],
       "C балконом": {
+        "tour_link": "#",
         "rooms": 1,
         "size": 27,
         "guests": 3,

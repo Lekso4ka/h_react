@@ -45,8 +45,7 @@ export const Mobile = () => {
             <Line/>
         </div>
         <Images cnt={ room[v].images.length }>
-            { room[v].images.map((el, i) => <Image key={ i } bg={ el }>{ i === 0 && <Tour
-                dark
+            { room[v].images.map((el, i) => <Image key={ i } bg={ el }>{ (i === 0 && room[v].tour_link) && <Tour
                 link={ room[v].tour_link }
                 pos/>
             }</Image>) }

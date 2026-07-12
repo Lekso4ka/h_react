@@ -223,6 +223,11 @@ export const ImagesBlock = styled.div`
     display: grid;
     gap: 2rem;
     padding-bottom: 2.4rem;
+    position: relative;
+    .tour {
+        top: 5rem;
+        left: 2.2rem;
+    }
 `
 
 export const Button = styled.button`
@@ -231,8 +236,8 @@ export const Button = styled.button`
     height: 6.4rem;
     justify-content: center;
     align-items: center;
-    background: var(--Green, #55532E);
-    color: #FFF;
+    background: #96281F;
+    color: #FFF6F0;
     font-family: "Playfair Display";
     font-size: 1.8rem;
     font-weight: 600;
@@ -240,6 +245,10 @@ export const Button = styled.button`
     letter-spacing: 0.036rem;
     position: sticky;
     bottom: 1.4rem;
+    transition: background-color .2s;
+    &:hover {
+        background-color: #A03229;
+    }
 `
 
 
