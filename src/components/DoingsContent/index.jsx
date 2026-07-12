@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Link } from "../../ui/Link";
 import { SingleActivity } from "../../sections/Activities/SingleActivity";
@@ -20,6 +20,8 @@ export const DoingsContent = () => {
     const [showAll, setShowAll] = useState(false);
     const [moreData, setMoreData] = useState(false);
     const location = useLocation();
+    const contentRef = useRef()
+    const btnRef = useRef()
     useEffect(() => {
         const hash = location.hash;
         if (hash) {
@@ -40,6 +42,21 @@ export const DoingsContent = () => {
             }, 300);
         }
     }, [location]);
+    
+    useEffect(() => {
+        const c = contentRef.current;
+        const b = btnRef.current;
+        if (c && b) {
+            let top = b.getBoundingClientRect().top;
+            for (let i = 0; i < c.children.length; i++) {
+                const rect = c.children[i].getBoundingClientRect()
+                let bot = rect.bottom;
+                if (Math.abs(top - bot) < 50) {
+                    c.children[i].style.borderBottom = "none";
+                }
+            }
+        }
+    }, [contentRef.current, btnRef.current])
     
     useEffect(() => {
         const arr = []
@@ -92,9 +109,9 @@ export const DoingsContent = () => {
             <h3>[ Роза Хутор ]</h3>
             <h1>События и мероприятия <span>горного курорта</span></h1>
         </Top>
-        <Content>
+        <Content ref={contentRef}>
             { data.map((el, i) => renderArticle(el, i)) }
-            <BtnBlock>
+            <BtnBlock ref={btnRef}>
                 <button onClick={ () => setShowAll(!showAll) }>
                     { showAll ? "Скрыть в" : "В" }се статьи
                 </button>

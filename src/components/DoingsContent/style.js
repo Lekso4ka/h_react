@@ -52,7 +52,7 @@ export const Top = styled.section`
 
 export const Content = styled.section`
  column-count: 1;
-    column-rule: .1rem solid rgba(150, 40, 31, 0.20);
+    column-rule: .12rem solid rgba(150, 40, 31, 0.20);
     column-gap: 0;
         
         overflow: hidden;
@@ -216,8 +216,8 @@ export const Article = styled.article`
 `
 
 export const BtnBlock = styled.div`
-border-top: .1rem solid rgba(150, 40, 31, 0.20);
-border-bottom: .1rem solid rgba(150, 40, 31, 0.20);
+    border-top: .1rem solid rgba(150, 40, 31, 0.20);
+    border-bottom: .1rem solid rgba(150, 40, 31, 0.20);
         column-span: all;
         display: flex;
         justify-content: center;
@@ -236,5 +236,8 @@ border-bottom: .1rem solid rgba(150, 40, 31, 0.20);
             text-decoration-thickness: 10%; /* 1.8px */
             text-underline-offset: 30%; /* 5.4px */
             text-underline-position: from-font;
+            &:hover {
+                color: #A03229;
+            }
         }
 `
