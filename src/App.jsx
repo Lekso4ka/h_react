@@ -10,9 +10,12 @@ import { Doings } from "./pages/Doings";
 import { Events } from "./pages/Events";
 import { Home } from "./pages/Home";
 import { Hotel } from "./pages/Hotel";
+import { Info } from "./pages/Info";
+import { Policy } from "./pages/Policy";
 import { Restaurant } from "./pages/Restaurant";
 import { Room } from "./pages/Room";
 import { Rooms } from "./pages/Rooms";
+import { Rules } from "./pages/Rules";
 import { Services } from "./pages/Services";
 import { Stocks } from "./pages/Stocks";
 import { Vacancies } from "./pages/Vacancies";
@@ -42,7 +45,10 @@ export const App = () => {
             <Route path="/venue/:id" element={ <Venue/> }/>
             <Route path="/rooms/:id" element={ <Rooms/> }/>
             <Route path="/room/:hotel/:id/:variant" element={ <Room/> }/>
-        
+            
+            <Route path="/info" element={ <Info/> }/>
+            <Route path="/rules" element={ <Rules/> }/>
+            <Route path="/policy" element={ <Policy/> }/>
         </Routes>
         <Map/>
         <Footer/>

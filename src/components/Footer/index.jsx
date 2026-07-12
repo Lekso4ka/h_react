@@ -50,8 +50,8 @@ export const Footer = () => {
             <div className="ftrCol">
                 <Title>Информация</Title>
                 <List>
-                    <a href="">Правовая информация</a>
-                    <a href="">Правила отеля</a>
+                    <a href="/info">Правовая информация</a>
+                    <a href="/rules">Правила отеля</a>
                 </List>
             </div>
             <div>
@@ -71,7 +71,7 @@ export const Footer = () => {
         
         <Bottom>
             <span>© 2026 все права защищены</span>
-            <a href="">политика конфиденциальности</a>
+            <a href="/policy">политика конфиденциальности</a>
         </Bottom>
     </Block>
 }
