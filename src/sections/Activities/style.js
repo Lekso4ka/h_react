@@ -249,9 +249,16 @@ export const Item = styled.li`
     right: 0;
     bottom: 0;
     padding: 9rem 1.6rem;
-    display: ${({ isActive }) => isActive ? "flex" : "none"};
+    pointer-events: none;
+    display: flex;
     flex-direction: column;
     align-items: center;
+    transition: opacity .5s;
+    opacity: 0;
+    &.active {
+        opacity: 1;
+        pointer-events: auto;
+    }
     h5 {
         color: var(--Black-2, #2F3034);
         text-align: center;

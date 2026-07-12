@@ -49,7 +49,8 @@ export const ActivitiesContent = () => {
                     <List>
                         { el.items.map((item, j) => <Item
                             key={ j }
-                            isActive={ activeItems[i] === j }
+                            className={ activeItems[i] === j ? "active" : ""}
+                            //isActive={ activeItems[i] === j }
                         >
                             <h5>{ item.tooltip }</h5>
                             <h3>{ item.title }</h3>
