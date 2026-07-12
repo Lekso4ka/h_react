@@ -61,7 +61,7 @@ export const Item = styled.article`
         position: absolute;
         top: 5rem;
         left: 5rem;
-        color: var(--Red, #96281F);
+        color: #fff;
         font-family: Manrope;
         font-size: 1.4rem;
         font-style: normal;
@@ -71,7 +71,7 @@ export const Item = styled.article`
     }
 
     .img {
-        background-image: linear-gradient(rgba(242, 242, 242, 0.4), rgba(242, 242, 242, 0.4)), url("${ ({ bg }) => img[bg] }");
+        background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("${ ({ bg }) => img[bg] }");
         background-position: center;
         background-size: cover;
     }

@@ -64,15 +64,22 @@ export const Arrow = styled.button`
 	${(p) => (p.$side === "left" ? "left: 2.4rem;" : "right: 2.4rem;")}
 	transform: translateY(-50%);
 	z-index: 2;
-	width: 3.1rem;
-	height: 2.9rem;
+	//width: 3.1rem;
+	//height: 2.9rem;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	transition: transform 120ms ease;
+	cursor: pointer;
+	border-radius: 50%;
+	border: .1rem solid transparent;
+	padding: 1.4rem;
+	:hover {
+		border-color: rgba(255, 246, 240, 0.20);
+		backdrop-filter: blur(7px);
+	}
 	svg {
-		width: 100%;
-		height: 100%;
+		width: 2.1rem;
 	}
 
 	&:active {
