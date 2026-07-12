@@ -415,7 +415,7 @@ export const ActivityCard = styled.div`
     padding: 1.2rem 1rem 4.8rem;
     box-sizing: border-box;
     opacity: ${ ({ active }) => active ? 1 : 0 };
-    user-select: ${ ({ active }) => active ? "auto" : "none" };
+    pointer-events: ${ ({ active }) => active ? "auto" : "none" };
     transition: opacity 1s;
     border: 1px solid var(--Green, #55532E);
 
@@ -423,7 +423,6 @@ export const ActivityCard = styled.div`
         position: relative;
         z-index: 1;
         height: 20rem;
-
         & > div {
             opacity: 1;
         }

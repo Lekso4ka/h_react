@@ -22,7 +22,20 @@
           "Зима здесь ощущается как полноценный сезон впечатлений, а не только активностей."
         ]
       },
-      "carousel": ["do_1", "do_2", "do_3"],
+      "carousel": [
+        {
+          "img": "do_1",
+          "pos": "center / cover"
+        },
+        {
+          "img": "do_2",
+          "pos": "center / cover"
+        },
+        {
+          "img": "do_3",
+          "pos": "center / cover"
+        }
+      ],
       "section_2": {
         "img_1": "do_1",
         "img_2": "do_1",
@@ -50,7 +63,7 @@
           }
         ],
         "tooltip": "Это тот формат отдыха,<br/>где не нужно спешить.",
-        "link": ""
+        "link": "/rooms/golden-tulip"
       },
       "section_4": {
         "img_1": "do_1",
@@ -165,7 +178,7 @@
           }
         ],
         "tooltip": "Lorem ipsum dolor sit amet, consectetur adipisicing",
-        "link": ""
+        "link": "/rooms/golden-tulip"
       },
       "section_4": {
         "img_1": "",
@@ -272,7 +285,7 @@
           }
         ],
         "tooltip": "Lorem ipsum dolor sit amet, consectetur adipisicing",
-        "link": ""
+        "link": "/rooms/golden-tulip"
       },
       "section_4": {
         "img_1": "",
@@ -387,7 +400,7 @@
           }
         ],
         "tooltip": "Lorem ipsum dolor sit amet, consectetur adipisicing",
-        "link": ""
+        "link": "/rooms/golden-tulip"
       },
       "section_4": {
         "img_1": "",
@@ -494,7 +507,7 @@
           }
         ],
         "tooltip": "Lorem ipsum dolor sit amet, consectetur adipisicing",
-        "link": ""
+        "link": "/rooms/golden-tulip"
       },
       "section_4": {
         "img_1": "",
@@ -601,7 +614,7 @@
           }
         ],
         "tooltip": "Lorem ipsum dolor sit amet, consectetur adipisicing",
-        "link": ""
+        "link": "/rooms/golden-tulip"
       },
       "section_4": {
         "img_1": "",
@@ -708,7 +721,7 @@
           }
         ],
         "tooltip": "Lorem ipsum dolor sit amet, consectetur adipisicing",
-        "link": ""
+        "link": "/rooms/golden-tulip"
       },
       "section_4": {
         "img_1": "",
@@ -815,7 +828,7 @@
           }
         ],
         "tooltip": "Lorem ipsum dolor sit amet, consectetur adipisicing",
-        "link": ""
+        "link": "/rooms/golden-tulip"
       },
       "section_4": {
         "img_1": "",
@@ -922,7 +935,7 @@
           }
         ],
         "tooltip": "Lorem ipsum dolor sit amet, consectetur adipisicing",
-        "link": ""
+        "link": "/rooms/golden-tulip"
       },
       "section_4": {
         "img_1": "",

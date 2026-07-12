@@ -3,9 +3,9 @@ import { Link as RouterLink, useParams } from "react-router-dom";
 import { getArticleById } from "../../data";
 import { Line } from "../../ui/Line";
 import { Link } from "../../ui/Link";
+import { Carousel } from "../Carousel";
 import {
-    Carousel,
-    CarouselItem,
+    SectionC,
     Hero,
     Section1,
     Section2,
@@ -38,22 +38,9 @@ export const ArticleContent = () => {
             <h3>{ a.section_1.caption_2 }</h3>
             { a.section_1.text_2.map((el, i) => <p key={ i }>{ el }</p>) }
         </Section1>
-        
-        <Carousel active={ activeImg }>
-            <div className="buttons">
-                { a.carousel.map((el, i) => <div
-                    className="btn"
-                    key={ i }
-                    onClick={ () => setActiveImg(i) }
-                />) }
-            </div>
-            { a.carousel.map((el, i) => <CarouselItem
-                key={ i }
-                bg={ el }
-                active={ activeImg === i }
-            />) }
-        </Carousel>
-        
+        <SectionC>
+        <Carousel className="carousel" images={ a.carousel }/>
+        </SectionC>
         <Section2
             bg1={ a.section_2.img_1 }
             bg2={ a.section_2.img_2 }
@@ -119,7 +106,7 @@ export const ArticleContent = () => {
                 <ul>
                     { a.section_7.list.map((el, i) => <li key={ i }>{ el }</li>) }
                 </ul>
-                <Link to={ a.section_7.link }>Выбрать отель</Link>
+                <Link to={ "/" }>Выбрать отель</Link>
             </div>
             <div className="bottom">
                 <Line/>

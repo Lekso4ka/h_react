@@ -133,47 +133,16 @@ export const Section1 = styled.section`
         }
     }
 `
-export const Carousel = styled.section`
-    position: relative;
-    display: flex;
-    justify-content: center;
+export const SectionC = styled.div`
     height: 66rem;
-    .buttons {
-        display: flex;
-        position: absolute;
-        gap: .6rem;
-        bottom: 2rem;
-        z-index: 1;
+    display: grid;
+    .tour {
+        display: none;
     }
-    .btn {
-        width: .8rem;
-        height: .8rem;
-        cursor: pointer;
-        box-sizing: border-box;
-        flex-shrink: 0;
-        border: .1rem solid #fff;
-        border-radius: 50%;
-        &:nth-of-type(${({ active }) => active + 1}) {
-            background-color: #fff;
-        }
+    .dots {
+        right: auto;
+        
     }
-    @media (min-width: 576px) {
-        margin: 0 2.4rem;
-        .btn {
-            width: 1.2rem;
-            height: 1.2rem;
-        }
-    }
-`
-export const CarouselItem = styled.div`
-    position: absolute;
-    background-color: #D9D9D9;
-    background-position: center;
-    background-size: cover;
-    width: 100%;
-    height: 100%;
-    ${ ({ bg }) => bg ? `background-image: url("${ img[bg] }");` : "" }
-    opacity: ${ ({ active }) => active ? 1 : 0}
 `
 
 export const Section2 = styled.section`
@@ -319,7 +288,7 @@ export const Section3Item = styled.li`
     display: grid;
     justify-items: flex-start;
     gap: 2rem;
-    color: var(--Black-2, #2F3034);
+    color: #fff;
     font-family: "Playfair Display";
     font-size: 1.8rem;
     font-style: italic;
@@ -330,10 +299,9 @@ export const Section3Item = styled.li`
         content: "";
         height: 31.2rem;
         width: 24.2rem;
-        background-color: #D9D9D9;
         background-position: center;
         background-size: cover;
-        ${ ({ bg }) => bg ? `background-image: url("${ img[bg] }");` : "" }
+            ${ ({ bg }) => bg ? `background-image:  linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url("${ img[bg] }");` : "linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%)" }
     }
 
     &:nth-of-type(2n)::before {
@@ -353,7 +321,6 @@ export const Section3Item = styled.li`
             content: "";
             height: 56.6rem;
             width: 45.2rem;
-            ${ ({ bg }) => bg ? `background-image:  linear-gradient(0deg, rgba(255, 255, 255, 0.30) 0%, rgba(255, 255, 255, 0.30) 100%), url("${ img[bg] }");` : "" }
         }
         &:nth-of-type(2n)::before {
             justify-self: stretch;
@@ -441,7 +408,7 @@ export const Section4 = styled.section`
 
 export const Section5 = styled.section`
     padding: 9rem 4rem;
-    color: var(--Black-2, #2F3034);
+    color: #fff;
 
     h2 {
         font-family: "Playfair Display";

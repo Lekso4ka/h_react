@@ -208,7 +208,7 @@ export const Carousel = ({ images = [], className, autoPlayInterval = DEFAULT_AU
                 </>
             )}
             {count > 1 && (
-                <Dots>
+                <Dots className={"dots"}>
                     {images.map((_, i) => (
                         <Dot
                             key={i}
