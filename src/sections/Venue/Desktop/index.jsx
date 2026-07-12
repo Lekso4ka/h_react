@@ -38,7 +38,7 @@ export const Desktop = ({data}) => {
                         <p>{ data.variants.length }</p>
                     </InfoItem> }
                 </Info>
-                { data.formats.length > 0 && <Formats>
+                { data.show_formats && <Formats>
                     <h3>Форматы мероприятий</h3>
                     <ul>
                         { data.formats.map((el, i) => <li key={ i }>

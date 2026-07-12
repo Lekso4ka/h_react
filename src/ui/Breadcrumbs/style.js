@@ -10,6 +10,10 @@ export const Container = styled.nav`
 
     a {
         color: rgba(47, 48, 52, 0.40);
+        transition: color .2s;
+        &:hover {
+            color: rgb(47, 48, 52);
+        }
     }
     .divider {
         color: rgba(47, 48, 52, 0.40);

@@ -179,6 +179,7 @@ export const Item = styled.div`
         font-weight: 500;
         line-height: 110%; /* 37.4px */
         margin-bottom: 2.6rem;
+        height: 4.8rem;
     }
 
     .line2 {
@@ -285,6 +286,7 @@ export const Item = styled.div`
         h2 {
             font-size: 3.4rem;
             margin-bottom: 3.6rem;
+            height: 7.2rem;
         }
 
         .line2 {

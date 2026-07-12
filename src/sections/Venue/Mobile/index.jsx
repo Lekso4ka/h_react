@@ -60,7 +60,7 @@ export const Mobile = ({ data }) => {
                 { data.text.map((el, i) => <p key={ i }>{ el }</p>) }
             </Text>
             
-            { data.formats.length > 0 && <Formats>
+            { data.show_formats && <Formats>
                 <h3>Форматы мероприятий</h3>
                 <ul>
                     { data.formats.map((el, i) => <li key={ i }>

@@ -90,11 +90,11 @@ export const Restaurants = () => {
         <Tour pos className="tour"/>
         <span
             className="arrow"
-            onClick={ () => arrowHandler(activeRest === 7 ? 0 : activeRest + 1) }
+            onClick={ () => arrowHandler(activeRest === 0 ? 7 : activeRest - 1, true) }
         ><Icon name={ "arrow" } color="#FFF"/></span>
         <span
             className="arrow right"
-            onClick={ () => arrowHandler(activeRest === 0 ? 7 : activeRest - 1, true) }
+            onClick={ () => arrowHandler(activeRest === 7 ? 0 : activeRest + 1) }
         ><Icon name={ "arrow" } left={ false } color="#FFF"/></span>
         <div className="list-container">
             <div className="list" ref={ restRef }>

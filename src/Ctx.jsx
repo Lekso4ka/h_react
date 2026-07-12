@@ -15,7 +15,7 @@ export const ContextProvider = ({children}) => {
             const w = window.outerWidth;
             setMob(w < 576)
         })
-    }, []);
+    });
     return <Context.Provider value={{
         mob
     }}>

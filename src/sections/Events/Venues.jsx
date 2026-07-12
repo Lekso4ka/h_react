@@ -7,7 +7,7 @@ import { getVenues } from "../../data/venues";
 
 export const Venues = ({ data }) => {
     const vData = getVenues()
-    
+    console.log(vData, data)
     return <>
         { data.map(el => <Item key={ el } bg={ vData[el].img }>
             <div className="text">
@@ -29,20 +29,10 @@ export const Venues = ({ data }) => {
                     </div>
                 </div>
                 <div className="list">
-                    { vData[el].formats.length > 0
-                        ? <>
-                            <h4>Мероприятия</h4>
-                            <ul>
-                                { vData[el].formats.map(f => <li key={ f }>{ f }</li>) }
-                            </ul>
-                        </>
-                        : <>
-                            <h4>Варианты рассадки</h4>
-                            <ul>
-                                { vData[el].variants.map(f => <li key={ f.name }>{ f.name }</li>) }
-                            </ul>
-                        </>
-                    }
+                    <h4>Мероприятия</h4>
+                    <ul>
+                        { vData[el].formats.map(f => <li key={ f }>{ f }</li>) }
+                    </ul>
                 </div>
                 <Link to={ `/venue/${ el }` } className="link">
                     Подробнее

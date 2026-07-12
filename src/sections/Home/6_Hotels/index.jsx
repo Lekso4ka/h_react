@@ -94,8 +94,8 @@ export const Hotels = () => {
             От утренних подъёмов на склон до вечерних прогулок по набережной — здесь всё настроено на лёгкость,
             разнообразие впечатлений и спокойное возвращение в атмосферу уюта.</p>
         <div className="links">
-            <Link to="/hotel/golden-tulip">Выбрать Голден</Link>
-            <Link to="/hotel/tulip-inn">Выбрать Тюлип</Link>
+            <Link to="/hotel/golden-tulip">Перейти в Голден</Link>
+            <Link to="/hotel/tulip-inn">Перейти в Тюлип</Link>
         </div>
     </Content>
 }

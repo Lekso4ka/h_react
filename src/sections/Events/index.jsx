@@ -12,8 +12,8 @@ const venues = [
     "ballroom",
     "fisht",
     "oshten",
-    "agiba-odin",
-    "agiba-dva",
+    "aibga-odin",
+    "aibga-dva",
     "elbrus",
     "achishkho",
     "lounge"
