@@ -4,7 +4,7 @@ import { List } from "./style";
 
 import { Item } from "./Item";
 
-export const Faq = ({ items = [], className, reset= 0 }) => {
+export const Faq = ({ items = [], className, reset= 0, refresh, setImg }) => {
     if (items.length === 0) return null;
     
     return (
@@ -16,8 +16,11 @@ export const Faq = ({ items = [], className, reset= 0 }) => {
                     question={item.name}
                     tooltip={item.tooltip}
                     answer={item.text}
+                    img={item.img}
                     links={item.links}
                     reset={reset}
+                    refresh={refresh}
+                    setImg={setImg}
                 />
             ))}
         </List>

@@ -103,6 +103,13 @@ export const Section = styled.section`
         background-position: center;
         background-size: cover;
         margin-bottom: 2rem;
+        transition: background-image 200ms linear;
+    }
+    .fix {
+        display: grid;
+        grid-column-end: span 2;
+        grid-template-columns: 76.7rem 1fr;
+        gap: 18rem;
     }
     @media (min-width: 576px) {
         grid-template-columns: 76.7rem 1fr;

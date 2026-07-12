@@ -12,7 +12,7 @@ const OPEN_DURATION = 0.45;
 const CLOSE_DURATION = 0.35;
 
 export const Item = ({
-    i, question, tooltip, answer, reset, links
+    i, question, tooltip, answer, reset, links, refresh, setImg, img
 }) => {
     const [isOpen, setIsOpen] = useState(false);
     const rootRef = useRef(null);
@@ -25,6 +25,7 @@ export const Item = ({
     useEffect(() => {
         if (reset === 0) return;
         setIsOpen(false);
+        setImg(null)
     }, [reset]);
     
     useGSAP(
@@ -40,6 +41,7 @@ export const Item = ({
                     gsap.set(panel, { height: 0, overflow: "hidden" });
                     gsap.set(inner, { opacity: 0 });
                     gsap.set(icon, { rotate: 0 });
+                    
                 }
                 if (!isOpen) return;
             }
@@ -47,6 +49,7 @@ export const Item = ({
             gsap.killTweensOf([panel, inner, icon]);
             
             if (isOpen) {
+                setImg(img)
                 gsap.set(panel, { height: 0, overflow: "hidden" });
                 gsap.set(inner, { opacity: 0, y: -6 });
                 
@@ -66,6 +69,7 @@ export const Item = ({
                 });
                 gsap.to(icon, { rotate: 45, duration: 0.35, ease: "power2.out" });
             } else {
+                setImg(null)
                 gsap.set(panel, { height: panel.offsetHeight, overflow: "hidden" });
                 gsap.to(inner, { opacity: 0, y: -4, duration: 0.2, ease: "power2.in" });
                 gsap.to(panel, {
@@ -75,6 +79,10 @@ export const Item = ({
                 });
                 gsap.to(icon, { rotate: 0, duration: 0.3, ease: "power2.inOut" });
             }
+            setTimeout(() => {
+                refresh(true)
+            }, 1000)
+            
         },
         { scope: rootRef, dependencies: [isOpen] }
     );
