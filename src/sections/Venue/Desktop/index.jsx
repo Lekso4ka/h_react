@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { Tour } from "../../../components/Tour";
 import { Lightbox } from "../../../ui/Lightbox";
+import { Line } from "../../../ui/Line";
+import { Link } from "../../../ui/Link";
 import { Vector } from "../../../ui/Vector";
-import { Content, Info, InfoItem, Options, Variant, Text, Images, Image, Formats } from "./style";
+import { Data } from "../../Stocks/style";
+import { Content, Info, InfoItem, Options, Variant, Text, Images, Image, Formats, Modal } from "./style";
 
 export const Desktop = ({data}) => {
+    const { id } = useParams();
     const [activeLb, setActiveLb] = useState(false);
+    const [active, setActive] = useState(null)
     const [lbIndex, setLbIndex] = useState(0);
     const close = () => {
         setActiveLb(false);
@@ -14,6 +20,14 @@ export const Desktop = ({data}) => {
         setActiveLb(true)
         setLbIndex(i)
     }
+    
+    useEffect(() => {
+        if (active !== null) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = null;
+        }
+    }, [active]);
     useEffect(() => {
         if (activeLb) {
             document.body.style.overflow = "hidden";
@@ -94,12 +108,53 @@ export const Desktop = ({data}) => {
                 </Text>
                 { data.images.map((el, i) => <Image key={ i } bg={ el } onClick={() => open(i)}/>) }
             </Images>
-            <a href="">Отправить запрос</a>
+            <a href="" onClick={(e) => {e.preventDefault(); setActive(id)} }>Отправить запрос</a>
             <Lightbox
                 data={data.images}
                 active={activeLb}
                 index={lbIndex}
                 close={close}
             />
-        </Content>
+        <Modal
+            className={typeof active === "string" ? "active" : "" }
+            onClick={e => e.currentTarget === e.target ? setActive(null) : null}
+        >
+            <div className="modal-content">
+                <svg
+                    className={ "x" }
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 34 34"
+                    fill="none"
+                    onClick={ () => setActive(null) }
+                >
+                    <rect width="34" height="34" fill="#2F3034"/>
+                    <path
+                        d="M11 23L15.8023 16.9333L11.1047 11H13.5698L17.0116 15.4L20.4186 11H22.8837L18.186 16.9333L23 23H20.5233L17.0116 18.4667L13.4767 23H11Z"
+                        fill="#FFF6F0"/>
+                </svg>
+                <h3>Запрос на мероприятие</h3>
+                <form>
+                    <label htmlFor="i1">Площадка мероприятия</label>
+                    <input type="text" id={ "i1" } value={ data.name }/>
+                    <label htmlFor="i2">Число участников</label>
+                    <input type="number" id={ "i2" }/>
+                    <label htmlFor="i3">Даты мероприятия</label>
+                    <input type="date" id={ "i3" }/>
+                    <label htmlFor="i4">Имя *</label>
+                    <input type="text" id={ "i4" }/>
+                    <label htmlFor="i5">Телефон *</label>
+                    <input type="text" id={ "i5" }/>
+                    <label htmlFor="i6">Почта *</label>
+                    <input type="text" id={ "i6" }/>
+                    <label htmlFor="i6">Пожелания к мероприятию</label>
+                    <input type="text" id={ "i6" }/>
+                </form>
+                <input type="checkbox" id="check"/>
+                <label htmlFor="check"><span>Даю свое <a href="">согласие на обработку</a> моих персональных данных в соответствии с <a
+                    href="">политикой конфиденциальности</a>.</span></label>
+                <button>Подписаться</button>
+                <span style={{opacity: .5}}>* Обязательные поля</span>
+            </div>
+        </Modal>
+    </Content>
 }
