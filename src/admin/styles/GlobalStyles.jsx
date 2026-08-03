@@ -6,6 +6,15 @@ export function GlobalStyles() {
   return (
     <Global
       styles={css`
+          body {
+              font-family: ${theme.fonts.base};
+              margin: 0;
+              min-height: 100vh;
+              background-color: ${theme.colors.light};
+              color: ${theme.colors.text};
+              font-style: normal;
+              font-weight: 400;
+          }
         .admin-root,
         .admin-root *,
         .admin-root *::before,
@@ -31,7 +40,7 @@ export function GlobalStyles() {
         }
 
         .admin-root a {
-          color: inherit;
+          //color: inherit;
           text-decoration: none;
         }
 

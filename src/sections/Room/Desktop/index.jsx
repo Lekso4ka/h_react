@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import { mediaUrl } from "../../../utils/mediaUrl";
 import { Tour } from "../../../components/Tour";
 import { useCtx } from "../../../Ctx";
-import img from "../../../assets/img";
 
 import { Navigate, useParams } from "react-router-dom";
 import gsap from "gsap";
@@ -102,7 +102,7 @@ export const Desktop = () => {
                 <ImagesBlock>
                     {room[v].tour_link && <Tour pos link={ room[v].tour_link }/>}
                     { galleryImages.map((src, i) => (
-                        <GalleryImage key={ i } src={ img[src] } alt="" loading={ i === 0 ? "eager" : "lazy" }/>
+                        <GalleryImage key={ i } src={ mediaUrl(src) } alt="" loading={ i === 0 ? "eager" : "lazy" }/>
                     )) }
                 </ImagesBlock>
             </div>

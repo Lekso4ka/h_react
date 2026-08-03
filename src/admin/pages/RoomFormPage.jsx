@@ -312,7 +312,7 @@ export function RoomFormPage() {
           variants: variant && variant !== "default" ? [variant] : [],
           room: payload,
         });
-        setSuccess("Номер добавлен и сохранён в JSON");
+        setSuccess("Номер добавлен и сохранён");
         navigate(
           adminPath(`/rooms/${hotel}/${created.categoryKey}/${created.variantKey}`),
           { replace: true }
@@ -323,7 +323,7 @@ export function RoomFormPage() {
           room: payload,
           newVariantKey: variant !== variantKey ? variant : undefined,
         });
-        setSuccess("Изменения сохранены в JSON");
+        setSuccess("Изменения сохранены");
         if (variant !== variantKey) {
           navigate(adminPath(`/rooms/${hotel}/${categoryKey}/${variant}`), {
             replace: true,

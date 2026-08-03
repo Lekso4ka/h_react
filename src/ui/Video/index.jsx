@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { VideoContainer, VideoWrapper, VideoSt } from "./style";
 
-import img from "../../assets/img";
+import { mediaUrl } from "../../utils/mediaUrl";
 
 export const Video = ({ data, index, h }) => {
     const [activeIndex, setActiveIndex] = useState(0);
@@ -52,8 +52,8 @@ export const Video = ({ data, index, h }) => {
                     playsInline
                     preload="auto"
                 >
-                    <source src={ img[video] } type="video/mp4"/>
-                    <source src={ img[video].replace(".mp4", ".webm") } type="video/webm"/>
+                    <source src={ mediaUrl(video) } type="video/mp4"/>
+                    <source src={ mediaUrl(video).replace(".mp4", ".webm") } type="video/webm"/>
                 </VideoSt>
             </VideoWrapper>
         )) }

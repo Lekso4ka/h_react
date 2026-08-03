@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import img from "../../assets/img";
+import { mediaUrl } from "../../utils/mediaUrl";
 
 export const Container = styled.div`
     .hero {
@@ -99,7 +100,7 @@ export const Item = styled.article`
         }
     }
     .img {
-        background: linear-gradient(0deg, rgba(0, 0, 0, 0.40) 0%, rgba(0, 0, 0, 0.40) 100%), url(${({pic}) => img[pic]});
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.40) 0%, rgba(0, 0, 0, 0.40) 100%), url(${({pic}) => mediaUrl(pic)});
         background-position: center;
         background-size: cover;
         height: 52.5rem;
@@ -248,7 +249,7 @@ export const Data = styled.div`
     overflow: auto;
     box-sizing: border-box;
     .img {
-        background: url(${({pic}) => img[pic]});
+        background: url(${({pic}) => mediaUrl(pic)});
         background-position: center;
         background-size: cover;
         height: 53.6rem;

@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
-import img from "../../../assets/img";
+import { mediaUrl } from "../../../utils/mediaUrl";
 
 export const Section3 = styled.section`
     height: 64rem;
-    background-image: url(${ ({ pic }) => img[pic] });
+    background-image: url(${ ({ pic }) => mediaUrl(pic) });
     background-position: center;
     background-size: cover;
     flex-direction: column;

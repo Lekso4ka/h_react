@@ -1,5 +1,5 @@
 import styled from "@emotion/styled"
-import img from "../../assets/img"
+import { mediaUrl } from "../../utils/mediaUrl"
 
 export const Container = styled.div`
     background: var(--Bege-2, #F2ECDE);
@@ -271,7 +271,7 @@ export const Item = styled.div`
     }
 
     .img {
-        background-image: url(${ ({ bg }) => img[bg] });
+        background-image: url(${ ({ bg }) => mediaUrl(bg) });
         background-position: center;
         background-size: cover;
     }

@@ -1,5 +1,5 @@
 import styled from "@emotion/styled"
-import img from "../../../assets/img"
+import { mediaUrl } from "../../../utils/mediaUrl"
 
 export const Block = styled.section`
     padding: 4.4rem 0 0;
@@ -62,7 +62,7 @@ export const Item = styled.article`
     .img {
         box-sizing: border-box;
         height: 49.2rem;
-        background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url(${({bg}) => img[bg]});
+        background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url(${({bg}) => mediaUrl(bg)});
         background-position: center;
         background-size: cover;
         color: var(--Beige, #FFF6F0);

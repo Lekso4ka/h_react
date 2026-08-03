@@ -1,5 +1,5 @@
 import styled from "@emotion/styled"
-import img from "../../../assets/img"
+import { mediaUrl } from "../../../utils/mediaUrl"
 export const Block = styled.section`
     padding: 0 1.6rem;
     @media (min-width: 576px) {
@@ -52,7 +52,7 @@ export const Item = styled.div`
     .img {
         width: 22.4rem;
         height: 32rem;
-        background-image: url(${({pic}) => img[pic]});
+        background-image: url(${({pic}) => mediaUrl(pic)});
         background-position: center;
         background-size: cover;
     }

@@ -1,5 +1,5 @@
+import { mediaUrl } from "../../utils/mediaUrl";
 import styled from "@emotion/styled";
-import img from "../../assets/img";
 
 export const Hero = styled.section`
     padding: 0 1.6rem;
@@ -65,7 +65,7 @@ export const Section1 = styled.section`
         background-color: #D9D9D9;
         background-position: center;
         background-size: cover;
-        ${({bg}) => bg ? `background-image: url("${img[bg]}")` : ""};
+        ${({bg}) => bg ? `background-image: url("${mediaUrl(bg)}")` : ""};
         margin-bottom: 4rem;
     }
     p {
@@ -156,10 +156,10 @@ export const Section2 = styled.section`
         margin-bottom: 4rem;
     }
     .img1 {
-        ${({bg1}) => bg1 ? `background-image: url("${img[bg1]}");` : ""}
+        ${({bg1}) => bg1 ? `background-image: url("${mediaUrl(bg1)}");` : ""}
     }
     .img2 {
-        ${({bg2}) => bg2 ? `background-image: url("${img[bg2]}");` : ""}
+        ${({bg2}) => bg2 ? `background-image: url("${mediaUrl(bg2)}");` : ""}
     }
     h2 {
         padding-bottom: 2.8rem;
@@ -301,7 +301,7 @@ export const Section3Item = styled.li`
         width: 24.2rem;
         background-position: center;
         background-size: cover;
-            ${ ({ bg }) => bg ? `background-image:  linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url("${ img[bg] }");` : "linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%)" }
+            ${ ({ bg }) => bg ? `background-image:  linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url("${ mediaUrl(bg) }");` : "linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%)" }
     }
 
     &:nth-of-type(2n)::before {
@@ -347,12 +347,12 @@ export const Section4 = styled.section`
     }
 
     .img1 {
-        ${ ({ bg1 }) => bg1 ? `background-image: url("${ img[bg1] }");` : "" }
+        ${ ({ bg1 }) => bg1 ? `background-image: url("${ mediaUrl(bg1) }");` : "" }
         height: 66rem;
     }
 
     .img2 {
-        ${ ({ bg2 }) => bg2 ? `background-image: url("${ img[bg2] }");` : "" }
+        ${ ({ bg2 }) => bg2 ? `background-image: url("${ mediaUrl(bg2) }");` : "" }
             height: 33.5rem;
             width: 24.2rem;
             margin-right: 4rem;
@@ -440,7 +440,7 @@ export const Section5 = styled.section`
         background-color: #D9D9D9;
         background-position: center;
         background-size: cover;
-        ${ ({ bg }) => bg ? `background-image: url("${ img[bg] }")` : "" };
+        ${ ({ bg }) => bg ? `background-image: url("${ mediaUrl(bg) }")` : "" };
         margin: 4rem 0 2rem;
         height: 40rem;
     }
@@ -488,7 +488,7 @@ export const Section6 = styled.div`
         background-color: #D9D9D9;
         background-position: center;
         background-size: cover;
-        ${({bg}) => bg ? `background-image: url("${img[bg]}");` : ""}
+        ${({bg}) => bg ? `background-image: url("${mediaUrl(bg)}");` : ""}
             height: 40rem;
             margin: 0 4rem 9rem;
     }

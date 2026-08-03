@@ -1,5 +1,5 @@
-import styled from "@emotion/styled";
-import img from "../../../assets/img"
+import styled from "@emotion/styled"
+import { mediaUrl } from "../../../utils/mediaUrl";
 
 export const Block = styled.div`
     padding-top: 15rem;
@@ -60,7 +60,7 @@ export const Images = styled.div`
     }
 `
 export const Image = styled.div`
-    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url(${({ bg }) => img[bg]});
+    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url(${({ bg }) => mediaUrl(bg)});
     background-position: center;
     background-size: cover;
     position: relative;

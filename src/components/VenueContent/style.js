@@ -1,5 +1,4 @@
 import styled  from "@emotion/styled";
-import img from "../../assets/img"
 import c from "../../assets/cursors"
 export const Block = styled.div`
     padding: 0 2.4rem;
@@ -210,7 +209,7 @@ export const Images = styled.div`
 `
 
 export const Image = styled.div`
-    background-image: url(${({ bg }) => img[bg]});
+    background-image: url(${({ bg }) => mediaUrl(bg)});
     background-position: center;
     background-size: cover;
     height: 59.8rem;

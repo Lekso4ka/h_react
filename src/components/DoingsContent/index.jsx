@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
+import { mediaUrl } from "../../utils/mediaUrl";
 import { useLocation } from "react-router-dom";
 import { Link } from "../../ui/Link";
 import { SingleActivity } from "../../sections/Activities/SingleActivity";
 import { Article, BtnBlock, Content, Top } from "./style";
 
 import { getDoings } from "../../data";
-import img from "../../assets/img"
 
 const randomize = (data) => {
     if (Array.isArray(data)) {
@@ -84,7 +84,7 @@ export const DoingsContent = () => {
             case "video":
                 return <Article key={ `art_${ i }` }>
                     <video
-                        src={ img[el.src] }
+                        src={ mediaUrl(el.src) }
                         autoPlay
                         muted
                         loop

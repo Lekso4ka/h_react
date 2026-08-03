@@ -99,8 +99,7 @@ export function RoomsPage() {
     <>
       <PageTitle>Номера и сьюты</PageTitle>
       <PageSubtitle>
-        Отель: {HOTEL_NAMES[hotel] || hotel}. Данные сохраняются в{" "}
-        <code>server/data/rooms.json</code>.
+        Отель: {HOTEL_NAMES[hotel] || hotel}.
       </PageSubtitle>
 
       <Actions style={{ marginBottom: 24 }}>

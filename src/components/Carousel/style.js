@@ -1,5 +1,5 @@
 import styled from "@emotion/styled"
-import img from "../../assets/img";
+import { mediaUrl } from "../../utils/mediaUrl"
 
 export const Root = styled.div`
 	width: 100%;
@@ -55,7 +55,7 @@ export const Slide = styled.div`
 export const SlideImage = styled.div`
 	width: 100%;
 	height: 100%;
-	background: ${({pic}) =>`linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url(${img[pic.img]}) ${pic.pos}` };
+	background: ${({pic}) =>`linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url(${mediaUrl(pic.img)}) ${pic.pos}` };
 	display: block;
 	user-select: none;
 `;

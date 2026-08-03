@@ -100,7 +100,7 @@ export function EntityFormPage({ entityKey: entityKeyProp } = {}) {
           id: recordId || undefined,
           item: payload,
         });
-        setSuccess("Сохранено в JSON");
+        setSuccess("Сохранено");
         navigate(adminPath(`/data/${entity.key}/${created.id}`), { replace: true });
       } else {
         const updated = await updateItem(entity.key, id, {
@@ -113,7 +113,7 @@ export function EntityFormPage({ entityKey: entityKeyProp } = {}) {
               ? recordId
               : undefined,
         });
-        setSuccess("Изменения сохранены в JSON");
+        setSuccess("Изменения сохранены");
         if (updated.id !== id) {
           navigate(adminPath(`/data/${entity.key}/${updated.id}`), { replace: true });
         }

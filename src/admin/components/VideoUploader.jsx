@@ -115,7 +115,7 @@ function resolveUrl(src) {
   if (src.startsWith("blob:") || src.startsWith("http") || src.startsWith("/")) {
     return src;
   }
-  return `/imajes/${src}`;
+  return `/images/${src}`;
 }
 
 export function VideoUploader({

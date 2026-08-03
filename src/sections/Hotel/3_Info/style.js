@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
-import img from "../../../assets/img";
+import { mediaUrl } from "../../../utils/mediaUrl";
 export const Section2 = styled.section`
     padding: 9rem 1.6rem;
     .img-left {
-        background-image: ${ ({ pic1 }) => `url(${ img[pic1] })` };
+        background-image: ${ ({ pic1 }) => `url(${ mediaUrl(pic1) })` };
         background-position: center;
         background-size: cover;
         height: 48.2rem;
@@ -11,7 +11,7 @@ export const Section2 = styled.section`
     }
     .img-right {
         height: 48.2rem;
-        background-image: ${ ({ pic2 }) => `url(${ img[pic2.pic] })` };
+        background-image: ${ ({ pic2 }) => `url(${ mediaUrl(pic2.pic) })` };
         background-position: center;
         background-size: cover;
         
@@ -78,7 +78,7 @@ export const Section2 = styled.section`
         .img-right {
             width: 100%;
             height: 104.2rem;
-            background: ${ ({ pic2 }) => `url(${ img[pic2.pic] }) ${ pic2.pos }` };
+            background: ${ ({ pic2 }) => `url(${ mediaUrl(pic2.pic) }) ${ pic2.pos }` };
             //background: url(<path-to-image>) lightgray -318.347px 0px / 168.94% 100% no-repeat, url(<path-to-image>) lightgray 50% / cover no-repeat;
         }
 

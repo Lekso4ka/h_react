@@ -1,6 +1,6 @@
 import styled from "@emotion/styled"
+import { mediaUrl } from "../../utils/mediaUrl"
 
-import img from "../../assets/img"
 
 export const Block = styled.div`
     background: var(--Beige, #FFF6F0);
@@ -44,7 +44,7 @@ export const Block = styled.div`
 
 export const Hero = styled.section`
     height: 80.4rem;
-    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.30) 0%, rgba(0, 0, 0, 0.30) 100%), url(${ ({ bg }) => img[bg] });
+    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.30) 0%, rgba(0, 0, 0, 0.30) 100%), url(${ ({ bg }) => mediaUrl(bg) });
     box-sizing: border-box;
     background-position: center;
     background-size: cover;
@@ -159,7 +159,7 @@ export const Content = styled.section`
 `
 
 export const Image = styled.div`
-    background-image: url(${ ({ bg }) => img[bg] });
+    background-image: url(${ ({ bg }) => mediaUrl(bg) });
     background-position: center;
     background-size: cover;
     display: flex;
@@ -300,7 +300,7 @@ export const Item = styled.li`
 `
 
 export const ImgItem = styled.div`
-    background-image: url(${ ({ bg }) => img[bg] });
+    background-image: url(${ ({ bg }) => mediaUrl(bg) });
     background-position: center;
     background-size: cover;
     width: 17.4rem;

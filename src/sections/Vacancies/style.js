@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import img from "../../assets/img";
+import { mediaUrl } from "../../utils/mediaUrl";
 
 export const Container = styled.div`
     position: relative;
@@ -177,11 +177,11 @@ export const Item = styled.article`
     }
 
     .img1 {
-        background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url(${ ({ pic }) => img[pic[0]] });
+        background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url(${ ({ pic }) => mediaUrl(pic[0]) });
     }
 
     .img2 {
-        background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url(${ ({ pic }) => img[pic[1]] });
+        background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url(${ ({ pic }) => mediaUrl(pic[1]) });
     }
 
     .links {

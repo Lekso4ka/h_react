@@ -117,7 +117,7 @@ export function EntityListPage() {
     <>
       <PageTitle>{pageTitle}</PageTitle>
       <PageSubtitle>
-        Данные сохраняются в <code>server/data/{entity.key}.json</code>
+        .
       </PageSubtitle>
 
       <Actions style={{ marginBottom: 24 }}>

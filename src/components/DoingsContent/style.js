@@ -1,5 +1,5 @@
 import styled from "@emotion/styled"
-import img from "../../assets/img"
+import { mediaUrl } from "../../utils/mediaUrl"
 
 export const Top = styled.section`
         margin: 0 1.6rem 2rem;
@@ -97,7 +97,7 @@ export const Article = styled.article`
 
     .img {
         height: 19.6rem;
-        background-image: url("${ ({ bg }) => img[bg] }");
+        background-image: url("${ ({ bg }) => mediaUrl(bg) }");
         background-position: center;
         background-size: cover;
     }

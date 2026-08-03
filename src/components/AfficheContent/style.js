@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import img from "../../assets/img";
+import { mediaUrl } from "../../utils/mediaUrl";
 
 export const Container = styled.div`
     display: grid;
@@ -71,7 +71,7 @@ export const Item = styled.article`
     }
 
     .img {
-        background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("${ ({ bg }) => img[bg] }");
+        background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("${ ({ bg }) => mediaUrl(bg) }");
         background-position: center;
         background-size: cover;
     }

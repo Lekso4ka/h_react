@@ -1,5 +1,5 @@
 import styled from "@emotion/styled"
-import img from "../../../assets/img"
+import { mediaUrl } from "../../../utils/mediaUrl"
 
 export const Section = styled.section`
     .tour {
@@ -90,7 +90,7 @@ export const Section = styled.section`
         .img {
             margin: .8rem 0 3rem;
             height: 17.2rem;
-            background-image: ${ ({ pic }) => `url(${ img[pic] })` };
+            background-image: ${ ({ pic }) => `url(${ mediaUrl(pic) })` };
             background-position: center;
             background-size: cover;
         }

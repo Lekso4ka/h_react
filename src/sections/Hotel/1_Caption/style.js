@@ -1,10 +1,10 @@
 import styled from "@emotion/styled";
-import img from "../../../assets/img";
+import { mediaUrl } from "../../../utils/mediaUrl";
 export const Hero = styled.div`
     height: 84.4rem;
     box-sizing: border-box;
     position: relative;
-    background: url(${ ({ bg }) => img[bg] }) lightgray 50% / cover no-repeat;
+    background: url(${ ({ bg }) => mediaUrl(bg) }) lightgray 50% / cover no-repeat;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

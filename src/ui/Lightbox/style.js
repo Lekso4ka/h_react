@@ -1,5 +1,5 @@
 import styled  from "@emotion/styled";
-import img from "../../assets/img";
+import { mediaUrl } from "../../utils/mediaUrl";
 
 export const Container = styled.div`
     opacity: 0;
@@ -68,18 +68,18 @@ export const Images = styled.div`
 export const Image = styled.div`
     background-position: center;
     background-size: cover;
-    background-image: ${({active, bg}) => (active ?  `url("${img[bg]}")` : `linear-gradient(0deg, rgba(0, 0, 0, 0.50) 0%, rgba(0, 0, 0, 0.50) 100%), url("${img[bg]}")`)};
+    background-image: ${({active, bg}) => (active ?  `url("${mediaUrl(bg)}")` : `linear-gradient(0deg, rgba(0, 0, 0, 0.50) 0%, rgba(0, 0, 0, 0.50) 100%), url("${mediaUrl(bg)}")`)};
     position: relative;
     
     &.active {
-        background-image: ${({active, bg}) => (active ?  `url("${img[bg]}")` : `linear-gradient(0deg, rgba(0, 0, 0, 0.50) 0%, rgba(0, 0, 0, 0.50) 100%), url("${img[bg]}")`)};
+        background-image: ${({active, bg}) => (active ?  `url("${mediaUrl(bg)}")` : `linear-gradient(0deg, rgba(0, 0, 0, 0.50) 0%, rgba(0, 0, 0, 0.50) 100%), url("${mediaUrl(bg)}")`)};
         transition-duration: .6s;
         transition-property: transform, background;
         transition-timing-function: ease-out, ease-in;
         transform: translate(calc(-100% - 3rem), 0);
     }
     &.active-r {
-        background-image: ${({active, bg}) => (active ?  `url("${img[bg]}")` : `linear-gradient(0deg, rgba(0, 0, 0, 0.50) 0%, rgba(0, 0, 0, 0.50) 100%), url("${img[bg]}")`)};
+        background-image: ${({active, bg}) => (active ?  `url("${mediaUrl(bg)}")` : `linear-gradient(0deg, rgba(0, 0, 0, 0.50) 0%, rgba(0, 0, 0, 0.50) 100%), url("${mediaUrl(bg)}")`)};
         transition-duration: .6s;
         transition-property: transform, background;
         transition-timing-function: ease-out, ease-in;

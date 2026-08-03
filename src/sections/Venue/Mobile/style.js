@@ -1,5 +1,4 @@
 import styled  from "@emotion/styled";
-import img from "../../../assets/img";
 
 export const Content = styled.div`
     overflow: hidden;
@@ -26,7 +25,7 @@ export const Images = styled.div`
     }
 `
 export const Image = styled.div`
-    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url(${({ bg }) => img[bg]});
+    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url(${({ bg }) => mediaUrl(bg)});
     background-position: center;
     background-size: cover;
     position: relative;

@@ -98,7 +98,7 @@ export function HotelSectionFormPage() {
       const updated = await updateItem("hotels", id, { item: nextItem });
       setFullItem(updated.item);
       setSectionData(pickSectionValue(updated.item, sectionConfig.schema));
-      setSuccess("Изменения сохранены в hotels.json");
+      setSuccess("Изменения сохранены");
     } catch (err) {
       setError(err.message);
     } finally {
@@ -114,7 +114,7 @@ export function HotelSectionFormPage() {
     <form onSubmit={handleSubmit}>
       <PageTitle>{title}</PageTitle>
       <PageSubtitle>
-        Раздел отеля · файл <code>server/data/hotels.json</code> ·{" "}
+        Раздел отеля ·{" "}
         <Link to={adminPath(`/data/hotels/${id}/main`)}>Главная</Link>
         {" · "}
         <Link to={adminPath(`/data/hotels/${id}/services`)}>Услуги</Link>
