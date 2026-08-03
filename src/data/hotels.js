@@ -1,14 +1,13 @@
-import hotels from "./hotels.json";
-
+import { getStore } from "./store";
 
 export function getHotels() {
-    return hotels;
+    return getStore().hotels;
 }
 
 export function getHotelById(id) {
-    return hotels[id]
+    return getStore().hotels[id]
 }
 
 export function getSectionData(id, s) {
-    return hotels[id][s]
+    return getStore().hotels[id][s]
 }

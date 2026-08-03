@@ -1,4 +1,4 @@
-import rooms from "./rooms.json";
+import { getStore } from "./store";
 
 export function decodeRouteParam(value) {
     if (!value) return "";
@@ -10,9 +10,9 @@ export function decodeRouteParam(value) {
 }
 
 export function getRooms(h) {
-    return rooms[h];
+    return getStore().rooms[h];
 }
 
 export function getRoomById(h,r) {
-    return rooms[h][r]
+    return getStore().rooms[h][r]
 }

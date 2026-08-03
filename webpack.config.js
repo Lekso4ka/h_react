@@ -16,7 +16,13 @@ module.exports = () => ({
         port: 3000,
         open: true,
         hot: true,
-        historyApiFallback: true
+        historyApiFallback: true,
+        proxy: [
+            {
+                context: ["/api", "/images"],
+                target: "http://localhost:4000",
+            },
+        ],
     },
     mode: "development",
     module: {

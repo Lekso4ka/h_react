@@ -4,7 +4,7 @@ import { Link } from "../../ui/Link";
 import { SingleActivity } from "../../sections/Activities/SingleActivity";
 import { Article, BtnBlock, Content, Top } from "./style";
 
-import data from "../../data/doings.json";
+import { getDoings } from "../../data";
 import img from "../../assets/img"
 
 const randomize = (data) => {
@@ -22,6 +22,8 @@ export const DoingsContent = () => {
     const location = useLocation();
     const contentRef = useRef()
     const btnRef = useRef()
+    const data = getDoings()
+
     useEffect(() => {
         const hash = location.hash;
         if (hash) {

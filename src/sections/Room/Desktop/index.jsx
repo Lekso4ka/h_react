@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Tour } from "../../../components/Tour";
 import { useCtx } from "../../../Ctx";
-import hData from "../../../data/hotels.json";
 import img from "../../../assets/img";
 
 import { Navigate, useParams } from "react-router-dom";
@@ -9,6 +8,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import {Breadcrumbs} from "../../../ui/Breadcrumbs";
+import { getHotelById } from "../../../data/hotels";
 import { decodeRouteParam, getRoomById } from "../../../data/rooms";
 import { Variants } from "../../../components/Variants";
 import { RoomAside } from "./Aside";
@@ -84,7 +84,7 @@ export const Desktop = () => {
                 <HeaderBlock>
                     <Breadcrumbs data={ [
                         { text: "Главная", link: "/" },
-                        { text: hData[hotel].name, link: `/hotel/${ hotel }` },
+                        { text: getHotelById(hotel).name, link: `/hotel/${ hotel }` },
                         { text: "Номера", link: `/rooms/${ hotel }` },
                         { text: room.name, link: "" },
                     ] }/>

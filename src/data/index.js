@@ -1,45 +1,38 @@
-import activities from "./activities.json";
-import affiche from "./affiche.json";
-import doings from "./doings.json";
-import hotels from "./hotels.json";
-import rooms  from "./rooms.json";
-import stocks from "./stocks.json";
-import vacancies  from "./vacancies.json";
-import venues from "./venues.json";
+import { getStore } from "./store";
 
 export const getActivities = () => {
-    return activities;
+    return getStore().activities;
 }
 
 export const getActivitiesById = (id) => {
-    return activities[id];
+    return getStore().activities[id];
 }
 
 export function getAffiche() {
-    return affiche;
+    return getStore().affiche;
 }
 
 export function getDoings() {
-    return doings;
+    return getStore().doings;
 }
 export function getArticleById(id) {
-    return doings.filter(el => el.id === id)[0];
+    return getStore().doings.filter(el => el.id === id)[0];
 }
 
 export function getHotels() {
-    return hotels;
+    return getStore().hotels;
 }
 
 export function getHotelById(id) {
-    return hotels[id]
+    return getStore().hotels[id]
 }
 
 export function getSectionData(id, s) {
-    return hotels[id][s]
+    return getStore().hotels[id][s]
 }
 
 export function getStocks(h) {
-    return stocks.filter(el => el.hotels.includes(h))
+    return getStore().stocks.filter(el => el.hotels.includes(h))
 }
 
 export function decodeRouteParam(value) {
@@ -52,23 +45,23 @@ export function decodeRouteParam(value) {
 }
 
 export function getRooms(h) {
-    return rooms[h];
+    return getStore().rooms[h];
 }
 
 export function getRoomById(h,r) {
-    return rooms[h][r]
+    return getStore().rooms[h][r]
 }
 export function getVacancies() {
-    return vacancies;
+    return getStore().vacancies;
 }
 export function getVenuesCnt() {
-    return Object.keys(venues).length;
+    return Object.keys(getStore().venues).length;
 }
 
 export function getVenues() {
-    return venues;
+    return getStore().venues;
 }
 
 export function getVenueById(id) {
-    return venues[id]
+    return getStore().venues[id]
 }

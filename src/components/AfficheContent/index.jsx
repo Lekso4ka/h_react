@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "../../ui/Link";
-import data from "../../data/affiche.json"
+import { getAffiche } from "../../data"
 import { parseDate } from "../../utils/parseDate";
 import { Breadcrumbs } from "../../ui/Breadcrumbs";
 import { Icon } from "../../ui/Icon";
@@ -21,6 +21,7 @@ const variants = [
 export const AfficheContent = () => {
     const [activeFilter, setActiveFilter] = useState(false)
     const [filters, setFilters] = useState([])
+    const data = getAffiche()
     
     const updFilter = (v) => {
         if (filters.includes(v)) {

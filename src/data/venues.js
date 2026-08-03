@@ -1,9 +1,9 @@
-import venues from "./venues.json";
+import { getStore } from "./store";
 
 export function getVenues() {
-    return venues;
+    return getStore().venues;
 }
 
 export function getVenueById(id) {
-    return venues[id]
+    return getStore().venues[id]
 }

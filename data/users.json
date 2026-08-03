@@ -1,0 +1,10 @@
+[
+  {
+    "id": "1",
+    "login": "admin",
+    "email": "admin@hotel.local",
+    "passwordHash": "$2b$10$4an2OuItDw5jNKrzBoxvIONZjQUEr19S9gCnCnniW36lIipp/VjZq",
+    "resetToken": null,
+    "resetTokenExpires": null
+  }
+]

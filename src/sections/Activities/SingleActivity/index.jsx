@@ -1,13 +1,14 @@
 import React from "react";
 import { Link } from "../../../ui/Link";
-import data from "../../../data/activities.json";
+import { getActivitiesById } from "../../../data";
 import { Section } from "./style";
 
 export const SingleActivity = ({name}) => {
-    return <Section bg={data[name].subImage}>
+    const data = getActivitiesById(name);
+    return <Section bg={data.subImage}>
         <div className="tooltip">[ Активности ]</div>
-        <h2>{data[name].subTitle}</h2>
-        <p>{data[name].subText}</p>
+        <h2>{data.subTitle}</h2>
+        <p>{data.subText}</p>
         <Link
             color={"light"}
             hover={"light"}

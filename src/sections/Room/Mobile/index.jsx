@@ -2,7 +2,6 @@ import React, { useId, useRef, useState } from "react"
 import { Navigate, useParams } from "react-router-dom";
 import { Tour } from "../../../components/Tour";
 import { Variants } from "../../../components/Variants";
-import hData from "../../../data/hotels.json";
 import { decodeRouteParam, getRoomById } from "../../../data/rooms";
 import { Breadcrumbs } from "../../../ui/Breadcrumbs";
 import { Icon } from "../../../ui/Icon";

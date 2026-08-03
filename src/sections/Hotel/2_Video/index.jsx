@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-import data from "../../../data/hotels.json";
 import { Link } from "../../../ui/Link";
 import { Video } from "../../../ui/Video";
 import { remToPixels } from "../../../utils/remToPx";
