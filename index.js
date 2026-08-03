@@ -9,7 +9,7 @@ const createResourceRouter = require("./routes/resource");
 const { authRequiredUnlessGet } = require("./middleware/auth");
 
 const app = exp();
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 2026;
 
 app.use(cors());
 app.use(exp.json({ limit: "200mb" }));

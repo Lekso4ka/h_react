@@ -23,8 +23,8 @@ export function LoginPage() {
   const location = useLocation();
   const from = location.state?.from || adminPath();
 
-  const [loginValue, setLoginValue] = useState("admin");
-  const [password, setPassword] = useState("admin");
+  const [loginValue, setLoginValue] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [saving, setSaving] = useState(false);
 
