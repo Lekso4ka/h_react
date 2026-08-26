@@ -248,6 +248,28 @@ export function Sidebar() {
         </Group>
 
         <Group>
+          <GroupTitle>Правовая информация</GroupTitle>
+          <Item
+            to={adminPath("/data/legal/info")}
+            className={() => classIf(entityKey === "legal" && id === "info")}
+          >
+            Правовая информация
+          </Item>
+          <Item
+            to={adminPath("/data/legal/rules")}
+            className={() => classIf(entityKey === "legal" && id === "rules")}
+          >
+            Правила отеля
+          </Item>
+          <Item
+            to={adminPath("/data/legal/policy")}
+            className={() => classIf(entityKey === "legal" && id === "policy")}
+          >
+            Политика конфиденциальности
+          </Item>
+        </Group>
+
+        <Group>
           <StaticItem>Редактор меню</StaticItem>
         </Group>
       </NavScroll>

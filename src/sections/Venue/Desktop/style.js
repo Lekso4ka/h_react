@@ -204,7 +204,7 @@ export const Images = styled.div`
 `
 
 export const Image = styled.div`
-    background-image: url(${({ bg }) => mediaUrl(bg)});
+    background-image: url(${({ bg }) => `/images/${bg}`});
     background-position: center;
     background-size: cover;
     height: 59.8rem;

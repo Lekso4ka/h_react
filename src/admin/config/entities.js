@@ -658,6 +658,87 @@ export const entities = {
     },
   },
 
+  legal: {
+    key: "legal",
+    title: "Правовые страницы",
+    kind: "object",
+    keyLabel: "Страница (info / rules / policy)",
+    allowKeyEdit: false,
+    schema: {
+      sections: [
+        {
+          title: "Страница",
+          fields: {
+            pageTitle: { type: "string", label: "Заголовок H1" },
+            label: { type: "string", label: "Красная метка" },
+            docTitle: { type: "string", label: "Заголовок документа H2" },
+            sections: {
+              type: "objectList",
+              label: "Разделы",
+              addLabel: "Добавить раздел",
+              itemLabel: "Раздел",
+              itemFields: {
+                id: { type: "string", label: "ID якоря" },
+                title: { type: "string", label: "Заголовок раздела" },
+                layout: {
+                  type: "select",
+                  label: "Тип блока",
+                  options: [
+                    { value: "text", label: "Текст / списки" },
+                    { value: "services", label: "Услуги (2 колонки)" },
+                    { value: "tariffs", label: "Тарифы" },
+                  ],
+                },
+                text: { type: "paragraphs", label: "Абзацы" },
+                listIntro: { type: "textarea", label: "Вступление к списку" },
+                listItems: {
+                  type: "stringList",
+                  label: "Пункты списка",
+                  addLabel: "Добавить пункт",
+                },
+                textAfter: {
+                  type: "paragraphs",
+                  label: "Абзацы после списка",
+                },
+                links: {
+                  type: "objectList",
+                  label: "Ссылки на документы",
+                  addLabel: "Добавить ссылку",
+                  itemFields: {
+                    title: { type: "string", label: "Название" },
+                    url: { type: "string", label: "URL" },
+                  },
+                },
+                freeTitle: { type: "string", label: "Заголовок бесплатных услуг" },
+                freeItems: {
+                  type: "stringList",
+                  label: "Бесплатные услуги",
+                  addLabel: "Добавить",
+                },
+                paidTitle: { type: "string", label: "Заголовок платных услуг" },
+                paidItems: {
+                  type: "stringList",
+                  label: "Платные услуги",
+                  addLabel: "Добавить",
+                },
+                tariffRows: {
+                  type: "objectList",
+                  label: "Тарифы",
+                  addLabel: "Добавить тариф",
+                  itemFields: {
+                    name: { type: "string", label: "Услуга" },
+                    price: { type: "string", label: "Стоимость" },
+                  },
+                },
+                downloadLabel: { type: "string", label: "Текст кнопки скачивания" },
+              },
+            },
+          },
+        },
+      ],
+    },
+  },
+
   venues: {
     key: "venues",
     title: "Конференц-залы",

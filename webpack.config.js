@@ -20,7 +20,7 @@ module.exports = () => ({
         proxy: [
             {
                 context: ["/api", "/images"],
-                target: "http://localhost:4000",
+                target: "http://localhost:2026",
             },
         ],
     },

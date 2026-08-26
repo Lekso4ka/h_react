@@ -7,6 +7,7 @@ const cache = {
     stocks: [],
     vacancies: [],
     venues: {},
+    legal: {},
 };
 
 let ready = false;
@@ -41,6 +42,7 @@ export function loadSiteData({ force = false } = {}) {
             stocksRes,
             vacanciesRes,
             venuesRes,
+            legalRes,
         ] = await Promise.all([
             fetchJson("/api/activities"),
             fetchJson("/api/affiche"),
@@ -50,6 +52,7 @@ export function loadSiteData({ force = false } = {}) {
             fetchJson("/api/stocks"),
             fetchJson("/api/vacancies"),
             fetchJson("/api/venues"),
+            fetchJson("/api/legal"),
         ]);
 
         cache.activities = activitiesRes.data || {};
@@ -60,6 +63,7 @@ export function loadSiteData({ force = false } = {}) {
         cache.stocks = stocksRes.data || [];
         cache.vacancies = vacanciesRes.data || [];
         cache.venues = venuesRes.data || {};
+        cache.legal = legalRes.data || {};
         ready = true;
         return cache;
     })().catch((error) => {

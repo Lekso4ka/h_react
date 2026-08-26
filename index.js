@@ -59,6 +59,10 @@ app.use(
         kind: "array",
     })
 );
+app.use(
+    "/api/legal",
+    createResourceRouter({ fileName: "legal.json", kind: "object" })
+);
 
 app.get("*splat", (_req, res) => {
     res.sendFile(path.join(__dirname, "static", "index.html"));

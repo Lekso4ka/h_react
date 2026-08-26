@@ -65,3 +65,11 @@ export function getVenues() {
 export function getVenueById(id) {
     return getStore().venues[id]
 }
+
+export function getLegal() {
+    return getStore().legal;
+}
+
+export function getLegalPage(id) {
+    return getStore().legal?.[id];
+}

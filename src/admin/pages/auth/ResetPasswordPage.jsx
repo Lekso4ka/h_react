@@ -70,7 +70,7 @@ export function ResetPasswordPage() {
             <AuthButton type="submit" disabled={saving || !token}>
               {saving ? "Сохранение…" : "Сохранить"}
             </AuthButton>
-            <AuthLink to={adminPath("/login")}>Вернуться к входу</AuthLink>
+            <AuthLink to={adminPath("/login")}>Вернуться ко входу</AuthLink>
           </AuthActions>
         </AuthForm>
       </AuthCard>
