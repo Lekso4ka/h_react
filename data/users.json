@@ -3,7 +3,7 @@
     "id": "1",
     "login": "admin",
     "email": "admin@hotel.local",
-    "passwordHash": "$2b$10$Sg3zGkVPdPIaM8a/RAFjXuJe2n6Sf/ZBQdrf.brC9B.ahg.aGNZ8S",
+    "passwordHash": "$2b$10$6E7J/dJUn5bdI9ZC9t3.IeqOkHdZQVUubn8VCLfoChI8IwJKllsW.",
     "resetToken": null,
     "resetTokenExpires": null
   }
