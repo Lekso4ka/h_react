@@ -2,23 +2,52 @@ import React from "react";
 import { Block, Bottom, Caption, Left, List, Right, Title } from "./style";
 
 export const Footer = () => {
+    const formHandler = async (e) => {
+        e.preventDefault();
+        const form = e.currentTarget;
+        if (!form.elements.consent.checked) return;
+        const payload = {
+            name: form.elements.name.value.trim(),
+            email: form.elements.email.value.trim(),
+            source: "newsletter",
+        };
+        try {
+            const res = await fetch("/api/leads", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload),
+            });
+            const data = await res.json().catch(() => ({}));
+            if (!res.ok) {
+                throw new Error(data.error || "Ошибка отправки");
+            }
+            form.reset();
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
     return <Block aria-label="Подвал сайта">
         <Caption>Голден тюлип & Тюлип инн</Caption>
         
         <Left>
             <Title>Рассылка</Title>
             <p>Подпишитесь на рассылку и оставайтесь в курсе новостей и особых предложений.</p>
-            <div className="form-row">
-                <label>
-                    <input type="text" placeholder="Имя"/>
+            <form onSubmit={ formHandler }>
+                <div className="form-row">
+                    <label>
+                        <input type="text" name="name" placeholder="Имя" required/>
+                    </label>
+                    <label>
+                        <input type="email" name="email" placeholder="Почта" required/>
+                    </label>
+                </div>
+                <label className="consent">
+                    <input type="checkbox" name="consent" required/>
+                    <span>Даю свое <a href="/policy">согласие на обработку</a> моих персональных данных в соответствии с <a href="/policy">политикой конфиденциальности</a>.</span>
                 </label>
-                <label>
-                    <input type="email" placeholder="Почта"/>
-                </label>
-            </div>
-            <input type="checkbox" id="check"/>
-            <label htmlFor="check"><span>Даю свое <a href="">согласие на обработку</a> моих персональных данных в соответствии с <a href="">политикой конфиденциальности</a>.</span></label>
-            <button>Подписаться</button>
+                <button type="submit">Подписаться</button>
+            </form>
             <div className="address">
             <Title>Адрес отелей</Title>
             <p>Россия, Краснодарский край, г. Сочи, Панорама наб., 2-3</p>

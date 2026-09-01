@@ -91,7 +91,8 @@ export const Content = styled.div`
     }
 
     @media (min-width: 576px) {
-        min-height: 108rem;
+        //min-height: 108rem;
+            height: 100vh;
         box-sizing: border-box;
         .line {
             display: none;

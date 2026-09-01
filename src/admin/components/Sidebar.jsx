@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 import { theme } from "../styles/theme";
 
 import { adminPath } from "../paths";
+import { LEAD_SECTIONS } from "../config/leads";
 const Aside = styled.aside`
   display: flex;
   flex-direction: column;
@@ -109,7 +110,7 @@ function classIf(condition) {
 }
 
 export function Sidebar() {
-  const { hotel, entityKey, id, section } = useParams();
+  const { hotel, entityKey, id, section, leadKey } = useParams();
   const [searchParams] = useSearchParams();
   const hotelFilter = searchParams.get("hotel");
 
@@ -131,6 +132,19 @@ export function Sidebar() {
         <TopItem to={adminPath()} end>
           Главная страница
         </TopItem>
+
+        <Group>
+          <GroupTitle>Заявки</GroupTitle>
+          {LEAD_SECTIONS.map((item) => (
+            <Item
+              key={item.key}
+              to={adminPath(`/leads/${item.key}`)}
+              className={() => classIf(leadKey === item.key)}
+            >
+              {item.title}
+            </Item>
+          ))}
+        </Group>
 
         <Group>
           <GroupTitle>Голден Тюлип</GroupTitle>

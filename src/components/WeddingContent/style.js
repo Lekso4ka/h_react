@@ -395,6 +395,7 @@ export const Section2 = styled.section`
 export const Section3 = styled.section`
     padding: 10rem 1.6rem;
     display: grid;
+    overflow-x: clip;
     h4 {
         color: var(--Black-2, #2F3034);
         text-align: center;
@@ -456,18 +457,23 @@ export const Section3 = styled.section`
                 width: 2.1rem;
             }
         }
+        .track {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            flex: 0 0 100%;
+            width: 100%;
+            will-change: transform;
+        }
         .img {
             background-position: center;
             background-size: cover;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
             width: 100%;
             height: 100%;
             flex-shrink: 0;
+            will-change: transform;
         }
-       
     }
     .img1 {
         background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url("${img.we_5}");
@@ -539,7 +545,9 @@ export const Section3 = styled.section`
             grid-column-end: span 2;
             overflow: visible;
             height: 54rem;
-            gap: 10rem;
+            .track {
+                gap: 10rem;
+            }
             .arrow {
                 padding: 2rem;
                 svg {
@@ -557,17 +565,6 @@ export const Section3 = styled.section`
                 background-position: 0 -49.484rem;
                 background-size: 100% 300.673%;
             }
-            .img {
-                transform-origin: 100% center;
-            }
-            .img:not(:nth-of-type(${({ active }) => active})) {
-                transform: scale(125%);
-                
-            }
-            .img:nth-of-type(${({ active }) => active})~.img {
-                transform-origin: 0 center;
-            }
-            
         }
         .tooltip {
             span {
@@ -659,6 +656,23 @@ export const Section4 = styled.section`
             }
             p {
                 font-size: 1.8rem;
+            }
+            @media (hover: hover) {
+                h3, p {
+                    opacity: 0;
+                    transform: translateY(1.2rem);
+                    transition: opacity .55s ease, transform .55s ease;
+                }
+                p {
+                    transition-delay: .08s;
+                }
+                &:hover,
+                &:focus-within {
+                    h3, p {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
             }
         }
         .img {
@@ -899,37 +913,40 @@ export const Section6 = styled.section`
         }
     }
     input[type=checkbox] {
-        display: none;
-        &+label {
-            display: block;
-            padding-left: 2.8rem;
-            position: relative;
-            color: rgba(255, 255, 255, 0.60);
-            font-family: Manrope;
-            font-size: 1.2rem;
-            font-style: normal;
-            font-weight: 500;
-            line-height: 120%;
-            user-select: none;
-            a {
-                color: #fff;
-            }
-            &::before {
-                content: "";
-                width: 1.8rem;
-                height: 1.8rem;
-                box-sizing: border-box;
-                border: .2rem solid #fff;
-                position: absolute;
-                left: 0;
-                @media (min-width: 576px) {
-                    width: 2rem;
-                    height: 2rem;
-                }
-            }
-        }
-        &:active+label::before {
+        appearance: none;
+        -webkit-appearance: none;
+        position: absolute;
+        left: 0;
+        top: 0.1rem;
+        width: 1.8rem;
+        height: 1.8rem;
+        margin: 0;
+        box-sizing: border-box;
+        border: .2rem solid #fff;
+        background-color: transparent;
+        cursor: pointer;
+        &:checked {
             background-color: #fff6f0;
+        }
+        &:focus-visible {
+            outline: .1rem solid #fff;
+            outline-offset: .2rem;
+        }
+    }
+    .consent {
+        display: block;
+        padding-left: 2.8rem;
+        position: relative;
+        color: rgba(255, 255, 255, 0.60);
+        font-family: Manrope;
+        font-size: 1.2rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 120%;
+        user-select: none;
+        cursor: pointer;
+        a {
+            color: #fff;
         }
     }
     button {
@@ -971,13 +988,13 @@ export const Section6 = styled.section`
         input:first-of-type{
             margin-bottom: 0;
         }
-        label{
+        .consent {
             margin-top: .3rem;
             padding-left: 3.2rem;
-            &:before {
-                width: 2rem;
-                height: 2rem
-            }
+        }
+        input[type=checkbox] {
+            width: 2rem;
+            height: 2rem;
         }
         button {
             margin-top: 3.3rem;

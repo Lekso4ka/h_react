@@ -1,0 +1,14 @@
+{
+  "seo": {
+    "title": "",
+    "description": "",
+    "keywords": ""
+  },
+  "default_season": "winter",
+  "hero": {
+    "winter": {
+      "title": "Зима на Розе Хутор",
+      "subtitle": "Комфорт или практичность — выберите свой формат проживания"
+    }
+  }
+}

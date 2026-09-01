@@ -1,0 +1,18 @@
+[
+  {
+    "id": "c069ff8e-8f24-4d12-8afc-a188d3ed2094",
+    "name": "Рита",
+    "source": "newsletter",
+    "date": "02.09.2026",
+    "time": "01:10:04",
+    "email": "123@123.ru"
+  },
+  {
+    "id": "d672b153-4962-487b-9dd4-f3de3b47c215",
+    "name": "Leksa",
+    "source": "wedding",
+    "date": "02.09.2026",
+    "time": "01:12:36",
+    "phone": "123"
+  }
+]

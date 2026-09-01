@@ -5,6 +5,7 @@ const cors = require("cors");
 const roomsRouter = require("./routes/rooms");
 const uploadRouter = require("./routes/upload");
 const authRouter = require("./routes/auth");
+const leadsRouter = require("./routes/leads");
 const createResourceRouter = require("./routes/resource");
 const { authRequiredUnlessGet } = require("./middleware/auth");
 
@@ -21,6 +22,7 @@ app.get("/api/health", (_req, res) => {
 });
 
 app.use("/api/auth", authRouter);
+app.use("/api/leads", leadsRouter);
 
 // Публичное чтение для сайта; запись — только с JWT
 app.use("/api", authRequiredUnlessGet);

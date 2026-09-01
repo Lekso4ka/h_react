@@ -159,42 +159,49 @@ export const Left = styled.div`
         }
     }
     input[type=checkbox] {
-        display: none;
-        &+label {
-            display: flex;
-            align-items: center;
-            padding-left: 3.2rem;
-            position: relative;
-            color: rgba(255, 255, 255, .6);
-            font-size: 1rem;
-            font-weight: 500;
-            line-height: 120%;
-            //width: 36rem;
-            user-select: none;
-            @media (min-width: 576px) {
-                width: 36rem;
-                font-size: 1.2rem;
-                line-height: 100%;
-            }
-            a {
-                color: #fff;
-            }
-            &::before {
-                content: "";
-                width: 1.8rem;
-                height: 1.8rem;
-                box-sizing: border-box;
-                border: .2rem solid #fff;
-                position: absolute;
-                left: 0;
-                @media (min-width: 576px) {
-                    width: 2rem;
-                    height: 2rem;
-                }
-            }
-        }
-        &:active+label::before {
+        appearance: none;
+        -webkit-appearance: none;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 1.8rem;
+        height: 1.8rem;
+        margin: 0;
+        box-sizing: border-box;
+        border: .2rem solid #fff;
+        background-color: transparent;
+        cursor: pointer;
+        flex-shrink: 0;
+        &:checked {
             background-color: #fff6f0;
+        }
+        &:focus-visible {
+            outline: .1rem solid #fff;
+            outline-offset: .2rem;
+        }
+        @media (min-width: 576px) {
+            width: 2rem;
+            height: 2rem;
+        }
+    }
+    .consent {
+        display: flex;
+        align-items: center;
+        padding-left: 3.2rem;
+        position: relative;
+        color: rgba(255, 255, 255, .6);
+        font-size: 1rem;
+        font-weight: 500;
+        line-height: 120%;
+        user-select: none;
+        cursor: pointer;
+        @media (min-width: 576px) {
+            width: 36rem;
+            font-size: 1.2rem;
+            line-height: 100%;
+        }
+        a {
+            color: #fff;
         }
     }
     button {
