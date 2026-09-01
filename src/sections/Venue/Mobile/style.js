@@ -1,4 +1,5 @@
 import styled  from "@emotion/styled";
+import { mediaUrl } from "../../../utils/mediaUrl";
 
 export const Content = styled.div`
     overflow: hidden;

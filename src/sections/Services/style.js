@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { mediaUrl } from "../../utils/mediaUrl";
 
 export const Container = styled.div`
     padding: ${({page}) => page ? "7.8rem" : "0"} 1.6rem 9rem;
@@ -99,17 +98,22 @@ export const Section = styled.section`
     }
     .img {
         height: 42.8rem;
-        background-image: ${ ({ pic }) => `url(${ mediaUrl(pic) })` };
-        background-position: center;
-        background-size: cover;
         margin-bottom: 2rem;
-        transition: background-image 200ms linear;
+    }
+    .img-pin {
+        height: 42.8rem;
+    }
+    .img-pin .img {
+        width: 100%;
+        height: 100%;
+        margin-bottom: 0;
     }
     .fix {
         display: grid;
         grid-column-end: span 2;
         grid-template-columns: 76.7rem 1fr;
         gap: 18rem;
+        align-items: start;
     }
     @media (min-width: 576px) {
         grid-template-columns: 76.7rem 1fr;
@@ -150,6 +154,10 @@ export const Section = styled.section`
         }
         .img {
             margin-bottom: 0;
+        }
+        .img-pin {
+            min-width: 0;
+            align-self: start;
         }
     }
 `

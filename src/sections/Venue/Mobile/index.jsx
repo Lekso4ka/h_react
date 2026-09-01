@@ -5,7 +5,7 @@ import { Link } from "../../../ui/Link";
 import { Vector } from "../../../ui/Vector";
 import { Content, Info, InfoItem, Options, Variant, Text, Images, Image, Formats, Block, Variants } from "./style";
 
-export const Mobile = ({ data }) => {
+export const Mobile = ({ data, onRequest }) => {
     const [w, setW] = useState(false);
     const ref = useRef();
     useEffect(() => {
@@ -121,7 +121,7 @@ export const Mobile = ({ data }) => {
                 { data.formats.length > 0 && <span>предоставим по запросу</span> }
             </Options>
             
-            <Link to="">Отправить запрос</Link>
+            <Link to="" onClick={(e) => { e.preventDefault(); onRequest(); }}>Отправить запрос</Link>
             <Line/>
         </Block>
     </Content>

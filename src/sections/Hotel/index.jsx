@@ -18,7 +18,7 @@ export const HotelContent = () => {
         <VideoSection data={data.section_1}/>
         <Info data={data.section_2}/>
         <Images data={data.section_4}/>
-        <Rooms data={data.section_3} name={data.name}/>
+        <Rooms data={data.section_3} link={data.room_link} name={data.name}/>
         <RestaurantContent/>
         <ServicesContent/>
         <EventsContent/>

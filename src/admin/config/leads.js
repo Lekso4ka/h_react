@@ -30,6 +30,11 @@ export const LEAD_SECTIONS = [
       { key: "time", label: "Время", mono: true },
       { key: "name", label: "Имя" },
       { key: "phone", label: "Телефон", href: "tel" },
+      { key: "email", label: "Почта", href: "mailto" },
+      { key: "venue", label: "Площадка" },
+      { key: "guests", label: "Участники" },
+      { key: "eventDate", label: "Даты мероприятия" },
+      { key: "wishes", label: "Пожелания" },
     ],
   },
 ];

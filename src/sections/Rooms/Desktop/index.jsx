@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { getSectionData } from "../../../data/hotels";
 import { getRooms } from "../../../data/rooms";
 import { Cursor, useCursor } from "../../../ui/Cursor";
+import { FadeBg } from "../../../ui/FadeBg";
 import { pluralize } from "../../../utils/pluralize";
 import { Section } from "./style";
 
@@ -37,7 +38,6 @@ export const Desktop = ({h}) => {
     }
     
     return <Section
-        pic={img}
         $hideCursor={hideNativeCursor}
     >
         <div className="content">
@@ -57,7 +57,7 @@ export const Desktop = ({h}) => {
                         <span>{pluralize(rooms, ["комната", "комнаты", "комнат"])}</span>
                     </div>
                 </div>
-                <div className="img"/>
+                <FadeBg className="img" src={img} />
             </div>
             <ul ref={zoneRef}>
                 { data.variants.map(el => <li

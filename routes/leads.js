@@ -20,6 +20,13 @@ function asString(value, max) {
   return String(value ?? "").trim().slice(0, max);
 }
 
+function formatEventDate(value) {
+  const raw = asString(value, 40);
+  const iso = raw.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (iso) return `${iso[3]}.${iso[2]}.${iso[1]}`;
+  return raw;
+}
+
 function sentAt(now = new Date()) {
   const parts = Object.fromEntries(
     new Intl.DateTimeFormat("ru-RU", {
@@ -49,6 +56,11 @@ router.post("/", (req, res) => {
     const email = asString(body.email, 200).toLowerCase();
     const source = asString(body.source, 60) || "wedding";
 
+    const venue = asString(body.venue, 200);
+    const guests = asString(body.guests, 20);
+    const wishes = asString(body.wishes, 2000);
+    const eventDate = formatEventDate(body.eventDate);
+
     if (!name) {
       return res.status(400).json({ error: "Укажите имя" });
     }
@@ -62,6 +74,14 @@ router.post("/", (req, res) => {
     } else if (!phone) {
       return res.status(400).json({ error: "Укажите телефон" });
     }
+    if (source === "conference") {
+      if (!email) {
+        return res.status(400).json({ error: "Укажите почту" });
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        return res.status(400).json({ error: "Некорректная почта" });
+      }
+    }
 
     const lead = {
       id: uuidv4(),
@@ -71,6 +91,10 @@ router.post("/", (req, res) => {
     };
     if (phone) lead.phone = phone;
     if (email) lead.email = email;
+    if (venue) lead.venue = venue;
+    if (guests) lead.guests = guests;
+    if (eventDate) lead.eventDate = eventDate;
+    if (wishes) lead.wishes = wishes;
 
     const leads = readLeads();
     leads.push(lead);

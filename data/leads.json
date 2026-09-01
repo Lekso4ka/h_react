@@ -14,5 +14,17 @@
     "date": "02.09.2026",
     "time": "01:12:36",
     "phone": "123"
+  },
+  {
+    "id": "e3e801de-65d3-4571-9913-131d2a4ca615",
+    "name": "Leksa",
+    "source": "conference",
+    "date": "02.09.2026",
+    "time": "02:11:11",
+    "phone": "123",
+    "email": "lexysnake@gmail.com",
+    "venue": "Обзорная площадка",
+    "guests": "23",
+    "eventDate": "24.09.2026"
   }
 ]

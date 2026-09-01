@@ -1,9 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useCtx } from "../../Ctx";
 import { getHotels } from "../../data/hotels";
 import { Breadcrumbs } from "../../ui/Breadcrumbs";
 import { Line } from "../../ui/Line";
+import { FadeBg } from "../../ui/FadeBg";
 import { SquareItem } from "../../ui/SquareItem";
 import { remToPixels } from "../../utils/remToPx";
 import { Faq } from "./Faq";
@@ -20,26 +21,39 @@ const names = [
     "golden-tulip",
     "tulip-inn"
 ]
+
+const ServicesImage = ({ className, defaultSrc, srcApiRef }) => {
+    const [src, setSrc] = useState(defaultSrc);
+    useEffect(() => {
+        srcApiRef.current = (next) => setSrc(next || defaultSrc);
+        return () => { srcApiRef.current = null; };
+    }, [defaultSrc, srcApiRef]);
+    useEffect(() => {
+        setSrc(defaultSrc);
+    }, [defaultSrc]);
+    return <FadeBg className={className} src={src || defaultSrc} />;
+};
+
 export const ServicesContent = ({ page }) => {
     const [service, setService] = useState("include")
     const [faqReset, setFaqReset] = useState(0);
-    const [refresh, setRefresh] = useState(false);
-    const [img, setImg] = useState(null)
     const { mob } = useCtx()
     const { id } = useParams();
     const navigate = useNavigate();
     const h = getHotels()
     const ref = useRef()
+    const srcApiRef = useRef(null)
+    const defaultSrc = h[id].section_6.image
+    const setImg = useCallback((next) => {
+        srcApiRef.current?.(next)
+    }, [])
+    const refreshPin = useCallback(() => {
+        ScrollTrigger.refresh()
+    }, [])
     useEffect(() => {
         setFaqReset(faqReset + 1)
-        setRefresh(true)
+        ScrollTrigger.refresh()
     }, [service])
-    useEffect(() => {
-        if (refresh) {
-            ScrollTrigger.refresh()
-            setRefresh(false)
-        }
-    }, [refresh])
     
     useGSAP(
         () => {
@@ -48,26 +62,19 @@ export const ServicesContent = ({ page }) => {
             const mm = gsap.matchMedia();
             
             mm.add(`(min-width: 576px)`, () => {
-                const image = container.querySelector(".img")
+                const image = container.querySelector(".img-pin")
+                if (!image) return;
                 const getFaqHeight = () => {
-                    return container.offsetHeight - image.offsetHeight;
+                    return Math.max(0, container.offsetHeight - image.offsetHeight);
                 };
                 
                 ScrollTrigger.create({
                     trigger: container,
-                    start: `top ${remToPixels(9.2 + 1.8)}`,
+                    start: () => `top ${remToPixels(9.2 + 1.8)}`,
                     end: () => `+=${ getFaqHeight() }`,
                     pin: image,
-                    //anticipatePin: 1,
-                    scrub: 1,
+                    anticipatePin: 1,
                     invalidateOnRefresh: true,
-                    onRefresh: (self) => {
-                        const newStart = remToPixels(9.2 + 1.8);
-                        self.start = `top ${newStart}`;
-                        const newEnd = getFaqHeight();
-                        self.end = `+=${newEnd}`;
-                        self.update();
-                    }
                 });
                 
                 return () => {
@@ -97,7 +104,7 @@ export const ServicesContent = ({ page }) => {
                 </Tabs>
             </div>
         </> }
-        <Section pic={ img || h[id].section_6.image  } id="services" page={ page }>
+        <Section id="services" page={ page }>
             { mob
                 ? <>
                     <Line/>
@@ -118,7 +125,7 @@ export const ServicesContent = ({ page }) => {
                             onClick={ () => setService("additional") }
                         >Дополнительно</SquareItem>
                     </div>
-                    <div className="img"/>
+                    <FadeBg className="img" src={defaultSrc} />
                     <Faq items={ h[id].section_6[service] } reset={ faqReset }/>
                 </>
                 : <>
@@ -142,12 +149,18 @@ export const ServicesContent = ({ page }) => {
                         <p>{ h[id].section_6.text_2 }</p>
                     </div>
                     <div ref={ref} className="fix">
-                        <div className="img"/>
+                        <div className="img-pin">
+                            <ServicesImage
+                                className="img"
+                                defaultSrc={defaultSrc}
+                                srcApiRef={srcApiRef}
+                            />
+                        </div>
                         <Faq
                             items={ h[id].section_6[service] }
                             reset={ faqReset }
                             className="faq"
-                            refresh={setRefresh}
+                            refresh={refreshPin}
                             setImg={setImg}
                         />
                     </div>

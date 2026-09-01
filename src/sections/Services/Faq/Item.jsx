@@ -58,7 +58,9 @@ export const Item = ({
                     height: targetHeight,
                     duration: OPEN_DURATION,
                     ease: "power2.out",
-                    onComplete: () => gsap.set(panel, { height: "auto", overflow: "visible" })
+                    onComplete: () => {
+                        gsap.set(panel, { height: "auto", overflow: "visible" });
+                    }
                 });
                 gsap.to(inner, {
                     opacity: 1,
@@ -79,9 +81,6 @@ export const Item = ({
                 });
                 gsap.to(icon, { rotate: 0, duration: 0.3, ease: "power2.inOut" });
             }
-            setTimeout(() => {
-                refresh(true)
-            }, 1000)
             
         },
         { scope: rootRef, dependencies: [isOpen] }
