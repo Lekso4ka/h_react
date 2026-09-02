@@ -20,6 +20,7 @@ import { Services } from "./pages/Services";
 import { Stocks } from "./pages/Stocks";
 import { Vacancies } from "./pages/Vacancies";
 import { Venue } from "./pages/Venue";
+import { Teambuilding } from "./pages/Teambuilding";
 import { Wedding } from "./pages/Wedding";
 
 export const App = () => {
@@ -31,6 +32,7 @@ export const App = () => {
             {/* Мероприятия */ }
             <Route path="/events/:event" element={ <Events/> }/>
             <Route path="/wedding" element={ <Wedding/> }/>
+            <Route path="/teambuilding" element={ <Teambuilding/> }/>
             {/* События */ }
             <Route path="/doings" element={ <Doings/> }/>
             <Route path="/article/:article" element={ <Article/> }/>

@@ -10,7 +10,7 @@ import { Container, BarBg, NavBlock, Button } from "./style";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-const dark = ["/", "/hotel/golden-tulip", "/hotel/tulip-inn", "/activities/winter", "/activities/summer", "/actions", "/vacancies", "/wedding", "/stock/golden-tulip", "/stock/tulip-inn"]
+const dark = ["/", "/hotel/golden-tulip", "/hotel/tulip-inn", "/activities/winter", "/activities/summer", "/actions", "/vacancies", "/wedding", "/teambuilding", "/stock/golden-tulip", "/stock/tulip-inn"]
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 

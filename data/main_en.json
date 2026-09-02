@@ -1,10 +1,10 @@
 {
+  "default_season": "winter",
   "seo": {
     "title": "",
     "description": "",
     "keywords": ""
   },
-  "default_season": "winter",
   "hero": {
     "winter_video": "file.mp4",
     "winter_video_preview": "",
@@ -199,6 +199,21 @@
           "Outdoor ceremony",
           "A compliment for the newlyweds",
           "Discount on guest stays"
+        ]
+      },
+      {
+        "id": "teambuilding",
+        "name": "Teambuilding in the heart of the mountains",
+        "size": 250,
+        "guests": 100,
+        "image": "56f5211c-004c-416e-80b4-748e1ef9d700.png",
+        "link": "teambuilding",
+        "list": [
+          "In the very heart of Rosa Khutor",
+          "Equipped halls and terraces",
+          "Unique mountain activities",
+          "A complimentary room for the organizer",
+          "Special rates for participants"
         ]
       }
     ]

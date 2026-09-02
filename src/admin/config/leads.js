@@ -11,6 +11,17 @@ export const LEAD_SECTIONS = [
     ],
   },
   {
+    key: "teambuilding",
+    title: "Тимбилдинг",
+    empty: "Заявок на тимбилдинг пока нет",
+    columns: [
+      { key: "date", label: "Дата", mono: true },
+      { key: "time", label: "Время", mono: true },
+      { key: "name", label: "Имя" },
+      { key: "phone", label: "Телефон", href: "tel" },
+    ],
+  },
+  {
     key: "newsletter",
     title: "Рассылка",
     empty: "Заявок на рассылку пока нет",
