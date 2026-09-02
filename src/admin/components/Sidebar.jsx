@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, useLocation, useNavigate, useParams } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate, useParams } from "react-router-dom";
 import styled from "@emotion/styled";
 import { theme } from "../styles/theme";
 
@@ -15,13 +15,19 @@ const Aside = styled.aside`
   overflow: hidden;
 `;
 
-const HomeLink = styled(NavLink)`
+const TopLinks = styled.div`
   flex-shrink: 0;
   height: 82px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+`;
+
+const iconLinkStyles = `
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   color: rgba(255, 246, 240, 0.72);
   transition: background 0.15s ease, color 0.15s ease;
 
@@ -30,15 +36,24 @@ const HomeLink = styled(NavLink)`
     color: ${theme.colors.beige};
   }
 
-  &.active {
-    background: ${theme.colors.red};
-    color: ${theme.colors.beige};
-  }
-
   svg {
     width: 26px;
     height: 26px;
   }
+`;
+
+const HomeLink = styled(NavLink)`
+  ${iconLinkStyles}
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
+
+  &.active {
+    background: ${theme.colors.red};
+    color: ${theme.colors.beige};
+  }
+`;
+
+const SiteLink = styled(Link)`
+  ${iconLinkStyles}
 `;
 
 const Head = styled.div`
@@ -141,6 +156,20 @@ function HomeIcon() {
   );
 }
 
+function SiteIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden>
+      <circle cx="12" cy="12" r="8.2" stroke="currentColor" strokeWidth="1.6" />
+      <path
+        d="M3.8 12h16.4M12 3.8c2.3 2.4 3.5 5.2 3.5 8.2s-1.2 5.8-3.5 8.2M12 3.8C9.7 6.2 8.5 9 8.5 12s1.2 5.8 3.5 8.2"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export function Sidebar() {
   const { hotel, entityKey, id, section, leadKey } = useParams();
   const location = useLocation();
@@ -169,9 +198,14 @@ export function Sidebar() {
 
   return (
     <Aside>
-      <HomeLink to={adminPath()} end aria-label="Главная админки">
-        <HomeIcon />
-      </HomeLink>
+      <TopLinks>
+        <HomeLink to={adminPath()} end aria-label="Главная админки">
+          <HomeIcon />
+        </HomeLink>
+        <SiteLink to="/" aria-label="На сайт">
+          <SiteIcon />
+        </SiteLink>
+      </TopLinks>
       <Head>
         <Tab
           type="button"
