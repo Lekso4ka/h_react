@@ -5,13 +5,19 @@ const multer = require("multer");
 const { v4: uuidv4 } = require("uuid");
 const { readJson, writeJson } = require("../lib/jsonStore");
 const { authRequired } = require("../middleware/auth");
+const {
+  createSubscriber,
+  deleteSubscriber,
+  findSubscriberByEmail,
+  listSubscribers,
+} = require("../lib/subscribers");
 
 const router = express.Router();
 const FILE = "leads.json";
 const TIME_ZONE = "Europe/Moscow";
 const RESUMES_DIR = path.join(__dirname, "..", "resumes");
 const RESUME_MAX_BYTES = Math.round(68.5 * 1024 * 1024);
-const EMAIL_SOURCES = new Set(["newsletter", "conference", "vacancy", "stock"]);
+const EMAIL_SOURCES = new Set(["conference", "vacancy", "stock"]);
 
 if (!fs.existsSync(RESUMES_DIR)) {
   fs.mkdirSync(RESUMES_DIR, { recursive: true });
@@ -97,7 +103,25 @@ function removeResume(filename) {
   }
 }
 
-function saveLead(req, res) {
+async function saveNewsletter(res, { name, email }) {
+  if (!email) {
+    return res.status(400).json({ error: "Укажите почту" });
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return res.status(400).json({ error: "Некорректная почта" });
+  }
+
+  const existing = await findSubscriberByEmail(email);
+  if (existing) {
+    return res.status(201).json({ ok: true, id: existing.id });
+  }
+
+  const created = await createSubscriber({ name, email });
+  const subscriber = created || (await findSubscriberByEmail(email));
+  return res.status(201).json({ ok: true, id: subscriber.id });
+}
+
+async function saveLead(req, res) {
   try {
     const body = req.body && typeof req.body === "object" ? req.body : {};
     const name = asString(body.name, 200);
@@ -121,13 +145,10 @@ function saveLead(req, res) {
       return res.status(400).json({ error: "Укажите имя" });
     }
     if (source === "newsletter") {
-      if (!email) {
-        return res.status(400).json({ error: "Укажите почту" });
-      }
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        return res.status(400).json({ error: "Некорректная почта" });
-      }
-    } else if (!phone) {
+      return await saveNewsletter(res, { name, email });
+    }
+
+    if (!phone) {
       if (req.file) removeResume(req.file.filename);
       return res.status(400).json({ error: "Укажите телефон" });
     }
@@ -206,10 +227,14 @@ function byDateTimeDesc(a, b) {
   return leadTimestamp(b) - leadTimestamp(a);
 }
 
-router.get("/", authRequired, (req, res) => {
+router.get("/", authRequired, async (req, res) => {
   try {
     const source = asString(req.query.source, 60);
-    let list = readLeads();
+    if (source === "newsletter") {
+      return res.json({ list: await listSubscribers() });
+    }
+
+    let list = readLeads().filter((lead) => lead.source !== "newsletter");
     if (source) {
       list = list.filter((lead) => lead.source === source);
     }
@@ -237,9 +262,13 @@ router.get("/:id/file", authRequired, (req, res) => {
   }
 });
 
-router.delete("/:id", authRequired, (req, res) => {
+router.delete("/:id", authRequired, async (req, res) => {
   try {
     const id = String(req.params.id || "");
+    if (await deleteSubscriber(id)) {
+      return res.json({ ok: true });
+    }
+
     const leads = readLeads();
     const lead = leads.find((item) => item.id === id);
     const next = leads.filter((item) => item.id !== id);

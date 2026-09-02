@@ -1,13 +1,5 @@
 [
   {
-    "id": "c069ff8e-8f24-4d12-8afc-a188d3ed2094",
-    "name": "Рита",
-    "source": "newsletter",
-    "date": "02.09.2026",
-    "time": "01:10:04",
-    "email": "123@123.ru"
-  },
-  {
     "id": "d672b153-4962-487b-9dd4-f3de3b47c215",
     "name": "Leksa",
     "source": "wedding",
@@ -59,14 +51,6 @@
     "phone": "123"
   },
   {
-    "id": "a21f7ce2-fac1-4ec9-8728-9ad9874c7356",
-    "name": "123",
-    "source": "newsletter",
-    "date": "02.09.2026",
-    "time": "03:03:48",
-    "email": "lexysnake@gmail.com"
-  },
-  {
     "id": "d1318f38-1741-48f5-b38a-0757d40a32a3",
     "name": "123",
     "source": "conference",
@@ -75,14 +59,6 @@
     "phone": "123",
     "email": "123@123.ru",
     "venue": "Бальный зал"
-  },
-  {
-    "id": "6b802add-1e4a-4a3e-9279-072864a7c4cc",
-    "name": "123",
-    "source": "newsletter",
-    "date": "02.09.2026",
-    "time": "03:05:07",
-    "email": "lexysnake@gmail.com"
   },
   {
     "id": "7538e001-2522-4f91-8837-c15369d7021c",
