@@ -34,6 +34,27 @@ const NestedHeader = styled.div`
   gap: 12px;
 `;
 
+const CheckboxList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`;
+
+const CheckboxRow = styled.label`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  color: ${theme.colors.text};
+
+  input {
+    width: 18px;
+    height: 18px;
+    accent-color: ${theme.colors.red};
+  }
+`;
+
 const Remove = styled.button`
   border: 0;
   background: transparent;
@@ -71,6 +92,7 @@ function emptyFromFields(fields = {}) {
         result[key] = def.default ?? false;
         break;
       case "stringList":
+      case "checkboxList":
       case "paragraphs":
       case "images":
         result[key] = [];
@@ -124,6 +146,7 @@ export function cleanByFields(value, fields = {}, root) {
         result[key] = Boolean(current);
         break;
       case "stringList":
+      case "checkboxList":
         result[key] = cleanStringList(current);
         break;
       case "paragraphs":
@@ -227,6 +250,36 @@ function FieldControl({ def, value, onChange }) {
           <span>{def.checkboxLabel || "Да"}</span>
         </label>
       );
+    case "checkboxList": {
+      const selected = Array.isArray(value) ? value : [];
+      return (
+        <CheckboxList>
+          {(def.options || []).map((option) => {
+            const optionValue =
+              typeof option === "string" ? option : option.value;
+            const optionLabel =
+              typeof option === "string" ? option : option.label;
+            const checked = selected.includes(optionValue);
+            return (
+              <CheckboxRow key={optionValue}>
+                <input
+                  type="checkbox"
+                  checked={checked}
+                  onChange={(e) => {
+                    if (e.target.checked) {
+                      onChange([...selected, optionValue]);
+                    } else {
+                      onChange(selected.filter((item) => item !== optionValue));
+                    }
+                  }}
+                />
+                <span>{optionLabel}</span>
+              </CheckboxRow>
+            );
+          })}
+        </CheckboxList>
+      );
+    }
     case "stringList":
       return (
         <StringListField

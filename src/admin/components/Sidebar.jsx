@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, useLocation, useParams, useSearchParams } from "react-router-dom";
+import { NavLink, useLocation, useNavigate, useParams } from "react-router-dom";
 import styled from "@emotion/styled";
 import { theme } from "../styles/theme";
 
@@ -15,17 +15,58 @@ const Aside = styled.aside`
   overflow: hidden;
 `;
 
+const HomeLink = styled(NavLink)`
+  flex-shrink: 0;
+  height: 82px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 246, 240, 0.72);
+  transition: background 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    background: rgba(150, 40, 31, 0.35);
+    color: ${theme.colors.beige};
+  }
+
+  &.active {
+    background: ${theme.colors.red};
+    color: ${theme.colors.beige};
+  }
+
+  svg {
+    width: 26px;
+    height: 26px;
+  }
+`;
+
 const Head = styled.div`
   flex-shrink: 0;
   height: 82px;
   display: flex;
   align-items: center;
   padding: 0 42px;
+  gap: 28px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+`;
+
+const Tab = styled.button`
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
   font-size: 18px;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+  color: ${({ $active }) =>
+    $active ? theme.colors.beige : "rgba(255, 246, 240, 0.45)"};
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: ${theme.colors.beige};
+  }
 `;
 
 const NavScroll = styled.nav`
@@ -83,33 +124,30 @@ const Item = styled(NavLink)`
   }
 `;
 
-const TopItem = styled(NavLink)`
-  ${itemStyles}
-  padding: 24px 42px;
-  font-size: 16px;
-  font-weight: 700;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-
-  &:hover {
-    background: rgba(150, 40, 31, 0.35);
-  }
-
-  &.active {
-    background: ${theme.colors.red};
-    color: ${theme.colors.beige};
-  }
-`;
-
 function classIf(condition) {
   return condition ? "active" : undefined;
+}
+
+function HomeIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden>
+      <path
+        d="M4.5 10.5 12 4l7.5 6.5V20a1 1 0 0 1-1 1h-4.2v-6.2H9.7V21H5.5a1 1 0 0 1-1-1v-9.5Z"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
 }
 
 export function Sidebar() {
   const { hotel, entityKey, id, section, leadKey } = useParams();
   const location = useLocation();
-  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const isLeadsTab = location.pathname.startsWith(adminPath("/leads"));
+  const isHomeEditor = location.pathname === adminPath("/home");
   const isMenu = location.pathname === adminPath("/menu");
-  const hotelFilter = searchParams.get("hotel");
 
   const isHotelSection = (hotelId, sectionKey) =>
     classIf(section === sectionKey && id === hotelId);
@@ -119,28 +157,59 @@ export function Sidebar() {
   const isActivity = (season) =>
     classIf(entityKey === "activities" && id === season);
 
-  const isStocksHotel = (hotelId) =>
-    classIf(entityKey === "stocks" && hotelFilter === hotelId);
+  const openTab = (tab) => {
+    if (tab === "leads" && !isLeadsTab) {
+      navigate(adminPath(`/leads/${LEAD_SECTIONS[0].key}`));
+      return;
+    }
+    if (tab === "sections" && isLeadsTab) {
+      navigate(adminPath("/home"));
+    }
+  };
 
   return (
     <Aside>
-      <Head>Разделы</Head>
+      <HomeLink to={adminPath()} end aria-label="Главная админки">
+        <HomeIcon />
+      </HomeLink>
+      <Head>
+        <Tab
+          type="button"
+          $active={!isLeadsTab}
+          onClick={() => openTab("sections")}
+        >
+          Разделы
+        </Tab>
+        <Tab
+          type="button"
+          $active={isLeadsTab}
+          onClick={() => openTab("leads")}
+        >
+          Заявки
+        </Tab>
+      </Head>
       <NavScroll>
-        <TopItem to={adminPath()} end>
-          Главная страница
-        </TopItem>
-
+        {isLeadsTab ? (
+          <Group>
+            {LEAD_SECTIONS.map((item) => (
+              <Item
+                key={item.key}
+                to={adminPath(`/leads/${item.key}`)}
+                className={() => classIf(leadKey === item.key)}
+              >
+                {item.title}
+              </Item>
+            ))}
+          </Group>
+        ) : (
+          <>
         <Group>
-          <GroupTitle>Заявки</GroupTitle>
-          {LEAD_SECTIONS.map((item) => (
-            <Item
-              key={item.key}
-              to={adminPath(`/leads/${item.key}`)}
-              className={() => classIf(leadKey === item.key)}
-            >
-              {item.title}
-            </Item>
-          ))}
+          <Item
+            to={adminPath("/home")}
+            className={() => classIf(isHomeEditor)}
+          >
+            Главная страница
+          </Item>
         </Group>
 
         <Group>
@@ -243,18 +312,12 @@ export function Sidebar() {
         </Group>
 
         <Group>
-          <GroupTitle>Акции</GroupTitle>
           <Item
-            to={{ pathname: adminPath("/data/stocks"), search: "?hotel=golden-tulip" }}
-            className={() => isStocksHotel("golden-tulip")}
+            to={adminPath("/data/stocks")}
+            end
+            className={() => classIf(entityKey === "stocks")}
           >
-            Голден Тюлип
-          </Item>
-          <Item
-            to={{ pathname: adminPath("/data/stocks"), search: "?hotel=tulip-inn" }}
-            className={() => isStocksHotel("tulip-inn")}
-          >
-            Тюлипп Инн
+            Акции
           </Item>
         </Group>
 
@@ -288,6 +351,8 @@ export function Sidebar() {
             Редактор меню
           </Item>
         </Group>
+          </>
+        )}
       </NavScroll>
     </Aside>
   );

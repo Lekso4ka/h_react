@@ -1,6 +1,6 @@
 import React from "react";
-import { useEffect, useMemo, useState } from "react";
-import { Link, useParams, useSearchParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import styled from "@emotion/styled";
 import { deleteItem, fetchList } from "../api/resource";
 import { getEntity } from "../config/entities";
@@ -15,10 +15,6 @@ import {
 import { theme } from "../styles/theme";
 
 import { adminPath } from "../paths";
-const HOTEL_NAMES = {
-  "golden-tulip": "Голден Тюлип",
-  "tulip-inn": "Тюлипп Инн",
-};
 
 const Table = styled.table`
   width: 100%;
@@ -60,8 +56,6 @@ const Empty = styled.p`
 
 export function EntityListPage() {
   const { entityKey } = useParams();
-  const [searchParams] = useSearchParams();
-  const hotelFilter = searchParams.get("hotel");
   const entity = getEntity(entityKey);
   const [list, setList] = useState([]);
   const [error, setError] = useState("");
@@ -85,14 +79,7 @@ export function EntityListPage() {
     load();
   }, [entityKey]);
 
-  const visibleList = useMemo(() => {
-    if (entityKey !== "stocks" || !hotelFilter) return list;
-    return list.filter((row) =>
-      Array.isArray(row.item?.hotels)
-        ? row.item.hotels.includes(hotelFilter)
-        : true
-    );
-  }, [list, entityKey, hotelFilter]);
+  const visibleList = list;
 
   if (!entity) {
     return <ErrorText>Раздел не найден</ErrorText>;
@@ -108,10 +95,7 @@ export function EntityListPage() {
     }
   };
 
-  const pageTitle =
-    entityKey === "stocks" && hotelFilter
-      ? `Акции · ${HOTEL_NAMES[hotelFilter] || hotelFilter}`
-      : entity.title;
+  const pageTitle = entity.title;
 
   return (
     <>

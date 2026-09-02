@@ -1,4 +1,9 @@
 {
+  "seo": {
+    "title": "",
+    "description": "",
+    "keywords": ""
+  },
   "default_season": "winter",
   "hero": {
     "winter_video": "file.mp4",

@@ -1,3 +1,5 @@
+import { seoSection } from "./seo";
+
 const hotelCardFields = {
   name: { type: "string", label: "Название" },
   stars: { type: "number", label: "Звёзды" },
@@ -111,6 +113,7 @@ export const singletons = {
         },
       },
       sections: [
+        seoSection(),
         {
           title: "Hero",
           key: "hero",
@@ -298,6 +301,7 @@ export const singletons = {
     title: "Редактор меню",
     schema: {
       sections: [
+        seoSection(),
         {
           title: "Левое меню",
           fields: {

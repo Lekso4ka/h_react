@@ -81,6 +81,7 @@ const GroupHeader = styled.div`
 `;
 
 const emptyRoom = {
+  seo: { title: "", description: "", keywords: "" },
   tour_link: "",
   rooms: 1,
   size: 25,
@@ -362,6 +363,44 @@ export function RoomFormPage() {
 
       {error && <ErrorText>{error}</ErrorText>}
       {success && <SuccessText>{success}</SuccessText>}
+
+      <AccordionSection title="SEO" defaultOpen>
+        <Grid>
+          <Field>
+            <Label>Title</Label>
+            <Input
+              value={room.seo?.title || ""}
+              onChange={(e) =>
+                setField("seo", { ...(room.seo || {}), title: e.target.value })
+              }
+            />
+          </Field>
+          <Field>
+            <Label>Description</Label>
+            <TextArea
+              value={room.seo?.description || ""}
+              onChange={(e) =>
+                setField("seo", {
+                  ...(room.seo || {}),
+                  description: e.target.value,
+                })
+              }
+            />
+          </Field>
+          <Field>
+            <Label>Keywords</Label>
+            <Input
+              value={room.seo?.keywords || ""}
+              onChange={(e) =>
+                setField("seo", {
+                  ...(room.seo || {}),
+                  keywords: e.target.value,
+                })
+              }
+            />
+          </Field>
+        </Grid>
+      </AccordionSection>
 
       <AccordionSection title="Основные параметры" defaultOpen>
         <Grid>

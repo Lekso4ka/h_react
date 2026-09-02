@@ -1,3 +1,5 @@
+import { seoSection } from "./seo";
+
 const linkItem = {
   title: { type: "string", label: "Название" },
   link: { type: "string", label: "Ссылка" },
@@ -156,6 +158,7 @@ const doingsContentFields = {
 
 const hotelMainSchema = {
   sections: [
+    seoSection(),
     {
       title: "Основные параметры",
       fields: {
@@ -274,6 +277,7 @@ const hotelMainSchema = {
 
 const hotelRestaurantSchema = {
   sections: [
+    seoSection("seo_restaurant"),
     {
       title: "Ресторан",
       fields: {
@@ -314,6 +318,7 @@ const hotelRestaurantSchema = {
 
 const hotelServicesSchema = {
   sections: [
+    seoSection("seo_services"),
     {
       title: "Услуги отеля",
       fields: {
@@ -376,6 +381,7 @@ export const entities = {
     allowKeyEdit: true,
     schema: {
       sections: [
+        seoSection(),
         {
           title: "Основное",
           fields: {
@@ -424,6 +430,7 @@ export const entities = {
     kind: "array",
     schema: {
       sections: [
+        seoSection(),
         {
           title: "Событие",
           fields: {
@@ -462,6 +469,7 @@ export const entities = {
     recordIdWhen: { type: "article" },
     schema: {
       sections: [
+        seoSection(),
         {
           title: "Карточка",
           fields: {
@@ -547,6 +555,7 @@ export const entities = {
     kind: "array",
     schema: {
       sections: [
+        seoSection(),
         {
           title: "Основное",
           fields: {
@@ -562,10 +571,12 @@ export const entities = {
             img: { type: "image", label: "Изображение" },
             link: { type: "string", label: "Ссылка" },
             hotels: {
-              type: "stringList",
-              label: "Отели (ключи)",
-              addLabel: "Добавить отель",
-              placeholder: "golden-tulip",
+              type: "checkboxList",
+              label: "Отели",
+              options: [
+                { value: "golden-tulip", label: "Голден Тюлип" },
+                { value: "tulip-inn", label: "Тюлипп Инн" },
+              ],
             },
             advantages: {
               type: "stringList",
@@ -626,6 +637,7 @@ export const entities = {
     kind: "array",
     schema: {
       sections: [
+        seoSection(),
         {
           title: "Вакансия",
           fields: {
@@ -666,6 +678,7 @@ export const entities = {
     allowKeyEdit: false,
     schema: {
       sections: [
+        seoSection(),
         {
           title: "Страница",
           fields: {
@@ -747,6 +760,7 @@ export const entities = {
     allowKeyEdit: true,
     schema: {
       sections: [
+        seoSection(),
         {
           title: "Основное",
           fields: {

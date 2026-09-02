@@ -7,6 +7,7 @@ import { EntityListPage } from "./pages/EntityListPage";
 import { EntityFormPage } from "./pages/EntityFormPage";
 import { HotelSectionFormPage } from "./pages/HotelSectionFormPage";
 import { SingletonFormPage } from "./pages/SingletonFormPage";
+import { WelcomeHomePage } from "./pages/WelcomeHomePage";
 import { LoginPage } from "./pages/auth/LoginPage";
 import { ForgotPasswordPage } from "./pages/auth/ForgotPasswordPage";
 import { ResetPasswordPage } from "./pages/auth/ResetPasswordPage";
@@ -37,7 +38,8 @@ export default function AdminApp() {
           </ProtectedRoute>
         }
       >
-        <Route index element={<SingletonFormPage singletonKey="main" />} />
+        <Route index element={<WelcomeHomePage />} />
+        <Route path="home" element={<SingletonFormPage singletonKey="main" />} />
         <Route path="menu" element={<SingletonFormPage singletonKey="menu" />} />
 
         <Route path="change-password" element={<ChangePasswordPage />} />

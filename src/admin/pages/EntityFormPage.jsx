@@ -26,6 +26,7 @@ import {
   SuccessText,
 } from "../components/ui";
 import { getEntity } from "../config/entities";
+import { splitSeoSchema } from "../config/seo";
 
 import { adminPath } from "../paths";
 export function EntityFormPage({ entityKey: entityKeyProp } = {}) {
@@ -140,6 +141,13 @@ export function EntityFormPage({ entityKey: entityKeyProp } = {}) {
     return <PageSubtitle>Загрузка формы…</PageSubtitle>;
   }
 
+  const { seoSchema, restSchema } = splitSeoSchema(entity.schema);
+  const showId =
+    entity.kind === "object" ||
+    (isNew &&
+      entity.kind === "array" &&
+      matchesShowWhen(entity.recordIdWhen, item));
+
   return (
     <form onSubmit={handleSubmit}>
       <PageTitle>{title}</PageTitle>
@@ -150,11 +158,12 @@ export function EntityFormPage({ entityKey: entityKeyProp } = {}) {
       {error && <ErrorText>{error}</ErrorText>}
       {success && <SuccessText>{success}</SuccessText>}
 
-      {(entity.kind === "object" ||
-        (isNew &&
-          entity.kind === "array" &&
-          matchesShowWhen(entity.recordIdWhen, item))) && (
-        <AccordionSection title="Идентификатор" defaultOpen>
+      {seoSchema.sections.length > 0 && (
+        <SchemaForm schema={seoSchema} value={item} onChange={setItem} />
+      )}
+
+      {showId && (
+        <AccordionSection title="Идентификатор" defaultOpen={false}>
           <Field>
             <Label>
               {entity.keyLabel || (entity.kind === "object" ? "Ключ" : "ID")}
@@ -173,7 +182,7 @@ export function EntityFormPage({ entityKey: entityKeyProp } = {}) {
         </AccordionSection>
       )}
 
-      <SchemaForm schema={entity.schema} value={item} onChange={setItem} />
+      <SchemaForm schema={restSchema} value={item} onChange={setItem} />
 
       <Actions>
         <Button type="submit" disabled={saving}>
