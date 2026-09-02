@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { Block, Bottom, Caption, Left, List, Right, Title } from "./style";
 
+const SUBSCRIBED_KEY = "newsletter-subscribed";
+
 export const Footer = () => {
+    const [subscribed, setSubscribed] = useState(() => {
+        try {
+            return sessionStorage.getItem(SUBSCRIBED_KEY) === "1";
+        } catch {
+            return false;
+        }
+    });
+    const [sending, setSending] = useState(false);
     const formHandler = async (e) => {
         e.preventDefault();
+        if (subscribed || sending) return;
         const form = e.currentTarget;
         if (!form.elements.consent.checked) return;
         const payload = {
@@ -11,6 +22,7 @@ export const Footer = () => {
             email: form.elements.email.value.trim(),
             source: "newsletter",
         };
+        setSending(true);
         try {
             const res = await fetch("/api/leads", {
                 method: "POST",
@@ -21,9 +33,15 @@ export const Footer = () => {
             if (!res.ok) {
                 throw new Error(data.error || "Ошибка отправки");
             }
+            try {
+                sessionStorage.setItem(SUBSCRIBED_KEY, "1");
+            } catch { /* ignore */ }
+            setSubscribed(true);
             form.reset();
         } catch (err) {
             console.error(err);
+        } finally {
+            setSending(false);
         }
     };
 
@@ -43,10 +61,12 @@ export const Footer = () => {
                     </label>
                 </div>
                 <label className="consent">
-                    <input type="checkbox" name="consent" required/>
+                    <input type="checkbox" name="consent" required={!subscribed}/>
                     <span>Даю свое <a href="/policy">согласие на обработку</a> моих персональных данных в соответствии с <a href="/policy">политикой конфиденциальности</a>.</span>
                 </label>
-                <button type="submit">Подписаться</button>
+                <button type="submit" disabled={ subscribed || sending }>
+                    { subscribed ? "Подписка оформлена" : "Подписаться" }
+                </button>
             </form>
             <div className="address">
             <Title>Адрес отелей</Title>

@@ -6,7 +6,7 @@ export const Modal = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 40;
+    z-index: ${({ $zIndex }) => $zIndex || 40};
     background: rgba(0, 0, 0, 0.70);
     pointer-events: none;
     opacity: 0;
@@ -25,11 +25,11 @@ export const Modal = styled.div`
         padding: 2.4rem 1.6rem 3.2rem;
         box-sizing: border-box;
         position: absolute;
-        top: 0;
+        top: 1.6rem;
         right: 0;
         transform: translate(100%);
         transition: transform 0.3s .3s;
-        bottom: 0;
+        bottom: 1.6rem;
         display: flex;
         flex-direction: column;
         overflow-y: auto;
@@ -49,9 +49,25 @@ export const Modal = styled.div`
         flex-direction: column;
         margin-top: 4rem;
     }
+    .pane {
+        position: relative;
+        border-top: .1rem solid #FFF6F0;
+        border-bottom: .1rem solid #FFF6F0;
+    }
+    .pane-inner {
+        display: flex;
+        flex-direction: column;
+    }
+    .fields:last-child .field:last-child {
+        border-bottom: none;
+    }
+    form.sent .pane-inner,
+    form.sent .consent {
+        visibility: hidden;
+        pointer-events: none;
+    }
     .fields {
         display: grid;
-        border-top: .1rem solid #FFF6F0;
     }
     .field {
         display: grid;
@@ -119,6 +135,69 @@ export const Modal = styled.div`
             cursor: pointer;
         }
     }
+    .file-field {
+        display: grid;
+        gap: 1rem;
+        padding-top: 1.8rem;
+        span {
+            color: rgba(255, 255, 255, 0.50);
+            font-family: Manrope;
+            font-size: 1.4rem;
+            font-weight: 600;
+            line-height: 100%;
+        }
+    }
+    .file-box {
+        width: 26.4rem;
+        height: 7.2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 246, 240, 0.16);
+        svg {
+            width: 3.6rem;
+            height: 3.6rem;
+        }
+        em {
+            font-style: normal;
+            font-family: Manrope;
+            font-size: 1.2rem;
+            font-weight: 500;
+            padding: 0 1.2rem;
+            text-align: center;
+            word-break: break-word;
+        }
+    }
+    .file-hint {
+        color: rgba(255, 255, 255, 0.45);
+        font-family: Manrope;
+        font-size: 1.2rem;
+        font-weight: 500;
+        line-height: 100%;
+    }
+    .file-error {
+        color: #ffb4b4;
+        font-family: Manrope;
+        font-size: 1.2rem;
+        font-weight: 500;
+    }
+    .success {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        p {
+            width: 36rem;
+            max-width: 100%;
+            color: rgba(255, 255, 255, 0.72);
+            text-align: center;
+            font-family: Manrope;
+            font-size: 1.6rem;
+            font-weight: 500;
+            line-height: 125%;
+        }
+    }
     .x {
         position: absolute;
         top: 2rem;
@@ -184,9 +263,15 @@ export const Modal = styled.div`
         width: 100%;
         margin: 6.4rem 0 2.4rem;
         flex-shrink: 0;
-        &:hover {
+        &:hover:not(:disabled) {
             background: #fff;
             color: #2F3034;
+        }
+        &.sent,
+        &:disabled.sent {
+            background: #fff;
+            color: #2F3034;
+            cursor: default;
         }
     }
     .required-note {
@@ -197,10 +282,15 @@ export const Modal = styled.div`
         font-weight: 500;
         line-height: 100%;
     }
+    form.sent .required-note {
+        visibility: hidden;
+    }
     @media (min-width: 576px) {
         .modal-content {
             width: 60.8rem;
             padding: 3.4rem 3.4rem 3.6rem;
+            top: 2.4rem;
+            bottom: 2.4rem;
             h3 {
                 font-size: 3.6rem;
             }

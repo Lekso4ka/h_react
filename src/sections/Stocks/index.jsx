@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { RequestModal } from "../../components/RequestModal";
 import { useCtx } from "../../Ctx";
 import { getStocks } from "../../data";
 import { Line } from "../../ui/Line";
@@ -7,8 +8,13 @@ import { Link } from "../../ui/Link";
 import { nToZero } from "../../utils/parseDate";
 import { Container, Data, Item, Modal } from "./style";
 
+function stripHtml(html) {
+    return String(html || "").replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
+}
+
 export const StocksContent = () => {
     const [active, setActive] = useState(null)
+    const [questionOpen, setQuestionOpen] = useState(false)
     const { id } = useParams();
     const { mob } = useCtx()
     const data = getStocks(id)
@@ -23,12 +29,12 @@ export const StocksContent = () => {
         return `с ${ nToZero(st.getDate()) }.${ nToZero(st.getMonth() + 1) }.${ st.getFullYear() } по ${ nToZero(en.getDate()) }.${ nToZero(en.getMonth() + 1) }.${ en.getFullYear() }`
     }
     useEffect(() => {
-        if (active !== null) {
+        if (active !== null || questionOpen) {
             document.body.style.overflow = "hidden";
         } else {
             document.body.style.overflow = null;
         }
-    }, [active]);
+    }, [active, questionOpen]);
     return <Container>
         <div className="hero">
             <h1>Акции отеля</h1>
@@ -92,7 +98,11 @@ export const StocksContent = () => {
         </div>
         <Modal
             className={typeof active === "number" ? "active" : "" }
-            onClick={e => e.currentTarget === e.target ? setActive(null) : null}
+            onClick={e => {
+                if (e.currentTarget !== e.target) return;
+                setActive(null);
+                setQuestionOpen(false);
+            }}
         >
             <div className="modal-content">
                 <svg
@@ -100,7 +110,10 @@ export const StocksContent = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 34 34"
                     fill="none"
-                    onClick={() => setActive(null)}
+                    onClick={() => {
+                        setActive(null);
+                        setQuestionOpen(false);
+                    }}
                 >
                     <rect width="34" height="34" fill="#2F3034"/>
                     <path
@@ -129,7 +142,15 @@ export const StocksContent = () => {
                     </div>
                     <div className="line">
                         <Link color="dark" hover="dark" to={ `/rooms/${ id }` }>Выбрать номер</Link>
-                        { <Link color="dark" hover="dark" to={ data[active].link }>Задать вопрос</Link> }
+                        <Link
+                            color="dark"
+                            hover="dark"
+                            to=""
+                            onClick={(e) => {
+                                e.preventDefault();
+                                setQuestionOpen(true);
+                            }}
+                        >Задать вопрос</Link>
                     </div>
                     <h4>Дополнительные условия</h4>
                     <ul className="conditions">
@@ -147,5 +168,22 @@ export const StocksContent = () => {
                 </Data> }
             </div>
         </Modal>
+        <RequestModal
+            active={questionOpen}
+            onClose={() => setQuestionOpen(false)}
+            lockBody={false}
+            zIndex={50}
+            title="Задать вопрос"
+            successMessage="Спасибо за вопрос! Мы свяжемся с вами в ближайшее время."
+            source="stock"
+            values={{ stock: typeof active === "number" ? stripHtml(data[active].name) : "" }}
+            fields={[
+                { name: "stock", label: "Название акции", readOnly: true },
+                { name: "name", label: "Имя *", required: true },
+                { name: "phone", label: "Телефон *", type: "tel", required: true },
+                { name: "email", label: "Почта *", type: "email", required: true },
+                { name: "question", label: "Вопрос" },
+            ]}
+        />
     </Container>
 }

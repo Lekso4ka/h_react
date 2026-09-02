@@ -217,6 +217,10 @@ export const Left = styled.div`
         text-decoration-thickness: 10%; /* 1.8px */
         text-underline-offset: 30%; /* 5.4px */
         text-underline-position: from-font;
+        &:disabled {
+            cursor: default;
+            pointer-events: none;
+        }
         @media (min-width: 576px) {
             margin-top: 2.8rem;
             font-size: 1.8rem;

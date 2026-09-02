@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "@emotion/styled";
-import { deleteLead, fetchLeads } from "../api/leads";
+import { deleteLead, downloadLeadFile, fetchLeads } from "../api/leads";
 import { getLeadSection } from "../config/leads";
 import { AccordionSection } from "../components/AccordionSection";
 import { Button, ErrorText, PageSubtitle, PageTitle } from "../components/ui";
@@ -62,7 +62,21 @@ const Empty = styled.p`
   color: ${theme.colors.gray};
 `;
 
-function LeadCell({ column, lead }) {
+function LeadCell({ column, lead, onDownload }) {
+  if (column.type === "file") {
+    if (!lead.resumeFile) return "—";
+    return (
+      <CellLink
+        href="#"
+        onClick={(e) => {
+          e.preventDefault();
+          onDownload(lead);
+        }}
+      >
+        {lead.resumeName || "Скачать"}
+      </CellLink>
+    );
+  }
   const value = lead[column.key];
   if (!value) return "—";
   if (column.mono) return <Mono>{value}</Mono>;
@@ -100,6 +114,14 @@ export function LeadsPage() {
   if (!section) {
     return <ErrorText>Раздел не найден</ErrorText>;
   }
+
+  const handleDownload = async (lead) => {
+    try {
+      await downloadLeadFile(lead.id, lead.resumeName);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
 
   const handleDelete = async (lead) => {
     if (!window.confirm(`Удалить заявку «${lead.name}»?`)) return;
@@ -139,7 +161,7 @@ export function LeadsPage() {
                 <tr key={lead.id}>
                   {section.columns.map((column) => (
                     <Td key={column.key}>
-                      <LeadCell column={column} lead={lead} />
+                      <LeadCell column={column} lead={lead} onDownload={handleDownload} />
                     </Td>
                   ))}
                   <Td>

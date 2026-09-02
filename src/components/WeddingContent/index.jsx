@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { Link } from "../../ui/Link";
@@ -144,8 +144,11 @@ const Section3Gallery = () => {
 };
 
 export const WeddingContent = () => {
+    const [sent, setSent] = useState(false);
+    const [sending, setSending] = useState(false);
     const formHandler = async (e) => {
         e.preventDefault();
+        if (sent || sending) return;
         const form = e.currentTarget;
         if (!form.elements.consent.checked) return;
         const payload = {
@@ -153,6 +156,7 @@ export const WeddingContent = () => {
             phone: form.elements.phone.value.trim(),
             source: "wedding",
         };
+        setSending(true);
         try {
             const res = await fetch("/api/leads", {
                 method: "POST",
@@ -163,9 +167,11 @@ export const WeddingContent = () => {
             if (!res.ok) {
                 throw new Error(data.error || "Ошибка отправки");
             }
-            form.reset();
+            setSent(true);
         } catch (err) {
             console.error(err);
+        } finally {
+            setSending(false);
         }
     }
     return <>
@@ -316,14 +322,19 @@ export const WeddingContent = () => {
                 <h4>Свадьба в серце гор</h4>
                 <h2>Начните подготовку вашей свадьбы</h2>
                 <p>Оставьте заявку и мы подготовим для вас<br/> индивидуальное предложение.</p>
-                <form onSubmit={ formHandler }>
-                    <input type="text" name="name" placeholder="Ваше имя" required/>
-                    <input type="tel" name="phone" placeholder="Телефон" required/>
-                    <label className="consent">
-                        <input type="checkbox" name="consent" required/>
-                        Даю свое <Link to="">согласие на обработку</Link> моих персональных данных в соответствии с <Link to="">политикой конфиденциальности</Link>.
-                    </label>
-                    <button type="submit">Запросить предложение</button>
+                <form className={ sent ? "sent" : "" } onSubmit={ formHandler }>
+                    <div className="form-body">
+                        <div className="form-fields">
+                            <input type="text" name="name" placeholder="Ваше имя" required={!sent}/>
+                            <input type="tel" name="phone" placeholder="Телефон" required={!sent}/>
+                            <label className="consent">
+                                <input type="checkbox" name="consent" required={!sent}/>
+                                Даю свое <Link to="">согласие на обработку</Link> моих персональных данных в соответствии с <Link to="">политикой конфиденциальности</Link>.
+                            </label>
+                        </div>
+                        { sent && <p className="form-success">Спасибо за заявку! Мы подготовим для вас индивидуальное предложение.</p> }
+                    </div>
+                    <button type="submit" disabled={ sent || sending }>{ sent ? "Отправлено" : "Запросить предложение" }</button>
                 </form>
             </div>
         </Section6>

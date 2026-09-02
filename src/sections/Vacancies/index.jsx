@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
+import { RequestModal } from "../../components/RequestModal";
 import { getVacancies } from "../../data";
 import { Line } from "../../ui/Line";
 import { Link } from "../../ui/Link";
 import { Video } from "../../ui/Video";
 import { Container, Item } from "./style";
 
+const RESUME_MAX_BYTES = Math.round(68.5 * 1024 * 1024);
+
 export const VacanciesContent = () => {
     const data = getVacancies()
+    const [vacancy, setVacancy] = useState("");
+    const [formOpen, setFormOpen] = useState(false);
     return <Container>
         <Line/>
         <div className="hero">
@@ -70,8 +75,41 @@ export const VacanciesContent = () => {
                         </li>) }
                     </ul>
                 </div>
-                <Link to={ "" } color={ "dark" } hover={ "dark" }>Обратная связь</Link>
+                <Link
+                    to=""
+                    color="dark"
+                    hover="dark"
+                    onClick={(e) => {
+                        e.preventDefault();
+                        setVacancy(el.name);
+                        setFormOpen(true);
+                    }}
+                >Обратная связь</Link>
             </Item>) }
         </div>
+        <RequestModal
+            active={formOpen}
+            onClose={() => setFormOpen(false)}
+            title="Отправить резюме"
+            successMessage="Спасибо за отклик! Мы свяжемся с Вами в случае, если будем готовы пригласить Вас на собеседование."
+            source="vacancy"
+            values={{ vacancy }}
+            fields={[
+                { name: "vacancy", label: "Вакансия", readOnly: true },
+                { name: "name", label: "Имя *", required: true },
+                { name: "phone", label: "Телефон *", type: "tel", required: true },
+                { name: "email", label: "Почта *", type: "email", required: true },
+                { name: "city", label: "Город проживания" },
+                { name: "social", label: "Ссылка на соц. сети" },
+                { name: "message", label: "Сообщение" },
+            ]}
+            file={{
+                name: "resume",
+                label: "Прикрепить резюме (pdf)",
+                hint: "(Файл не более 68.5 мб)",
+                accept: "application/pdf,.pdf",
+                maxSize: RESUME_MAX_BYTES,
+            }}
+        />
     </Container>
 }

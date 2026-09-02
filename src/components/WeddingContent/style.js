@@ -878,6 +878,33 @@ export const Section6 = styled.section`
         gap: 1.6rem;
         padding: 0 1.9rem;
     }
+    .form-body {
+        position: relative;
+        display: grid;
+        gap: inherit;
+    }
+    .form-fields {
+        display: grid;
+        gap: inherit;
+    }
+    form.sent .form-fields {
+        visibility: hidden;
+        pointer-events: none;
+    }
+    .form-success {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+        color: #FFF;
+        text-align: center;
+        font-size: 1.6rem;
+        font-weight: 500;
+        line-height: 130%;
+    }
     input:not([type="checkbox"]) {
         padding: 0 0 1.6rem;
         height: auto;
@@ -965,6 +992,11 @@ export const Section6 = styled.section`
         text-decoration-thickness: 10%; /* 1.6px */
         text-underline-offset: 30%; /* 4.8px */
         text-underline-position: from-font;
+        &:disabled {
+            cursor: default;
+            pointer-events: none;
+            color: #FFF;
+        }
     }
     @media (min-width: 576px) {
         background-position: center;
@@ -981,6 +1013,10 @@ export const Section6 = styled.section`
             font-size: 1.4rem;
             font-style: normal;
             padding-bottom: 8.1rem;
+        }
+        .form-success {
+            padding-bottom: 0;
+            font-size: 1.6rem;
         }
         form {
             gap: 3.4rem;
