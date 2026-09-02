@@ -341,4 +341,18 @@ CREATE TABLE subscribers (
   created_at  timestamptz NOT NULL DEFAULT now()
 );
 
+-- ─── leads (all request forms except newsletter) ──────────────────────────────
+
+CREATE TABLE leads (
+  id          uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  source      text NOT NULL,
+  name        text NOT NULL,
+  phone       text NOT NULL DEFAULT '',
+  email       text NOT NULL DEFAULT '',
+  payload     jsonb NOT NULL DEFAULT '{}'::jsonb,
+  created_at  timestamptz NOT NULL DEFAULT now()
+);
+
+CREATE INDEX leads_source_created_idx ON leads (source, created_at DESC);
+
 COMMIT;

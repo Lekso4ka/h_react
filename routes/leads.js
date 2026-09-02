@@ -3,7 +3,6 @@ const fs = require("fs");
 const express = require("express");
 const multer = require("multer");
 const { v4: uuidv4 } = require("uuid");
-const { readJson, writeJson } = require("../lib/jsonStore");
 const { authRequired } = require("../middleware/auth");
 const {
   createSubscriber,
@@ -11,13 +10,35 @@ const {
   findSubscriberByEmail,
   listSubscribers,
 } = require("../lib/subscribers");
+const {
+  createLead,
+  deleteLead,
+  findLeadById,
+  listLeads,
+} = require("../lib/leads");
 
 const router = express.Router();
-const FILE = "leads.json";
-const TIME_ZONE = "Europe/Moscow";
 const RESUMES_DIR = path.join(__dirname, "..", "resumes");
 const RESUME_MAX_BYTES = Math.round(68.5 * 1024 * 1024);
 const EMAIL_SOURCES = new Set(["conference", "vacancy", "stock"]);
+const PAYLOAD_FIELDS = {
+  conference: [
+    ["venue", 200],
+    ["guests", 20],
+    ["eventDate", 40],
+    ["wishes", 2000],
+  ],
+  vacancy: [
+    ["vacancy", 200],
+    ["city", 200],
+    ["social", 500],
+    ["message", 2000],
+  ],
+  stock: [
+    ["stock", 400],
+    ["question", 2000],
+  ],
+};
 
 if (!fs.existsSync(RESUMES_DIR)) {
   fs.mkdirSync(RESUMES_DIR, { recursive: true });
@@ -46,15 +67,6 @@ const uploadResume = multer({
   },
 });
 
-function readLeads() {
-  try {
-    const data = readJson(FILE);
-    return Array.isArray(data) ? data : [];
-  } catch {
-    return [];
-  }
-}
-
 function asString(value, max) {
   return String(value ?? "").trim().slice(0, max);
 }
@@ -64,27 +76,6 @@ function formatEventDate(value) {
   const iso = raw.match(/^(\d{4})-(\d{2})-(\d{2})$/);
   if (iso) return `${iso[3]}.${iso[2]}.${iso[1]}`;
   return raw;
-}
-
-function sentAt(now = new Date()) {
-  const parts = Object.fromEntries(
-    new Intl.DateTimeFormat("ru-RU", {
-      timeZone: TIME_ZONE,
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-      hourCycle: "h23",
-    })
-      .formatToParts(now)
-      .map((part) => [part.type, part.value])
-  );
-  return {
-    date: `${parts.day}.${parts.month}.${parts.year}`,
-    time: `${parts.hour}:${parts.minute}:${parts.second}`,
-  };
 }
 
 function resumePath(filename) {
@@ -101,6 +92,21 @@ function removeResume(filename) {
   } catch {
     // ignore missing files
   }
+}
+
+function buildPayload(source, fields, file) {
+  const spec = PAYLOAD_FIELDS[source] || [];
+  const payload = {};
+  for (const [key, max] of spec) {
+    let value = fields[key];
+    if (key === "eventDate") value = formatEventDate(value);
+    if (value) payload[key] = value;
+  }
+  if (file) {
+    payload.resumeFile = file.filename;
+    payload.resumeName = asString(file.originalname, 300) || file.filename;
+  }
+  return payload;
 }
 
 async function saveNewsletter(res, { name, email }) {
@@ -129,17 +135,6 @@ async function saveLead(req, res) {
     const email = asString(body.email, 200).toLowerCase();
     const source = asString(body.source, 60) || "wedding";
 
-    const venue = asString(body.venue, 200);
-    const guests = asString(body.guests, 20);
-    const wishes = asString(body.wishes, 2000);
-    const eventDate = formatEventDate(body.eventDate);
-    const vacancy = asString(body.vacancy, 200);
-    const city = asString(body.city, 200);
-    const social = asString(body.social, 500);
-    const message = asString(body.message, 2000);
-    const stock = asString(body.stock, 400);
-    const question = asString(body.question, 2000);
-
     if (!name) {
       if (req.file) removeResume(req.file.filename);
       return res.status(400).json({ error: "Укажите имя" });
@@ -152,7 +147,7 @@ async function saveLead(req, res) {
       if (req.file) removeResume(req.file.filename);
       return res.status(400).json({ error: "Укажите телефон" });
     }
-    if (EMAIL_SOURCES.has(source) && source !== "newsletter") {
+    if (EMAIL_SOURCES.has(source)) {
       if (!email) {
         if (req.file) removeResume(req.file.filename);
         return res.status(400).json({ error: "Укажите почту" });
@@ -163,34 +158,15 @@ async function saveLead(req, res) {
       }
     }
 
-    const lead = {
-      id: uuidv4(),
-      name,
+    const created = await createLead({
       source,
-      ...sentAt(),
-    };
-    if (phone) lead.phone = phone;
-    if (email) lead.email = email;
-    if (venue) lead.venue = venue;
-    if (guests) lead.guests = guests;
-    if (eventDate) lead.eventDate = eventDate;
-    if (wishes) lead.wishes = wishes;
-    if (vacancy) lead.vacancy = vacancy;
-    if (city) lead.city = city;
-    if (social) lead.social = social;
-    if (message) lead.message = message;
-    if (stock) lead.stock = stock;
-    if (question) lead.question = question;
-    if (req.file) {
-      lead.resumeFile = req.file.filename;
-      lead.resumeName = asString(req.file.originalname, 300) || req.file.filename;
-    }
+      name,
+      phone,
+      email,
+      payload: buildPayload(source, body, req.file),
+    });
 
-    const leads = readLeads();
-    leads.push(lead);
-    writeJson(FILE, leads);
-
-    res.status(201).json({ ok: true, id: lead.id });
+    res.status(201).json({ ok: true, id: created.id });
   } catch (error) {
     if (req.file) removeResume(req.file.filename);
     res.status(500).json({ error: error.message });
@@ -211,52 +187,31 @@ router.post("/", (req, res) => {
   saveLead(req, res);
 });
 
-function leadTimestamp(lead) {
-  if (lead?.createdAt) {
-    const parsed = Date.parse(lead.createdAt);
-    if (!Number.isNaN(parsed)) return parsed;
-  }
-  const [day, month, year] = String(lead?.date || "").split(".");
-  const time = String(lead?.time || "00:00:00");
-  if (!year || !month || !day) return 0;
-  const parsed = Date.parse(`${year}-${month}-${day}T${time}`);
-  return Number.isNaN(parsed) ? 0 : parsed;
-}
-
-function byDateTimeDesc(a, b) {
-  return leadTimestamp(b) - leadTimestamp(a);
-}
-
 router.get("/", authRequired, async (req, res) => {
   try {
     const source = asString(req.query.source, 60);
     if (source === "newsletter") {
       return res.json({ list: await listSubscribers() });
     }
-
-    let list = readLeads().filter((lead) => lead.source !== "newsletter");
-    if (source) {
-      list = list.filter((lead) => lead.source === source);
-    }
-    list.sort(byDateTimeDesc);
-    res.json({ list });
+    res.json({ list: await listLeads(source || null) });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 
-router.get("/:id/file", authRequired, (req, res) => {
+router.get("/:id/file", authRequired, async (req, res) => {
   try {
     const id = String(req.params.id || "");
-    const lead = readLeads().find((item) => item.id === id);
-    if (!lead || !lead.resumeFile) {
+    const lead = await findLeadById(id);
+    const resumeFile = lead?.payload?.resumeFile;
+    if (!lead || !resumeFile) {
       return res.status(404).json({ error: "Файл не найден" });
     }
-    const full = resumePath(lead.resumeFile);
+    const full = resumePath(resumeFile);
     if (!full || !fs.existsSync(full)) {
       return res.status(404).json({ error: "Файл не найден" });
     }
-    res.download(full, lead.resumeName || lead.resumeFile);
+    res.download(full, lead.payload.resumeName || resumeFile);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -269,14 +224,13 @@ router.delete("/:id", authRequired, async (req, res) => {
       return res.json({ ok: true });
     }
 
-    const leads = readLeads();
-    const lead = leads.find((item) => item.id === id);
-    const next = leads.filter((item) => item.id !== id);
-    if (next.length === leads.length) {
+    const deleted = await deleteLead(id);
+    if (!deleted) {
       return res.status(404).json({ error: "Заявка не найдена" });
     }
-    if (lead?.resumeFile) removeResume(lead.resumeFile);
-    writeJson(FILE, next);
+    if (deleted.payload?.resumeFile) {
+      removeResume(deleted.payload.resumeFile);
+    }
     res.json({ ok: true });
   } catch (error) {
     res.status(500).json({ error: error.message });
