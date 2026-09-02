@@ -1,0 +1,287 @@
+{
+  "seo": {
+    "title": "",
+    "description": "",
+    "keywords": ""
+  },
+  "left": [
+    {
+      "id": "hotels",
+      "label": "Hotels",
+      "hasMenu": true,
+      "layout": "hotels",
+      "href": "",
+      "brands": [
+        {
+          "title": "Golden Tulip",
+          "link": "/hotel/golden-tulip",
+          "items": [
+            {
+              "label": "Rooms & Suites",
+              "href": "/rooms/golden-tulip",
+              "image": "023688bc-a905-42c2-a279-2a9f09c724a3.jpg"
+            },
+            {
+              "label": "Hotel services",
+              "href": "/services/golden-tulip",
+              "image": "09f407aaf973c32d8dd73f7535c9ada576405ab7.png"
+            }
+          ]
+        },
+        {
+          "title": "Tulip Inn",
+          "link": "/hotel/tulip-inn",
+          "items": [
+            {
+              "label": "Rooms",
+              "href": "/rooms/tulip-inn",
+              "image": "899c4304-72c6-41ae-a3eb-3ae4c325b0b5.jpg"
+            },
+            {
+              "label": "Hotel services",
+              "href": "/services/tulip-inn",
+              "image": "09f407aaf973c32d8dd73f7535c9ada576405ab7.png"
+            }
+          ]
+        }
+      ],
+      "columns": []
+    },
+    {
+      "id": "activities",
+      "label": "Activities",
+      "hasMenu": true,
+      "layout": "activities",
+      "href": "",
+      "brands": [],
+      "columns": [
+        {
+          "title": "Summer",
+          "href": "/activities/summer",
+          "image": "8c65aeb8fa2c6a80c3c61a8bf2ade0c37ca9a244.png",
+          "digit": "2026",
+          "seasonLabel": "Season"
+        },
+        {
+          "title": "Winter",
+          "href": "/activities/winter",
+          "image": "e01766434fde37e9d8d89d399f0a0d367d572ed9.png",
+          "digit": "2026",
+          "seasonLabel": "Season"
+        }
+      ]
+    },
+    {
+      "id": "services",
+      "label": "Services",
+      "hasMenu": true,
+      "layout": "columns",
+      "href": "",
+      "brands": [],
+      "columns": [
+        {
+          "title": "SPA centre",
+          "href": "",
+          "image": "45a1432d-0cc5-48af-afb4-82ffc74dbed3.jpg",
+          "digit": "",
+          "seasonLabel": ""
+        },
+        {
+          "title": "Restaurants",
+          "href": "/restaurant/golden-tulip",
+          "image": "fe118ef6-330c-43f1-a088-9f25136a8f30.jpg",
+          "digit": "",
+          "seasonLabel": ""
+        },
+        {
+          "title": "Conference halls",
+          "href": "/events/venues",
+          "image": "625b115e2603dcc3097a449b3058c4d8e4953834.png",
+          "digit": "",
+          "seasonLabel": ""
+        },
+        {
+          "title": "Events",
+          "href": "/events/default",
+          "image": "625b115e2603dcc3097a449b3058c4d8e4953834.png",
+          "digit": "",
+          "seasonLabel": ""
+        }
+      ]
+    },
+    {
+      "id": "events",
+      "label": "What's on",
+      "hasMenu": true,
+      "layout": "columns",
+      "href": "",
+      "brands": [],
+      "columns": [
+        {
+          "title": "Rosa Khutor poster",
+          "href": "/affiche",
+          "image": "f30e4c1585302e99863f5188f93294cf396d1087.png",
+          "digit": "",
+          "seasonLabel": ""
+        },
+        {
+          "title": "Resort events",
+          "href": "/doings",
+          "image": "87489baf30ebfc869e74cc76fb0f23c82c007649.png",
+          "digit": "",
+          "seasonLabel": ""
+        }
+      ]
+    }
+  ],
+  "right": [
+    {
+      "id": "promos",
+      "label": "Offers",
+      "hasMenu": true,
+      "layout": "columns",
+      "href": "",
+      "brands": [
+        {
+          "title": "Golden Tulip",
+          "link": "/hotel/golden-tulip",
+          "items": [
+            {
+              "label": "Special offers",
+              "href": "/stock/golden-tulip",
+              "image": "625b115e2603dcc3097a449b3058c4d8e4953834.png"
+            }
+          ]
+        },
+        {
+          "title": "Tulip Inn",
+          "link": "/hotel/tulip-inn",
+          "items": [
+            {
+              "label": "Special offers",
+              "href": "/stock/tulip-inn",
+              "image": "625b115e2603dcc3097a449b3058c4d8e4953834.png"
+            }
+          ]
+        }
+      ],
+      "columns": []
+    },
+    {
+      "id": "contacts",
+      "label": "Contacts",
+      "hasMenu": false,
+      "layout": "columns",
+      "href": "#contacts",
+      "brands": [],
+      "columns": []
+    }
+  ],
+  "mobile": [
+    {
+      "id": "hotels",
+      "label": "Hotels",
+      "hasMenu": true,
+      "href": "",
+      "columns": [
+        {
+          "title": "Golden Tulip rooms & suites",
+          "href": "/rooms/golden-tulip"
+        },
+        {
+          "title": "Golden Tulip hotel services",
+          "href": "/services/golden-tulip"
+        },
+        {
+          "title": "Tulip Inn rooms",
+          "href": "/rooms/tulip-inn"
+        },
+        {
+          "title": "Tulip Inn hotel services",
+          "href": "/services/tulip-inn"
+        }
+      ]
+    },
+    {
+      "id": "activities",
+      "label": "Activities",
+      "hasMenu": true,
+      "href": "",
+      "columns": [
+        {
+          "title": "Summer Season 2026",
+          "href": "/activities/summer"
+        },
+        {
+          "title": "Winter Season 2026",
+          "href": "/activities/winter"
+        }
+      ]
+    },
+    {
+      "id": "services",
+      "label": "Services",
+      "hasMenu": true,
+      "href": "",
+      "columns": [
+        {
+          "title": "SPA centre",
+          "href": ""
+        },
+        {
+          "title": "Restaurants",
+          "href": "/restaurant/golden-tulip"
+        },
+        {
+          "title": "Conference halls",
+          "href": "/events/venues"
+        },
+        {
+          "title": "Events",
+          "href": "/events/default"
+        }
+      ]
+    },
+    {
+      "id": "events",
+      "label": "What's on",
+      "hasMenu": true,
+      "href": "",
+      "columns": [
+        {
+          "title": "Rosa Khutor poster",
+          "href": "/affiche"
+        },
+        {
+          "title": "Resort events",
+          "href": "/doings"
+        }
+      ]
+    },
+    {
+      "id": "promos",
+      "label": "Offers",
+      "hasMenu": true,
+      "href": "",
+      "columns": [
+        {
+          "title": "Golden Tulip special offers",
+          "href": "/stock/golden-tulip"
+        },
+        {
+          "title": "Tulip Inn special offers",
+          "href": "/stock/tulip-inn"
+        }
+      ]
+    },
+    {
+      "id": "contacts",
+      "label": "Contacts",
+      "hasMenu": false,
+      "href": "#contacts",
+      "columns": []
+    }
+  ],
+  "mobile_address_title": "Hotel address",
+  "mobile_address": "Russia, Krasnodar Region, Sochi, Panorama embankment, 2-3"
+}

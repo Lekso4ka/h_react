@@ -14,6 +14,8 @@ import {
   TextArea,
 } from "../ui";
 import { theme } from "../../styles/theme";
+import { useAdminLang } from "../../lang";
+import { isSharedField } from "../../localeFields";
 import { ParagraphListField, cleanParagraphs } from "./ParagraphListField";
 import { StringListField, cleanStringList } from "./StringListField";
 
@@ -195,7 +197,34 @@ export function fieldLabel(def, fallback = "") {
   return def?.authored ? `${base} (авторское форматирование)` : base;
 }
 
-function FieldControl({ def, value, onChange }) {
+function fieldTreeHasText(fields) {
+  if (!fields) return false;
+  for (const [key, def] of Object.entries(fields)) {
+    if (def.type === "object") {
+      if (fieldTreeHasText(def.fields)) return true;
+      continue;
+    }
+    if (def.type === "objectList") {
+      if (fieldTreeHasText(def.itemFields)) return true;
+      continue;
+    }
+    if (def.type === "paragraphs") return true;
+    if (!isSharedField(key, def)) return true;
+  }
+  return false;
+}
+
+function visibleFieldEntries(fields, context, textOnly) {
+  return Object.entries(fields || {}).filter(([key, def]) => {
+    if (!matchesShowWhen(def.showWhen, context)) return false;
+    if (!textOnly) return true;
+    if (def.type === "object") return fieldTreeHasText(def.fields);
+    if (def.type === "objectList") return fieldTreeHasText(def.itemFields);
+    return !isSharedField(key, def);
+  });
+}
+
+function FieldControl({ def, value, onChange, lockStructure = false }) {
   switch (def.type) {
     case "textarea":
       return (
@@ -287,6 +316,7 @@ function FieldControl({ def, value, onChange }) {
           onChange={onChange}
           placeholder={def.placeholder}
           addLabel={def.addLabel || "Добавить"}
+          lockStructure={lockStructure}
         />
       );
     case "paragraphs":
@@ -295,6 +325,7 @@ function FieldControl({ def, value, onChange }) {
           value={Array.isArray(value) ? value : []}
           onChange={onChange}
           addLabel={def.addLabel || "Добавить абзац"}
+          lockStructure={lockStructure}
         />
       );
     case "image":
@@ -334,7 +365,19 @@ function FieldControl({ def, value, onChange }) {
         </Nested>
       );
     case "objectList": {
-      const items = Array.isArray(value) && value.length > 0 ? value : [{}];
+      const stored = Array.isArray(value) ? value : [];
+      const items = lockStructure
+        ? stored
+        : stored.length > 0
+          ? stored
+          : [{}];
+      if (lockStructure && items.length === 0) {
+        return (
+          <Label style={{ display: "block" }}>
+            Добавьте элементы во вкладке RU
+          </Label>
+        );
+      }
       return (
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
           {items.map((item, index) => (
@@ -343,19 +386,21 @@ function FieldControl({ def, value, onChange }) {
                 <Label>
                   {def.itemLabel || "Элемент"} {index + 1}
                 </Label>
-                <Remove
-                  type="button"
-                  disabled={items.length <= 1}
-                  onClick={() => {
-                    if (items.length <= 1) {
-                      onChange([emptyFromFields(def.itemFields)]);
-                      return;
-                    }
-                    onChange(items.filter((_, i) => i !== index));
-                  }}
-                >
-                  Удалить
-                </Remove>
+                {!lockStructure && (
+                  <Remove
+                    type="button"
+                    disabled={items.length <= 1}
+                    onClick={() => {
+                      if (items.length <= 1) {
+                        onChange([emptyFromFields(def.itemFields)]);
+                        return;
+                      }
+                      onChange(items.filter((_, i) => i !== index));
+                    }}
+                  >
+                    Удалить
+                  </Remove>
+                )}
               </NestedHeader>
               <FieldsGrid
                 fields={def.itemFields}
@@ -368,20 +413,22 @@ function FieldControl({ def, value, onChange }) {
               />
             </Nested>
           ))}
-          <Actions>
-            <Button
-              type="button"
-              variant="ghost"
-              onClick={() =>
-                onChange([
-                  ...(Array.isArray(value) ? value : items),
-                  emptyFromFields(def.itemFields),
-                ])
-              }
-            >
-              {def.addLabel || "Добавить"}
-            </Button>
-          </Actions>
+          {!lockStructure && (
+            <Actions>
+              <Button
+                type="button"
+                variant="ghost"
+                onClick={() =>
+                  onChange([
+                    ...(Array.isArray(value) ? value : items),
+                    emptyFromFields(def.itemFields),
+                  ])
+                }
+              >
+                {def.addLabel || "Добавить"}
+              </Button>
+            </Actions>
+          )}
         </div>
       );
     }
@@ -397,10 +444,12 @@ function FieldControl({ def, value, onChange }) {
 }
 
 function FieldsGrid({ fields, value, onChange, root }) {
+  const { lang } = useAdminLang();
+  const textOnly = lang === "en";
   const context = root ?? value;
-  const entries = Object.entries(fields || {}).filter(([, def]) =>
-    matchesShowWhen(def.showWhen, context)
-  );
+  const entries = visibleFieldEntries(fields, context, textOnly);
+
+  if (entries.length === 0) return null;
 
   return (
     <Grid cols={1} gap={18}>
@@ -437,6 +486,12 @@ function FieldsGrid({ fields, value, onChange, root }) {
               def={def}
               value={value?.[key]}
               onChange={(next) => onChange({ ...value, [key]: next })}
+              lockStructure={
+                textOnly &&
+                (def.type === "objectList" ||
+                  def.type === "stringList" ||
+                  def.type === "paragraphs")
+              }
             />
           </Field>
         );
@@ -465,6 +520,12 @@ function FieldsGrid({ fields, value, onChange, root }) {
                 def={def}
                 value={value?.[key]}
                 onChange={(next) => onChange({ ...value, [key]: next })}
+                lockStructure={
+                textOnly &&
+                (def.type === "objectList" ||
+                  def.type === "stringList" ||
+                  def.type === "paragraphs")
+              }
               />
             </div>
           );
@@ -477,6 +538,9 @@ function FieldsGrid({ fields, value, onChange, root }) {
 }
 
 export function SchemaForm({ schema, value, onChange }) {
+  const { lang } = useAdminLang();
+  const textOnly = lang === "en";
+
   if (!schema?.sections) {
     return (
       <AccordionSection title="Данные" defaultOpen>
@@ -501,7 +565,11 @@ export function SchemaForm({ schema, value, onChange }) {
         />
       )}
       {schema.sections
-        .filter((section) => matchesShowWhen(section.showWhen, value))
+        .filter((section) => {
+          if (!matchesShowWhen(section.showWhen, value)) return false;
+          if (!textOnly) return true;
+          return visibleFieldEntries(section.fields, value, true).length > 0;
+        })
         .map((section, index) => {
           const nested = Boolean(section.key);
           const sectionValue = nested ? value?.[section.key] || {} : value;

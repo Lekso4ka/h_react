@@ -1,3 +1,5 @@
+import { getAdminContentLang } from "../lang";
+
 const API = "/api";
 const TOKEN_KEY = "hotel_admin_token";
 
@@ -17,9 +19,24 @@ export function clearToken() {
   localStorage.removeItem(TOKEN_KEY);
 }
 
+function shouldAttachLang(url) {
+  if (url.startsWith("/auth")) return false;
+  if (url.startsWith("/leads")) return false;
+  if (url.startsWith("/upload")) return false;
+  return true;
+}
+
+function withLang(url) {
+  if (!shouldAttachLang(url)) return url;
+  const lang = getAdminContentLang();
+  if (lang !== "en") return url;
+  return `${url}${url.includes("?") ? "&" : "?"}lang=en`;
+}
+
 export async function apiRequest(url, options = {}) {
   const headers = new Headers(options.headers || {});
   const token = getToken();
+  url = withLang(url);
 
   if (token) {
     headers.set("Authorization", `Bearer ${token}`);

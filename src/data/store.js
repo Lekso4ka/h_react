@@ -31,8 +31,10 @@ export function getStore() {
     return cache;
 }
 
-export function loadSiteData({ force = false } = {}) {
+export function loadSiteData({ force = false, lang } = {}) {
     if (loadPromise && !force) return loadPromise;
+
+    const q = lang === "en" ? "?lang=en" : "";
 
     loadPromise = (async () => {
         const [
@@ -48,17 +50,17 @@ export function loadSiteData({ force = false } = {}) {
             mainRes,
             menuRes,
         ] = await Promise.all([
-            fetchJson("/api/activities"),
-            fetchJson("/api/affiche"),
-            fetchJson("/api/doings"),
-            fetchJson("/api/hotels"),
-            fetchJson("/api/rooms"),
-            fetchJson("/api/stocks"),
-            fetchJson("/api/vacancies"),
-            fetchJson("/api/venues"),
-            fetchJson("/api/legal"),
-            fetchJson("/api/main"),
-            fetchJson("/api/menu"),
+            fetchJson(`/api/activities${q}`),
+            fetchJson(`/api/affiche${q}`),
+            fetchJson(`/api/doings${q}`),
+            fetchJson(`/api/hotels${q}`),
+            fetchJson(`/api/rooms${q}`),
+            fetchJson(`/api/stocks${q}`),
+            fetchJson(`/api/vacancies${q}`),
+            fetchJson(`/api/venues${q}`),
+            fetchJson(`/api/legal${q}`),
+            fetchJson(`/api/main${q}`),
+            fetchJson(`/api/menu${q}`),
         ]);
 
         cache.activities = activitiesRes.data || {};

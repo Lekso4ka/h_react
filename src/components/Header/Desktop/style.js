@@ -132,12 +132,12 @@ export const HeaderLang = styled.div`
     font-weight: 600;
     text-transform: uppercase;
     margin-left: .5rem;
-    span:first-of-type {
+    span[data-lang] {
         cursor: pointer;
         opacity: .4;
     }
-    span:last-of-type {
-        cursor: pointer;
+    span[data-lang][data-active="true"] {
+        opacity: 1;
     }
 `
 

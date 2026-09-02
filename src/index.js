@@ -5,8 +5,9 @@ import { ThemeProvider } from "@emotion/react";
 
 import { App } from "./App";
 import { AdminRoot } from "./admin/AdminRoot";
-import { ContextProvider } from "./Ctx";
+import { ContextProvider, useCtx } from "./Ctx";
 import { loadSiteData } from "./data/store";
+import { readStoredLang } from "./i18n/strings";
 import { GlobalStyles } from "./styles/GlobalSt";
 import { theme } from "./styles/theme";
 
@@ -26,7 +27,7 @@ const PublicRoot = () => {
 
     useEffect(() => {
         let cancelled = false;
-        loadSiteData({ force: true })
+        loadSiteData({ force: true, lang: readStoredLang() })
             .then(() => {
                 if (!cancelled) setReady(true);
             })
@@ -55,9 +56,14 @@ const PublicRoot = () => {
         <ContextProvider>
             <ScrollToTop />
             <GlobalStyles />
-            <App />
+            <PublicApp />
         </ContextProvider>
     );
+};
+
+const PublicApp = () => {
+    const { lang } = useCtx();
+    return <App key={lang} />;
 };
 
 const root = createRoot(document.getElementById("root"));

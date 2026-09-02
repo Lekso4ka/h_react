@@ -20,6 +20,7 @@ import {
 const dark = ["/", "/hotel/golden-tulip", "/hotel/tulip-inn", "/activities/winter", "/activities/summer", "/actions", "/vacancies", "/wedding", "/stock/golden-tulip", "/stock/tulip-inn"]
 
 import { getAllMenuNav, getLeftNav, getRightNav } from "../data";
+import { useCtx, useT } from "../../../Ctx";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -35,6 +36,8 @@ export const Desktop = () => {
     const menuOpenRef = useRef(false);
     const navigate = useNavigate();
     const location = useLocation()
+    const { lang, setLang } = useCtx();
+    const t = useT();
     const isHeroRouteRef = useRef(false);
     
     const [activeMenuId, setActiveMenuId] = useState(null);
@@ -211,7 +214,7 @@ export const Desktop = () => {
                     onNavigate={ navigateToHash }
                 />) }
             </HeaderMenu>
-            <HeaderName><Link to={ "/" } state={ { id: "home" } }>Голден<br/>Тюлип & Тюлип<br/>Инн</Link></HeaderName>
+            <HeaderName><Link to={ "/" } state={ { id: "home" } }>{ t("brandName").split("\n").map((line, i, arr) => <React.Fragment key={ i }>{ line }{ i < arr.length - 1 ? <br/> : null }</React.Fragment>) }</Link></HeaderName>
             <HeaderMenu2>
                 { rightNav.map((item) => <NavItem
                     light={ lightHeader }
@@ -222,30 +225,21 @@ export const Desktop = () => {
                     onNavigate={ navigateToHash }
                 />) }
                 <HeaderButton>
-                    Бронировать
+                    { t("book") }
                 </HeaderButton>
                 <HeaderLang>
-                    <span>ru</span>
+                    <span
+                        data-lang="ru"
+                        data-active={ lang === "ru" ? "true" : "false" }
+                        onClick={ () => setLang("ru") }
+                    >ru</span>
                     <span>|</span>
-                    <span>en</span>
+                    <span
+                        data-lang="en"
+                        data-active={ lang === "en" ? "true" : "false" }
+                        onClick={ () => setLang("en") }
+                    >en</span>
                 </HeaderLang>
-                {/*<LangSwitch aria-label="Выбор языка">*/ }
-                {/*    <LangBtn*/ }
-                {/*        type="button"*/ }
-                {/*        $active={lang === "ru"}*/ }
-                {/*        onClick={() => switchLang("ru")}*/ }
-                {/*    >*/ }
-                {/*        RU*/ }
-                {/*    </LangBtn>*/ }
-                {/*    <LangDivider aria-hidden="true">|</LangDivider>*/ }
-                {/*    <LangBtn*/ }
-                {/*        type="button"*/ }
-                {/*        $active={lang === "en"}*/ }
-                {/*        onClick={() => switchLang("en")}*/ }
-                {/*    >*/ }
-                {/*        EN*/ }
-                {/*    </LangBtn>*/ }
-                {/*</LangSwitch>*/ }
             </HeaderMenu2>
         </HeaderBlock>
         

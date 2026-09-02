@@ -5,6 +5,7 @@ import { useAuth } from "../auth/AuthContext";
 import { Sidebar } from "./Sidebar";
 import { theme } from "../styles/theme";
 
+import { AdminLangProvider } from "../lang";
 import { adminPath } from "../paths";
 const Shell = styled.div`
   display: grid;
@@ -106,6 +107,7 @@ export function Layout() {
   };
 
   return (
+    <AdminLangProvider>
     <Shell>
       <Sidebar />
       <Main>
@@ -132,5 +134,6 @@ export function Layout() {
         <Outlet />
       </Main>
     </Shell>
+    </AdminLangProvider>
   );
 }

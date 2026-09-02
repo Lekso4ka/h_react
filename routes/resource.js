@@ -1,5 +1,19 @@
 const express = require("express");
-const { readJson, writeJson, decodeParam, slugify } = require("../lib/jsonStore");
+const { langFromQuery, otherLang } = require("../lib/lang");
+const {
+  readJsonLang,
+  writeJsonLang,
+  cloneJson,
+  decodeParam,
+  slugify,
+} = require("../lib/jsonStore");
+const { syncLocale } = require("../lib/localeSync");
+
+function readLocalized(fileName, lang) {
+  const data = readJsonLang(fileName, lang);
+  if (lang !== "en") return data;
+  return syncLocale(readJsonLang(fileName, "ru"), data);
+}
 
 /**
  * kind: "object" | "array"
@@ -9,9 +23,9 @@ function createResourceRouter({ fileName, kind, idField = null }) {
   const router = express.Router();
 
   if (kind === "singleton") {
-    router.get("/", (_req, res) => {
+    router.get("/", (req, res) => {
       try {
-        const data = readJson(fileName);
+        const data = readLocalized(fileName, langFromQuery(req));
         res.json({ kind, data });
       } catch (error) {
         res.status(500).json({ error: error.message });
@@ -24,7 +38,17 @@ function createResourceRouter({ fileName, kind, idField = null }) {
         if (!item || typeof item !== "object" || Array.isArray(item)) {
           return res.status(400).json({ error: "Нужно поле item" });
         }
-        writeJson(fileName, item);
+        const lang = langFromQuery(req);
+        if (lang === "en") {
+          const ruItem = readJsonLang(fileName, "ru");
+          const synced = syncLocale(ruItem, item);
+          writeJsonLang(fileName, "en", synced);
+          return res.json({ item: synced });
+        }
+
+        writeJsonLang(fileName, "ru", item);
+        const enItem = readJsonLang(fileName, "en");
+        writeJsonLang(fileName, "en", syncLocale(item, enItem));
         res.json({ item });
       } catch (error) {
         res.status(500).json({ error: error.message });
@@ -65,9 +89,9 @@ function createResourceRouter({ fileName, kind, idField = null }) {
     return -1;
   }
 
-  router.get("/", (_req, res) => {
+  router.get("/", (req, res) => {
     try {
-      const data = readJson(fileName);
+      const data = readLocalized(fileName, langFromQuery(req));
       res.json({
         kind,
         list: listItems(data).map(({ id, item, index }) => ({
@@ -90,7 +114,7 @@ function createResourceRouter({ fileName, kind, idField = null }) {
 
   router.get("/:id", (req, res) => {
     try {
-      const data = readJson(fileName);
+      const data = readLocalized(fileName, langFromQuery(req));
       const id = decodeParam(req.params.id);
 
       if (kind === "object") {
@@ -119,7 +143,8 @@ function createResourceRouter({ fileName, kind, idField = null }) {
 
   router.post("/", (req, res) => {
     try {
-      const data = readJson(fileName);
+      const lang = langFromQuery(req);
+      const data = readJsonLang(fileName, lang);
       const { id: rawId, item } = req.body;
 
       if (!item || typeof item !== "object") {
@@ -135,7 +160,14 @@ function createResourceRouter({ fileName, kind, idField = null }) {
           id = `${id}-${n}`;
         }
         data[id] = item;
-        writeJson(fileName, data);
+        writeJsonLang(fileName, lang, data);
+
+        const altLang = otherLang(lang);
+        const altData = readJsonLang(fileName, altLang);
+        if (!altData[id]) {
+          altData[id] = cloneJson(item);
+          writeJsonLang(fileName, altLang, altData);
+        }
         return res.status(201).json({ id, item });
       }
 
@@ -144,7 +176,13 @@ function createResourceRouter({ fileName, kind, idField = null }) {
       }
 
       data.push(item);
-      writeJson(fileName, data);
+      writeJsonLang(fileName, lang, data);
+
+      const altLang = otherLang(lang);
+      const altData = readJsonLang(fileName, altLang);
+      altData.push(cloneJson(item));
+      writeJsonLang(fileName, altLang, altData);
+
       const index = data.length - 1;
       res.status(201).json({
         id: idField && item[idField] != null ? String(item[idField]) : String(index),
@@ -158,7 +196,8 @@ function createResourceRouter({ fileName, kind, idField = null }) {
 
   router.put("/:id", (req, res) => {
     try {
-      const data = readJson(fileName);
+      const lang = langFromQuery(req);
+      const data = readJsonLang(fileName, lang);
       const id = decodeParam(req.params.id);
       const { item, newId } = req.body;
 
@@ -167,24 +206,48 @@ function createResourceRouter({ fileName, kind, idField = null }) {
       }
 
       if (kind === "object") {
-        if (!data[id]) {
+        const ruData = lang === "ru" ? data : readJsonLang(fileName, "ru");
+        const enData = lang === "en" ? data : readJsonLang(fileName, "en");
+
+        if (!ruData[id]) {
           return res.status(404).json({ error: "Запись не найдена" });
         }
 
         let finalId = id;
-        if (newId && newId !== id) {
-          if (data[newId]) {
+        if (newId && newId !== id && lang === "ru") {
+          if (ruData[newId]) {
             return res.status(400).json({ error: "Ключ уже существует" });
           }
-          data[newId] = item;
-          delete data[id];
+          ruData[newId] = item;
+          delete ruData[id];
           finalId = newId;
-        } else {
-          data[id] = item;
+          if (enData[id] && !enData[newId]) {
+            enData[newId] = enData[id];
+            delete enData[id];
+          }
+        } else if (lang === "ru") {
+          ruData[id] = item;
         }
 
-        writeJson(fileName, data);
-        return res.json({ id: finalId, item });
+        if (lang === "en") {
+          if (!ruData[id]) {
+            return res.status(404).json({ error: "Запись не найдена" });
+          }
+          const synced = syncLocale(ruData[id], item);
+          enData[id] = synced;
+          writeJsonLang(fileName, "en", enData);
+          return res.json({ id, item: synced });
+        }
+
+        writeJsonLang(fileName, "ru", ruData);
+        const ruItem = ruData[finalId];
+        if (enData[finalId]) {
+          enData[finalId] = syncLocale(ruItem, enData[finalId]);
+        } else {
+          enData[finalId] = cloneJson(ruItem);
+        }
+        writeJsonLang(fileName, "en", enData);
+        return res.json({ id: finalId, item: ruItem });
       }
 
       const index = findArrayIndex(data, id);
@@ -192,8 +255,34 @@ function createResourceRouter({ fileName, kind, idField = null }) {
         return res.status(404).json({ error: "Запись не найдена" });
       }
 
+      if (lang === "en") {
+        const ruData = readJsonLang(fileName, "ru");
+        const ruIndex = findArrayIndex(ruData, id);
+        if (ruIndex === -1) {
+          return res.status(404).json({ error: "Запись не найдена" });
+        }
+        const synced = syncLocale(ruData[ruIndex], item);
+        data[index] = synced;
+        writeJsonLang(fileName, "en", data);
+        return res.json({
+          id: idField && synced[idField] != null ? String(synced[idField]) : String(index),
+          index,
+          item: synced,
+        });
+      }
+
       data[index] = item;
-      writeJson(fileName, data);
+      writeJsonLang(fileName, "ru", data);
+
+      const enData = readJsonLang(fileName, "en");
+      const enIndex = idField ? findArrayIndex(enData, id) : index;
+      if (enIndex !== -1) {
+        enData[enIndex] = syncLocale(item, enData[enIndex]);
+      } else {
+        enData.push(cloneJson(item));
+      }
+      writeJsonLang(fileName, "en", enData);
+
       res.json({
         id: idField && item[idField] != null ? String(item[idField]) : String(index),
         index,
@@ -206,7 +295,8 @@ function createResourceRouter({ fileName, kind, idField = null }) {
 
   router.delete("/:id", (req, res) => {
     try {
-      const data = readJson(fileName);
+      const lang = langFromQuery(req);
+      const data = readJsonLang(fileName, lang);
       const id = decodeParam(req.params.id);
 
       if (kind === "object") {
@@ -214,7 +304,14 @@ function createResourceRouter({ fileName, kind, idField = null }) {
           return res.status(404).json({ error: "Запись не найдена" });
         }
         delete data[id];
-        writeJson(fileName, data);
+        writeJsonLang(fileName, lang, data);
+
+        const altLang = otherLang(lang);
+        const altData = readJsonLang(fileName, altLang);
+        if (altData[id]) {
+          delete altData[id];
+          writeJsonLang(fileName, altLang, altData);
+        }
         return res.json({ ok: true });
       }
 
@@ -224,7 +321,15 @@ function createResourceRouter({ fileName, kind, idField = null }) {
       }
 
       data.splice(index, 1);
-      writeJson(fileName, data);
+      writeJsonLang(fileName, lang, data);
+
+      const altLang = otherLang(lang);
+      const altData = readJsonLang(fileName, altLang);
+      const altIndex = idField ? findArrayIndex(altData, id) : index;
+      if (altIndex !== -1) {
+        altData.splice(altIndex, 1);
+        writeJsonLang(fileName, altLang, altData);
+      }
       res.json({ ok: true });
     } catch (error) {
       res.status(500).json({ error: error.message });

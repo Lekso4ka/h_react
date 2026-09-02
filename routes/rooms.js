@@ -1,11 +1,32 @@
 const path = require("path");
 const fs = require("fs");
 const express = require("express");
+const { langFromQuery, fileNameFor, otherLang } = require("../lib/lang");
+const { syncLocale, pickText } = require("../lib/localeSync");
 
 const router = express.Router();
-const DATA_PATH = path.join(__dirname, "..", "data", "rooms.json");
+const DATA_DIR = path.join(__dirname, "..", "data");
 
 const META_KEYS = new Set(["name", "variants", "id", "tour_link"]);
+
+function roomsFile(lang) {
+  return path.join(DATA_DIR, fileNameFor("rooms.json", lang));
+}
+
+function readRoomsLang(lang) {
+  try {
+    return JSON.parse(fs.readFileSync(roomsFile(lang), "utf8"));
+  } catch (error) {
+    if (lang === "en") {
+      return JSON.parse(fs.readFileSync(roomsFile("ru"), "utf8"));
+    }
+    throw error;
+  }
+}
+
+function writeRoomsLang(lang, data) {
+  fs.writeFileSync(roomsFile(lang), JSON.stringify(data, null, 2), "utf8");
+}
 
 function decodeParam(value) {
   const raw = String(value ?? "");
@@ -14,15 +35,6 @@ function decodeParam(value) {
   } catch {
     return raw;
   }
-}
-
-function readRooms() {
-  const raw = fs.readFileSync(DATA_PATH, "utf8");
-  return JSON.parse(raw);
-}
-
-function writeRooms(data) {
-  fs.writeFileSync(DATA_PATH, JSON.stringify(data, null, 2), "utf8");
 }
 
 function slugify(value) {
@@ -74,6 +86,50 @@ function listEntries(data, hotel) {
   return entries;
 }
 
+function cloneJson(data) {
+  return JSON.parse(JSON.stringify(data));
+}
+
+function syncRoomCategory(ruCat, enCat) {
+  const en = enCat && typeof enCat === "object" ? enCat : {};
+  const out = {};
+  for (const key of Object.keys(ruCat || {})) {
+    if (key === "name") {
+      out.name = pickText(en.name, ruCat.name);
+      continue;
+    }
+    if (META_KEYS.has(key) && key !== "name") {
+      out[key] = cloneJson(ruCat[key]);
+      continue;
+    }
+    if (ruCat[key] && typeof ruCat[key] === "object" && !Array.isArray(ruCat[key])) {
+      out[key] = syncLocale(ruCat[key], en[key]);
+      continue;
+    }
+    out[key] = cloneJson(ruCat[key]);
+  }
+  return out;
+}
+
+function overlayRooms(ruData, enData) {
+  const out = {};
+  for (const hotel of Object.keys(ruData || {})) {
+    out[hotel] = {};
+    const ruHotel = ruData[hotel] || {};
+    const enHotel = enData?.[hotel] && typeof enData[hotel] === "object" ? enData[hotel] : {};
+    for (const catKey of Object.keys(ruHotel)) {
+      out[hotel][catKey] = syncRoomCategory(ruHotel[catKey], enHotel[catKey]);
+    }
+  }
+  return out;
+}
+
+function readRoomsOverlay(lang) {
+  const data = readRoomsLang(lang);
+  if (lang !== "en") return data;
+  return overlayRooms(readRoomsLang("ru"), data);
+}
+
 function getVariantPayload(category, variantKey) {
   if (!category) return null;
   const payload = category[variantKey];
@@ -81,9 +137,9 @@ function getVariantPayload(category, variantKey) {
   return payload;
 }
 
-router.get("/", (_req, res) => {
+router.get("/", (req, res) => {
   try {
-    const data = readRooms();
+    const data = readRoomsOverlay(langFromQuery(req));
     res.json(data);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -92,7 +148,7 @@ router.get("/", (_req, res) => {
 
 router.get("/:hotel", (req, res) => {
   try {
-    const data = readRooms();
+    const data = readRoomsOverlay(langFromQuery(req));
     const hotel = req.params.hotel;
 
     if (!data[hotel]) {
@@ -111,7 +167,7 @@ router.get("/:hotel", (req, res) => {
 
 router.get("/:hotel/:categoryKey/:variantKey", (req, res) => {
   try {
-    const data = readRooms();
+    const data = readRoomsOverlay(langFromQuery(req));
     const hotel = decodeParam(req.params.hotel);
     const categoryKey = decodeParam(req.params.categoryKey);
     const variantKey = decodeParam(req.params.variantKey);
@@ -142,7 +198,8 @@ router.get("/:hotel/:categoryKey/:variantKey", (req, res) => {
 
 router.post("/:hotel", (req, res) => {
   try {
-    const data = readRooms();
+    const lang = langFromQuery(req);
+    const data = readRoomsLang(lang);
     const { hotel } = req.params;
 
     if (!data[hotel]) {
@@ -179,13 +236,20 @@ router.post("/:hotel", (req, res) => {
           ? []
           : [variantKey];
 
-    data[hotel][categoryKey] = {
+    const created = {
       name,
       variants: variantList,
       [variantKey]: room,
     };
+    data[hotel][categoryKey] = created;
+    writeRoomsLang(lang, data);
 
-    writeRooms(data);
+    const altLang = otherLang(lang);
+    const altData = readRoomsLang(altLang);
+    if (altData[hotel] && !altData[hotel][categoryKey]) {
+      altData[hotel][categoryKey] = JSON.parse(JSON.stringify(created));
+      writeRoomsLang(altLang, altData);
+    }
 
     res.status(201).json({
       hotel,
@@ -201,7 +265,8 @@ router.post("/:hotel", (req, res) => {
 
 router.put("/:hotel/:categoryKey/:variantKey", (req, res) => {
   try {
-    const data = readRooms();
+    const lang = langFromQuery(req);
+    const data = readRoomsLang(lang);
     const hotel = decodeParam(req.params.hotel);
     const categoryKey = decodeParam(req.params.categoryKey);
     const variantKey = decodeParam(req.params.variantKey);
@@ -216,6 +281,35 @@ router.put("/:hotel/:categoryKey/:variantKey", (req, res) => {
     }
 
     const { name, room, variants, newVariantKey } = req.body;
+
+    if (lang === "en") {
+      const ruData = readRoomsLang("ru");
+      const ruCategory = ruData[hotel]?.[categoryKey];
+      if (!ruCategory?.[variantKey]) {
+        return res.status(404).json({ error: "Вариант номера не найден" });
+      }
+
+      const enData = data;
+      const nextEn = {
+        ...category,
+        name: name || category.name,
+      };
+      if (room && typeof room === "object") {
+        nextEn[variantKey] = room;
+      }
+      enData[hotel][categoryKey] = syncRoomCategory(ruCategory, nextEn);
+      writeRoomsLang("en", enData);
+
+      const saved = enData[hotel][categoryKey];
+      return res.json({
+        hotel,
+        categoryKey,
+        variantKey,
+        name: saved.name,
+        variants: saved.variants || [],
+        data: saved[variantKey],
+      });
+    }
 
     if (name) {
       category.name = name;
@@ -242,11 +336,32 @@ router.put("/:hotel/:categoryKey/:variantKey", (req, res) => {
           item === variantKey ? newVariantKey : item
         );
       }
+
+      const enData = readRoomsLang("en");
+      const enCategory = enData[hotel]?.[categoryKey];
+      if (enCategory?.[variantKey] && !enCategory[newVariantKey]) {
+        enCategory[newVariantKey] = enCategory[variantKey];
+        delete enCategory[variantKey];
+        if (Array.isArray(enCategory.variants)) {
+          enCategory.variants = enCategory.variants.map((item) =>
+            item === variantKey ? newVariantKey : item
+          );
+        }
+        writeRoomsLang("en", enData);
+      }
     }
 
-    writeRooms(data);
+    writeRoomsLang("ru", data);
 
     const finalVariantKey = newVariantKey || variantKey;
+    const enData = readRoomsLang("en");
+    if (enData[hotel]?.[categoryKey]) {
+      enData[hotel][categoryKey] = syncRoomCategory(
+        data[hotel][categoryKey],
+        enData[hotel][categoryKey]
+      );
+      writeRoomsLang("en", enData);
+    }
 
     res.json({
       hotel,
@@ -263,7 +378,8 @@ router.put("/:hotel/:categoryKey/:variantKey", (req, res) => {
 
 router.post("/:hotel/:categoryKey/variants", (req, res) => {
   try {
-    const data = readRooms();
+    const lang = langFromQuery(req);
+    const data = readRoomsLang(lang);
     const { hotel, categoryKey } = req.params;
     const category = data[hotel]?.[categoryKey];
 
@@ -288,7 +404,21 @@ router.post("/:hotel/:categoryKey/variants", (req, res) => {
       category.variants.push(variantKey);
     }
 
-    writeRooms(data);
+    writeRoomsLang(lang, data);
+
+    const altLang = otherLang(lang);
+    const altData = readRoomsLang(altLang);
+    const altCategory = altData[hotel]?.[categoryKey];
+    if (altCategory && !altCategory[variantKey]) {
+      altCategory[variantKey] = JSON.parse(JSON.stringify(room));
+      if (!Array.isArray(altCategory.variants)) {
+        altCategory.variants = [];
+      }
+      if (!altCategory.variants.includes(variantKey) && variantKey !== "default") {
+        altCategory.variants.push(variantKey);
+      }
+      writeRoomsLang(altLang, altData);
+    }
 
     res.status(201).json({
       hotel,
@@ -303,7 +433,8 @@ router.post("/:hotel/:categoryKey/variants", (req, res) => {
 
 router.delete("/:hotel/:categoryKey/:variantKey", (req, res) => {
   try {
-    const data = readRooms();
+    const lang = langFromQuery(req);
+    const data = readRoomsLang(lang);
     const hotel = decodeParam(req.params.hotel);
     const categoryKey = decodeParam(req.params.categoryKey);
     const variantKey = decodeParam(req.params.variantKey);
@@ -317,21 +448,29 @@ router.delete("/:hotel/:categoryKey/:variantKey", (req, res) => {
       return res.status(404).json({ error: "Вариант номера не найден" });
     }
 
-    delete category[variantKey];
+    const removeVariant = (store) => {
+      const cat = store[hotel]?.[categoryKey];
+      if (!cat?.[variantKey]) return;
+      delete cat[variantKey];
+      if (Array.isArray(cat.variants)) {
+        cat.variants = cat.variants.filter((item) => item !== variantKey);
+      }
+      const remainingVariants = Object.keys(cat).filter(
+        (key) => !META_KEYS.has(key)
+      );
+      if (remainingVariants.length === 0) {
+        delete store[hotel][categoryKey];
+      }
+    };
 
-    if (Array.isArray(category.variants)) {
-      category.variants = category.variants.filter((item) => item !== variantKey);
-    }
+    removeVariant(data);
+    writeRoomsLang(lang, data);
 
-    const remainingVariants = Object.keys(category).filter(
-      (key) => !META_KEYS.has(key)
-    );
+    const altLang = otherLang(lang);
+    const altData = readRoomsLang(altLang);
+    removeVariant(altData);
+    writeRoomsLang(altLang, altData);
 
-    if (remainingVariants.length === 0) {
-      delete data[hotel][categoryKey];
-    }
-
-    writeRooms(data);
     res.json({ ok: true });
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -340,7 +479,8 @@ router.delete("/:hotel/:categoryKey/:variantKey", (req, res) => {
 
 router.delete("/:hotel/:categoryKey", (req, res) => {
   try {
-    const data = readRooms();
+    const lang = langFromQuery(req);
+    const data = readRoomsLang(lang);
     const { hotel, categoryKey } = req.params;
 
     if (!data[hotel]?.[categoryKey]) {
@@ -348,7 +488,14 @@ router.delete("/:hotel/:categoryKey", (req, res) => {
     }
 
     delete data[hotel][categoryKey];
-    writeRooms(data);
+    writeRoomsLang(lang, data);
+
+    const altLang = otherLang(lang);
+    const altData = readRoomsLang(altLang);
+    if (altData[hotel]?.[categoryKey]) {
+      delete altData[hotel][categoryKey];
+      writeRoomsLang(altLang, altData);
+    }
     res.json({ ok: true });
   } catch (error) {
     res.status(500).json({ error: error.message });

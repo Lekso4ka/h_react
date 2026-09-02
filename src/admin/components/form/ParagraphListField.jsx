@@ -44,6 +44,7 @@ export function ParagraphListField({
   value = [],
   onChange,
   addLabel = "Добавить абзац",
+  lockStructure = false,
 }) {
   const items = value.length > 0 ? value : [""];
 
@@ -70,13 +71,15 @@ export function ParagraphListField({
         <Block key={index}>
           <Header>
             <Label>Абзац {index + 1}</Label>
-            <Remove
-              type="button"
-              onClick={() => remove(index)}
-              disabled={items.length <= 1}
-            >
-              Удалить
-            </Remove>
+            {!lockStructure && (
+              <Remove
+                type="button"
+                onClick={() => remove(index)}
+                disabled={items.length <= 1}
+              >
+                Удалить
+              </Remove>
+            )}
           </Header>
           <TextArea
             value={item}
@@ -84,11 +87,13 @@ export function ParagraphListField({
           />
         </Block>
       ))}
-      <Actions>
-        <Button type="button" variant="ghost" onClick={add}>
-          {addLabel}
-        </Button>
-      </Actions>
+      {!lockStructure && (
+        <Actions>
+          <Button type="button" variant="ghost" onClick={add}>
+            {addLabel}
+          </Button>
+        </Actions>
+      )}
     </Wrap>
   );
 }

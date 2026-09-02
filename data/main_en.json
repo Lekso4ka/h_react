@@ -1,0 +1,206 @@
+{
+  "seo": {
+    "title": "",
+    "description": "",
+    "keywords": ""
+  },
+  "default_season": "winter",
+  "hero": {
+    "winter_video": "file.mp4",
+    "winter_video_preview": "",
+    "summer_video": "video-s.mp4",
+    "summer_video_preview": "",
+    "winter_title": "Winter at Rosa Khutor",
+    "summer_title": "Summer at Rosa Khutor",
+    "subtitle": "Comfort or a practical stay — choose your way to live in the mountains",
+    "golden_tulip": {
+      "name": "Golden Tulip",
+      "stars": 4,
+      "tagline": "Comfort and service",
+      "phone": "+7 (862) 243 12 00",
+      "text": "Golden Tulip Rosa Khutor is a four-star hotel in the heart of the resort, on the Rosa Khutor embankment. Minutes from the lifts and key infrastructure, with panoramic mountain views and easy access to everything the resort has to offer.",
+      "image": "ddcc8ed1-27f5-439e-bd96-eb658db62016.jpeg"
+    },
+    "tulip_inn": {
+      "name": "Tulip Inn",
+      "stars": 3,
+      "tagline": "A practical format",
+      "phone": "+7 (862) 243 00 00",
+      "text": "Tulip Inn is a three-star hotel in the heart of the resort, on the Rosa Khutor embankment. Minutes from the lifts and key infrastructure, with panoramic mountain views and easy access to everything the resort has to offer.",
+      "image": "52b44d67-992c-4193-a496-79485a2a2d04.jpeg"
+    },
+    "activity_card": {
+      "video": "activity_home.mp4",
+      "video_preview": "",
+      "text": "Stay for children under 14 is complimentary."
+    },
+    "season_label_winter": "winter ‘26",
+    "season_label_summer": "summer ‘26",
+    "season_text": "Discover a season where movement and rest share the same rhythm."
+  },
+  "atmosphere": {
+    "label": "[ Atmosphere and space ]",
+    "text": "A comfortable stay among the resort’s mountain slopes. The hotel architecture continues the natural landscape,",
+    "text_accent": "while light interiors, natural materials and considered proportions create a calm, restrained atmosphere.",
+    "tooltip": "Architecture, light and quiet shape the hotel atmosphere.",
+    "images": [
+      "f7c83f11-e768-40fa-bd8e-1d5a49ab32e0.jpg",
+      "458fced8-9ed4-40bc-90cd-2b0c1a05690b.jpg",
+      "876f9b43-e959-45ec-baa9-024d2d9367f5.jpg"
+    ]
+  },
+  "nav": {
+    "label": "[ Hotel facilities ]",
+    "image_1": "5fae5253-ace6-47c0-a48a-5cdeca8f1565.jpg",
+    "image_2": "3dcd6eb8-8d38-4c92-b81f-74a7db2ec96a.jpg",
+    "golden_tulip": {
+      "label": "Golden Tulip",
+      "title": "Rooms & Suites"
+    },
+    "tulip_inn": {
+      "label": "Tulip Inn",
+      "title": "Hotel rooms"
+    }
+  },
+  "activities": {
+    "label": "[ Activities ]",
+    "winter": {
+      "title": "Feel the rhythm of the mountains —",
+      "title_accent": "from early morning to evening",
+      "text": "Seasonal trails, panoramic views and considered rest scenarios help you combine movement and relaxation all year round.",
+      "items": [
+        {
+          "title": "Skiing and snowboarding",
+          "text": "Rosa Khutor has more than 100 km of runs: from green slopes for beginners to black Olympic descents for true professionals. Both the northern and southern slopes of the Aibga ridge are open for skiing.",
+          "image": "bc14f9ec-18dd-4c3d-b6d6-dfaf7b6fbc36.jpg"
+        },
+        {
+          "title": "Mountain attractions",
+          "text": "Turns at up to 40 km/h along the mountain rodeltbahn in the heart of the Olympic Village — a real rush of adrenaline and impressions.",
+          "image": "299dbb23-13af-4109-af6d-335f14723b46.jpg"
+        },
+        {
+          "title": "Parks and farms",
+          "text": "Meet friendly alpacas whose funny fringes, thoughtful looks and soft wool bring an instant smile to adults and genuine delight to children.",
+          "image": "bc3ce114-2fbb-4cf8-9fba-a81003cb025b.jpg"
+        },
+        {
+          "title": "Cable car journey",
+          "text": "The cable cars are 20+ km of air travel with views that stop the heart. Enjoy mountain landscapes, forest sounds and the rush of streams just minutes after you start.",
+          "image": "56c9b3b2-0262-43bc-b886-344ccdb986f8.jpg"
+        }
+      ]
+    },
+    "summer": {
+      "title": "Catch the mood of the mountains —",
+      "title_accent": "from first light to sunset",
+      "text": "Summer trails, scenic views and quiet rest at altitude fill every day with new impressions and bright moments.",
+      "items": [
+        {
+          "title": "Cable car journey",
+          "text": "The cable cars are 20+ km of air travel with views that stop the heart. Enjoy mountain landscapes, forest sounds and the rush of streams just minutes after you start.",
+          "image": "c6ef9486-9079-463a-8936-2797920c4fc0.jpg"
+        },
+        {
+          "title": "Eco trails and trekking",
+          "text": "More than 20 eco trails are available for independent exploration or with professional guides. High-mountain routes, easy family paths for unhurried walks in the shade, and the Mendelikha waterfall nature park.",
+          "image": "88243f41-c88d-4db5-936c-e0badd8256fc.jpg"
+        },
+        {
+          "title": "Mountain attractions",
+          "text": "Turns at up to 40 km/h along the mountain rodeltbahn in the heart of the Olympic Village — a real rush of adrenaline and impressions.",
+          "image": "9d9d0b1f-b381-42ba-b90e-592d247fe525.jpg"
+        },
+        {
+          "title": "Parks and farms",
+          "text": "Meet friendly alpacas whose funny fringes, thoughtful looks and soft wool bring an instant smile to adults and genuine delight to children.",
+          "image": "30925f92-e411-4e74-902a-b1e2d3fd7983.jpg"
+        }
+      ]
+    }
+  },
+  "spa": {
+    "label": "[ SPA centre ]",
+    "title": "Restore your balance",
+    "image": "45a1432d-0cc5-48af-afb4-82ffc74dbed3.jpg"
+  },
+  "hotels": {
+    "title": "TWO HOTELS IN THE HEART OF THE RESORT\nFOR A MOUNTAIN BREAK AND ACTIVE TRIPS\nAT ANY TIME OF YEAR",
+    "text": "Contemporary spaces, considered rooms and a convenient location create a comfortable setting for rest. From morning lifts to the slopes to evening walks along the embankment — everything here is tuned to ease, a variety of impressions and a calm return to comfort.",
+    "images": [
+      "923ef149-aecd-476b-a4cd-7cd5f6c88b74.jpg",
+      "a78587cb-dfcf-4547-9f4f-cc8cf7863790.jpg",
+      "6184687c-35cf-4674-ba07-66b808f3a401.jpg",
+      "4d2e34cf-f085-4510-8a24-9ec0ccab420c.jpg",
+      "9a9d5143-f360-4dd3-a287-f0a4aba77685.jpg"
+    ]
+  },
+  "restaurants": {
+    "preview_image": "4ac407277eaac160051a149803bdbb3c59253651.jpg",
+    "slides": [
+      {
+        "name": "Branche",
+        "image": "fe118ef6-330c-43f1-a088-9f25136a8f30.jpg",
+        "hotel": "golden-tulip"
+      },
+      {
+        "name": "Branche",
+        "image": "0fb84190-86b1-46d8-88ed-f2264ca302bf.jpg",
+        "hotel": "tulip-inn"
+      },
+      {
+        "name": "Branche",
+        "image": "12820f4b-3f0b-4fd1-8093-e6c00a03422a.jpg",
+        "hotel": "tulip-inn"
+      },
+      {
+        "name": "Branche",
+        "image": "b778e91d-f63a-46e9-b33a-6c69f9389a4d.jpg",
+        "hotel": "tulip-inn"
+      },
+      {
+        "name": "Amsterdam",
+        "image": "1b5ef79f-9e3a-49d4-bfe9-3294a02bd8f0.jpg",
+        "hotel": "golden-tulip"
+      },
+      {
+        "name": "Amsterdam",
+        "image": "386c9a94-f311-4e5a-9547-6bb768db6dea.jpg",
+        "hotel": "tulip-inn"
+      },
+      {
+        "name": "Amsterdam",
+        "image": "3d51941b-0dc2-4e68-a278-ee73aa7654f7.jpg",
+        "hotel": "tulip-inn"
+      },
+      {
+        "name": "Amsterdam",
+        "image": "cbba2a35-bf74-467c-bb4d-131887958435.jpg",
+        "hotel": "tulip-inn"
+      }
+    ]
+  },
+  "events": {
+    "label": "[ MICE ]",
+    "title": "Events of any format where atmosphere and detail matter.",
+    "text_1": "Hold meetings, presentations and conferences in comfortable halls with a considered atmosphere. Spaces adapt easily to the format and number of guests.",
+    "text_2": "From intimate dinners to large celebrations. Beautiful halls, an attentive team and details that make every event truly special.",
+    "items": [
+      {
+        "id": "wedding",
+        "name": "A wedding in the heart of the mountains",
+        "size": 250,
+        "guests": 100,
+        "image": "736163b0e7a4193bc499bb910f64a255fe2eda11.png",
+        "link": "wedding",
+        "list": [
+          "In the very heart of Rosa Khutor",
+          "Panoramic terrace",
+          "Outdoor ceremony",
+          "A compliment for the newlyweds",
+          "Discount on guest stays"
+        ]
+      }
+    ]
+  }
+}

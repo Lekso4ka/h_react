@@ -10,6 +10,7 @@ import {
 } from "../api/rooms";
 import { ImageUploader } from "../components/ImageUploader";
 import { AccordionSection } from "../components/AccordionSection";
+import { LangTabs } from "../components/LangTabs";
 import {
   Actions,
   Button,
@@ -23,6 +24,7 @@ import {
   SuccessText,
   TextArea,
 } from "../components/ui";
+import { useAdminLang } from "../lang";
 import { theme } from "../styles/theme";
 
 import { adminPath } from "../paths";
@@ -116,6 +118,8 @@ export function RoomFormPage() {
   const { hotel, categoryKey, variantKey } = useParams();
   const isNew = !categoryKey;
   const navigate = useNavigate();
+  const { lang } = useAdminLang();
+  const textOnly = lang === "en";
 
   const [name, setName] = useState("");
   const [variant, setVariant] = useState(variantKey || "default");
@@ -143,15 +147,21 @@ export function RoomFormPage() {
       setAllOptions([{ title: "", list: [""] }]);
       setServices([""]);
       setParagraphs([""]);
+      setError("");
+      setSuccess("");
       setLoading(false);
-      return;
     }
+  }, [hotel, categoryKey, variantKey, isNew]);
+
+  useEffect(() => {
+    if (isNew) return;
 
     let cancelled = false;
 
     (async () => {
       setLoading(true);
       setError("");
+      setSuccess("");
       try {
         const data = await fetchRoom(hotel, categoryKey, variantKey);
         if (cancelled) return;
@@ -177,7 +187,7 @@ export function RoomFormPage() {
     return () => {
       cancelled = true;
     };
-  }, [hotel, categoryKey, variantKey, isNew]);
+  }, [hotel, categoryKey, variantKey, isNew, lang]);
 
   const setField = (key, value) => {
     setRoom((prev) => ({ ...prev, [key]: value }));
@@ -322,10 +332,11 @@ export function RoomFormPage() {
         await updateRoom(hotel, categoryKey, variantKey, {
           name,
           room: payload,
-          newVariantKey: variant !== variantKey ? variant : undefined,
+          newVariantKey:
+            !textOnly && variant !== variantKey ? variant : undefined,
         });
         setSuccess("Изменения сохранены");
-        if (variant !== variantKey) {
+        if (!textOnly && variant !== variantKey) {
           navigate(adminPath(`/rooms/${hotel}/${categoryKey}/${variant}`), {
             replace: true,
           });
@@ -351,12 +362,20 @@ export function RoomFormPage() {
   };
 
   if (loading) {
-    return <PageSubtitle>Загрузка формы…</PageSubtitle>;
+    return (
+      <>
+        <PageTitle>{title}</PageTitle>
+        <LangTabs />
+        <PageSubtitle>Загрузка формы…</PageSubtitle>
+        {error && <ErrorText>{error}</ErrorText>}
+      </>
+    );
   }
 
   return (
     <form onSubmit={handleSubmit}>
       <PageTitle>{title}</PageTitle>
+      <LangTabs />
       <PageSubtitle>
         <Link to={adminPath(`/rooms/${hotel}`)}>← К списку номеров</Link>
       </PageSubtitle>
@@ -420,35 +439,40 @@ export function RoomFormPage() {
               onChange={(e) => setVariant(e.target.value)}
               placeholder="default / Базовый / Вид на реку"
               required
+              disabled={textOnly && !isNew}
             />
           </Field>
-          <Field>
-            <Label>Количество комнат</Label>
-            <Input
-              type="number"
-              min="0"
-              value={room.rooms}
-              onChange={(e) => setField("rooms", e.target.value)}
-            />
-          </Field>
-          <Field>
-            <Label>Площадь, м²</Label>
-            <Input
-              type="number"
-              min="0"
-              value={room.size}
-              onChange={(e) => setField("size", e.target.value)}
-            />
-          </Field>
-          <Field>
-            <Label>Гостей</Label>
-            <Input
-              type="number"
-              min="0"
-              value={room.guests}
-              onChange={(e) => setField("guests", e.target.value)}
-            />
-          </Field>
+          {!textOnly && (
+            <>
+              <Field>
+                <Label>Количество комнат</Label>
+                <Input
+                  type="number"
+                  min="0"
+                  value={room.rooms}
+                  onChange={(e) => setField("rooms", e.target.value)}
+                />
+              </Field>
+              <Field>
+                <Label>Площадь, м²</Label>
+                <Input
+                  type="number"
+                  min="0"
+                  value={room.size}
+                  onChange={(e) => setField("size", e.target.value)}
+                />
+              </Field>
+              <Field>
+                <Label>Гостей</Label>
+                <Input
+                  type="number"
+                  min="0"
+                  value={room.guests}
+                  onChange={(e) => setField("guests", e.target.value)}
+                />
+              </Field>
+            </>
+          )}
           <Field>
             <Label>Вид</Label>
             <Input
@@ -463,13 +487,15 @@ export function RoomFormPage() {
               onChange={(e) => setField("beds", e.target.value)}
             />
           </Field>
-          <Field>
-            <Label>Ссылка на тур</Label>
-            <Input
-              value={room.tour_link}
-              onChange={(e) => setField("tour_link", e.target.value)}
-            />
-          </Field>
+          {!textOnly && (
+            <Field>
+              <Label>Ссылка на тур</Label>
+              <Input
+                value={room.tour_link}
+                onChange={(e) => setField("tour_link", e.target.value)}
+              />
+            </Field>
+          )}
         </Grid>
       </AccordionSection>
 
@@ -479,13 +505,15 @@ export function RoomFormPage() {
             <ParagraphBlock key={index}>
               <ParagraphHeader>
                 <Label>Абзац {index + 1}</Label>
-                <RemoveLink
-                  type="button"
-                  onClick={() => removeParagraph(index)}
-                  disabled={paragraphs.length <= 1}
-                >
-                  Удалить
-                </RemoveLink>
+                {!textOnly && (
+                  <RemoveLink
+                    type="button"
+                    onClick={() => removeParagraph(index)}
+                    disabled={paragraphs.length <= 1}
+                  >
+                    Удалить
+                  </RemoveLink>
+                )}
               </ParagraphHeader>
               <TextArea
                 value={paragraph}
@@ -494,11 +522,13 @@ export function RoomFormPage() {
               />
             </ParagraphBlock>
           ))}
-          <Actions>
-            <Button type="button" variant="ghost" onClick={addParagraph}>
-              Добавить абзац
-            </Button>
-          </Actions>
+          {!textOnly && (
+            <Actions>
+              <Button type="button" variant="ghost" onClick={addParagraph}>
+                Добавить абзац
+              </Button>
+            </Actions>
+          )}
           <Field>
             <Label>Подсказка</Label>
             <TextArea
@@ -518,20 +548,24 @@ export function RoomFormPage() {
                 onChange={(e) => updateOption(index, e.target.value)}
                 placeholder="Например: Высокоскоростной Wi-Fi"
               />
-              <RemoveLink
-                type="button"
-                onClick={() => removeOption(index)}
-                disabled={options.length <= 1}
-              >
-                Удалить
-              </RemoveLink>
+              {!textOnly && (
+                <RemoveLink
+                  type="button"
+                  onClick={() => removeOption(index)}
+                  disabled={options.length <= 1}
+                >
+                  Удалить
+                </RemoveLink>
+              )}
             </InputRow>
           ))}
-          <Actions>
-            <Button type="button" variant="ghost" onClick={addOption}>
-              Добавить опцию
-            </Button>
-          </Actions>
+          {!textOnly && (
+            <Actions>
+              <Button type="button" variant="ghost" onClick={addOption}>
+                Добавить опцию
+              </Button>
+            </Actions>
+          )}
         </Grid>
       </AccordionSection>
 
@@ -550,14 +584,16 @@ export function RoomFormPage() {
                     placeholder="Комфорт / Технологии / Удобства"
                   />
                 </Field>
-                <RemoveLink
-                  type="button"
-                  onClick={() => removeOptionGroup(groupIndex)}
-                  disabled={allOptions.length <= 1}
-                  style={{ marginBottom: 18 }}
-                >
-                  Удалить раздел
-                </RemoveLink>
+                {!textOnly && (
+                  <RemoveLink
+                    type="button"
+                    onClick={() => removeOptionGroup(groupIndex)}
+                    disabled={allOptions.length <= 1}
+                    style={{ marginBottom: 18 }}
+                  >
+                    Удалить раздел
+                  </RemoveLink>
+                )}
               </GroupHeader>
 
               {group.list.map((item, itemIndex) => (
@@ -569,33 +605,39 @@ export function RoomFormPage() {
                     }
                     placeholder="– ортопедический матрас"
                   />
-                  <RemoveLink
-                    type="button"
-                    onClick={() => removeGroupItem(groupIndex, itemIndex)}
-                    disabled={group.list.length <= 1}
-                  >
-                    Удалить
-                  </RemoveLink>
+                  {!textOnly && (
+                    <RemoveLink
+                      type="button"
+                      onClick={() => removeGroupItem(groupIndex, itemIndex)}
+                      disabled={group.list.length <= 1}
+                    >
+                      Удалить
+                    </RemoveLink>
+                  )}
                 </InputRow>
               ))}
 
-              <Actions>
-                <Button
-                  type="button"
-                  variant="ghost"
-                  onClick={() => addGroupItem(groupIndex)}
-                >
-                  Добавить пункт
-                </Button>
-              </Actions>
+              {!textOnly && (
+                <Actions>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    onClick={() => addGroupItem(groupIndex)}
+                  >
+                    Добавить пункт
+                  </Button>
+                </Actions>
+              )}
             </OptionGroup>
           ))}
 
-          <Actions>
-            <Button type="button" variant="ghost" onClick={addOptionGroup}>
-              Добавить опцию
-            </Button>
-          </Actions>
+          {!textOnly && (
+            <Actions>
+              <Button type="button" variant="ghost" onClick={addOptionGroup}>
+                Добавить опцию
+              </Button>
+            </Actions>
+          )}
         </Grid>
       </AccordionSection>
 
@@ -608,31 +650,37 @@ export function RoomFormPage() {
                 onChange={(e) => updateService(index, e.target.value)}
                 placeholder="мини-бар"
               />
-              <RemoveLink
-                type="button"
-                onClick={() => removeService(index)}
-                disabled={services.length <= 1}
-              >
-                Удалить
-              </RemoveLink>
+              {!textOnly && (
+                <RemoveLink
+                  type="button"
+                  onClick={() => removeService(index)}
+                  disabled={services.length <= 1}
+                >
+                  Удалить
+                </RemoveLink>
+              )}
             </InputRow>
           ))}
-          <Actions>
-            <Button type="button" variant="ghost" onClick={addService}>
-              Добавить услугу
-            </Button>
-          </Actions>
+          {!textOnly && (
+            <Actions>
+              <Button type="button" variant="ghost" onClick={addService}>
+                Добавить услугу
+              </Button>
+            </Actions>
+          )}
         </Grid>
       </AccordionSection>
 
-      <AccordionSection title="Изображения" defaultOpen>
-        <ImageUploader
-          label="Изображения номера"
-          value={room.images}
-          onChange={(images) => setField("images", images)}
-          multiple
-        />
-      </AccordionSection>
+      {!textOnly && (
+        <AccordionSection title="Изображения" defaultOpen>
+          <ImageUploader
+            label="Изображения номера"
+            value={room.images}
+            onChange={(images) => setField("images", images)}
+            multiple
+          />
+        </AccordionSection>
+      )}
 
       <Actions>
         <Button type="submit" disabled={saving}>

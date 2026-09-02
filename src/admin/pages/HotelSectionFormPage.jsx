@@ -16,6 +16,8 @@ import {
   SuccessText,
 } from "../components/ui";
 import { getHotelSection } from "../config/entities";
+import { LangTabs } from "../components/LangTabs";
+import { useAdminLang } from "../lang";
 
 import { adminPath } from "../paths";
 const HOTEL_NAMES = {
@@ -39,6 +41,7 @@ function pickSectionValue(fullItem, schema) {
 export function HotelSectionFormPage() {
   const { id, section } = useParams();
   const sectionConfig = getHotelSection(section);
+  const { lang } = useAdminLang();
 
   const [fullItem, setFullItem] = useState(null);
   const [sectionData, setSectionData] = useState(null);
@@ -78,7 +81,7 @@ export function HotelSectionFormPage() {
     return () => {
       cancelled = true;
     };
-  }, [id, section]);
+  }, [id, section, lang]);
 
   if (!sectionConfig) {
     return <Navigate to={adminPath(`/data/hotels/${id}/main`)} replace />;
@@ -106,13 +109,10 @@ export function HotelSectionFormPage() {
     }
   };
 
-  if (loading) {
-    return <PageSubtitle>Загрузка формы…</PageSubtitle>;
-  }
-
   return (
     <form onSubmit={handleSubmit}>
       <PageTitle>{title}</PageTitle>
+      <LangTabs />
       <PageSubtitle>
         Раздел отеля ·{" "}
         <Link to={adminPath(`/data/hotels/${id}/main`)}>Главная</Link>
@@ -125,6 +125,10 @@ export function HotelSectionFormPage() {
       {error && <ErrorText>{error}</ErrorText>}
       {success && <SuccessText>{success}</SuccessText>}
 
+      {loading ? (
+        <PageSubtitle>Загрузка формы…</PageSubtitle>
+      ) : (
+        <>
       {sectionData && (
         <SchemaForm
           schema={sectionConfig.schema}
@@ -138,6 +142,8 @@ export function HotelSectionFormPage() {
           {saving ? "Сохранение…" : "Сохранить"}
         </Button>
       </Actions>
+        </>
+      )}
     </form>
   );
 }

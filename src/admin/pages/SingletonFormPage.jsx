@@ -14,9 +14,12 @@ import {
   SuccessText,
 } from "../components/ui";
 import { getSingleton } from "../config/singletons";
+import { LangTabs } from "../components/LangTabs";
+import { useAdminLang } from "../lang";
 
 export function SingletonFormPage({ singletonKey }) {
   const config = getSingleton(singletonKey);
+  const { lang } = useAdminLang();
 
   const [item, setItem] = useState(() => createEmptyItem(config?.schema));
   const [error, setError] = useState("");
@@ -47,7 +50,7 @@ export function SingletonFormPage({ singletonKey }) {
     return () => {
       cancelled = true;
     };
-  }, [singletonKey]);
+  }, [singletonKey, lang]);
 
   if (!config) {
     return <ErrorText>Раздел не найден</ErrorText>;
@@ -71,18 +74,19 @@ export function SingletonFormPage({ singletonKey }) {
     }
   };
 
-  if (loading) {
-    return <PageSubtitle>Загрузка формы…</PageSubtitle>;
-  }
-
   return (
     <form onSubmit={handleSubmit}>
       <PageTitle>{config.title}</PageTitle>
+      <LangTabs />
       <PageSubtitle>Тексты и медиа этой страницы</PageSubtitle>
 
       {error && <ErrorText>{error}</ErrorText>}
       {success && <SuccessText>{success}</SuccessText>}
 
+      {loading ? (
+        <PageSubtitle>Загрузка формы…</PageSubtitle>
+      ) : (
+        <>
       <SchemaForm schema={config.schema} value={item} onChange={setItem} />
 
       <Actions>
@@ -90,6 +94,8 @@ export function SingletonFormPage({ singletonKey }) {
           {saving ? "Сохранение…" : "Сохранить"}
         </Button>
       </Actions>
+        </>
+      )}
     </form>
   );
 }

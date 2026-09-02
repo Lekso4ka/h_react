@@ -40,6 +40,7 @@ export function StringListField({
   onChange,
   placeholder = "",
   addLabel = "Добавить",
+  lockStructure = false,
 }) {
   const items = value.length > 0 ? value : [""];
 
@@ -69,20 +70,24 @@ export function StringListField({
             onChange={(e) => update(index, e.target.value)}
             placeholder={placeholder}
           />
-          <Remove
-            type="button"
-            onClick={() => remove(index)}
-            disabled={items.length <= 1}
-          >
-            Удалить
-          </Remove>
+          {!lockStructure && (
+            <Remove
+              type="button"
+              onClick={() => remove(index)}
+              disabled={items.length <= 1}
+            >
+              Удалить
+            </Remove>
+          )}
         </Row>
       ))}
-      <Actions>
-        <Button type="button" variant="ghost" onClick={add}>
-          {addLabel}
-        </Button>
-      </Actions>
+      {!lockStructure && (
+        <Actions>
+          <Button type="button" variant="ghost" onClick={add}>
+            {addLabel}
+          </Button>
+        </Actions>
+      )}
     </Wrap>
   );
 }

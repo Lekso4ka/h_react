@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useT } from "../../Ctx";
 import { Modal } from "./style";
 
 const CalendarIcon = () => (
@@ -31,6 +32,7 @@ export const RequestModal = ({
     lockBody = true,
     zIndex,
 }) => {
+    const t = useT();
     const formRef = useRef(null);
     const fileRef = useRef(null);
     const [sent, setSent] = useState(false);
@@ -69,13 +71,13 @@ export const RequestModal = ({
         }
         const isPdf = selected.type === "application/pdf" || selected.name.toLowerCase().endsWith(".pdf");
         if (file.accept && !isPdf) {
-            setFileError("Можно прикрепить только PDF");
+            setFileError(t("pdfOnly"));
             setFileName("");
             e.target.value = "";
             return;
         }
         if (file.maxSize && selected.size > file.maxSize) {
-            setFileError("Файл слишком большой");
+            setFileError(t("fileTooBig"));
             setFileName("");
             e.target.value = "";
             return;
@@ -208,13 +210,13 @@ export const RequestModal = ({
                     <label className="consent">
                         <input type="checkbox" name="consent" required={!sent}/>
                         <span>
-                            Даю свое <a href="/policy">согласие на обработку</a> моих персональных данных в соответствии с <a href="/policy">политикой конфиденциальности</a>.
+                            {t("consent")} <a href="/policy">{t("consentLink")}</a> {t("consentMid")} <a href="/policy">{t("policyLink")}</a>{t("consentEnd")}
                         </span>
                     </label>
                     <button type="submit" disabled={sent || sending} className={sent ? "sent" : ""}>
-                        {sent ? "Отправлено" : "Отправить запрос"}
+                        {sent ? t("sent") : t("send")}
                     </button>
-                    <p className="required-note">* Обязательные поля</p>
+                    <p className="required-note">{t("requiredFields")}</p>
                 </form>
             </div>
         </Modal>

@@ -14,6 +14,7 @@ import {
   matchesShowWhen,
 } from "../components/form/FieldRenderer";
 import { AccordionSection } from "../components/AccordionSection";
+import { LangTabs } from "../components/LangTabs";
 import {
   Actions,
   Button,
@@ -27,6 +28,7 @@ import {
 } from "../components/ui";
 import { getEntity } from "../config/entities";
 import { splitSeoSchema } from "../config/seo";
+import { useAdminLang } from "../lang";
 
 import { adminPath } from "../paths";
 export function EntityFormPage({ entityKey: entityKeyProp } = {}) {
@@ -36,6 +38,7 @@ export function EntityFormPage({ entityKey: entityKeyProp } = {}) {
   const entity = getEntity(entityKey);
   const isNew = !id || id === "new";
   const navigate = useNavigate();
+  const { lang } = useAdminLang();
 
   const [recordId, setRecordId] = useState(isNew ? "" : id);
   const [item, setItem] = useState(() => createEmptyItem(entity?.schema));
@@ -57,15 +60,21 @@ export function EntityFormPage({ entityKey: entityKeyProp } = {}) {
     if (isNew) {
       setRecordId("");
       setItem(createEmptyItem(entity.schema));
+      setError("");
+      setSuccess("");
       setLoading(false);
-      return;
     }
+  }, [entityKey, id, isNew]);
+
+  useEffect(() => {
+    if (!entity || isNew) return;
 
     let cancelled = false;
 
     (async () => {
       setLoading(true);
       setError("");
+      setSuccess("");
       try {
         const data = await fetchItem(entity.key, id);
         if (cancelled) return;
@@ -81,7 +90,7 @@ export function EntityFormPage({ entityKey: entityKeyProp } = {}) {
     return () => {
       cancelled = true;
     };
-  }, [entityKey, id, isNew]);
+  }, [entityKey, id, isNew, lang]);
 
   if (!entity) {
     return <ErrorText>Раздел не найден</ErrorText>;
@@ -107,6 +116,7 @@ export function EntityFormPage({ entityKey: entityKeyProp } = {}) {
         const updated = await updateItem(entity.key, id, {
           item: payload,
           newId:
+            lang === "ru" &&
             entity.kind === "object" &&
             entity.allowKeyEdit &&
             recordId &&
@@ -137,10 +147,6 @@ export function EntityFormPage({ entityKey: entityKeyProp } = {}) {
     }
   };
 
-  if (loading) {
-    return <PageSubtitle>Загрузка формы…</PageSubtitle>;
-  }
-
   const { seoSchema, restSchema } = splitSeoSchema(entity.schema);
   const showId =
     entity.kind === "object" ||
@@ -151,6 +157,7 @@ export function EntityFormPage({ entityKey: entityKeyProp } = {}) {
   return (
     <form onSubmit={handleSubmit}>
       <PageTitle>{title}</PageTitle>
+      <LangTabs />
       <PageSubtitle>
         <Link to={adminPath(`/data/${entity.key}`)}>← К списку</Link>
       </PageSubtitle>
@@ -158,11 +165,15 @@ export function EntityFormPage({ entityKey: entityKeyProp } = {}) {
       {error && <ErrorText>{error}</ErrorText>}
       {success && <SuccessText>{success}</SuccessText>}
 
+      {loading ? (
+        <PageSubtitle>Загрузка формы…</PageSubtitle>
+      ) : (
+        <>
       {seoSchema.sections.length > 0 && (
         <SchemaForm schema={seoSchema} value={item} onChange={setItem} />
       )}
 
-      {showId && (
+      {showId && !(lang === "en" && !isNew) && (
         <AccordionSection title="Идентификатор" defaultOpen={false}>
           <Field>
             <Label>
@@ -176,7 +187,9 @@ export function EntityFormPage({ entityKey: entityKeyProp } = {}) {
                   ? "например: winter"
                   : "например: article_10"
               }
-              disabled={entity.kind === "array" && !isNew}
+              disabled={
+                (entity.kind === "array" && !isNew) || (lang === "en" && !isNew)
+              }
             />
           </Field>
         </AccordionSection>
@@ -197,6 +210,8 @@ export function EntityFormPage({ entityKey: entityKeyProp } = {}) {
           </Button>
         )}
       </Actions>
+        </>
+      )}
     </form>
   );
 }

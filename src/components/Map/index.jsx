@@ -1,4 +1,5 @@
-import React from "react"
+import React from "react";
+import { useT } from "../../Ctx";
 import { MainImage } from "./MainImage";
 import { Block, Content, Links } from "./style";
 

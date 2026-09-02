@@ -5,6 +5,7 @@ import styled from "@emotion/styled";
 import { deleteItem, fetchList } from "../api/resource";
 import { getEntity } from "../config/entities";
 import { AccordionSection } from "../components/AccordionSection";
+import { LangTabs } from "../components/LangTabs";
 import {
   Actions,
   Button,
@@ -12,6 +13,7 @@ import {
   PageSubtitle,
   PageTitle,
 } from "../components/ui";
+import { useAdminLang } from "../lang";
 import { theme } from "../styles/theme";
 
 import { adminPath } from "../paths";
@@ -57,6 +59,7 @@ const Empty = styled.p`
 export function EntityListPage() {
   const { entityKey } = useParams();
   const entity = getEntity(entityKey);
+  const { lang } = useAdminLang();
   const [list, setList] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
@@ -77,7 +80,7 @@ export function EntityListPage() {
 
   useEffect(() => {
     load();
-  }, [entityKey]);
+  }, [entityKey, lang]);
 
   const visibleList = list;
 
@@ -100,6 +103,7 @@ export function EntityListPage() {
   return (
     <>
       <PageTitle>{pageTitle}</PageTitle>
+      <LangTabs />
       <PageSubtitle>
         .
       </PageSubtitle>

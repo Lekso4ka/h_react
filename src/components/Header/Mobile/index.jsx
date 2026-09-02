@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Icon } from "../../../ui/Icon";
+import { useCtx, useT } from "../../../Ctx";
 import { getAllMenuNav, getMobileNav } from "../data";
 import { getMenu } from "../../../data";
 import { Dropdown } from "../Desktop/Dropdown";
@@ -24,6 +25,8 @@ export const Mobile = () => {
     const scrolledRef = useRef(false);
     const navigate = useNavigate();
     const location = useLocation()
+    const { lang, setLang } = useCtx();
+    const t = useT();
     const isHeroRouteRef = useRef(false);
     
     
@@ -205,8 +208,8 @@ export const Mobile = () => {
                 light={ lightHeader }
                 aria-hidden="true"
             />
-            <button>EN</button>
-            <Link to="/">Голден<br/>Тюлип & Тюлип<br/>Инн</Link>
+            <button type="button" onClick={() => setLang(lang === "en" ? "ru" : "en")}>{ lang === "en" ? "RU" : "EN" }</button>
+            <Link to="/">{ t("brandName").split("\n").map((line, i, arr) => <React.Fragment key={ i }>{ line }{ i < arr.length - 1 ? <br/> : null }</React.Fragment>) }</Link>
             <Icon name="burger" onClick={() => {setMenuOpen(!menuOpen)}}/>
         </header>
         <NavBlock
@@ -226,7 +229,7 @@ export const Mobile = () => {
                 <h5>{ menu.mobile_address_title }</h5>
                 <p>{ menu.mobile_address }</p>
             </div>
-            <Button>Бронировать</Button>
+            <Button>{ t("book") }</Button>
         </NavBlock>
         
     </Container>

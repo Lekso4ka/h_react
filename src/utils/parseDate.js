@@ -1,32 +1,18 @@
-const months = [
-    "Января",
-    "Февраля",
-    "Марта",
-    "Апреля",
-    "Мая",
-    "Июня",
-    "Июля",
-    "Августа",
-    "Сентября",
-    "Октября",
-    "Ноября",
-    "Декабря"
-]
+const MONTHS = {
+    ru: [
+        "Января", "Февраля", "Марта", "Апреля", "Мая", "Июня",
+        "Июля", "Августа", "Сентября", "Октября", "Ноября", "Декабря"
+    ],
+    en: [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ],
+};
 
-const shortMonths = [
-    "ЯНВ",
-    "ФЕВ",
-    "МАР",
-    "АПР",
-    "МАЙ",
-    "ИЮН",
-    "ИЮЛ",
-    "АВГ",
-    "СЕН",
-    "ОКТ",
-    "НОЯ",
-    "ДЕК"
-]
+const SHORT_MONTHS = {
+    ru: ["ЯНВ", "ФЕВ", "МАР", "АПР", "МАЙ", "ИЮН", "ИЮЛ", "АВГ", "СЕН", "ОКТ", "НОЯ", "ДЕК"],
+    en: ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"],
+};
 
 const nToZero = (n, len = 2) => {
     let str = n.toString()
@@ -41,13 +27,15 @@ const parseSimple = (date) => {
     return `${nToZero(day.getDate())}.${nToZero(day.getMonth() + 1)}.${nToZero(day.getFullYear())}`
 }
 
-const parseWithText = (date) => {
+const parseWithText = (date, lang = "ru") => {
     const day = new Date(date)
+    const months = MONTHS[lang] || MONTHS.ru;
     return `${nToZero(day.getDate())} ${months[day.getMonth()]} ${nToZero(day.getFullYear())}`
 }
 
-const parseWithShortText = (date) => {
+const parseWithShortText = (date, lang = "ru") => {
     const day = new Date(date)
+    const shortMonths = SHORT_MONTHS[lang] || SHORT_MONTHS.ru;
     return `${nToZero(day.getDate())} ${shortMonths[day.getMonth()]} ${nToZero(day.getFullYear())}`
 }
 
@@ -56,12 +44,12 @@ const parseWithoutYear = (date) => {
     return `${nToZero(day.getDate())}.${nToZero(day.getMonth() + 1)}`
 }
 
-export const parseDate = (date, variant) => {
+export const parseDate = (date, variant, lang = "ru") => {
     switch(variant) {
         case "text":
-            return parseWithText(date)
+            return parseWithText(date, lang)
         case "short-text":
-            return parseWithShortText(date)
+            return parseWithShortText(date, lang)
         case "without-year":
             return parseWithoutYear(date)
         default:

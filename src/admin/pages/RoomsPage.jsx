@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import styled from "@emotion/styled";
 import { fetchHotelRooms, deleteRoom } from "../api/rooms";
 import { AccordionSection } from "../components/AccordionSection";
+import { LangTabs } from "../components/LangTabs";
 import {
   Actions,
   Button,
@@ -11,6 +12,7 @@ import {
   PageSubtitle,
   PageTitle,
 } from "../components/ui";
+import { useAdminLang } from "../lang";
 import { theme } from "../styles/theme";
 
 import { adminPath } from "../paths";
@@ -59,6 +61,7 @@ const Empty = styled.p`
 
 export function RoomsPage() {
   const { hotel } = useParams();
+  const { lang } = useAdminLang();
   const [list, setList] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
@@ -78,7 +81,7 @@ export function RoomsPage() {
 
   useEffect(() => {
     load();
-  }, [hotel]);
+  }, [hotel, lang]);
 
   const handleDelete = async (item) => {
     const label = item.variantLabel
@@ -98,6 +101,7 @@ export function RoomsPage() {
   return (
     <>
       <PageTitle>Номера и сьюты</PageTitle>
+      <LangTabs />
       <PageSubtitle>
         Отель: {HOTEL_NAMES[hotel] || hotel}.
       </PageSubtitle>
