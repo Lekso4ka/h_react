@@ -8,6 +8,8 @@ const cache = {
     vacancies: [],
     venues: {},
     legal: {},
+    main: {},
+    menu: {},
 };
 
 let ready = false;
@@ -43,6 +45,8 @@ export function loadSiteData({ force = false } = {}) {
             vacanciesRes,
             venuesRes,
             legalRes,
+            mainRes,
+            menuRes,
         ] = await Promise.all([
             fetchJson("/api/activities"),
             fetchJson("/api/affiche"),
@@ -53,6 +57,8 @@ export function loadSiteData({ force = false } = {}) {
             fetchJson("/api/vacancies"),
             fetchJson("/api/venues"),
             fetchJson("/api/legal"),
+            fetchJson("/api/main"),
+            fetchJson("/api/menu"),
         ]);
 
         cache.activities = activitiesRes.data || {};
@@ -64,6 +70,8 @@ export function loadSiteData({ force = false } = {}) {
         cache.vacancies = vacanciesRes.data || [];
         cache.venues = venuesRes.data || {};
         cache.legal = legalRes.data || {};
+        cache.main = mainRes.data || {};
+        cache.menu = menuRes.data || {};
         ready = true;
         return cache;
     })().catch((error) => {

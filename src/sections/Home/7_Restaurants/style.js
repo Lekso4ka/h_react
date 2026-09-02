@@ -167,11 +167,11 @@ position: relative;
     }
 `
 
-import img from "../../../assets/img";
+import { mediaUrl } from "../../../utils/mediaUrl";
 export const Img = styled.div`
     background-position: center;
     background-size: cover;
-    background-image: url("${({bg}) => img[bg]}");
+    background-image: url("${({bg}) => mediaUrl(bg)}");
     height: 5.1rem;
     background-repeat: no-repeat;
     box-sizing: border-box;

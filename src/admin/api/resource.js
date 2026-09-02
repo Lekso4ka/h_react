@@ -36,3 +36,14 @@ export function deleteItem(resource, id) {
     method: "DELETE",
   });
 }
+
+export function fetchSingleton(resource) {
+  return apiRequest(`/${resource}`);
+}
+
+export function updateSingleton(resource, item) {
+  return apiRequest(`/${resource}`, {
+    method: "PUT",
+    body: JSON.stringify({ item }),
+  });
+}

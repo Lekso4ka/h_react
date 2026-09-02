@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, useParams, useSearchParams } from "react-router-dom";
+import { NavLink, useLocation, useParams, useSearchParams } from "react-router-dom";
 import styled from "@emotion/styled";
 import { theme } from "../styles/theme";
 
@@ -83,11 +83,6 @@ const Item = styled(NavLink)`
   }
 `;
 
-const StaticItem = styled.div`
-  ${itemStyles}
-  cursor: default;
-`;
-
 const TopItem = styled(NavLink)`
   ${itemStyles}
   padding: 24px 42px;
@@ -111,7 +106,9 @@ function classIf(condition) {
 
 export function Sidebar() {
   const { hotel, entityKey, id, section, leadKey } = useParams();
+  const location = useLocation();
   const [searchParams] = useSearchParams();
+  const isMenu = location.pathname === adminPath("/menu");
   const hotelFilter = searchParams.get("hotel");
 
   const isHotelSection = (hotelId, sectionKey) =>
@@ -284,7 +281,12 @@ export function Sidebar() {
         </Group>
 
         <Group>
-          <StaticItem>Редактор меню</StaticItem>
+          <Item
+            to={adminPath("/menu")}
+            className={() => classIf(isMenu)}
+          >
+            Редактор меню
+          </Item>
         </Group>
       </NavScroll>
     </Aside>

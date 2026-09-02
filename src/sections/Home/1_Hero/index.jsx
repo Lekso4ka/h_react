@@ -1,10 +1,21 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useCtx } from "../../../Ctx";
+import { getMain } from "../../../data";
 import { ActivityBtn } from "../../../ui/ActivityBtn";
 import { Icon } from "../../../ui/Icon";
 import { Link } from "../../../ui/Link";
 import { Video } from "../../../ui/Video";
 import { ActivityCard, Content, HotelCard, Sticky } from "./style";
+
+const Stars = ({ count }) => (
+    <>
+        {Array.from({ length: Number(count) || 0 }, (_, i) => (
+            <Icon key={i} name="star"/>
+        ))}
+    </>
+);
+
+const telHref = (phone) => `tel:${String(phone || "").replace(/[^\d+]/g, "")}`;
 
 export const Hero = ({ weather, setWeather }) => {
     const [actGt, setActGt] = useState(false)
@@ -12,6 +23,10 @@ export const Hero = ({ weather, setWeather }) => {
     const [active, setActive] = useState(false);
     const { mob } = useCtx();
     const btn = useRef()
+    const hero = getMain()?.hero || {};
+    const golden = hero.golden_tulip || {};
+    const tulip = hero.tulip_inn || {};
+    const activity = hero.activity_card || {};
     
     useEffect(() => {
         setTimeout(() => {
@@ -37,7 +52,7 @@ export const Hero = ({ weather, setWeather }) => {
     return <>
         <Content activeBtn={ weather === "winter" ? 2 : 1 }>
             <Video
-                data={ ["video_w", "video_s"] }
+                data={ [hero.winter_video, hero.summer_video].filter(Boolean) }
                 index={ weather === "winter" ? 0 : 1 }
                 h={ mob ? "84.4rem" : null }
             ></Video>
@@ -57,51 +72,40 @@ export const Hero = ({ weather, setWeather }) => {
                 </ActivityBtn>
             </div>
             <h1>
-                { weather === "winter" ? "Зима" : "Лето" } на Розе Хутор
+                { weather === "winter" ? hero.winter_title : hero.summer_title }
             </h1>
-            <h4>Комфорт или практичность — выберите свой формат проживания</h4>
+            <h4>{ hero.subtitle }</h4>
             <div className="divider"/>
             <div className="hotels">
-                <HotelCard active={ actGt } bg={ "home_gt" }>
-                    <h2>Голден тюлип</h2>
+                <HotelCard active={ actGt } bg={ golden.image }>
+                    <h2>{ golden.name }</h2>
                     <div className="stars">
-                        <Icon name="star"/>
-                        <Icon name="star"/>
-                        <Icon name="star"/>
-                        <Icon name="star"/>
+                        <Stars count={ golden.stars }/>
                     </div>
                     <Link to={ "" } onClick={ (e) => {
                         e.preventDefault();
                         setActGt(true)
                     } }>Выбрать</Link>
-                    <span>Комфорт и сервис</span>
+                    <span>{ golden.tagline }</span>
                     <div className="card">
                         <div className="content">
                             <div className="top">
                                 <div className="stars">
-                                    <Icon name="star"/>
-                                    <Icon name="star"/>
-                                    <Icon name="star"/>
-                                    <Icon name="star"/>
+                                    <Stars count={ golden.stars }/>
                                 </div>
                                 <button onClick={ () => setActGt(false) }>
                                     закрыть
                                 </button>
                             </div>
-                            <h2>Голден тюлип</h2>
+                            <h2>{ golden.name }</h2>
                             <p>
-                                Комфорт и сервис
+                                { golden.tagline }
                                 <span>/</span>
-                                <a href="tel:+7(862)2431200">Тел. +7 (862) 243 12 00</a>
+                                <a href={ telHref(golden.phone) }>Тел. { golden.phone }</a>
                             </p>
                             <div className="img"/>
                             <p className="text">
-                                Голден Тулип Роза Хутор — четырёхзвёздочный отель в самом центре курорта, на набережной
-                                Роза
-                                Хутор. В нескольких минутах от подъёмников и ключевой инфраструктуры, с панорамными
-                                видами на
-                                горы и удобным доступом ко всем возможностям курорта.
-                            
+                                { golden.text }
                             </p>
                             <div className="links">
                                 <Link to="/hotel/golden-tulip">Выбрать отель</Link>
@@ -110,42 +114,35 @@ export const Hero = ({ weather, setWeather }) => {
                         </div>
                     </div>
                 </HotelCard>
-                <HotelCard active={ actTi } bg={ "home_ti" }>
-                    <h2>Тюлип инн</h2>
+                <HotelCard active={ actTi } bg={ tulip.image }>
+                    <h2>{ tulip.name }</h2>
                     <div className="stars">
-                        <Icon name="star"/>
-                        <Icon name="star"/>
-                        <Icon name="star"/>
+                        <Stars count={ tulip.stars }/>
                     </div>
                     <Link to={ "" } onClick={ (e) => {
                         e.preventDefault();
                         setActTi(true)
                     } }>Выбрать</Link>
-                    <span>Практичный формат</span>
+                    <span>{ tulip.tagline }</span>
                     <div className="card">
                         <div className="content">
                             <div className="top">
                                 <div className="stars">
-                                    <Icon name="star"/>
-                                    <Icon name="star"/>
-                                    <Icon name="star"/>
+                                    <Stars count={ tulip.stars }/>
                                 </div>
                                 <button onClick={ () => setActTi(false) }>
                                     закрыть
                                 </button>
                             </div>
-                            <h2>Тюлип инн</h2>
+                            <h2>{ tulip.name }</h2>
                             <p>
-                                Практичный формат
+                                { tulip.tagline }
                                 <span>/</span>
-                                <a href="tel:+7(862)2430000">Тел. +7 (862) 243 00 00</a>
+                                <a href={ telHref(tulip.phone) }>Тел. { tulip.phone }</a>
                             </p>
                             <div className="img"/>
                             <p className="text">
-                                Тюлип инн — трёхзвёздочный отель в самом центре курорта, на набережной Роза
-                                Хутор. В нескольких минутах от подъёмников и ключевой инфраструктуры, с панорамными
-                                видами
-                                на горы и удобным доступом ко всем возможностям курорта.
+                                { tulip.text }
                                 <br/>
                                 <span style={ { color: "transparent" } }>.</span>
                             </p>
@@ -157,9 +154,9 @@ export const Hero = ({ weather, setWeather }) => {
                     </div>
                 </HotelCard>
                 {<ActivityCard active={active}>
-                    <Video data={["activity_home"]}/>
+                    <Video data={ activity.video ? [activity.video] : [] }/>
                     <div className="text">
-                        <p>Проживание для детей до 14 лет комплементарно. </p>
+                        <p>{ activity.text }</p>
                         <Link>{mob ? "Узнать цену" : "К активностям"}</Link>
                     </div>
                     <button onClick={() => setActive(false)}>
@@ -173,8 +170,8 @@ export const Hero = ({ weather, setWeather }) => {
                 </ActivityCard> }
             </div>
             <div className="activities">
-                <span>{ weather === "winter" ? "зима" : "лето" } ‘26</span>
-                <p>Откройте для себя сезон, в котором движение и отдых звучат в одном ритме.</p>
+                <span>{ weather === "winter" ? hero.season_label_winter : hero.season_label_summer }</span>
+                <p>{ hero.season_text }</p>
                 <Link
                     color={ "white" }
                     hover={ "white" }

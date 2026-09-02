@@ -1,14 +1,14 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Icon } from "../../../ui/Icon";
-import { ALL_MENU_NAV } from "../data";
+import { getAllMenuNav, getMobileNav } from "../data";
+import { getMenu } from "../../../data";
 import { Dropdown } from "../Desktop/Dropdown";
 import { AccItem } from "./AccItem";
 import { Container, BarBg, NavBlock, Button } from "./style";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { NAV } from "./data";
 const dark = ["/", "/hotel/golden-tulip", "/hotel/tulip-inn", "/activities/winter", "/activities/summer", "/actions", "/vacancies", "/wedding", "/stock/golden-tulip", "/stock/tulip-inn"]
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
@@ -33,9 +33,12 @@ export const Mobile = () => {
     const isHeroRoute = dark.includes(location.pathname);
     const lightHeader = !isHeroRoute || scrolled || menuOpen;
     isHeroRouteRef.current = isHeroRoute;
+    const mobileNav = getMobileNav();
+    const menu = getMenu();
+    const allMenuNav = getAllMenuNav();
     const activeMenu = useMemo(
-        () => ALL_MENU_NAV.find((item) => item.id === activeMenuId) ?? null,
-        [activeMenuId]
+        () => allMenuNav.find((item) => item.id === activeMenuId) ?? null,
+        [activeMenuId, allMenuNav]
     );
     
     useEffect(() => {
@@ -139,7 +142,7 @@ export const Mobile = () => {
     );
     
     const openMenu = useCallback((id) => {
-        const item = ALL_MENU_NAV.find((nav) => nav.id === id);
+        const item = getAllMenuNav().find((nav) => nav.id === id);
         if (!item) return;
         menuOpenRef.current = true;
         setActiveMenuId(id);
@@ -214,14 +217,14 @@ export const Mobile = () => {
         >
             <div className="nav">
             <nav>
-                {NAV.map(el => el.hasMenu
-                    ? <AccItem title={el.label} data={el.columns} key={el.id} close={closeMenu} />
+                {mobileNav.map(el => el.hasMenu
+                    ? <AccItem title={el.label} data={el.columns || []} key={el.id} close={closeMenu} />
                     : <Link to="" key={el.id} onClick={() => linkHandler(e, el.href)}>{el.label}</Link>)}
             </nav>
             </div>
             <div className="address">
-                <h5>Адрес отелей</h5>
-                <p>Россия, Краснодарский край, г. Сочи, Панорама наб., 2-3</p>
+                <h5>{ menu.mobile_address_title }</h5>
+                <p>{ menu.mobile_address }</p>
             </div>
             <Button>Бронировать</Button>
         </NavBlock>

@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-import img from "../../../assets/img";
+import { mediaUrl } from "../../../utils/mediaUrl";
 
 export const Content = styled.section`
     padding: 6rem 0rem;
@@ -134,11 +134,11 @@ export const Content = styled.section`
             transition: background-size 1s;
 
             &:nth-of-type(1) {
-                background-image:  url("${ ({ bg1 }) => img[bg1] }");
+                background-image:  url("${ ({ bg1 }) => mediaUrl(bg1) }");
             }
 
             &:nth-of-type(2) {
-                background-image: url("${ ({ bg2 }) => img[bg2] }");
+                background-image: url("${ ({ bg2 }) => mediaUrl(bg2) }");
             }
 
             &::before {

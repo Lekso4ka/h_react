@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import img from "../../../assets/img";
+import { mediaUrl } from "../../../utils/mediaUrl";
 
 export const Content = styled.section`
     height: 75.4rem;
@@ -9,7 +9,7 @@ export const Content = styled.section`
     align-items: center;
     justify-content: center;
     position: relative;
-    background-image: url(${ ({ bg }) => img[bg]});
+    background-image: url(${ ({ bg }) => mediaUrl(bg)});
     background-position: center;
     background-size: cover;
 

@@ -19,7 +19,7 @@ import {
 
 const dark = ["/", "/hotel/golden-tulip", "/hotel/tulip-inn", "/activities/winter", "/activities/summer", "/actions", "/vacancies", "/wedding", "/stock/golden-tulip", "/stock/tulip-inn"]
 
-import { ALL_MENU_NAV, LEFT_NAV, RIGHT_NAV } from "../data";
+import { getAllMenuNav, getLeftNav, getRightNav } from "../data";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -43,9 +43,12 @@ export const Desktop = () => {
     const isHeroRoute = dark.includes(location.pathname);
     const lightHeader = !isHeroRoute || scrolled || menuOpen;
     isHeroRouteRef.current = isHeroRoute;
+    const leftNav = getLeftNav();
+    const rightNav = getRightNav();
+    const allMenuNav = getAllMenuNav();
     const activeMenu = useMemo(
-        () => ALL_MENU_NAV.find((item) => item.id === activeMenuId) ?? null,
-        [activeMenuId]
+        () => allMenuNav.find((item) => item.id === activeMenuId) ?? null,
+        [activeMenuId, allMenuNav]
     );
     
     const applyBg = useCallback(
@@ -145,7 +148,7 @@ export const Desktop = () => {
     );
     
     const openMenu = useCallback((id) => {
-        const item = ALL_MENU_NAV.find((nav) => nav.id === id);
+        const item = getAllMenuNav().find((nav) => nav.id === id);
         if (!item) return;
         menuOpenRef.current = true;
         setActiveMenuId(id);
@@ -199,7 +202,7 @@ export const Desktop = () => {
                 aria-hidden="true"
             />
             <HeaderMenu>
-                { LEFT_NAV.map((item) => <NavItem
+                { leftNav.map((item) => <NavItem
                     light={ lightHeader }
                     key={ item.id }
                     item={ item }
@@ -210,7 +213,7 @@ export const Desktop = () => {
             </HeaderMenu>
             <HeaderName><Link to={ "/" } state={ { id: "home" } }>Голден<br/>Тюлип & Тюлип<br/>Инн</Link></HeaderName>
             <HeaderMenu2>
-                { RIGHT_NAV.map((item) => <NavItem
+                { rightNav.map((item) => <NavItem
                     light={ lightHeader }
                     key={ item.id }
                     item={ item }

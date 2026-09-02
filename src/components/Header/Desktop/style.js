@@ -1,5 +1,5 @@
 import styled from "@emotion/styled"
-import img from "../../../assets/img"
+import { mediaUrl } from "../../../utils/mediaUrl"
 export const Shell = styled.div`
 	position: fixed;
 	top: 0;
@@ -194,7 +194,7 @@ export const ColumnLink = styled.a`
         position: relative;
         padding: 2.4rem;
         background-color: #D9D9D9;
-        background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.30) 0%, rgba(0, 0, 0, 0.30) 100%), url(${({pic}) => img[pic]});
+        background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.30) 0%, rgba(0, 0, 0, 0.30) 100%), url(${({pic}) => mediaUrl(pic)});
         background-position: center;
         background-size: cover;
         display: flex;
@@ -269,7 +269,7 @@ export const BrandLink = styled.a`
         position: relative;
         padding: 2.4rem;
         background-color: #D9D9D9;
-        background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.30) 0%, rgba(0, 0, 0, 0.30) 100%), url(${({pic}) => img[pic]});
+        background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.30) 0%, rgba(0, 0, 0, 0.30) 100%), url(${({pic}) => mediaUrl(pic)});
         background-position: center;
         background-size: cover;
         display: flex;

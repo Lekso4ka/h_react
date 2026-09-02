@@ -6,6 +6,7 @@ import { Events } from "./Events";
 import { Venues } from "./Venues";
 import { Block, Buttons, Container, Content, Section, Tooltip, Top } from "./style";
 import { Breadcrumbs } from "../../ui/Breadcrumbs";
+import { getMain } from "../../data";
 
 const venues = [
     "viewpoint",
@@ -19,27 +20,11 @@ const venues = [
     "lounge"
 ]
 
-const events = [
-    {
-        id: "wedding",
-        name: "Свадьба в серце гор",
-        size: 250,
-        guests: 100,
-        image: "we_7_1",
-        link: "wedding",
-        list: [
-            "В самом серце Роза Хутор",
-            "Панорамная площадка",
-            "Выездная регистрация",
-            "Комплимент молодоженам",
-            "Скидка на проживание гостей"
-        ]
-    }
-]
-
 export const EventsContent = ({ page }) => {
     const [type, setType] = useState("venues");
     const { event } = useParams()
+    const block = getMain()?.events || {};
+    const events = block.items || [];
     
     useEffect(() => {
         if (event) {
@@ -49,7 +34,7 @@ export const EventsContent = ({ page }) => {
     
     return <Container page={ page }>
         <Line/>
-        { !page && <Tooltip>[ MICE ]</Tooltip> }
+        { !page && <Tooltip>{ block.label }</Tooltip> }
         <Block>
             { page && <div className="bc">
                 <Breadcrumbs data={ [
@@ -58,9 +43,9 @@ export const EventsContent = ({ page }) => {
                 ] }/>
             </div> }
             <Top>
-                <h1>Мероприятия и события любого формата, где важны атмосфера и детали.</h1>
-                <p>Проводите встречи, презентации и конференции в удобных залах с продуманной атмосферой. Пространства легко адаптируются под формат и количество гостей.</p>
-                <p>От камерных ужинов до больших праздников. Красивые залы, внимательная команда и детали, которые делают каждое событие по-настоящему особенным.</p>
+                <h1>{ block.title }</h1>
+                <p>{ block.text_1 }</p>
+                <p>{ block.text_2 }</p>
             </Top>
             <Section>
                 <Buttons>

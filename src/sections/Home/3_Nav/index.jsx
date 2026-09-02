@@ -1,11 +1,15 @@
 import React from "react";
-import { getVenuesCnt } from "../../../data";
+import { getMain, getVenuesCnt } from "../../../data";
 import { Link } from "../../../ui/Link";
 import { Content } from "./style";
 
 export const Nav = ({weather}) => {
-    return <Content bg1={ "home_nav_1" } bg2={ "home_nav_2" }>
-        <h4>[ Возможности отеля ]</h4>
+    const data = getMain()?.nav || {};
+    const golden = data.golden_tulip || {};
+    const tulip = data.tulip_inn || {};
+
+    return <Content bg1={ data.image_1 } bg2={ data.image_2 }>
+        <h4>{ data.label }</h4>
         <nav>
             <Link
                 variant="big"
@@ -42,8 +46,8 @@ export const Nav = ({weather}) => {
         </nav>
         <div className="list">
             <div className="room">
-                <h4>Голден Тюлип</h4>
-                <h2>Номера и сьюты</h2>
+                <h4>{ golden.label }</h4>
+                <h2>{ golden.title }</h2>
                 <Link
                     color={"light"}
                     hover={"light"}
@@ -51,8 +55,8 @@ export const Nav = ({weather}) => {
                 >К номерам</Link>
             </div>
             <div className="room">
-                <h4>Тюлип Инн</h4>
-                <h2>Номера отеля</h2>
+                <h4>{ tulip.label }</h4>
+                <h2>{ tulip.title }</h2>
                 <Link
                     color={"light"}
                     hover={"light"}

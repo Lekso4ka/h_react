@@ -73,3 +73,11 @@ export function getLegal() {
 export function getLegalPage(id) {
     return getStore().legal?.[id];
 }
+
+export function getMain() {
+    return getStore().main || {};
+}
+
+export function getMenu() {
+    return getStore().menu || {};
+}

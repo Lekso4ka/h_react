@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-import img from "../../../assets/img";
+import { mediaUrl } from "../../../utils/mediaUrl";
 
 export const Content = styled.section`
     background: var(--Bege-2, #F2ECDE);
@@ -153,18 +153,18 @@ export const Content = styled.section`
         }
 
         .img1 {
-            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url("${ ({ bg1 }) => img[bg1] }");
+            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url("${ ({ bg1 }) => mediaUrl(bg1) }");
         }
 
         .img2 {
-            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url("${ ({ bg2 }) => img[bg2] }");
+            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url("${ ({ bg2 }) => mediaUrl(bg2) }");
         }
 
         .img3 {
-            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url("${ ({ bg3 }) => img[bg3] }");
+            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url("${ ({ bg3 }) => mediaUrl(bg3) }");
         }
 		.img4 {
-			background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url("${ ({ bg4 }) => img[bg4] }");
+			background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url("${ ({ bg4 }) => mediaUrl(bg4) }");
 		}
     }
 

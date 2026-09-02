@@ -1,11 +1,13 @@
 import React from "react";
+import { getMain } from "../../../data";
 import { Link } from "../../../ui/Link";
 import { Content } from "./style";
 
 export const Spa = () => {
-    return <Content bg={"home_spa"}>
-        <h4>[ СПА центр ]</h4>
-        <h2>Востановите баланс</h2>
+    const data = getMain()?.spa || {};
+    return <Content bg={ data.image }>
+        <h4>{ data.label }</h4>
+        <h2>{ data.title }</h2>
         <div className="line"/>
         <Link
             color={ "light" }

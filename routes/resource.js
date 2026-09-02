@@ -8,6 +8,32 @@ const { readJson, writeJson, decodeParam, slugify } = require("../lib/jsonStore"
 function createResourceRouter({ fileName, kind, idField = null }) {
   const router = express.Router();
 
+  if (kind === "singleton") {
+    router.get("/", (_req, res) => {
+      try {
+        const data = readJson(fileName);
+        res.json({ kind, data });
+      } catch (error) {
+        res.status(500).json({ error: error.message });
+      }
+    });
+
+    router.put("/", (req, res) => {
+      try {
+        const { item } = req.body;
+        if (!item || typeof item !== "object" || Array.isArray(item)) {
+          return res.status(400).json({ error: "Нужно поле item" });
+        }
+        writeJson(fileName, item);
+        res.json({ item });
+      } catch (error) {
+        res.status(500).json({ error: error.message });
+      }
+    });
+
+    return router;
+  }
+
   function listItems(data) {
     if (kind === "object") {
       return Object.entries(data).map(([key, value]) => ({

@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-import img from "../../../assets/img";
+import { mediaUrl } from "../../../utils/mediaUrl";
 
 export const Content = styled.section`
     display: grid;
@@ -16,20 +16,20 @@ export const Content = styled.section`
     }
 
     .img1 {
-        background-image: url("${ ({ bg1 }) => img[bg1] }");
+        background-image: url("${ ({ bg1 }) => mediaUrl(bg1) }");
         height: 48.5rem;
         margin-bottom: 6rem;
     }
 
     .img2 {
-        background-image:  url("${ ({ bg2 }) => img[bg2] }");
+        background-image:  url("${ ({ bg2 }) => mediaUrl(bg2) }");
         height: 48.2rem;
         grid-row-start: 1;
         margin-bottom: 4.8rem;
     }
 
     .img3 {
-        background-image: url("${ ({ bg3 }) => img[bg3] }");
+        background-image: url("${ ({ bg3 }) => mediaUrl(bg3) }");
         height: 42.4rem;
         width: 30.6rem;
         margin: 0 auto 6rem;
@@ -90,7 +90,7 @@ export const Content = styled.section`
             height: 68rem;
             grid-row-start: auto;
             margin-bottom: 0;
-            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.30) 0%, rgba(0, 0, 0, 0.30) 100%),url("${ ({ bg2 }) => img[bg2] }");
+            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.30) 0%, rgba(0, 0, 0, 0.30) 100%),url("${ ({ bg2 }) => mediaUrl(bg2) }");
         }
 
         .img3 {

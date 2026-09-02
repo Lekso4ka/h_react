@@ -439,49 +439,84 @@ export function SchemaForm({ schema, value, onChange }) {
 
   return (
     <>
+      {schema.fields && (
+        <FieldsGrid
+          fields={schema.fields}
+          value={value}
+          onChange={onChange}
+          root={value}
+        />
+      )}
       {schema.sections
         .filter((section) => matchesShowWhen(section.showWhen, value))
-        .map((section, index) => (
-          <AccordionSection
-            key={section.title}
-            title={section.title}
-            defaultOpen={index === 0}
-          >
-            <FieldsGrid
-              fields={section.fields}
-              value={value}
-              onChange={onChange}
-              root={value}
-            />
-          </AccordionSection>
-        ))}
+        .map((section, index) => {
+          const nested = Boolean(section.key);
+          const sectionValue = nested ? value?.[section.key] || {} : value;
+          const handleChange = nested
+            ? (next) => onChange({ ...value, [section.key]: next })
+            : onChange;
+
+          return (
+            <AccordionSection
+              key={section.title}
+              title={section.title}
+              defaultOpen={index === 0}
+            >
+              <FieldsGrid
+                fields={section.fields}
+                value={sectionValue}
+                onChange={handleChange}
+                root={value}
+              />
+            </AccordionSection>
+          );
+        })}
     </>
   );
 }
 
 export function createEmptyItem(schema) {
-  if (schema?.sections) {
-    return schema.sections.reduce((acc, section) => {
-      return { ...acc, ...emptyFromFields(section.fields) };
-    }, {});
+  const result = emptyFromFields(schema?.fields || {});
+  for (const section of schema?.sections || []) {
+    const part = emptyFromFields(section.fields);
+    if (section.key) {
+      result[section.key] = part;
+    } else {
+      Object.assign(result, part);
+    }
   }
-  return emptyFromFields(schema?.fields || {});
+  return result;
 }
 
 export function cleanItem(schema, value) {
-  if (schema?.sections) {
-    const draft = { ...(value || {}) };
-    const fields = {};
-    for (const section of schema.sections) {
-      if (!matchesShowWhen(section.showWhen, value)) {
+  const draft = { ...(value || {}) };
+  const flatFields = { ...(schema?.fields || {}) };
+
+  for (const section of schema?.sections || []) {
+    if (!matchesShowWhen(section.showWhen, value)) {
+      if (section.key) {
+        delete draft[section.key];
+      } else {
         for (const [key, def] of Object.entries(section.fields || {})) {
           omitHiddenField(draft, key, def);
         }
-        continue;
       }
-      Object.assign(fields, section.fields);
+      continue;
     }
-    return cleanByFields(draft, fields, value);
+    if (section.key) {
+      draft[section.key] = cleanByFields(
+        value?.[section.key],
+        section.fields || {},
+        value
+      );
+    } else {
+      Object.assign(flatFields, section.fields);
+    }
   }
-  return cleanByFields(value, schema?.fields || {}, value);
+
+  if (Object.keys(flatFields).length) {
+    return cleanByFields(draft, flatFields, value);
+  }
+
+  return draft;
 }

@@ -1,29 +1,25 @@
 import React, { useEffect, useRef, useState } from "react";
-import img from "../../../assets/img";
+import { getMain } from "../../../data";
+import { mediaUrl } from "../../../utils/mediaUrl";
 import { Tour } from "../../../components/Tour";
 import { Icon } from "../../../ui/Icon";
 import { Link } from "../../../ui/Link";
 import { Content, Img } from "./style";
 
-const rest = [
-    "home_r_1",
-    "home_r_2",
-    "home_r_3",
-    "home_r_4",
-    "home_r_5",
-    "home_r_6",
-    "home_r_7",
-    "home_r_8",
-]
-
 export const Restaurants = () => {
-    const [restImages, setRestImages] = useState(rest)
-    const [btns, setBtns] = useState([...rest.map((el, index) => ({ index, src: el })), { index: 8, src: "res_1" }])
+    const data = getMain()?.restaurants || {};
+    const slides = data.slides || [];
+    const preview = data.preview_image;
+    const [btns, setBtns] = useState(() => [
+        ...slides.map((el, index) => ({ index, src: el.image })),
+        ...(preview ? [{ index: slides.length, src: preview }] : []),
+    ]);
     const [right, setRight] = useState(null)
     const [activeBtn, setActiveBtn] = useState(0);
     const restRef = useRef()
     
     const [activeRest, setActiveRest] = useState(0)
+    const activeSlide = slides[activeRest] || {};
     
     useEffect(() => {
         const ref = restRef.current
@@ -75,26 +71,27 @@ export const Restaurants = () => {
         setActiveRest(i);
         setRight(right)
     }
+    const lastIndex = Math.max(slides.length - 1, 0);
     return <Content>
         <div className={ "bg" }>
-            { restImages.map((el, i) => <img className={ activeRest === i ? "active" : "" } key={ i } src={ img[el] }
+            { slides.map((el, i) => <img className={ activeRest === i ? "active" : "" } key={ i } src={ mediaUrl(el.image) }
                                              alt=""/>) }
         </div>
-        <h2>{ Math.floor(rest.indexOf(restImages[activeRest]) / 4) === 0 ? "Бранше" : "Амстердам" }</h2>
+        <h2>{ activeSlide.name }</h2>
         <Link
             className="link"
             color={ "light" }
             hover={ "light" }
-            to={ `/restaurant/${ Math.floor(rest.indexOf(restImages[activeRest]) % 4) === 0 ? "golden-tulip" : "tulip-inn" }` }
+            to={ `/restaurant/${ activeSlide.hotel || "golden-tulip" }` }
         >О ресторане</Link>
         <Tour pos className="tour"/>
         <span
             className="arrow"
-            onClick={ () => arrowHandler(activeRest === 0 ? 7 : activeRest - 1, true) }
+            onClick={ () => arrowHandler(activeRest === 0 ? lastIndex : activeRest - 1, true) }
         ><Icon name={ "arrow" } color="#FFF"/></span>
         <span
             className="arrow right"
-            onClick={ () => arrowHandler(activeRest === 7 ? 0 : activeRest + 1) }
+            onClick={ () => arrowHandler(activeRest === lastIndex ? 0 : activeRest + 1) }
         ><Icon name={ "arrow" } left={ false } color="#FFF"/></span>
         <div className="list-container">
             <div className="list" ref={ restRef }>
@@ -106,8 +103,8 @@ export const Restaurants = () => {
             </div>
         </div>
         <div className="cnt">
-            <span className="active">0{ rest.indexOf(restImages[activeRest]) + 1 }/</span>
-            <span>0{ rest.length }</span>
+            <span className="active">0{ (slides.indexOf(activeSlide) >= 0 ? slides.indexOf(activeSlide) : 0) + 1 }/</span>
+            <span>0{ slides.length }</span>
         </div>
     </Content>
 }

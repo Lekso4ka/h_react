@@ -65,6 +65,14 @@ app.use(
     "/api/legal",
     createResourceRouter({ fileName: "legal.json", kind: "object" })
 );
+app.use(
+    "/api/main",
+    createResourceRouter({ fileName: "main.json", kind: "singleton" })
+);
+app.use(
+    "/api/menu",
+    createResourceRouter({ fileName: "menu.json", kind: "singleton" })
+);
 
 app.get("*splat", (_req, res) => {
     res.sendFile(path.join(__dirname, "static", "index.html"));

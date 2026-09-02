@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-import img from "../../../assets/img";
+import { mediaUrl } from "../../../utils/mediaUrl";
 
 export const Content = styled.div`
     min-height: 76rem;
@@ -262,7 +262,7 @@ export const HotelCard = styled.div`
 
         .img {
             height: 27.4rem;
-            background-image: url("${ ({bg}) => img[bg] }");
+            background-image: url("${ ({bg}) => mediaUrl(bg) }");
             background-size: cover;
             background-position: center;
             margin: 1rem 0 1.4rem;

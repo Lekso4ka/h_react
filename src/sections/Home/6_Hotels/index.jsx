@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import { getMain } from "../../../data";
 import { Link } from "../../../ui/Link";
 import { Content } from "./style";
 import gsap from "gsap";
@@ -76,23 +77,32 @@ export const Hotels = () => {
         { scope: sectionRef, dependencies: [], revertOnUpdate: true }
     );
     
+    const data = getMain()?.hotels || {};
+    const images = data.images || [];
+    const titleLines = String(data.title || "").split("\n").filter(Boolean);
+
     return <Content
-        bg1={ "home_h_6" }
-        bg2={ "home_h_7" }
-        bg3={ "home_h_8" }
-        bg4={ "home_h_9" }
-        bg5={ "home_h_10" }
+        bg1={ images[0] }
+        bg2={ images[1] }
+        bg3={ images[2] }
+        bg4={ images[3] }
+        bg5={ images[4] }
         ref={sectionRef}
     >
-        <h2>ДВА ОТЕЛЯ В ЦЕНТРЕ КУРОРТА<br/>ДЛЯ ОТДЫХА В ГОРАХ И АКТИВНЫХ ПОЕЗДОК<br/>В ЛЮБОЕ ВРЕМЯ ГОДА</h2>
+        <h2>
+            { titleLines.map((line, index) => (
+                <React.Fragment key={ index }>
+                    { index > 0 && <br/> }
+                    { line }
+                </React.Fragment>
+            )) }
+        </h2>
         <div className="img img1" ref={r1}/>
         <div className="img img2" ref={r2}/>
         <div className="img img3" ref={r3}/>
         <div className="img img4" ref={r4}/>
         <div className="img img5" ref={r5}/>
-        <p>Современные пространства, продуманные номера и удобное расположение создают комфортную среду для отдыха.
-            От утренних подъёмов на склон до вечерних прогулок по набережной — здесь всё настроено на лёгкость,
-            разнообразие впечатлений и спокойное возвращение в атмосферу уюта.</p>
+        <p>{ data.text }</p>
         <div className="links">
             <Link to="/hotel/golden-tulip">Перейти в Голден</Link>
             <Link to="/hotel/tulip-inn">Перейти в Тюлип</Link>

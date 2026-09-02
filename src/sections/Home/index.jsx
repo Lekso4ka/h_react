@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { getMain } from "../../data";
 import { Activities } from "./4_Activities";
 import { Hero } from "./1_Hero";
 import { Hotels } from "./6_Hotels";
@@ -8,7 +9,8 @@ import { Restaurants } from "./7_Restaurants";
 import { Spa } from "./5_Spa";
 
 export const HomeContent = () => {
-    const [weather, setWeather] = useState("winter");
+    const season = getMain()?.default_season === "summer" ? "summer" : "winter";
+    const [weather, setWeather] = useState(season);
     
     return <>
         <Hero

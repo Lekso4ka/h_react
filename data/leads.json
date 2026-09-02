@@ -28,32 +28,6 @@
     "eventDate": "24.09.2026"
   },
   {
-    "id": "c7e5649a-473d-4ee8-b7f6-634f8c39e9e0",
-    "name": "123",
-    "source": "vacancy",
-    "date": "02.09.2026",
-    "time": "02:48:16",
-    "phone": "123",
-    "email": "123@123.ru",
-    "vacancy": "Бармен",
-    "city": "13",
-    "social": "123",
-    "message": "123",
-    "resumeFile": "d4278843-8bf8-4ed3-909f-4b76c50c8ec0.pdf",
-    "resumeName": "prihody-raskhody-podrobno.pdf"
-  },
-  {
-    "id": "7e10d608-cee4-4268-8ffb-ef6e16599435",
-    "name": "123",
-    "source": "stock",
-    "date": "02.09.2026",
-    "time": "02:49:07",
-    "phone": "123",
-    "email": "lexysnake@gmail.com",
-    "stock": "Раннее бронирование на апрель и май. Твоя весна в горах — идеальное время для отдыха и перезагрузки.",
-    "question": "123"
-  },
-  {
     "id": "db6e6e59-1721-490b-b818-a194ca8d9de2",
     "name": "123",
     "source": "conference",
@@ -65,17 +39,6 @@
     "guests": "1",
     "eventDate": "19.09.2026",
     "wishes": "123333"
-  },
-  {
-    "id": "c045c0d3-7c57-412e-ace0-2b85fa0719a6",
-    "name": "123",
-    "source": "stock",
-    "date": "02.09.2026",
-    "time": "03:02:44",
-    "phone": "123",
-    "email": "lexysnake@gmail.com",
-    "stock": "Раннее бронирование на апрель и май. Твоя весна в горах — идеальное время для отдыха и перезагрузки.",
-    "question": "123"
   },
   {
     "id": "b9af9b26-8d79-429c-9875-99658bd39917",
