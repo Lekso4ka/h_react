@@ -1,6 +1,5 @@
 const path = require("node:path");
 const HTMLWebpackPlugins = require("html-webpack-plugin");
-const Dotenv = require("dotenv-webpack");
 
 module.exports = () => ({
     entry: path.resolve(__dirname, "./src/index.js"),
@@ -53,9 +52,6 @@ module.exports = () => ({
         new HTMLWebpackPlugins({
             template: path.resolve(__dirname, "public/index.html"),
             //favicon: path.resolve(__dirname, "public/favicon.svg")
-        }),
-        new Dotenv({
-            path: "./.env"
         })
     ],
     infrastructureLogging: {

@@ -1,11 +1,13 @@
+const crypto = require("node:crypto");
 const express = require("express");
 const bcrypt = require("bcryptjs");
-const { v4: uuidv4 } = require("uuid");
-const { readJson, writeJson } = require("../lib/jsonStore");
+const { query } = require("../lib/db");
+const { config } = require("../lib/env");
+const { sendPasswordResetEmail } = require("../lib/mail");
 const { signToken, authRequired } = require("../middleware/auth");
 
 const router = express.Router();
-const USERS_FILE = "users.json";
+const RESET_TTL_MS = 60 * 60 * 1000;
 
 function publicUser(user) {
   return {
@@ -15,15 +17,71 @@ function publicUser(user) {
   };
 }
 
-function findUser(users, loginOrEmail) {
-  const value = String(loginOrEmail || "")
+function normalizeLogin(value) {
+  return String(value || "")
     .trim()
     .toLowerCase();
-  return users.find(
-    (user) =>
-      user.login.toLowerCase() === value ||
-      (user.email && user.email.toLowerCase() === value)
+}
+
+function resetUrlFor(token) {
+  return `${config.appUrl}/admin/reset-password?token=${encodeURIComponent(token)}`;
+}
+
+async function findUserByLoginOrEmail(loginOrEmail) {
+  const value = normalizeLogin(loginOrEmail);
+  if (!value) return null;
+
+  const { rows } = await query(
+    `SELECT id, login, email, password_hash
+     FROM users
+     WHERE lower(login) = $1 OR lower(email) = $1
+     LIMIT 1`,
+    [value]
   );
+  return rows[0] || null;
+}
+
+async function findUserById(id) {
+  const { rows } = await query(
+    `SELECT id, login, email, password_hash
+     FROM users
+     WHERE id = $1
+     LIMIT 1`,
+    [id]
+  );
+  return rows[0] || null;
+}
+
+async function issueResetLink(user) {
+  const resetToken = crypto.randomBytes(32).toString("hex");
+  const expiresAt = new Date(Date.now() + RESET_TTL_MS);
+  const resetUrl = resetUrlFor(resetToken);
+
+  await query(
+    `UPDATE users
+     SET reset_token = $1, reset_token_expires = $2
+     WHERE id = $3`,
+    [resetToken, expiresAt, user.id]
+  );
+
+  const mail = await sendPasswordResetEmail({
+    to: user.email,
+    resetUrl,
+  });
+
+  const payload = {
+    ok: true,
+    message: mail.sent
+      ? "Ссылка для смены пароля отправлена на почту"
+      : "Ссылка для смены пароля создана. Почтовый ящик ещё не настроен — используйте ссылку ниже.",
+  };
+
+  if (!mail.sent) {
+    payload.resetPath = `/admin/reset-password?token=${resetToken}`;
+    payload.resetUrl = resetUrl;
+  }
+
+  return payload;
 }
 
 router.post("/login", async (req, res) => {
@@ -33,13 +91,12 @@ router.post("/login", async (req, res) => {
       return res.status(400).json({ error: "Укажите логин и пароль" });
     }
 
-    const users = readJson(USERS_FILE);
-    const user = findUser(users, login);
+    const user = await findUserByLoginOrEmail(login);
     if (!user) {
       return res.status(401).json({ error: "Неверный логин или пароль" });
     }
 
-    const ok = await bcrypt.compare(password, user.passwordHash);
+    const ok = await bcrypt.compare(password, user.password_hash);
     if (!ok) {
       return res.status(401).json({ error: "Неверный логин или пароль" });
     }
@@ -58,29 +115,15 @@ router.post("/forgot", async (req, res) => {
       return res.status(400).json({ error: "Укажите e-mail или логин" });
     }
 
-    const users = readJson(USERS_FILE);
-    const user = findUser(users, loginOrEmail);
-
-    // Не раскрываем, существует ли пользователь
+    const user = await findUserByLoginOrEmail(loginOrEmail);
     if (!user) {
       return res.json({
         ok: true,
-        message: "Если пользователь найден, ссылка для восстановления создана",
+        message: "Если пользователь найден, ссылка для смены пароля создана",
       });
     }
 
-    const resetToken = uuidv4();
-    user.resetToken = resetToken;
-    user.resetTokenExpires = Date.now() + 60 * 60 * 1000;
-    writeJson(USERS_FILE, users);
-
-    res.json({
-      ok: true,
-      message: "Ссылка для восстановления создана",
-      // Для локальной разработки без почты возвращаем токен
-      resetToken,
-      resetPath: `/admin/reset-password?token=${resetToken}`,
-    });
+    res.json(await issueResetLink(user));
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -96,22 +139,30 @@ router.post("/reset", async (req, res) => {
       return res.status(400).json({ error: "Пароль слишком короткий" });
     }
 
-    const users = readJson(USERS_FILE);
-    const user = users.find(
-      (item) =>
-        item.resetToken === token &&
-        item.resetTokenExpires &&
-        item.resetTokenExpires > Date.now()
+    const { rows } = await query(
+      `SELECT id
+       FROM users
+       WHERE reset_token = $1
+         AND reset_token_expires IS NOT NULL
+         AND reset_token_expires > now()
+       LIMIT 1`,
+      [String(token)]
     );
+    const user = rows[0];
 
     if (!user) {
       return res.status(400).json({ error: "Ссылка недействительна или истекла" });
     }
 
-    user.passwordHash = await bcrypt.hash(String(password), 10);
-    user.resetToken = null;
-    user.resetTokenExpires = null;
-    writeJson(USERS_FILE, users);
+    const passwordHash = await bcrypt.hash(String(password), 10);
+    await query(
+      `UPDATE users
+       SET password_hash = $1,
+           reset_token = NULL,
+           reset_token_expires = NULL
+       WHERE id = $2`,
+      [passwordHash, user.id]
+    );
 
     res.json({ ok: true, message: "Пароль успешно изменён" });
   } catch (error) {
@@ -121,42 +172,20 @@ router.post("/reset", async (req, res) => {
 
 router.post("/change-password", authRequired, async (req, res) => {
   try {
-    const { currentPassword, newPassword } = req.body || {};
-    if (!currentPassword || !newPassword) {
-      return res
-        .status(400)
-        .json({ error: "Укажите текущий и новый пароль" });
-    }
-    if (String(newPassword).length < 4) {
-      return res.status(400).json({ error: "Пароль слишком короткий" });
-    }
-
-    const users = readJson(USERS_FILE);
-    const user = users.find((item) => item.id === req.user.sub);
+    const user = await findUserById(req.user.sub);
     if (!user) {
       return res.status(404).json({ error: "Пользователь не найден" });
     }
 
-    const ok = await bcrypt.compare(currentPassword, user.passwordHash);
-    if (!ok) {
-      return res.status(401).json({ error: "Неверный текущий пароль" });
-    }
-
-    user.passwordHash = await bcrypt.hash(String(newPassword), 10);
-    user.resetToken = null;
-    user.resetTokenExpires = null;
-    writeJson(USERS_FILE, users);
-
-    res.json({ ok: true, message: "Пароль успешно изменён" });
+    res.json(await issueResetLink(user));
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 
-router.get("/me", authRequired, (req, res) => {
+router.get("/me", authRequired, async (req, res) => {
   try {
-    const users = readJson(USERS_FILE);
-    const user = users.find((item) => item.id === req.user.sub);
+    const user = await findUserById(req.user.sub);
     if (!user) {
       return res.status(404).json({ error: "Пользователь не найден" });
     }

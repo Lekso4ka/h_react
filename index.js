@@ -1,6 +1,9 @@
+require("./lib/env");
+
 const path = require("node:path");
 const exp = require("express");
 const cors = require("cors");
+const { config } = require("./lib/env");
 
 const roomsRouter = require("./routes/rooms");
 const uploadRouter = require("./routes/upload");
@@ -10,7 +13,7 @@ const createResourceRouter = require("./routes/resource");
 const { authRequiredUnlessGet } = require("./middleware/auth");
 
 const app = exp();
-const PORT = process.env.PORT || 2026;
+const PORT = config.port;
 
 app.use(cors());
 app.use(exp.json({ limit: "200mb" }));

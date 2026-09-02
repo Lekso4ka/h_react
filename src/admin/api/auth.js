@@ -23,10 +23,9 @@ export async function resetPasswordRequest(token, password) {
   });
 }
 
-export async function changePasswordRequest(currentPassword, newPassword) {
+export async function changePasswordRequest() {
   return apiRequest("/auth/change-password", {
     method: "POST",
-    body: JSON.stringify({ currentPassword, newPassword }),
   });
 }
 

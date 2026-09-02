@@ -1,15 +1,13 @@
 import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../auth/AuthContext";
 import { changePasswordRequest } from "../../api/auth";
 import { AccordionSection } from "../../components/AccordionSection";
 import {
   Actions,
   Button,
   ErrorText,
-  Field,
-  Input,
-  Label,
   PageSubtitle,
   PageTitle,
   SuccessText,
@@ -17,22 +15,24 @@ import {
 
 import { adminPath } from "../../paths";
 export function ChangePasswordPage() {
-  const [currentPassword, setCurrentPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
+  const { user } = useAuth();
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [resetPath, setResetPath] = useState("");
   const [saving, setSaving] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setError("");
     setSuccess("");
+    setResetPath("");
     setSaving(true);
     try {
-      const data = await changePasswordRequest(currentPassword, newPassword);
-      setSuccess(data.message || "Пароль изменён");
-      setCurrentPassword("");
-      setNewPassword("");
+      const data = await changePasswordRequest();
+      setSuccess(data.message || "Ссылка для смены пароля создана");
+      if (data.resetPath) {
+        setResetPath(data.resetPath);
+      }
     } catch (err) {
       setError(err.message);
     } finally {
@@ -49,31 +49,23 @@ export function ChangePasswordPage() {
 
       {error && <ErrorText>{error}</ErrorText>}
       {success && <SuccessText>{success}</SuccessText>}
+      {resetPath && (
+        <PageSubtitle>
+          <Link to={resetPath}>Открыть ссылку для смены пароля</Link>
+        </PageSubtitle>
+      )}
 
-      <AccordionSection title="Новые данные" defaultOpen>
-        <Field style={{ marginBottom: 20 }}>
-          <Label>Текущий пароль</Label>
-          <Input
-            type="password"
-            value={currentPassword}
-            onChange={(e) => setCurrentPassword(e.target.value)}
-            required
-          />
-        </Field>
-        <Field>
-          <Label>Новый пароль</Label>
-          <Input
-            type="password"
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-            required
-          />
-        </Field>
+      <AccordionSection title="Письмо со ссылкой" defaultOpen>
+        <PageSubtitle style={{ marginBottom: 0 }}>
+          Отправим ссылку на {user?.email || "почту аккаунта"}. Перейдите по ней,
+          чтобы задать новый пароль. Почтовый ящик пока не подключён — ссылка
+          появится на этой странице.
+        </PageSubtitle>
       </AccordionSection>
 
       <Actions>
         <Button type="submit" disabled={saving}>
-          {saving ? "Сохранение…" : "Сохранить"}
+          {saving ? "Отправка…" : "Отправить ссылку"}
         </Button>
       </Actions>
     </form>

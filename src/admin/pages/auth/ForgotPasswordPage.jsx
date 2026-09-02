@@ -1,6 +1,5 @@
 import React from "react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { forgotPasswordRequest } from "../../api/auth";
 import {
   AuthActions,
@@ -18,22 +17,23 @@ import {
 
 import { adminPath } from "../../paths";
 export function ForgotPasswordPage() {
-  const navigate = useNavigate();
   const [loginOrEmail, setLoginOrEmail] = useState("");
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
+  const [resetPath, setResetPath] = useState("");
   const [saving, setSaving] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setError("");
     setMessage("");
+    setResetPath("");
     setSaving(true);
     try {
       const data = await forgotPasswordRequest(loginOrEmail);
       setMessage(data.message || "Запрос отправлен");
-      if (data.resetToken) {
-        navigate(`${adminPath("/reset-password")}?token=${encodeURIComponent(data.resetToken)}`);
+      if (data.resetPath) {
+        setResetPath(data.resetPath);
       }
     } catch (err) {
       setError(err.message);
@@ -58,6 +58,9 @@ export function ForgotPasswordPage() {
           </AuthField>
           {error && <AuthMessage tone="error">{error}</AuthMessage>}
           {message && <AuthMessage>{message}</AuthMessage>}
+          {resetPath && (
+            <AuthLink to={resetPath}>Открыть ссылку для смены пароля</AuthLink>
+          )}
           <AuthActions>
             <AuthButton type="submit" disabled={saving}>
               {saving ? "Отправка…" : "Отправить"}
