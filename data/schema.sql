@@ -355,4 +355,13 @@ CREATE TABLE leads (
 
 CREATE INDEX leads_source_created_idx ON leads (source, created_at DESC);
 
+-- ─── site content (whole JSON documents, ru + en) ─────────────────────────────
+
+CREATE TABLE content (
+  id          text PRIMARY KEY,
+  ru          jsonb NOT NULL,
+  en          jsonb NOT NULL,
+  updated_at  timestamptz NOT NULL DEFAULT now()
+);
+
 COMMIT;

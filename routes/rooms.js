@@ -1,31 +1,19 @@
-const path = require("path");
-const fs = require("fs");
 const express = require("express");
-const { langFromQuery, fileNameFor, otherLang } = require("../lib/lang");
+const { langFromQuery, otherLang } = require("../lib/lang");
+const { readJsonLang, writeJsonLang } = require("../lib/jsonStore");
 const { syncLocale, pickText } = require("../lib/localeSync");
 
 const router = express.Router();
-const DATA_DIR = path.join(__dirname, "..", "data");
+const ROOMS_FILE = "rooms.json";
 
 const META_KEYS = new Set(["name", "variants", "id", "tour_link"]);
 
-function roomsFile(lang) {
-  return path.join(DATA_DIR, fileNameFor("rooms.json", lang));
-}
-
 function readRoomsLang(lang) {
-  try {
-    return JSON.parse(fs.readFileSync(roomsFile(lang), "utf8"));
-  } catch (error) {
-    if (lang === "en") {
-      return JSON.parse(fs.readFileSync(roomsFile("ru"), "utf8"));
-    }
-    throw error;
-  }
+  return readJsonLang(ROOMS_FILE, lang);
 }
 
 function writeRoomsLang(lang, data) {
-  fs.writeFileSync(roomsFile(lang), JSON.stringify(data, null, 2), "utf8");
+  return writeJsonLang(ROOMS_FILE, lang, data);
 }
 
 function decodeParam(value) {
@@ -124,10 +112,10 @@ function overlayRooms(ruData, enData) {
   return out;
 }
 
-function readRoomsOverlay(lang) {
-  const data = readRoomsLang(lang);
+async function readRoomsOverlay(lang) {
+  const data = await readRoomsLang(lang);
   if (lang !== "en") return data;
-  return overlayRooms(readRoomsLang("ru"), data);
+  return overlayRooms(await readRoomsLang("ru"), data);
 }
 
 function getVariantPayload(category, variantKey) {
@@ -137,18 +125,18 @@ function getVariantPayload(category, variantKey) {
   return payload;
 }
 
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
   try {
-    const data = readRoomsOverlay(langFromQuery(req));
+    const data = await readRoomsOverlay(langFromQuery(req));
     res.json(data);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 
-router.get("/:hotel", (req, res) => {
+router.get("/:hotel", async (req, res) => {
   try {
-    const data = readRoomsOverlay(langFromQuery(req));
+    const data = await readRoomsOverlay(langFromQuery(req));
     const hotel = req.params.hotel;
 
     if (!data[hotel]) {
@@ -165,9 +153,9 @@ router.get("/:hotel", (req, res) => {
   }
 });
 
-router.get("/:hotel/:categoryKey/:variantKey", (req, res) => {
+router.get("/:hotel/:categoryKey/:variantKey", async (req, res) => {
   try {
-    const data = readRoomsOverlay(langFromQuery(req));
+    const data = await readRoomsOverlay(langFromQuery(req));
     const hotel = decodeParam(req.params.hotel);
     const categoryKey = decodeParam(req.params.categoryKey);
     const variantKey = decodeParam(req.params.variantKey);
@@ -196,10 +184,10 @@ router.get("/:hotel/:categoryKey/:variantKey", (req, res) => {
   }
 });
 
-router.post("/:hotel", (req, res) => {
+router.post("/:hotel", async (req, res) => {
   try {
     const lang = langFromQuery(req);
-    const data = readRoomsLang(lang);
+    const data = await readRoomsLang(lang);
     const { hotel } = req.params;
 
     if (!data[hotel]) {
@@ -242,13 +230,13 @@ router.post("/:hotel", (req, res) => {
       [variantKey]: room,
     };
     data[hotel][categoryKey] = created;
-    writeRoomsLang(lang, data);
+    await writeRoomsLang(lang, data);
 
     const altLang = otherLang(lang);
-    const altData = readRoomsLang(altLang);
+    const altData = await readRoomsLang(altLang);
     if (altData[hotel] && !altData[hotel][categoryKey]) {
       altData[hotel][categoryKey] = JSON.parse(JSON.stringify(created));
-      writeRoomsLang(altLang, altData);
+      await writeRoomsLang(altLang, altData);
     }
 
     res.status(201).json({
@@ -263,10 +251,10 @@ router.post("/:hotel", (req, res) => {
   }
 });
 
-router.put("/:hotel/:categoryKey/:variantKey", (req, res) => {
+router.put("/:hotel/:categoryKey/:variantKey", async (req, res) => {
   try {
     const lang = langFromQuery(req);
-    const data = readRoomsLang(lang);
+    const data = await readRoomsLang(lang);
     const hotel = decodeParam(req.params.hotel);
     const categoryKey = decodeParam(req.params.categoryKey);
     const variantKey = decodeParam(req.params.variantKey);
@@ -283,7 +271,7 @@ router.put("/:hotel/:categoryKey/:variantKey", (req, res) => {
     const { name, room, variants, newVariantKey } = req.body;
 
     if (lang === "en") {
-      const ruData = readRoomsLang("ru");
+      const ruData = await readRoomsLang("ru");
       const ruCategory = ruData[hotel]?.[categoryKey];
       if (!ruCategory?.[variantKey]) {
         return res.status(404).json({ error: "Вариант номера не найден" });
@@ -298,7 +286,7 @@ router.put("/:hotel/:categoryKey/:variantKey", (req, res) => {
         nextEn[variantKey] = room;
       }
       enData[hotel][categoryKey] = syncRoomCategory(ruCategory, nextEn);
-      writeRoomsLang("en", enData);
+      await writeRoomsLang("en", enData);
 
       const saved = enData[hotel][categoryKey];
       return res.json({
@@ -337,7 +325,7 @@ router.put("/:hotel/:categoryKey/:variantKey", (req, res) => {
         );
       }
 
-      const enData = readRoomsLang("en");
+      const enData = await readRoomsLang("en");
       const enCategory = enData[hotel]?.[categoryKey];
       if (enCategory?.[variantKey] && !enCategory[newVariantKey]) {
         enCategory[newVariantKey] = enCategory[variantKey];
@@ -347,20 +335,20 @@ router.put("/:hotel/:categoryKey/:variantKey", (req, res) => {
             item === variantKey ? newVariantKey : item
           );
         }
-        writeRoomsLang("en", enData);
+        await writeRoomsLang("en", enData);
       }
     }
 
-    writeRoomsLang("ru", data);
+    await writeRoomsLang("ru", data);
 
     const finalVariantKey = newVariantKey || variantKey;
-    const enData = readRoomsLang("en");
+    const enData = await readRoomsLang("en");
     if (enData[hotel]?.[categoryKey]) {
       enData[hotel][categoryKey] = syncRoomCategory(
         data[hotel][categoryKey],
         enData[hotel][categoryKey]
       );
-      writeRoomsLang("en", enData);
+      await writeRoomsLang("en", enData);
     }
 
     res.json({
@@ -376,10 +364,10 @@ router.put("/:hotel/:categoryKey/:variantKey", (req, res) => {
   }
 });
 
-router.post("/:hotel/:categoryKey/variants", (req, res) => {
+router.post("/:hotel/:categoryKey/variants", async (req, res) => {
   try {
     const lang = langFromQuery(req);
-    const data = readRoomsLang(lang);
+    const data = await readRoomsLang(lang);
     const { hotel, categoryKey } = req.params;
     const category = data[hotel]?.[categoryKey];
 
@@ -404,10 +392,10 @@ router.post("/:hotel/:categoryKey/variants", (req, res) => {
       category.variants.push(variantKey);
     }
 
-    writeRoomsLang(lang, data);
+    await writeRoomsLang(lang, data);
 
     const altLang = otherLang(lang);
-    const altData = readRoomsLang(altLang);
+    const altData = await readRoomsLang(altLang);
     const altCategory = altData[hotel]?.[categoryKey];
     if (altCategory && !altCategory[variantKey]) {
       altCategory[variantKey] = JSON.parse(JSON.stringify(room));
@@ -417,7 +405,7 @@ router.post("/:hotel/:categoryKey/variants", (req, res) => {
       if (!altCategory.variants.includes(variantKey) && variantKey !== "default") {
         altCategory.variants.push(variantKey);
       }
-      writeRoomsLang(altLang, altData);
+      await writeRoomsLang(altLang, altData);
     }
 
     res.status(201).json({
@@ -431,10 +419,10 @@ router.post("/:hotel/:categoryKey/variants", (req, res) => {
   }
 });
 
-router.delete("/:hotel/:categoryKey/:variantKey", (req, res) => {
+router.delete("/:hotel/:categoryKey/:variantKey", async (req, res) => {
   try {
     const lang = langFromQuery(req);
-    const data = readRoomsLang(lang);
+    const data = await readRoomsLang(lang);
     const hotel = decodeParam(req.params.hotel);
     const categoryKey = decodeParam(req.params.categoryKey);
     const variantKey = decodeParam(req.params.variantKey);
@@ -464,12 +452,12 @@ router.delete("/:hotel/:categoryKey/:variantKey", (req, res) => {
     };
 
     removeVariant(data);
-    writeRoomsLang(lang, data);
+    await writeRoomsLang(lang, data);
 
     const altLang = otherLang(lang);
-    const altData = readRoomsLang(altLang);
+    const altData = await readRoomsLang(altLang);
     removeVariant(altData);
-    writeRoomsLang(altLang, altData);
+    await writeRoomsLang(altLang, altData);
 
     res.json({ ok: true });
   } catch (error) {
@@ -477,10 +465,10 @@ router.delete("/:hotel/:categoryKey/:variantKey", (req, res) => {
   }
 });
 
-router.delete("/:hotel/:categoryKey", (req, res) => {
+router.delete("/:hotel/:categoryKey", async (req, res) => {
   try {
     const lang = langFromQuery(req);
-    const data = readRoomsLang(lang);
+    const data = await readRoomsLang(lang);
     const { hotel, categoryKey } = req.params;
 
     if (!data[hotel]?.[categoryKey]) {
@@ -488,13 +476,13 @@ router.delete("/:hotel/:categoryKey", (req, res) => {
     }
 
     delete data[hotel][categoryKey];
-    writeRoomsLang(lang, data);
+    await writeRoomsLang(lang, data);
 
     const altLang = otherLang(lang);
-    const altData = readRoomsLang(altLang);
+    const altData = await readRoomsLang(altLang);
     if (altData[hotel]?.[categoryKey]) {
       delete altData[hotel][categoryKey];
-      writeRoomsLang(altLang, altData);
+      await writeRoomsLang(altLang, altData);
     }
     res.json({ ok: true });
   } catch (error) {
