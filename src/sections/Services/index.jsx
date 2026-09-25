@@ -126,7 +126,12 @@ export const ServicesContent = ({ page }) => {
                         >Дополнительно</SquareItem>
                     </div>
                     <FadeBg className="img" src={defaultSrc} />
-                    <Faq items={ h[id].section_6[service] } reset={ faqReset }/>
+                    <Faq
+                        items={ h[id].section_6[service] }
+                        reset={ faqReset }
+                        refresh={refreshPin}
+                        setImg={setImg}
+                    />
                 </>
                 : <>
                     <div className="caption">

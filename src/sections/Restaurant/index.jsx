@@ -24,7 +24,7 @@ export const RestaurantContent = ({page}) => {
         { page && <div className="top">
             <Line/>
             <Breadcrumbs data={ [
-                { text: "Home", link: "/" },
+                { text: "Главная", link: "/" },
                 { text: h[id].name, link: `/hotel/${ id }` },
                 { text: `Ресторан ${ h[id].name }` }
             ] }/>
