@@ -509,7 +509,7 @@ export const Section3 = styled.section`
              color: var(--Black-2, #2F3034);
              text-align: center;
              font-family: Manrope;
-             font-size: 1.8rem;
+             font-size: 1.6rem;
              font-style: normal;
              font-weight: 500;
              line-height: 120%; /* 21.6px */
@@ -570,6 +570,9 @@ export const Section3 = styled.section`
             }
         }
         .tooltip {
+            p {
+                font-size: 1.8rem;
+            }
             span {
                 color: var(--Black-2, #2F3034);
             }
@@ -614,6 +617,9 @@ export const Section4 = styled.section`
         display: grid;
         gap: 4.4rem;
     }
+    .caption {
+        display: contents;
+    }
     li {
         gap: 1.8rem;
         display: flex;
@@ -650,8 +656,7 @@ export const Section4 = styled.section`
         li {
             height: 95.2rem;
             box-sizing: border-box;
-            padding: 11.4rem 9.1rem;
-            gap: 3.2rem;
+            padding: 11.4rem 5.4rem;
             justify-content: flex-end;
             color: #FFF6F0;
             h3 {
@@ -659,6 +664,14 @@ export const Section4 = styled.section`
             }
             p {
                 font-size: 1.8rem;
+            }
+            .caption {
+                display: grid;
+                grid-template-rows: auto 8.8rem;
+                align-content: flex-start;
+                justify-items: center;
+                gap: 3.2rem;
+                transition: transform .55s ease;
             }
             @media (hover: hover) {
                 h3, p {

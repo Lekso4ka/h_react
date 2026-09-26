@@ -6,6 +6,7 @@ import { Icon } from "../../ui/Icon";
 import { useT } from "../../Ctx";
 import {Link as ReactLink} from "react-router-dom";
 import { Hero, Section1, Section2, Section3, Section4, Section5, Section6 } from "./style";
+import { handlePhoneBlur, handlePhoneFocus, handlePhoneInput, lockPhoneAutofill } from "../../utils/phoneMask";
 
 const lines = (text) => String(text).split("\n").map((line, i, arr) => (
     <React.Fragment key={i}>{line}{i < arr.length - 1 ? <br/> : null}</React.Fragment>
@@ -252,18 +253,24 @@ export const TeambuildingContent = () => {
             <ul>
                 <li>
                     <div className="img img1"/>
-                    <h3>{ t("tbHalls") }</h3>
-                    <p>{ t("tbHallsText") }</p>
+                    <div className="caption">
+                        <h3>{ t("tbHalls") }</h3>
+                        <p>{ t("tbHallsText") }</p>
+                    </div>
                 </li>
                 <li>
                     <div className="img img2"/>
-                    <h3>{ t("tbGala") }</h3>
-                    <p>{ t("tbGalaText") }</p>
+                    <div className="caption">
+                        <h3>{ t("tbGala") }</h3>
+                        <p>{ t("tbGalaText") }</p>
+                    </div>
                 </li>
                 <li>
                     <div className="img img3"/>
-                    <h3>{ t("tbActivities") }</h3>
-                    <p>{ t("tbActivitiesText") }</p>
+                    <div className="caption">
+                        <h3>{ t("tbActivities") }</h3>
+                        <p>{ t("tbActivitiesText") }</p>
+                    </div>
                 </li>
             </ul>
         </Section4>
@@ -318,11 +325,25 @@ export const TeambuildingContent = () => {
                 <h4>{ t("tbFormKicker") }</h4>
                 <h2>{ t("tbFormTitle") }</h2>
                 <p>{ t("tbFormLead") }</p>
-                <form className={ sent ? "sent" : "" } onSubmit={ formHandler }>
+                <form className={ sent ? "sent" : "" } autoComplete="off" onSubmit={ formHandler }>
                     <div className="form-body">
                         <div className="form-fields">
                             <input type="text" name="name" placeholder={ t("yourName") } required={!sent} autoComplete="off"/>
-                            <input type="tel" name="phone" placeholder={ t("phone") } required={!sent} autoComplete="off"/>
+                            <input
+                                type="tel"
+                                name="phone"
+                                placeholder={ t("phone") }
+                                required={!sent}
+                                inputMode="tel"
+                                autoComplete="off"
+                                autoCorrect="off"
+                                autoCapitalize="off"
+                                spellCheck={false}
+                                ref={lockPhoneAutofill}
+                                onFocus={handlePhoneFocus}
+                                onInput={handlePhoneInput}
+                                onBlur={handlePhoneBlur}
+                            />
                             <label className="consent">
                                 <input type="checkbox" name="consent" required={!sent}/>
                                 { t("consent") } <ReactLink to="">{ t("consentLink") }</ReactLink> { t("consentMid") } <ReactLink to="">{ t("policyLink") }</ReactLink>{ t("consentEnd") }

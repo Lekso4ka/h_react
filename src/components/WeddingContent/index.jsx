@@ -5,6 +5,8 @@ import { Link } from "../../ui/Link";
 import { Icon } from "../../ui/Icon";
 import { Video } from "../../ui/Video";
 import { Hero, Section1, Section2, Section3, Section4, Section5, Section6 } from "./style";
+import { handlePhoneBlur, handlePhoneFocus, handlePhoneInput, isPhoneComplete, lockPhoneAutofill } from "../../utils/phoneMask";
+import {Link as ReactLink} from "react-router-dom";
 
 gsap.registerPlugin(useGSAP);
 
@@ -144,8 +146,23 @@ const Section3Gallery = () => {
 };
 
 export const WeddingContent = () => {
+    const formRef = useRef(null);
     const [sent, setSent] = useState(false);
     const [sending, setSending] = useState(false);
+    const [formReady, setFormReady] = useState(false);
+
+    const scrollToForm = (e) => {
+        e.preventDefault();
+        formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    };
+
+    const syncFormReady = (form) => {
+        const name = form.elements.name.value.trim();
+        const phone = form.elements.phone.value;
+        const consent = form.elements.consent.checked;
+        setFormReady(Boolean(name && isPhoneComplete(phone) && consent));
+    };
+
     const formHandler = async (e) => {
         e.preventDefault();
         if (sent || sending) return;
@@ -196,11 +213,13 @@ export const WeddingContent = () => {
             <div className="img1"></div>
             <div className="content">
                 <div className="line"/>
-                <p>Мы позаботимся о каждой детали, что бы вы могли наслаждаться самым важным – друг другом и
-                    этим
-                    незабываемым днем. Опытная команда отеля возьмет на себя всю организацию торждества любой
-                    сложности – от камерной свадьбы до масштабного праздника.</p>
-                <Link to="">Запросить предложение</Link>
+                <div className="offer">
+                    <p>Мы позаботимся о каждой детали, что бы вы могли наслаждаться самым важным – друг другом и
+                        этим
+                        незабываемым днем. Опытная команда отеля возьмет на себя всю организацию торждества любой
+                        сложности – от камерной свадьбы до масштабного праздника.</p>
+                    <Link to="#wedding-form" onClick={scrollToForm}>Запросить предложение</Link>
+                </div>
             </div>
             <div className="img2"></div>
         </Section1>
@@ -251,23 +270,24 @@ export const WeddingContent = () => {
             <ul>
                 <li>
                     <div className="img img1"/>
-                    <h3>Выездная регистрация</h3>
-                    <p>Обменяйтесь клятвами на фоне горных вершин и панорамных видов Роза Хутор. Мы поможем
-                        организовать
-                        церемонию до мельчайших деталей, чтобы этот момент остался в памяти навсегда.</p>
+                    <div className="caption">
+                        <h3>Выездная регистрация</h3>
+                        <p>Обменяйтесь клятвами на фоне горных вершин и панорамных видов Роза Хутор. Мы поможем организовать церемонию до мельчайших деталей, чтобы этот момент остался в памяти навсегда.</p>
+                    </div>
                 </li>
                 <li>
                     <div className="img img2"/>
-                    <h3>Фотосессия в горах</h3>
-                    <p>Живописные локации, горные панорамы и мягкий свет создают идеальные условия для свадебной
-                        съёмки.
-                        Каждая фотография сохранит эмоции вашего дня и красоту Кавказских гор на долгие годы.</p>
+                    <div className="caption">
+                        <h3>Фотосессия в горах</h3>
+                        <p>Живописные локации, горные панорамы и мягкий свет создают идеальные условия для свадебной съёмки. Каждая фотография сохранит эмоции вашего дня и красоту Кавказских гор на долгие годы.</p>
+                    </div>
                 </li>
                 <li>
                     <div className="img img3"/>
-                    <h3>Свадебный ужин</h3>
-                    <p>От уютного семейного вечера до торжества с большим количеством гостей. Изысканное меню,
-                        безупречный сервис и атмосфера, созданная специально для вашего праздника.</p>
+                    <div className="caption">
+                        <h3>Свадебный ужин</h3>
+                        <p>От уютного семейного вечера до торжества с большим количеством гостей. Изысканное меню, безупречный сервис и атмосфера, созданная специально для вашего праздника.</p>
+                    </div>
                 </li>
             </ul>
         </Section4>
@@ -317,24 +337,45 @@ export const WeddingContent = () => {
                 </li>
             </ul>
         </Section5>
-        <Section6>
+        <Section6 id="wedding-form" ref={formRef}>
             <div className="content">
                 <h4>Свадьба в серце гор</h4>
                 <h2>Начните подготовку вашей свадьбы</h2>
                 <p>Оставьте заявку и мы подготовим для вас<br/> индивидуальное предложение.</p>
-                <form className={ sent ? "sent" : "" } onSubmit={ formHandler }>
+                <form
+                    className={ sent ? "sent" : "" }
+                    autoComplete="off"
+                    onSubmit={ formHandler }
+                    onInput={ (e) => syncFormReady(e.currentTarget) }
+                    onChange={ (e) => syncFormReady(e.currentTarget) }
+                    onBlur={ (e) => syncFormReady(e.currentTarget) }
+                >
                     <div className="form-body">
                         <div className="form-fields">
                             <input type="text" name="name" placeholder="Ваше имя" required={!sent} autoComplete="off"/>
-                            <input type="tel" name="phone" placeholder="Телефон" required={!sent} autoComplete="off"/>
+                            <input
+                                type="tel"
+                                name="phone"
+                                placeholder="Телефон"
+                                required={!sent}
+                                inputMode="tel"
+                                autoComplete="off"
+                                autoCorrect="off"
+                                autoCapitalize="off"
+                                spellCheck={false}
+                                ref={lockPhoneAutofill}
+                                onFocus={handlePhoneFocus}
+                                onInput={handlePhoneInput}
+                                onBlur={handlePhoneBlur}
+                            />
                             <label className="consent">
                                 <input type="checkbox" name="consent" required={!sent}/>
-                                Даю свое <Link to="">согласие на обработку</Link> моих персональных данных в соответствии с <Link to="">политикой конфиденциальности</Link>.
+                                Даю свое <ReactLink to="">согласие на обработку</ReactLink> моих персональных данных в соответствии с <ReactLink to="">политикой конфиденциальности</ReactLink>.
                             </label>
                         </div>
                         { sent && <p className="form-success">Спасибо за заявку! Мы подготовим для вас индивидуальное предложение.</p> }
                     </div>
-                    <button type="submit" disabled={ sent || sending }>{ sent ? "Отправлено" : "Запросить предложение" }</button>
+                    <button type="submit" disabled={ !formReady || sent || sending }>{ sent ? "Отправлено" : "Запросить предложение" }</button>
                 </form>
             </div>
         </Section6>

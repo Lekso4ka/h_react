@@ -6,9 +6,23 @@ const Context = createContext();
 
 export const useCtx = () => useContext(Context);
 
+const BR_RE = /<br\s*\/?>/gi;
+
+function withBreaks(value) {
+    if (typeof value !== "string" || !value.toLowerCase().includes("<br")) return value;
+    const parts = value.split(BR_RE);
+    if (parts.length < 2) return value;
+    return parts.map((part, i) => (
+        <React.Fragment key={i}>
+            {part}
+            {i < parts.length - 1 ? <br/> : null}
+        </React.Fragment>
+    ));
+}
+
 export const useT = () => {
     const { lang } = useCtx();
-    return (key) => t(lang, key);
+    return (key) => withBreaks(t(lang, key));
 };
 
 export const ContextProvider = ({children}) => {

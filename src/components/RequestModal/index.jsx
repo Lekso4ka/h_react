@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useT } from "../../Ctx";
 import { Modal } from "./style";
+import { handlePhoneBlur, handlePhoneFocus, handlePhoneInput, lockPhoneAutofill } from "../../utils/phoneMask";
 
 const CalendarIcon = () => (
     <svg className="calendar-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 25" fill="none" aria-hidden>
@@ -151,7 +152,7 @@ export const RequestModal = ({
                     />
                 </svg>
                 <h3>{title}</h3>
-                <form ref={formRef} className={sent ? "sent" : ""} onSubmit={formHandler}>
+                <form ref={formRef} className={sent ? "sent" : ""} autoComplete="off" onSubmit={formHandler}>
                     <div className="pane">
                         <div className="pane-inner">
                             <div className="fields">
@@ -171,8 +172,15 @@ export const RequestModal = ({
                                                 name={field.name}
                                                 required={Boolean(field.required)}
                                                 min={field.type === "number" ? "1" : undefined}
-                                                inputMode={field.type === "number" ? "numeric" : undefined}
+                                                inputMode={field.type === "tel" ? "tel" : field.type === "number" ? "numeric" : undefined}
                                                 autoComplete="off"
+                                                autoCorrect={field.type === "tel" ? "off" : undefined}
+                                                autoCapitalize={field.type === "tel" ? "off" : undefined}
+                                                spellCheck={field.type === "tel" ? false : undefined}
+                                                ref={field.type === "tel" ? lockPhoneAutofill : undefined}
+                                                onFocus={field.type === "tel" ? handlePhoneFocus : undefined}
+                                                onInput={field.type === "tel" ? handlePhoneInput : undefined}
+                                                onBlur={field.type === "tel" ? handlePhoneBlur : undefined}
                                             />
                                         )}
                                         {field.type === "date" && <CalendarIcon/>}

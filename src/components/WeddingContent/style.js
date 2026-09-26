@@ -192,6 +192,12 @@ export const Section1 = styled.section`
         font-weight: 500;
         text-align: center;
     }
+    .offer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
     .line {
         height: 25.2rem;
         width: .1rem;
@@ -250,6 +256,12 @@ export const Section1 = styled.section`
             padding: 0;
             font-size: 1.8rem;
             font-weight: 500;
+            align-self: stretch;
+        }
+        .offer {
+            position: sticky;
+            top: 9.2rem;
+            z-index: 1;
         }
     }
 `
@@ -506,7 +518,7 @@ export const Section3 = styled.section`
              color: var(--Black-2, #2F3034);
              text-align: center;
              font-family: Manrope;
-             font-size: 1.8rem;
+             font-size: 1.6rem;
              font-style: normal;
              font-weight: 500;
              line-height: 120%; /* 21.6px */
@@ -520,7 +532,8 @@ export const Section3 = styled.section`
         padding-top: 4.6rem;
     }
     @media (min-width: 576px) {
-        width: 108.2rem;
+        box-sizing: border-box;
+        width: 100%;
         grid-template-columns: repeat(2, 1fr);
         padding: 15rem 41.9rem 0;
         h4 {
@@ -567,6 +580,9 @@ export const Section3 = styled.section`
             }
         }
         .tooltip {
+            p {
+                font-size: 1.8rem;
+            }
             span {
                 color: var(--Black-2, #2F3034);
             }
@@ -594,22 +610,33 @@ export const Section4 = styled.section`
         padding-bottom: 4.4rem;
     }
     .img {
+        position: relative;
         background-position: center;
         background-size: cover;
         height: 54rem;
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.20);
+            transition: background-color .55s ease;
+        }
     }
     .img1 {
-        background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url("${img.we_10}");
+        background-image: url("${img.we_10}");
     }
     .img2 {
-        background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url("${img.we_11}");
+        background-image: url("${img.we_11}");
     }
     .img3 {
-        background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url("${img.we_12}");
+        background-image: url("${img.we_12}");
     }
     ul {
         display: grid;
         gap: 4.4rem;
+    }
+    .caption {
+        display: contents;
     }
     li {
         gap: 1.8rem;
@@ -647,8 +674,7 @@ export const Section4 = styled.section`
         li {
             height: 95.2rem;
             box-sizing: border-box;
-            padding: 11.4rem 9.1rem;
-            gap: 3.2rem;
+            padding: 11.4rem 5.4rem;
             justify-content: flex-end;
             color: #FFF6F0;
             h3 {
@@ -656,21 +682,31 @@ export const Section4 = styled.section`
             }
             p {
                 font-size: 1.8rem;
+                overflow: visible;
+            }
+            .caption {
+                display: grid;
+                grid-template-rows: auto 8.8rem;
+                align-content: flex-start;
+                justify-items: center;
+                gap: 3.2rem;
+                transition: transform .55s ease;
             }
             @media (hover: hover) {
-                h3, p {
+                .caption p {
                     opacity: 0;
-                    transform: translateY(1.2rem);
-                    transition: opacity .55s ease, transform .55s ease;
-                }
-                p {
-                    transition-delay: .08s;
+                    transition: opacity .55s ease;
                 }
                 &:hover,
                 &:focus-within {
-                    h3, p {
+                    .img::after {
+                        background: rgba(0, 0, 0, 0.40);
+                    }
+                    .caption {
+                        transform: translateY(-2rem);
+                    }
+                    .caption p {
                         opacity: 1;
-                        transform: translateY(0);
                     }
                 }
             }
@@ -831,6 +867,7 @@ export const Section6 = styled.section`
     display: flex;
     align-items: stretch;
     justify-content: center;
+    scroll-margin-top: 8.8rem;
     padding: 13.9rem 1.6rem 6rem;
     background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.30) 0%, rgba(0, 0, 0, 0.30) 100%), url("${img.we_16}");
     background-position: bottom;
@@ -984,7 +1021,7 @@ export const Section6 = styled.section`
     button {
         margin-top: 2.8rem;
         padding: 0;
-        color: rgba(255, 255, 255, 0.40);
+        color: #FFF;
         text-align: center;
         font-family: "Playfair Display";
         font-size: 1.6rem;
@@ -1000,10 +1037,11 @@ export const Section6 = styled.section`
         &:disabled {
             cursor: default;
             pointer-events: none;
-            color: #FFF;
+            color: rgba(255, 255, 255, 0.40);
         }
     }
     @media (min-width: 576px) {
+        scroll-margin-top: 10.2rem;
         background-position: center;
         padding: 13rem 0 18.4rem;
         .content {
