@@ -32,7 +32,7 @@ export const EventsContent = ({ page }) => {
         }
     }, [event]);
     
-    return <Container page={ page }>
+    return <Container page={ page } id={ page ? undefined : "venues" }>
         <Line/>
         { !page && <Tooltip>{ block.label }</Tooltip> }
         <Block>

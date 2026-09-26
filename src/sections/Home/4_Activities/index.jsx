@@ -1,5 +1,6 @@
 
 import React, { useRef, useState } from "react";
+import { useCtx } from "../../../Ctx";
 import { getMain } from "../../../data";
 import { ActivityBtn } from "../../../ui/ActivityBtn";
 import { Cursor, useCursor } from "../../../ui/Cursor";
@@ -10,6 +11,7 @@ import { Content, Zone } from "./style";
 
 
 export const Activities = ({weather, setWeather}) => {
+    const { mob } = useCtx();
     const zoneRef = useRef(null);
     const [dragging, setDragging] = useState(false);
     const { visible, position } = useCursor({ zoneRef, dragging });
@@ -17,7 +19,8 @@ export const Activities = ({weather, setWeather}) => {
     const season = data[weather] || {};
     const items = season.items || [];
     
-    const hideNativeCursor = visible || dragging;
+    const customCursor = !mob;
+    const hideNativeCursor = customCursor && (visible || dragging);
     return <Content
             bg1={ items[0]?.image }
             bg2={ items[1]?.image }
@@ -47,7 +50,7 @@ export const Activities = ({weather, setWeather}) => {
             <div className="list-container">
                 <Zone ref={zoneRef} $hideCursor={hideNativeCursor}>
                     <HorizontalDragRail
-                        customCursor
+                        customCursor={ customCursor }
                         onDragStart={ () => setDragging(true) }
                         onDragEnd={ () => setDragging(false) }
                     >
@@ -58,13 +61,13 @@ export const Activities = ({weather, setWeather}) => {
                             </div>
                         )) }
                     </HorizontalDragRail>
-                    <Cursor
+                    { customCursor && <Cursor
                         visible={ visible }
                         active={ dragging }
                         x={ position.x }
                         y={ position.y }
                         label={ "[ двигать ]" }
-                    />
+                    /> }
                 </Zone>
             </div>
             <Line/>

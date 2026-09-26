@@ -37,16 +37,23 @@ export const Hero = ({ weather, setWeather }) => {
         
         if (btn.current) {
             const handleScroll = () => {
-                if (window.scrollY >= 320) {
-                    btn.current.style.opacity = 1;
-                    btn.current.style.pointerEvents = "auto";
-                } else {
-                    btn.current.style.opacity = 0;
-                    btn.current.style.pointerEvents = "none";
-                }
+                const button = btn.current;
+                if (!button) return;
+                const venues = document.getElementById("venues");
+                const venuesTop = venues?.getBoundingClientRect().top;
+                const buttonTop = button.getBoundingClientRect().top;
+                const underVenues = venuesTop != null && venuesTop <= buttonTop;
+                const show = window.scrollY >= 320 && !underVenues;
+                button.style.opacity = show ? "1" : "0";
+                button.style.pointerEvents = show ? "auto" : "none";
             };
-            window.addEventListener("scroll", handleScroll);
-            return () => window.removeEventListener("scroll", handleScroll);
+            handleScroll();
+            window.addEventListener("scroll", handleScroll, { passive: true });
+            window.addEventListener("resize", handleScroll);
+            return () => {
+                window.removeEventListener("scroll", handleScroll);
+                window.removeEventListener("resize", handleScroll);
+            };
         }
     });
     return <>
