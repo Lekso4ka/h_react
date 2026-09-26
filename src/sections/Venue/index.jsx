@@ -37,7 +37,7 @@ export const VenueContent = () => {
                 { name: "name", label: "Имя *", required: true },
                 { name: "phone", label: "Телефон *", type: "tel", required: true },
                 { name: "email", label: "Почта *", type: "email", required: true },
-                { name: "wishes", label: "Пожелания к мероприятию" },
+                { name: "wishes", label: "Пожелания к мероприятию", type: "textarea" },
             ]}
         />
     </Container>

@@ -242,6 +242,23 @@ export const Modal = styled.div`
         width: 3.4rem;
         cursor: pointer;
     }
+    @media (max-width: 575px) {
+        &.active .modal-content {
+            transform: translate(0);
+        }
+        .modal-content {
+            top: 0;
+            left: 0;
+            width: 100%;
+            bottom: 0;
+        }
+        .x {
+            top: 2.6rem;
+            right: 2.6rem;
+            width: 2.4rem;
+            z-index: 2;
+        }
+    }
 `
 
 export const Data = styled.div`
@@ -355,6 +372,55 @@ export const Data = styled.div`
             box-sizing: border-box;
             svg {
                 width: .2rem;
+            }
+        }
+    }
+    @media (max-width: 575px) {
+        padding: 1.6rem 1.6rem 2.6rem;
+        .img {
+            height: 52rem;
+            padding: 1rem;
+            .tooltip {
+                font-size: 1.8rem;
+                line-height: 1;
+            }
+        }
+        h3 {
+            font-size: 2.4rem;
+            padding: 2.8rem 0 2.2rem;
+        }
+        p {
+            font-size: 1.6rem;
+        }
+        h4 {
+            line-height: 100%;
+            padding-bottom: 1.2rem;
+        }
+        .advantages {
+            gap: 2rem 1rem;
+            li {
+                font-size: 1.4rem;
+            }
+        }
+        .line {
+            padding-top: 4rem;
+            gap: 0 1rem;
+            p {
+                font-size: 1.4rem;
+                line-height: 1.2;
+            }
+        }
+        .line + .line {
+            padding-top: 5.4rem;
+        }
+        .conditions {
+            li {
+                font-size: 1.2rem;
+            }
+            .circle {
+                width: 1.4rem;
+                height: 1.4rem;
+                margin-top: 0;
             }
         }
     }

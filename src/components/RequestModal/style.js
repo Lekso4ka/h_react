@@ -83,7 +83,7 @@ export const Modal = styled.div`
             font-weight: 600;
             line-height: 100%;
         }
-        input {
+        input, textarea {
             border: none;
             padding: 0;
             width: 100%;
@@ -97,6 +97,7 @@ export const Modal = styled.div`
             background: transparent;
             outline: none;
             border-radius: 0;
+            display: block;
             &[readonly] {
                 cursor: default;
             }
@@ -111,6 +112,11 @@ export const Modal = styled.div`
             &[type="date"] {
                 color-scheme: dark;
             }
+        }
+        textarea {
+            resize: none;
+            overflow: auto;
+            min-height: 1em;
         }
     }
     .date-field {
@@ -303,7 +309,8 @@ export const Modal = styled.div`
         form {
             margin-top: auto;
         }
-        .field input {
+        .field input,
+        .field textarea {
             font-size: 2rem;
         }
         .x {
@@ -317,6 +324,69 @@ export const Modal = styled.div`
         button[type="submit"] {
             font-size: 1.8rem;
             margin: 8.8rem 0 3.8rem;
+        }
+    }
+    @media (max-width: 575px) {
+        &.active .modal-content {
+            transform: translateY(0);
+        }
+        .modal-content {
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.4rem;
+            transform: translateY(100%);
+            h3 {
+                font-size: 3.4rem;
+                padding-right: 2.4rem;
+            }
+        }
+        form {
+            margin-top: 10rem;
+            flex: 1 0 auto;
+        }
+        .field {
+            gap: .8rem;
+            padding: 1.6rem 0 1.2rem;
+            span {
+                font-size: 1.2rem;
+            }
+            input, textarea {
+                font-size: 1.6rem;
+            }
+        }
+        .date-field {
+            input {
+                padding-right: 2.8rem;
+            }
+            .calendar-icon,
+            input::-webkit-calendar-picker-indicator {
+                width: 1.9rem;
+                height: 2.2rem;
+                bottom: 1.2rem;
+            }
+        }
+        .x {
+            top: 1.4rem;
+            right: 1.4rem;
+            width: 2.4rem;
+        }
+        .consent {
+            margin-top: auto;
+            padding: 1.5rem 0 0 3.4rem;
+            border-top: .1rem solid #FFF6F0;
+            line-height: 1.6rem;
+            input[type=checkbox] {
+                top: 1.5rem;
+            }
+        }
+        button[type="submit"] {
+            margin: 4.2rem 0 2rem;
+        }
+        .required-note {
+            font-size: 1.2rem;
         }
     }
 `

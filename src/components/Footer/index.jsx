@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { useT } from "../../Ctx";
 import { Block, Bottom, Caption, Left, List, Right, Title } from "./style";
 
@@ -64,7 +65,7 @@ export const Footer = () => {
                 </div>
                 <label className="consent">
                     <input type="checkbox" name="consent" required={!subscribed}/>
-                    <span>{ t("consent") } <a href="/policy">{ t("consentLink") }</a> { t("consentMid") } <a href="/policy">{ t("policyLink") }</a>{ t("consentEnd") }</span>
+                    <span>{ t("consent") } <Link to="/policy">{ t("consentLink") }</Link> { t("consentMid") } <Link to="/policy">{ t("policyLink") }</Link>{ t("consentEnd") }</span>
                 </label>
                 <button type="submit" disabled={ subscribed || sending }>
                     { subscribed ? t("subscribed") : t("subscribe") }

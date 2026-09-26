@@ -182,7 +182,7 @@ export const StocksContent = () => {
                 { name: "name", label: "Имя *", required: true },
                 { name: "phone", label: "Телефон *", type: "tel", required: true },
                 { name: "email", label: "Почта *", type: "email", required: true },
-                { name: "question", label: "Вопрос" },
+                { name: "question", label: "Вопрос", type: "textarea" },
             ]}
         />
     </Container>

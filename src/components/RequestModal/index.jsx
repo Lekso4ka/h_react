@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { useT } from "../../Ctx";
 import { Modal } from "./style";
 import { handlePhoneBlur, handlePhoneFocus, handlePhoneInput, lockPhoneAutofill } from "../../utils/phoneMask";
@@ -166,6 +167,12 @@ export const RequestModal = ({
                                                 value={values[field.name] ?? ""}
                                                 readOnly
                                             />
+                                        ) : field.type === "textarea" ? (
+                                            <textarea
+                                                name={field.name}
+                                                rows={1}
+                                                required={Boolean(field.required)}
+                                            />
                                         ) : (
                                             <input
                                                 type={field.type || "text"}
@@ -219,7 +226,7 @@ export const RequestModal = ({
                     <label className="consent">
                         <input type="checkbox" name="consent" required={!sent}/>
                         <span>
-                            {t("consent")} <a href="/policy">{t("consentLink")}</a> {t("consentMid")} <a href="/policy">{t("policyLink")}</a>{t("consentEnd")}
+                            {t("consent")} <Link to="/policy">{t("consentLink")}</Link> {t("consentMid")} <Link to="/policy">{t("policyLink")}</Link>{t("consentEnd")}
                         </span>
                     </label>
                     <button type="submit" disabled={sent || sending} className={sent ? "sent" : ""}>

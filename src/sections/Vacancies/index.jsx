@@ -101,7 +101,7 @@ export const VacanciesContent = () => {
                 { name: "email", label: "Почта *", type: "email", required: true },
                 { name: "city", label: "Город проживания" },
                 { name: "social", label: "Ссылка на соц. сети" },
-                { name: "message", label: "Сообщение" },
+                { name: "message", label: "Сообщение", type: "textarea" },
             ]}
             file={{
                 name: "resume",
