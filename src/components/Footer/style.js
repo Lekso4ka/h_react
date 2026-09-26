@@ -169,11 +169,16 @@ export const Left = styled.div`
         margin: 0;
         box-sizing: border-box;
         border: .2rem solid #fff;
+        border-radius: .4rem;
         background-color: transparent;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-origin: border-box;
         cursor: pointer;
         flex-shrink: 0;
         &:checked {
-            background-color: #fff6f0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Crect width='10' height='10' rx='4' fill='%23fff'/%3E%3C/svg%3E");
+            background-size: 50% 50%;
         }
         &:focus-visible {
             outline: .1rem solid #fff;
