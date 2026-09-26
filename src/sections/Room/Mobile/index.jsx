@@ -18,7 +18,7 @@ import {
     Options,
     SecondaryText,
     TextTop,
-    OptLite, Opt1
+    OptLite, Opt1, BtnWrap
 } from "./style";
 
 export const Mobile = () => {
@@ -41,7 +41,7 @@ export const Mobile = () => {
                 h={ hotel }
                 id={ id }
             /> }
-            <div className="variant">{ v === "default" ? "" : `[ ${v} ]` }</div>
+            <div className="variant">{ v === "default" ? "" : `[ ${ v } ]` }</div>
             <h1>{ room.name }</h1>
             <Line/>
         </div>
@@ -56,7 +56,7 @@ export const Mobile = () => {
                 <h2>{ t("roomParams") }</h2>
                 <div className={ "tl" }>
                     <span>{ room[v].size }</span>
-                        <span>{ t("sqm") }<sup>2</sup></span>
+                    <span>{ t("sqm") }<sup>2</sup></span>
                 </div>
                 <div className={ "tr" }>
                     <span>{ t("upTo") }</span>
@@ -77,17 +77,17 @@ export const Mobile = () => {
                 { room[v].tooltip }
             </SecondaryText>
             { room[v].options.length > 0 && <>
-            <Line/>
-            <Options>
-                <h2>{ t("roomEquipment") }</h2>
-                <ul>
-                    { room[v].options.map(item => <li key={ item }>
-                        <Icon name={ "check-circle" }/>
-                        <span>{ item }</span>
-                    </li>) }
-                </ul>
-            </Options>
-            </>}
+                <Line/>
+                <Options>
+                    <h2>{ t("roomEquipment") }</h2>
+                    <ul>
+                        { room[v].options.map(item => <li key={ item }>
+                            <Icon name={ "check-circle" }/>
+                            <span>{ item }</span>
+                        </li>) }
+                    </ul>
+                </Options>
+            </> }
             { room[v].options.length === 0
                 ? <Opt1>
                     { room[v].all_options.map(el => <OptLite key={ el.title }>
@@ -101,6 +101,9 @@ export const Mobile = () => {
             }
             <AccItem title={ t("onRequestServices") } data={ room[v].services } variant={ "opt2" }/>
         </Content>
-        <Button>{ t("checkAvailability") }</Button>
+        <BtnWrap>
+            <Button>{ t("checkAvailability") }</Button>
+        </BtnWrap>
+        
     </Block>
 }

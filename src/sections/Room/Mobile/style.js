@@ -246,8 +246,19 @@ export const Options = styled.div`
         }
     }
 `
+export const BtnWrap = styled.div`
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    padding-bottom: .01rem;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+`
 
 export const Button = styled.button`
+    pointer-events: auto;
     display: flex;
     width: 100%;
     height: 5.8rem;
@@ -262,8 +273,6 @@ export const Button = styled.button`
     font-weight: 600;
     line-height: normal;
     letter-spacing: 0.056rem;
-    position: sticky;
-    bottom: 0;
     transition: background-color .2s;
     &:hover {
         background-color: #A03229;

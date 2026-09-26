@@ -9,7 +9,6 @@ import { Block, Item } from "./style";
 export const Mobile = ({ id }) => {
     const t = useT();
     const data = getRooms(id);
-    console.log(Object.entries(data))
     return <Block>
         { Object.entries(data).map(el => <Item key={ el[0] } bg={ el[1][el[1].variants[0] || "default"].images[0] }>
             <h2>{ el[1].name }</h2>
