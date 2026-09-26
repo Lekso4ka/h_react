@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useCtx } from "../../Ctx";
+import { useCtx, useT } from "../../Ctx";
 import { getHotels } from "../../data/hotels";
 import { Breadcrumbs } from "../../ui/Breadcrumbs";
 import { Line } from "../../ui/Line";
@@ -38,6 +38,7 @@ export const ServicesContent = ({ page }) => {
     const [service, setService] = useState("include")
     const [faqReset, setFaqReset] = useState(0);
     const { mob } = useCtx()
+    const t = useT()
     const { id } = useParams();
     const navigate = useNavigate();
     const h = getHotels()
@@ -92,9 +93,9 @@ export const ServicesContent = ({ page }) => {
             <Line/>
             <div className="top">
                 <Breadcrumbs data={ [
-                    { text: "Home", link: "/" },
+                    { text: t("home"), link: "/" },
                     { text: h[id].name, link: `/hotel/${ id }` },
-                    { text: "Услуги" }
+                    { text: t("services") }
                 ] }/>
                 <Tabs>
                     { names.map(el => <SquareItem
@@ -118,12 +119,12 @@ export const ServicesContent = ({ page }) => {
                             cnt={ h[id].section_6.include.length }
                             active={ service === "include" }
                             onClick={ () => setService("include") }
-                        >Включено</SquareItem>
+                        >{ t("included") }</SquareItem>
                         <SquareItem
                             cnt={ h[id].section_6.additional.length }
                             active={ service === "additional" }
                             onClick={ () => setService("additional") }
-                        >Дополнительно</SquareItem>
+                        >{ t("additional") }</SquareItem>
                     </div>
                     <FadeBg className="img" src={defaultSrc} />
                     <Faq
@@ -141,12 +142,12 @@ export const ServicesContent = ({ page }) => {
                                 cnt={ h[id].section_6.include.length }
                                 active={ service === "include" }
                                 onClick={ () => setService("include") }
-                            >Включено</SquareItem>
+                            >{ t("included") }</SquareItem>
                             <SquareItem
                                 cnt={ h[id].section_6.additional.length }
                                 active={ service === "additional" }
                                 onClick={ () => setService("additional") }
-                            >Дополнительно</SquareItem>
+                            >{ t("additional") }</SquareItem>
                         </div>
                     </div>
                     <div className="text">

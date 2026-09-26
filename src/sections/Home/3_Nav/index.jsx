@@ -1,9 +1,11 @@
 import React from "react";
+import { useT } from "../../../Ctx";
 import { getMain, getVenuesCnt } from "../../../data";
 import { Link } from "../../../ui/Link";
 import { Content } from "./style";
 
 export const Nav = ({weather}) => {
+    const t = useT();
     const data = getMain()?.nav || {};
     const golden = data.golden_tulip || {};
     const tulip = data.tulip_inn || {};
@@ -14,35 +16,35 @@ export const Nav = ({weather}) => {
             <Link
                 variant="big"
                 to={ `/activities/${ weather }` }
-            >Активности<span>[ { getVenuesCnt() } ]</span></Link>
+            >{ t("activities") }<span>[ { getVenuesCnt() } ]</span></Link>
             <Link
                 variant="big"
                 to=""
-            >СПА центр</Link>
+            >{ t("spa") }</Link>
             <Link
                 variant="big"
                 to="/restaurant/golden-tulip"
-            >Рестораны<span>[ 2 ]</span></Link>
+            >{ t("restaurants") }<span>[ 2 ]</span></Link>
             <Link
                 variant="big"
                 to="/services/golden-tulip"
-            >Услуги отеля</Link>
+            >{ t("hotelServices") }</Link>
             <Link
                 variant="big"
                 to="/events/default"
-            >Мероприятия<span>[ 1 ]</span></Link>
+            >{ t("events") }<span>[ 1 ]</span></Link>
             <Link
                 variant="big"
                 to="/events/venues"
-            >Конференц залы<span>[ { getVenuesCnt() } ]</span></Link>
+            >{ t("venues") }<span>[ { getVenuesCnt() } ]</span></Link>
             <Link
                 variant="big"
                 to="/stock/golden-tulip"
-            >Акции<span>[ { getVenuesCnt() } ]</span></Link>
+            >{ t("offers") }<span>[ { getVenuesCnt() } ]</span></Link>
             <Link
                 variant="big"
                 to="/affiche"
-            >Афиша<span>[ { getVenuesCnt() } ]</span></Link>
+            >{ t("poster") }<span>[ { getVenuesCnt() } ]</span></Link>
         </nav>
         <div className="list">
             <div className="room">
@@ -52,7 +54,7 @@ export const Nav = ({weather}) => {
                     color={"light"}
                     hover={"light"}
                     to="/rooms/golden-tulip"
-                >К номерам</Link>
+                >{ t("toRooms") }</Link>
             </div>
             <div className="room">
                 <h4>{ tulip.label }</h4>
@@ -61,7 +63,7 @@ export const Nav = ({weather}) => {
                     color={"light"}
                     hover={"light"}
                     to="/rooms/tulip-inn"
-                >К номерам</Link>
+                >{ t("toRooms") }</Link>
             </div>
         </div>
     </Content>

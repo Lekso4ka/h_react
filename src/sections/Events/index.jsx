@@ -6,6 +6,7 @@ import { Events } from "./Events";
 import { Venues } from "./Venues";
 import { Block, Buttons, Container, Content, Section, Tooltip, Top } from "./style";
 import { Breadcrumbs } from "../../ui/Breadcrumbs";
+import { useT } from "../../Ctx";
 import { getMain } from "../../data";
 
 const venues = [
@@ -21,6 +22,7 @@ const venues = [
 ]
 
 export const EventsContent = ({ page }) => {
+    const t = useT();
     const [type, setType] = useState("venues");
     const { event } = useParams()
     const block = getMain()?.events || {};
@@ -38,8 +40,8 @@ export const EventsContent = ({ page }) => {
         <Block>
             { page && <div className="bc">
                 <Breadcrumbs data={ [
-                    { text: "Главная", link: "/" },
-                    { text: "Мероприятия" }
+                    { text: t("home"), link: "/" },
+                    { text: t("events") }
                 ] }/>
             </div> }
             <Top>
@@ -57,12 +59,12 @@ export const EventsContent = ({ page }) => {
                             console.log(type);
                             type !== "venues" && setType("venues")
                         } }
-                    >Конференц залы</SquareItem>
+                    >{ t("venues") }</SquareItem>
                     <SquareItem
                         cnt={ events.length }
                         active={ type === "default" }
                         onClick={ () => setType("default") }
-                    >Мероприятия</SquareItem>
+                    >{ t("events") }</SquareItem>
                 </Buttons>
                 <Content cnt={ type === "venues" ? venues.length : events.length }>
                     <div className="wrapper">{ type === "venues"

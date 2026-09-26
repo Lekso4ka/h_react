@@ -1,3 +1,5 @@
+import { t } from "../i18n/strings";
+
 const cache = {
     activities: {},
     affiche: [],
@@ -15,10 +17,10 @@ const cache = {
 let ready = false;
 let loadPromise = null;
 
-async function fetchJson(url) {
+async function fetchJson(url, lang) {
     const response = await fetch(url);
     if (!response.ok) {
-        throw new Error(`Не удалось загрузить ${url}`);
+        throw new Error(`${t(lang, "loadFailed")} ${url}`);
     }
     return response.json();
 }
@@ -50,17 +52,17 @@ export function loadSiteData({ force = false, lang } = {}) {
             mainRes,
             menuRes,
         ] = await Promise.all([
-            fetchJson(`/api/activities${q}`),
-            fetchJson(`/api/affiche${q}`),
-            fetchJson(`/api/doings${q}`),
-            fetchJson(`/api/hotels${q}`),
-            fetchJson(`/api/rooms${q}`),
-            fetchJson(`/api/stocks${q}`),
-            fetchJson(`/api/vacancies${q}`),
-            fetchJson(`/api/venues${q}`),
-            fetchJson(`/api/legal${q}`),
-            fetchJson(`/api/main${q}`),
-            fetchJson(`/api/menu${q}`),
+            fetchJson(`/api/activities${q}`, lang),
+            fetchJson(`/api/affiche${q}`, lang),
+            fetchJson(`/api/doings${q}`, lang),
+            fetchJson(`/api/hotels${q}`, lang),
+            fetchJson(`/api/rooms${q}`, lang),
+            fetchJson(`/api/stocks${q}`, lang),
+            fetchJson(`/api/vacancies${q}`, lang),
+            fetchJson(`/api/venues${q}`, lang),
+            fetchJson(`/api/legal${q}`, lang),
+            fetchJson(`/api/main${q}`, lang),
+            fetchJson(`/api/menu${q}`, lang),
         ]);
 
         cache.activities = activitiesRes.data || {};

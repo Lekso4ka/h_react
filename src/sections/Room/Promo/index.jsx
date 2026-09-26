@@ -1,29 +1,31 @@
 import React from "react";
+import { useT } from "../../../Ctx";
 import { Link } from "../../../ui/Link";
-
-const data = [
-    {
-        "tooltip": "Весеннее предложение",
-        "main_text": "Раннее бронирование на апрель и май. Твоя весна в горах — ",
-        "color_text": "идеальное время для отдыха и перезагрузки.",
-        text: ["main_text", "color_text"],
-        "additional": "Планируйте поездку заранее и получите скидку 20% от стандартного тарифа с завтраком на заезды в апреле и мае 2026 года.",
-        link: { href: "/", title: "Подробнее" },
-        image: "promo"
-    },
-    {
-        "tooltip": "Весеннее предложение",
-        "main_text": "Раннее бронирование на апрель и май. Твоя весна в горах — ",
-        "color_text": "идеальное время для отдыха и перезагрузки.",
-        text: ["main_text", "color_text"],
-        "additional": "Планируйте поездку заранее и получите скидку 20% от стандартного тарифа с завтраком на заезды в апреле и мае 2026 года.",
-        link: { href: "/", title: "Подробнее" },
-        image: "promo"
-    },
-]
 import { Block, Item } from "./style";
 
 export const Promo = () => {
+    const t = useT();
+    const data = [
+        {
+            tooltip: t("promoTooltip"),
+            main_text: t("promoMain"),
+            color_text: t("promoColor"),
+            text: ["main_text", "color_text"],
+            additional: t("promoExtra"),
+            link: { href: "/", title: t("more") },
+            image: "promo",
+        },
+        {
+            tooltip: t("promoTooltip"),
+            main_text: t("promoMain"),
+            color_text: t("promoColor"),
+            text: ["main_text", "color_text"],
+            additional: t("promoExtra"),
+            link: { href: "/", title: t("more") },
+            image: "promo",
+        },
+    ];
+
     return <Block>
         { data.map((item, i) => <Item
             key={i}

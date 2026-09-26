@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link as RouterLink, useParams } from "react-router-dom";
+import { useT } from "../../Ctx";
 import { getArticleById } from "../../data";
 import { Line } from "../../ui/Line";
 import { Link } from "../../ui/Link";
@@ -17,6 +18,7 @@ import {
 } from "./style";
 
 export const ArticleContent = () => {
+    const t = useT();
     const [activeImg, setActiveImg] = useState(0);
     const { article } = useParams();
     const { content: a } = getArticleById(article);
@@ -64,7 +66,7 @@ export const ArticleContent = () => {
                 </Section3Item>) }
             </ul>
             <h3 dangerouslySetInnerHTML={ { __html: a.section_3.tooltip } }/>
-            <Link to={ a.section_3.link }>Смотреть номера</Link>
+            <Link to={ a.section_3.link }>{ t("viewRooms") }</Link>
         </Section3>
         
         
@@ -106,7 +108,7 @@ export const ArticleContent = () => {
                 <ul>
                     { a.section_7.list.map((el, i) => <li key={ i }>{ el }</li>) }
                 </ul>
-                <Link to={ "/" }>Выбрать отель</Link>
+                <Link to={ "/" }>{ t("chooseHotel") }</Link>
             </div>
             <div className="bottom">
                 <Line/>

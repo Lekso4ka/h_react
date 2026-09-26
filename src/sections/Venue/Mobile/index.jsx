@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useT } from "../../../Ctx";
 import { Tour } from "../../../components/Tour";
 import { Line } from "../../../ui/Line";
 import { Link } from "../../../ui/Link";
@@ -6,6 +7,7 @@ import { Vector } from "../../../ui/Vector";
 import { Content, Info, InfoItem, Options, Variant, Text, Images, Image, Formats, Block, Variants } from "./style";
 
 export const Mobile = ({ data, onRequest }) => {
+    const t = useT();
     const [w, setW] = useState(false);
     const ref = useRef();
     useEffect(() => {
@@ -43,15 +45,15 @@ export const Mobile = ({ data, onRequest }) => {
         <Block rotate={ data.plan_rotate }>
             <Info>
                 <InfoItem>
-                    <h4>Площадь зала</h4>
-                    <p>{ data.size }<span>м<sup>2</sup></span></p>
+                    <h4>{ t("hallArea") }</h4>
+                    <p>{ data.size }<span>{ t("sqm") }<sup>2</sup></span></p>
                 </InfoItem>
                 { data.variants.length > 0 && <InfoItem>
-                    <h4>Варианты рассадки</h4>
+                    <h4>{ t("seatingOptions") }</h4>
                     <p>{ data.variants.length }</p>
                 </InfoItem> }
                 <InfoItem>
-                    <h4>Вместимость человек</h4>
+                    <h4>{ t("hallCapacity") }</h4>
                     <p>{ data.guests }</p>
                 </InfoItem>
             </Info>
@@ -61,7 +63,7 @@ export const Mobile = ({ data, onRequest }) => {
             </Text>
             
             { data.show_formats && <Formats>
-                <h3>Форматы мероприятий</h3>
+                <h3>{ t("eventFormats") }</h3>
                 <ul>
                     { data.formats.map((el, i) => <li key={ i }>
                         <span>{ i < 9 && 0 }{ i + 1 }.</span>
@@ -86,7 +88,7 @@ export const Mobile = ({ data, onRequest }) => {
             { data.variants.length > 0 && <>
                 <Line/>
                 <Variants cnt={ data.variants.length }>
-                    <h5>Вместимость</h5>
+                    <h5>{ t("capacity") }</h5>
                     <div className="buttons">
                         <button/>
                         <button/>
@@ -110,18 +112,18 @@ export const Mobile = ({ data, onRequest }) => {
             
             <Options>
                 <h4>{ data.formats.length > 0
-                    ? "Дополнительные возможности"
-                    : "Оснащение зала" }</h4>
+                    ? t("extraOptions")
+                    : t("hallEquipment") }</h4>
                 <ul>
                     { data.options.map(el => <li
                         key={ el }
                         dangerouslySetInnerHTML={ { __html: el } }
                     />) }
                 </ul>
-                { data.formats.length > 0 && <span>предоставим по запросу</span> }
+                { data.formats.length > 0 && <span>{ t("onRequest") }</span> }
             </Options>
             
-            <Link to="" onClick={(e) => { e.preventDefault(); onRequest(); }}>Отправить запрос</Link>
+            <Link to="" onClick={(e) => { e.preventDefault(); onRequest(); }}>{ t("sendRequest") }</Link>
             <Line/>
         </Block>
     </Content>

@@ -7,7 +7,7 @@ import { App } from "./App";
 import { AdminRoot } from "./admin/AdminRoot";
 import { ContextProvider, useCtx } from "./Ctx";
 import { loadSiteData } from "./data/store";
-import { readStoredLang } from "./i18n/strings";
+import { readStoredLang, t } from "./i18n/strings";
 import { GlobalStyles } from "./styles/GlobalSt";
 import { theme } from "./styles/theme";
 
@@ -32,7 +32,7 @@ const PublicRoot = () => {
                 if (!cancelled) setReady(true);
             })
             .catch((err) => {
-                if (!cancelled) setError(err.message || "Ошибка загрузки данных");
+                if (!cancelled) setError(err.message || t(readStoredLang(), "loadError"));
             });
 
         return () => {

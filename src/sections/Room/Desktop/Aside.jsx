@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useT } from "../../../Ctx";
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -10,6 +11,7 @@ import { Button, Info, MainText, Options, SecondaryText, TextTop, Opt1, OptLite 
 gsap.registerPlugin(useGSAP);
 
 export const RoomAside = ({ room, v, infoRef, onLayoutChange }) => {
+    const t = useT();
     const [isOpen1, setIsOpen1] = useState(false);
     const [isOpen2, setIsOpen2] = useState(false);
     const [h, setH] = useState(0)
@@ -41,15 +43,15 @@ export const RoomAside = ({ room, v, infoRef, onLayoutChange }) => {
     return <Info ref={ infoRef }>
         <div>
             <TextTop>
-                <h2>Основные параметры</h2>
+                <h2>{ t("roomParams") }</h2>
                 <div className={ "tl" }>
                     <span>{ room[v].size }</span>
-                    <span>м<sup>2</sup></span>
+                    <span>{ t("sqm") }<sup>2</sup></span>
                 </div>
                 <div className={ "tr" }>
-                    <span>до</span>
+                    <span>{ t("upTo") }</span>
                     <span>{ room[v].guests }</span>
-                    <sup>гостей</sup>
+                    <sup>{ t("guests") }</sup>
                 </div>
                 <div className={ "bl" }>
                     { room[v].beds }
@@ -65,7 +67,7 @@ export const RoomAside = ({ room, v, infoRef, onLayoutChange }) => {
                 { room[v].tooltip }
             </SecondaryText>
             { room[v].options.length > 0 && <Options>
-                <h2>Оснащение номера</h2>
+                <h2>{ t("roomEquipment") }</h2>
                 <ul>
                     { room[v].options.map(item => <li key={ item }>
                         <Icon name={ "check-circle" }/>
@@ -82,17 +84,17 @@ export const RoomAside = ({ room, v, infoRef, onLayoutChange }) => {
                         </ul>
                     </OptLite>) }
                 </Opt1>
-                : <AccItem title={ "Всё оснащение номера" } data={ room[v].all_options } variant={ "opt1" }
+                : <AccItem title={ t("allRoomEquipment") } data={ room[v].all_options } variant={ "opt1" }
                            cb={ setIsOpen1 }/>
             }
             <AccItem
-                title={ "Услуги по запросу" }
+                title={ t("onRequestServices") }
                 data={ room[v].services }
                 variant={ "opt2" }
                 cb={ setIsOpen2 }
             />
         </div>
-        <Button>Проверить доступность</Button>
+        <Button>{ t("checkAvailability") }</Button>
     </Info>
     
 }

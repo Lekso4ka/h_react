@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { RequestModal } from "../../components/RequestModal";
-import { useCtx } from "../../Ctx";
+import { useCtx, useT } from "../../Ctx";
 import { getStocks } from "../../data";
 import { Line } from "../../ui/Line";
 import { Link } from "../../ui/Link";
@@ -17,16 +17,17 @@ export const StocksContent = () => {
     const [questionOpen, setQuestionOpen] = useState(false)
     const { id } = useParams();
     const { mob } = useCtx()
+    const t = useT()
     const data = getStocks(id)
     const getMainDates = ({ start, end }) => {
         const st = new Date(start)
         const en = new Date(end)
-        return `с ${ nToZero(st.getDate()) }.${ nToZero(st.getMonth() + 1) } по ${ nToZero(en.getDate()) }.${ nToZero(en.getMonth() + 1) }.${ en.getFullYear() }`
+        return `${ t("dateFrom") }\u00A0${ nToZero(st.getDate()) }.${ nToZero(st.getMonth() + 1) } ${ t("dateTo") }\u00A0${ nToZero(en.getDate()) }.${ nToZero(en.getMonth() + 1) }.${ en.getFullYear() }`
     }
     const getDates = ({ start, end }) => {
         const st = new Date(start)
         const en = new Date(end)
-        return `с ${ nToZero(st.getDate()) }.${ nToZero(st.getMonth() + 1) }.${ st.getFullYear() } по ${ nToZero(en.getDate()) }.${ nToZero(en.getMonth() + 1) }.${ en.getFullYear() }`
+        return `${ t("dateFrom") }\u00A0${ nToZero(st.getDate()) }.${ nToZero(st.getMonth() + 1) }.${ st.getFullYear() } ${ t("dateTo") }\u00A0${ nToZero(en.getDate()) }.${ nToZero(en.getMonth() + 1) }.${ en.getFullYear() }`
     }
     useEffect(() => {
         if (active !== null || questionOpen) {
@@ -37,7 +38,7 @@ export const StocksContent = () => {
     }, [active, questionOpen]);
     return <Container>
         <div className="hero">
-            <h1>Акции отеля</h1>
+            <h1>{ t("hotelOffers") }</h1>
             <div className="divider"/>
         </div>
         <div className="content">
@@ -72,7 +73,7 @@ export const StocksContent = () => {
                                               fill="white"/>
                                     </svg>
                                 </div>
-                                <span>Проживание { getMainDates(el.dates_of_stay) }</span>
+                                <span>{ t("stayDatesPrefix") } { getMainDates(el.dates_of_stay) }</span>
                             </li>
                         
                         </> : el.conditions.map((it, j) => <li key={ j }>
@@ -87,11 +88,11 @@ export const StocksContent = () => {
                         </li>) }
                     </ul>
                     <div className="links">
-                        <Link to={`/rooms/${id}`}>Выбрать номер</Link>
+                        <Link to={`/rooms/${id}`}>{ t("chooseRoom") }</Link>
                         { el.type === "offer" && <Link to={""} onClick={(e) => {
                             e.preventDefault()
                             setActive(i)
-                        }}>Подробнее</Link>}
+                        }}>{ t("more") }</Link>}
                     </div>
                 </div>
             </Item>) }
@@ -126,22 +127,22 @@ export const StocksContent = () => {
                     </div>
                     <h3 dangerouslySetInnerHTML={ { __html: data[active].name } }/>
                     <p>{ data[active].text }</p>
-                    <h4>Преимущества предложения:</h4>
+                    <h4>{ t("offerAdvantages") }</h4>
                     <ul className="advantages">
                         { data[active].advantages.map((el, i) => <li key={ i }>{ el }</li>) }
                     </ul>
                     <div className="line">
                         <div>
-                            <h4>Срок бронирования: </h4>
+                            <h4>{ t("bookingPeriod") } </h4>
                             <p>{ getDates(data[active].reservation_period) }</p>
                         </div>
                         <div>
-                            <h4>Даты проживания: </h4>
+                            <h4>{ t("stayDates") } </h4>
                             <p>{ getDates(data[active].dates_of_stay) }</p>
                         </div>
                     </div>
                     <div className="line">
-                        <Link color="dark" hover="dark" to={ `/rooms/${ id }` }>Выбрать номер</Link>
+                        <Link color="dark" hover="dark" to={ `/rooms/${ id }` }>{ t("chooseRoom") }</Link>
                         <Link
                             color="dark"
                             hover="dark"
@@ -150,9 +151,9 @@ export const StocksContent = () => {
                                 e.preventDefault();
                                 setQuestionOpen(true);
                             }}
-                        >Задать вопрос</Link>
+                        >{ t("askQuestion") }</Link>
                     </div>
-                    <h4>Дополнительные условия</h4>
+                    <h4>{ t("extraConditions") }</h4>
                     <ul className="conditions">
                         { data[active].conditions.map((el, i) => <li key={ i }>
                             <div className="circle">
@@ -173,16 +174,16 @@ export const StocksContent = () => {
             onClose={() => setQuestionOpen(false)}
             lockBody={false}
             zIndex={50}
-            title="Задать вопрос"
-            successMessage="Спасибо за вопрос! Мы свяжемся с вами в ближайшее время."
+            title={ t("askQuestionTitle") }
+            successMessage={ t("askQuestionSuccess") }
             source="stock"
             values={{ stock: typeof active === "number" ? stripHtml(data[active].name) : "" }}
             fields={[
-                { name: "stock", label: "Название акции", readOnly: true },
-                { name: "name", label: "Имя *", required: true },
-                { name: "phone", label: "Телефон *", type: "tel", required: true },
-                { name: "email", label: "Почта *", type: "email", required: true },
-                { name: "question", label: "Вопрос", type: "textarea" },
+                { name: "stock", label: t("offerName"), readOnly: true },
+                { name: "name", label: t("nameStar"), required: true },
+                { name: "phone", label: t("phoneStar"), type: "tel", required: true },
+                { name: "email", label: t("emailStar"), type: "email", required: true },
+                { name: "question", label: t("question"), type: "textarea" },
             ]}
         />
     </Container>

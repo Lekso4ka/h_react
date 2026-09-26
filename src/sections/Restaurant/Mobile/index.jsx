@@ -1,10 +1,12 @@
 import React from "react";
+import { useT } from "../../../Ctx";
 import { Carousel } from "../../../components/Carousel";
 import { Line } from "../../../ui/Line";
 import { Link } from "../../../ui/Link";
 import { Section } from "./style";
 
 export const Mobile = ({ data, page }) => {
+    const t = useT();
     return <Section pic={ data.image } page={ page }>
         { page
             ? <div className="page-top">
@@ -39,8 +41,8 @@ export const Mobile = ({ data, page }) => {
                 { el.text } { el.time }
             </p>) }
             <div className="img"/>
-            <Link to={ data.menu_link }>Открыть меню</Link>
-            <Link to={""}>Резерв стола</Link>
+            <Link to={ data.menu_link }>{ t("openMenu") }</Link>
+            <Link to={""}>{ t("reserveTable") }</Link>
         </div>
     </Section>
 }

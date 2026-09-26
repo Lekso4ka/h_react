@@ -1,6 +1,6 @@
 
 import React, { useRef, useState } from "react";
-import { useCtx } from "../../../Ctx";
+import { useCtx, useT } from "../../../Ctx";
 import { getMain } from "../../../data";
 import { ActivityBtn } from "../../../ui/ActivityBtn";
 import { Cursor, useCursor } from "../../../ui/Cursor";
@@ -12,6 +12,7 @@ import { Content, Zone } from "./style";
 
 export const Activities = ({weather, setWeather}) => {
     const { mob } = useCtx();
+    const t = useT();
     const zoneRef = useRef(null);
     const [dragging, setDragging] = useState(false);
     const { visible, position } = useCursor({ zoneRef, dragging });
@@ -38,14 +39,14 @@ export const Activities = ({weather, setWeather}) => {
                         active={weather === "summer"}
                         onClick={ () => setWeather("summer") }
                         variant={2}
-                    >Лето</ActivityBtn>
+                    >{ t("summer") }</ActivityBtn>
                     <ActivityBtn
                         active={weather === "winter"}
                         onClick={ () => setWeather("winter") }
                         variant={2}
-                    >зима</ActivityBtn>
+                    >{ t("winter") }</ActivityBtn>
                 </div>
-                <Link to={ `/activities/${ weather }` }>К активностям</Link>
+                <Link to={ `/activities/${ weather }` }>{ t("toActivities") }</Link>
             </div>
             <div className="list-container">
                 <Zone ref={zoneRef} $hideCursor={hideNativeCursor}>
@@ -66,7 +67,7 @@ export const Activities = ({weather, setWeather}) => {
                         active={ dragging }
                         x={ position.x }
                         y={ position.y }
-                        label={ "[ двигать ]" }
+                        label={ t("drag") }
                     /> }
                 </Zone>
             </div>

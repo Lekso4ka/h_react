@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { useT } from "../../../Ctx";
 import { getRooms } from "../../../data";
 import { Line } from "../../../ui/Line";
 import { Link } from "../../../ui/Link";
@@ -6,6 +7,7 @@ import { pluralize } from "../../../utils/pluralize";
 import { Block, Item } from "./style";
 
 export const Mobile = ({ id }) => {
+    const t = useT();
     const data = getRooms(id);
     console.log(Object.entries(data))
     return <Block>
@@ -14,16 +16,16 @@ export const Mobile = ({ id }) => {
             <div className="text">
                 <div>
                     <span className="digit">{ el[1][el[1].variants[0] || "default"].size }</span>
-                    <span>м<sup>2</sup></span>
+                    <span>{ t("sqm") }<sup>2</sup></span>
                 </div>
                 <div>
-                    <span>до</span>
+                    <span>{ t("upTo") }</span>
                     <span className="digit">{ el[1][el[1].variants[0] || "default"].guests }</span>
-                    <span>{ pluralize(el[1][el[1].variants[0] || "default"].guests, ["гостя", "гостей", "гостей"]) }</span>
+                    <span>{ pluralize(el[1][el[1].variants[0] || "default"].guests, t("guestForms")) }</span>
                 </div>
                 <div>
                     <span className="digit">{ el[1][el[1].variants[0] || "default"].rooms }</span>
-                    <span>{ pluralize(el[1][el[1].variants[0] || "default"].rooms, ["комната", "комнаты", "комнат"]) }</span>
+                    <span>{ pluralize(el[1][el[1].variants[0] || "default"].rooms, t("roomForms")) }</span>
                 </div>
             </div>
             <div className="img">
@@ -40,7 +42,7 @@ export const Mobile = ({ id }) => {
                 ) }</div>
                 
             </div>
-            <Link to={ `/room/${ id }/${ el[0] }/${el[1].variants[0] || "default"}` }>Смотреть номер</Link>
+            <Link to={ `/room/${ id }/${ el[0] }/${el[1].variants[0] || "default"}` }>{ t("viewRoom") }</Link>
             <Line/>
         </Item>) }
     </Block>

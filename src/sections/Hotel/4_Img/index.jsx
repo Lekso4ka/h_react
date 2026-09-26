@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import { useT } from "../../../Ctx";
 import { Link } from "../../../ui/Link";
 import { Content } from "./style";
 import gsap from "gsap";
@@ -7,6 +8,7 @@ import { useGSAP } from "@gsap/react";
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export const Images = ({data}) => {
+    const t = useT();
     const r1 = useRef()
     const r2 = useRef()
     const r3 = useRef()
@@ -88,7 +90,7 @@ export const Images = ({data}) => {
         <div className="img img5" ref={r5}/>
         <p>{ data.text }</p>
         <div className="links">
-            <Link to="#">Перейти к бронированию</Link>
+            <Link to="#">{ t("toBooking") }</Link>
         </div>
     </Content>
 }

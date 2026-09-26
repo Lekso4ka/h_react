@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useT } from "../../Ctx";
+import { AFFICHE_FILTERS } from "../../i18n/strings";
 import { Link } from "../../ui/Link";
 import { getAffiche } from "../../data"
 import { parseDate } from "../../utils/parseDate";
@@ -7,18 +9,13 @@ import { Icon } from "../../ui/Icon";
 import { VariantItem } from "../Variants/VariantItem";
 import { Container, Content, Filter, Item, Line } from "./style";
 
-const variants = [
-    "Спорт",
-    "Концерты",
-    "Гастрономия",
-    "Фестивали",
-    "Семья и дети",
-    "Экскурсии",
-    "Вечерние события",
-    "Развлечения на курорте"
-]
+const afficheLabel = (value, t) => {
+    const found = AFFICHE_FILTERS.find((item) => item.value === value);
+    return found ? t(found.key) : value;
+};
 
 export const AfficheContent = () => {
+    const t = useT();
     const [activeFilter, setActiveFilter] = useState(false)
     const [filters, setFilters] = useState([])
     const data = getAffiche()
@@ -33,37 +30,37 @@ export const AfficheContent = () => {
     return <Container>
         <Line/>
         <Breadcrumbs data={[
-            {text: "Главная", link: ""},
-            {text: "Афиша", link: ""}
+            {text: t("home"), link: ""},
+            {text: t("poster"), link: ""}
         ]}/>
-        <h1>Чем заняться на Роза Хутор</h1>
+        <h1>{ t("afficheTitle") }</h1>
         <Content>
             <Filter active={activeFilter}>
                 <div className="top" onClick={() => setActiveFilter(!activeFilter)}>
                     <Icon name={"plus"}/>
-                    <span>Фильтр</span>
+                    <span>{ t("filter") }</span>
                 </div>
                 <div className="bottom">
-                    { variants.map(v => <VariantItem
-                        key={v}
+                    { AFFICHE_FILTERS.map((item) => <VariantItem
+                        key={item.value}
                         className={"affiche"}
-                        isActive={filters.includes(v)}
-                        clickHandler={() => updFilter(v)}
+                        isActive={filters.includes(item.value)}
+                        clickHandler={() => updFilter(item.value)}
                     >
-                        {v}
+                        { t(item.key) }
                     </VariantItem>) }
                 </div>
             </Filter>
             {data.filter(el => filters.length > 0 ? filters.includes(el.variant) : true).map((el, i) => <Item key={i} bg={el.src}>
                 <div className="img"/>
-                <h5>{ el.variant }</h5>
+                <h5>{ afficheLabel(el.variant, t) }</h5>
                 <h2>{el.title}</h2>
                 <div className="time">
                     <span>{parseDate(el.date,"without-year")}</span>
                     <span className="divider"/>
                     <span>{el.time}</span>
                 </div>
-                <Link to={el.link}>Подробнее</Link>
+                <Link to={el.link}>{ t("more") }</Link>
             </Item>)}
         </Content>
         <Line/>

@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { mediaUrl } from "../../../utils/mediaUrl";
 import { Tour } from "../../../components/Tour";
-import { useCtx } from "../../../Ctx";
+import { useT } from "../../../Ctx";
 
 import { Navigate, useParams } from "react-router-dom";
 import gsap from "gsap";
@@ -25,7 +25,8 @@ gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 
 export const Desktop = () => {
-        const { hotel, id, variant } = useParams();
+    const t = useT();
+    const { hotel, id, variant } = useParams();
         const v = decodeRouteParam(variant)
         
         const sectionRef = useRef(null);
@@ -83,9 +84,9 @@ export const Desktop = () => {
             <div ref={ galleryRef }>
                 <HeaderBlock>
                     <Breadcrumbs data={ [
-                        { text: "Главная", link: "/" },
+                        { text: t("home"), link: "/" },
                         { text: getHotelById(hotel).name, link: `/hotel/${ hotel }` },
-                        { text: "Номера", link: `/rooms/${ hotel }` },
+                        { text: t("rooms"), link: `/rooms/${ hotel }` },
                         { text: room.name, link: "" },
                     ] }/>
                     { room.variants.length > 1 && <Variants

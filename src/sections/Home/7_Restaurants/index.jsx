@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useT } from "../../../Ctx";
 import { getMain } from "../../../data";
 import { mediaUrl } from "../../../utils/mediaUrl";
 import { Tour } from "../../../components/Tour";
@@ -7,6 +8,7 @@ import { Link } from "../../../ui/Link";
 import { Content, Img } from "./style";
 
 export const Restaurants = () => {
+    const t = useT();
     const data = getMain()?.restaurants || {};
     const slides = data.slides || [];
     const preview = data.preview_image;
@@ -83,7 +85,7 @@ export const Restaurants = () => {
             color={ "light" }
             hover={ "light" }
             to={ `/restaurant/${ activeSlide.hotel || "golden-tulip" }` }
-        >О ресторане</Link>
+        >{ t("aboutRestaurant") }</Link>
         <Tour pos className="tour"/>
         <span
             className="arrow"

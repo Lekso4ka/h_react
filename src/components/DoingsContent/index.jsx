@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useT } from "../../Ctx";
 import { mediaUrl } from "../../utils/mediaUrl";
 import { useLocation } from "react-router-dom";
 import { Link } from "../../ui/Link";
@@ -17,6 +18,7 @@ const randomize = (data) => {
 }
 
 export const DoingsContent = () => {
+    const t = useT();
     const [showAll, setShowAll] = useState(false);
     const [moreData, setMoreData] = useState(false);
     const location = useLocation();
@@ -101,21 +103,21 @@ export const DoingsContent = () => {
                     <h3 dangerouslySetInnerHTML={ { __html: el.title } }></h3>
                     <div className="img"/>
                     <p dangerouslySetInnerHTML={ { __html: el.text } }/>
-                    <Link to={ `/article/${ el.id }` }>Читать</Link>
+                    <Link to={ `/article/${ el.id }` }>{ t("read") }</Link>
                 </Article>
         }
     }
     
     return <>
         <Top>
-            <h3>[ Роза Хутор ]</h3>
-            <h1>События и мероприятия <span>горного курорта</span></h1>
+            <h3>{ t("rosaKhutor") }</h3>
+            <h1>{ t("doingsTitle") } <span>{ t("doingsTitleAccent") }</span></h1>
         </Top>
         <Content ref={contentRef}>
             { data.map((el, i) => renderArticle(el, i)) }
             <BtnBlock ref={btnRef}>
                 <button onClick={ () => setShowAll(!showAll) }>
-                    { showAll ? "Скрыть в" : "В" }се статьи
+                    { showAll ? t("hideArticles") : t("allArticles") }
                 </button>
             </BtnBlock>
             { showAll && moreData.map((el, i) => renderArticle(el, i)) }

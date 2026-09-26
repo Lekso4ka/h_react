@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { Tour } from "../../components/Tour";
-import { useCtx } from "../../Ctx";
+import { useT } from "../../Ctx";
 import { getActivities } from "../../data";
 import { Icon } from "../../ui/Icon";
 import { Line } from "../../ui/Line";
@@ -10,6 +10,7 @@ import { SingleActivity } from "./SingleActivity";
 import { Block, Btn, Content, Hero, HeroLink, Image, ImgItem, Item, List, Other, VideoContainer } from "./style";
 
 export const ActivitiesContent = () => {
+    const t = useT();
     const data = getActivities()
     const { activity } = useParams()
     const navigate = useNavigate();
@@ -31,11 +32,11 @@ export const ActivitiesContent = () => {
                 <HeroLink
                     isActive={ activity === "summer" }
                     onClick={ () => navigate("/activities/summer") }
-                >лето</HeroLink>
+                >{ t("summer") }</HeroLink>
                 <HeroLink
                     isActive={ activity === "winter" }
                     onClick={ () => navigate("/activities/winter") }
-                >зима</HeroLink>
+                >{ t("winter") }</HeroLink>
             </div>
             <div className="divider"/>
         </Hero>
@@ -85,7 +86,7 @@ export const ActivitiesContent = () => {
             <div>
                 <Tour dark link={ "" } pos style={ { top: "2.4rem", right: "2.4rem", left: "auto" } }/>
                 <h2>BRANCHE</h2>
-                <Link className="link" to={ "" }>Резерв стола</Link>
+                <Link className="link" to={ "" }>{ t("reserveTable") }</Link>
             </div>
         </VideoContainer>
         <SingleActivity name={ other }/>

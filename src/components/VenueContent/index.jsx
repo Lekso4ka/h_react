@@ -1,5 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
+import { useT } from "../../Ctx";
 import { getVenueById } from "../../data/venues";
 import { Breadcrumbs } from "../../ui/Breadcrumbs";
 import { Lightbox } from "../Lightbox";
@@ -8,13 +9,14 @@ import { Vector } from "../../ui/Vector";
 import { Block, Content, Info, InfoItem, Options, Variant, Text, Images, Image, Formats } from "./style";
 
 export const VenueContent = () => {
+    const t = useT();
     const { id } = useParams();
     const data = getVenueById(id);
     
     return <Block>
         <Breadcrumbs data={ [
-            { text: "Главная", link: "/" },
-            { text: "Конференц-залы", link: "/events/venues" },
+            { text: t("home"), link: "/" },
+            { text: t("venues"), link: "/events/venues" },
             { text: data.name }
         ] }/>
         <Content>
@@ -22,20 +24,20 @@ export const VenueContent = () => {
             <div className="center">
                 <Info>
                     <InfoItem>
-                        <h4>Площадь зала</h4>
-                        <p>{ data.size }<span>м<sup>2</sup></span></p>
+                        <h4>{ t("hallArea") }</h4>
+                        <p>{ data.size }<span>{ t("sqm") }<sup>2</sup></span></p>
                     </InfoItem>
                     <InfoItem>
-                        <h4>Вместимость человек</h4>
+                        <h4>{ t("hallCapacity") }</h4>
                         <p>{ data.guests }</p>
                     </InfoItem>
                     { data.variants.length > 0 && <InfoItem>
-                        <h4>Варианты рассадки</h4>
+                        <h4>{ t("seatingOptions") }</h4>
                         <p>{ data.variants.length }</p>
                     </InfoItem> }
                 </Info>
                 { data.formats.length > 0 && <Formats>
-                    <h3>Форматы мероприятий</h3>
+                    <h3>{ t("eventFormats") }</h3>
                     <ul>
                         { data.formats.map((el, i) => <li key={ i }>
                             <span>{ i < 9 && 0 }{ i + 1 }</span>
@@ -64,7 +66,7 @@ export const VenueContent = () => {
                 />
                 <div>
                     { data.variants.map(v => <Variant key={ v.name }>
-                        <h5>Вместимость</h5>
+                        <h5>{ t("capacity") }</h5>
                         <h5>{ v.name }</h5>
                         <div className="digit">{ v.guests }</div>
                         <Vector name={ v.name }/>
@@ -72,15 +74,15 @@ export const VenueContent = () => {
                 </div>
                 <Options>
                     <h4>{ data.formats.length > 0
-                        ? "Дополнительные возможности"
-                        : "Оснащение зала" }</h4>
+                        ? t("extraOptions")
+                        : t("hallEquipment") }</h4>
                     <ul>
                         { data.options.map(el => <li
                             key={ el }
                             dangerouslySetInnerHTML={ { __html: el } }
                         />) }
                     </ul>
-                    {data.formats.length > 0 && <span>предоставим по запросу</span>}
+                    {data.formats.length > 0 && <span>{ t("onRequest") }</span>}
                 </Options>
             </div>
             <Images>
@@ -90,7 +92,7 @@ export const VenueContent = () => {
                 </Text>
                 { data.images.map((el, i) => <Image key={ i } bg={ el }/>) }
             </Images>
-            <a href="">Отправить запрос</a>
+            <a href="">{ t("sendRequest") }</a>
         </Content>
         <Lightbox images={data.images} />
     </Block>

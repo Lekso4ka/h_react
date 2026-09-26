@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { RequestModal } from "../../components/RequestModal";
+import { useT } from "../../Ctx";
 import { getVacancies } from "../../data";
 import { Line } from "../../ui/Line";
 import { Link } from "../../ui/Link";
@@ -9,6 +10,7 @@ import { Container, Item } from "./style";
 const RESUME_MAX_BYTES = Math.round(68.5 * 1024 * 1024);
 
 export const VacanciesContent = () => {
+    const t = useT();
     const data = getVacancies()
     const [vacancy, setVacancy] = useState("");
     const [formOpen, setFormOpen] = useState(false);
@@ -16,24 +18,22 @@ export const VacanciesContent = () => {
         <Line/>
         <div className="hero">
             <Video data={ ["vac_banner"] } index={ 0 }/>
-            <h1>Вакансии</h1>
-            <p>Трудоустройство в нашем отеле - это возможность работать в большом и дружном коллективе на самом
-                живописном курорте, найти друзей из разных уголков страны, получить новые знания на тренингах и
-                развиваться как профессионал.</p>
+            <h1>{ t("vacancies") }</h1>
+            <p>{ t("vacanciesLead") }</p>
         </div>
         <div className="content">
             { data.map((el, i) => <Item key={ i } pic={ el.images }>
                 <h2>{ el.name }</h2>
                 <div className="text">
-                    <h3>Условия:</h3>
+                    <h3>{ t("conditions") }</h3>
                     <ul>
                         { el.conditions.map((item, j) => <li key={ j }>{ item }</li>) }
                     </ul>
-                    <h3>Обязанности::</h3>
+                    <h3>{ t("responsibilities") }</h3>
                     <ul>
                         { el.responsibilities.map((item, j) => <li key={ j }>{ item }</li>) }
                     </ul>
-                    <h3>Требования</h3>
+                    <h3>{ t("requirements") }</h3>
                     <ul>
                         { el.requirements.map((item, j) => <li key={ j }>{ item }</li>) }
                     </ul>
@@ -41,14 +41,14 @@ export const VacanciesContent = () => {
                 <div className="other">
                     { el.payments && <div className={ "row" }>
                         <h4>
-                            Выплаты
+                            { t("payments") }
                             <span>{ el.payments.tooltip }</span>
                         </h4>
                         <p>{ el.payments.text }</p>
                     </div> }
                     { el.registration && <div className={ "row" }>
                         <h4>
-                            Оформление
+                            { t("registration") }
                             <span>{ el.registration.tooltip }</span>
                         </h4>
                         <p>{ el.registration.text }</p>
@@ -59,7 +59,7 @@ export const VacanciesContent = () => {
                     <div className="img img2"/>
                 </div>
                 <div className="links">
-                    <h3>Связаться</h3>
+                    <h3>{ t("contact") }</h3>
                     <ul>
                         { el.links.map((item, j) => <li key={ j }>
                             <a target="_blank" href={ item.link }>
@@ -84,29 +84,29 @@ export const VacanciesContent = () => {
                         setVacancy(el.name);
                         setFormOpen(true);
                     }}
-                >Обратная связь</Link>
+                >{ t("feedback") }</Link>
             </Item>) }
         </div>
         <RequestModal
             active={formOpen}
             onClose={() => setFormOpen(false)}
-            title="Отправить резюме"
-            successMessage="Спасибо за отклик! Мы свяжемся с Вами в случае, если будем готовы пригласить Вас на собеседование."
+            title={ t("sendResume") }
+            successMessage={ t("resumeSuccess") }
             source="vacancy"
             values={{ vacancy }}
             fields={[
-                { name: "vacancy", label: "Вакансия", readOnly: true },
-                { name: "name", label: "Имя *", required: true },
-                { name: "phone", label: "Телефон *", type: "tel", required: true },
-                { name: "email", label: "Почта *", type: "email", required: true },
-                { name: "city", label: "Город проживания" },
-                { name: "social", label: "Ссылка на соц. сети" },
-                { name: "message", label: "Сообщение", type: "textarea" },
+                { name: "vacancy", label: t("vacancy"), readOnly: true },
+                { name: "name", label: t("nameStar"), required: true },
+                { name: "phone", label: t("phoneStar"), type: "tel", required: true },
+                { name: "email", label: t("emailStar"), type: "email", required: true },
+                { name: "city", label: t("city") },
+                { name: "social", label: t("social") },
+                { name: "message", label: t("message"), type: "textarea" },
             ]}
             file={{
                 name: "resume",
-                label: "Прикрепить резюме (pdf)",
-                hint: "(Файл не более 68.5 мб)",
+                label: t("attachResume"),
+                hint: t("resumeHint"),
                 accept: "application/pdf,.pdf",
                 maxSize: RESUME_MAX_BYTES,
             }}

@@ -1,5 +1,5 @@
 import React from "react";
-import { useCtx } from "../../../Ctx";
+import { useCtx, useT } from "../../../Ctx";
 import { Icon } from "../../../ui/Icon";
 import { Line } from "../../../ui/Line";
 import { Link } from "../../../ui/Link";
@@ -8,6 +8,7 @@ import { VideoSection } from "../2_Video";
 
 export const Caption = ({ data }) => {
     const {mob} = useCtx()
+    const t = useT()
     const renderStars = () => {
         const arr = []
         let n = data.stars
@@ -32,7 +33,7 @@ export const Caption = ({ data }) => {
             <p>{ data.text_1 }</p>
             <p>{ data.text_2 }</p>
             <p className="address">{ data.address }</p>
-            <Link to={ data.room_link }>Выбрать номер</Link>
+            <Link to={ data.room_link }>{ t("chooseRoom") }</Link>
         </Title>
         
         

@@ -1,5 +1,6 @@
 import React, { useId, useRef, useState } from "react"
 import { Navigate, useParams } from "react-router-dom";
+import { useT } from "../../../Ctx";
 import { Tour } from "../../../components/Tour";
 import { Variants } from "../../../components/Variants";
 import { decodeRouteParam, getRoomById } from "../../../data/rooms";
@@ -21,6 +22,7 @@ import {
 } from "./style";
 
 export const Mobile = () => {
+    const t = useT();
     const { hotel, id, variant } = useParams();
     const v = decodeRouteParam(variant)
     const room = getRoomById(hotel, id);
@@ -29,8 +31,8 @@ export const Mobile = () => {
     return <Block>
         <div className="wrapper">
             <Breadcrumbs data={ [
-                { text: "Главная", link: "/" },
-                { text: "Номера", link: `/rooms/${ hotel }` },
+                { text: t("home"), link: "/" },
+                { text: t("rooms"), link: `/rooms/${ hotel }` },
                 { text: room.name, link: "" },
             ] }/>
             { room.variants.length > 1 && <Variants
@@ -51,15 +53,15 @@ export const Mobile = () => {
         </Images>
         <Content>
             <TextTop>
-                <h2>Основные параметры</h2>
+                <h2>{ t("roomParams") }</h2>
                 <div className={ "tl" }>
                     <span>{ room[v].size }</span>
-                    <span>м<sup>2</sup></span>
+                        <span>{ t("sqm") }<sup>2</sup></span>
                 </div>
                 <div className={ "tr" }>
-                    <span>до</span>
+                    <span>{ t("upTo") }</span>
                     <span>{ room[v].guests }</span>
-                    <span>гостей</span>
+                    <span>{ t("guests") }</span>
                 </div>
                 <div className={ "bl" }>
                     { room[v].beds }
@@ -77,7 +79,7 @@ export const Mobile = () => {
             { room[v].options.length > 0 && <>
             <Line/>
             <Options>
-                <h2>Оснащение номера</h2>
+                <h2>{ t("roomEquipment") }</h2>
                 <ul>
                     { room[v].options.map(item => <li key={ item }>
                         <Icon name={ "check-circle" }/>
@@ -95,10 +97,10 @@ export const Mobile = () => {
                         </ul>
                     </OptLite>) }
                 </Opt1>
-                : <AccItem title={ "Всё оснащение номера" } data={ room[v].all_options } variant={ "opt1" }/>
+                : <AccItem title={ t("allRoomEquipment") } data={ room[v].all_options } variant={ "opt1" }/>
             }
-            <AccItem title={ "Услуги по запросу" } data={ room[v].services } variant={ "opt2" }/>
+            <AccItem title={ t("onRequestServices") } data={ room[v].services } variant={ "opt2" }/>
         </Content>
-        <Button>Проверить доступность</Button>
+        <Button>{ t("checkAvailability") }</Button>
     </Block>
 }

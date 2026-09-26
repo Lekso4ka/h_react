@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useT } from "../../Ctx";
 import { getLegalPage } from "../../data";
 import { Breadcrumbs } from "../../ui/Breadcrumbs";
 import { Line } from "../../ui/Line";
@@ -7,9 +8,9 @@ import { SquareItem } from "../../ui/SquareItem";
 import { Buttons, Container } from "./style";
 
 const TABS = [
-    { id: "info", path: "/info", label: "Правовая информация" },
-    { id: "rules", path: "/rules", label: "Правила отеля" },
-    { id: "policy", path: "/policy", label: "Политика конфиденциальности" },
+    { id: "info", path: "/info", labelKey: "legalInfo" },
+    { id: "rules", path: "/rules", labelKey: "hotelRules" },
+    { id: "policy", path: "/policy", labelKey: "privacyPolicy" },
 ];
 
 function padNum(index) {
@@ -17,6 +18,7 @@ function padNum(index) {
 }
 
 function SectionBody({ section }) {
+    const t = useT();
     const layout = section.layout || "text";
 
     if (layout === "services") {
@@ -47,8 +49,8 @@ function SectionBody({ section }) {
             <>
                 <div className="tariffs">
                     <div className="tariff-head">
-                        <span>Услуга</span>
-                        <span>Стоимость</span>
+                        <span>{ t("tariffService") }</span>
+                        <span>{ t("tariffPrice") }</span>
                     </div>
                     {(section.tariffRows || []).map((row) => (
                         <div className="tariff-row" key={row.name}>
@@ -101,6 +103,7 @@ function SectionBody({ section }) {
 }
 
 export const LegalContent = ({ pageKey }) => {
+    const t = useT();
     const navigate = useNavigate();
     const data = getLegalPage(pageKey) || {
         pageTitle: "",
@@ -149,7 +152,7 @@ export const LegalContent = ({ pageKey }) => {
             <Line />
             <Breadcrumbs
                 data={[
-                    { text: "Главная", link: "/" },
+                    { text: t("home"), link: "/" },
                     { text: data.pageTitle || "" },
                 ]}
             />
@@ -161,14 +164,14 @@ export const LegalContent = ({ pageKey }) => {
                         active={tab.id === pageKey}
                         onClick={() => navigate(tab.path)}
                     >
-                        {tab.label}
+                        {t(tab.labelKey)}
                     </SquareItem>
                 ))}
             </Buttons>
 
             <div className="layout">
                 <aside className="sidebar">
-                    <div className="sidebar-title">Содержание</div>
+                    <div className="sidebar-title">{ t("toc") }</div>
                     <ul className="toc">
                         {sections.map((section, index) => (
                             <li key={section.id}>

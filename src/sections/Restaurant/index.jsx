@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate, useParams } from "react-router-dom";
-import { useCtx } from "../../Ctx";
+import { useCtx, useT } from "../../Ctx";
 import { getHotels } from "../../data";
 import { Breadcrumbs } from "../../ui/Breadcrumbs";
 import { Line } from "../../ui/Line";
@@ -20,13 +20,14 @@ export const RestaurantContent = ({page}) => {
     const navigate = useNavigate();
     const h = getHotels()
     const {mob} = useCtx()
+    const t = useT()
     return <Container page={ page }>
         { page && <div className="top">
             <Line/>
             <Breadcrumbs data={ [
-                { text: "Главная", link: "/" },
+                { text: t("home"), link: "/" },
                 { text: h[id].name, link: `/hotel/${ id }` },
-                { text: `Ресторан ${ h[id].name }` }
+                { text: `${ t("restaurantOf") } ${ h[id].name }` }
             ] }/>
             <div className="tabs">
                 { names.map(el => <SquareItem

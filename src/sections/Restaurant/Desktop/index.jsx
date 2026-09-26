@@ -1,9 +1,11 @@
 import React from 'react';
+import { useT } from "../../../Ctx";
 import { Carousel } from "../../../components/Carousel";
 import { Link } from "../../../ui/Link";
 import { Section } from "./style";
 
 export const Desktop = ({data, page}) => {
+    const t = useT();
     return <Section pic={ data.image } page={ page }>
         <div className="caption">
             <span>{ data.caption_tooltip }</span>
@@ -14,13 +16,13 @@ export const Desktop = ({data, page}) => {
         <div className="text">
             <p>{ data.text_1 }</p>
             <p>{ data.text_2 }</p>
-            <Link to={ "" }>Резерв стола</Link>
+            <Link to={ "" }>{ t("reserveTable") }</Link>
         </div>
         <div className="menu">
             <div className="img"/>
             <div className="title">
                 <h3>{ data.caption_2 }</h3>
-                <Link href={ data.menu_link } target="_blank">Открыть</Link>
+                <Link href={ data.menu_link } target="_blank">{ t("open") }</Link>
             </div>
             <ul>
                 { data.list.map((el, i) => <li key={ i }>

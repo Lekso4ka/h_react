@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useCtx } from "../../Ctx";
+import { useCtx, useT } from "../../Ctx";
 import { getSectionData } from "../../data/hotels";
 import { Breadcrumbs } from "../../ui/Breadcrumbs";
 import { Line } from "../../ui/Line";
@@ -13,12 +13,13 @@ export const RoomsContent = () => {
     const name = getSectionData(id, "name")
     const s3 = getSectionData(id, "section_3");
     const { mob } = useCtx()
+    const t = useT()
     return <Container>
         <Line/>
         <Breadcrumbs data={ [
-            { text: "Главная", link: "/" },
+            { text: t("home"), link: "/" },
             { text: name, link: `/hotel/${ id }` },
-            { text: "Номера", link: "" }
+            { text: t("rooms"), link: "" }
         ] }/>
         <h1>{ s3.caption }</h1>
         <Line/>

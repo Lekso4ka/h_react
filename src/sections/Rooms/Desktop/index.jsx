@@ -2,12 +2,14 @@ import React, { Fragment, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getSectionData } from "../../../data/hotels";
 import { getRooms } from "../../../data/rooms";
+import { useT } from "../../../Ctx";
 import { Cursor, useCursor } from "../../../ui/Cursor";
 import { FadeBg } from "../../../ui/FadeBg";
 import { pluralize } from "../../../utils/pluralize";
 import { Section } from "./style";
 
 export const Desktop = ({h}) => {
+    const t = useT();
     const data = getSectionData(h, "section_3");
     const [size, setSize] = useState(data.size)
     const [guests, setGuests] = useState(data.guests)
@@ -45,16 +47,16 @@ export const Desktop = ({h}) => {
                 <div className="tooltips">
                     <div>
                         <span className="digit">{size}</span>
-                        <span>м<sup>2</sup></span>
+                        <span>{ t("sqm") }<sup>2</sup></span>
                     </div>
                     <div>
-                        <span>до</span>
+                        <span>{ t("upTo") }</span>
                         <span className="digit">{guests}</span>
-                        <span>{pluralize(guests, ["гостя", "гостей", "гостей"])}</span>
+                        <span>{pluralize(guests, t("guestForms"))}</span>
                     </div>
                     <div>
                         <span className="digit">{rooms}</span>
-                        <span>{pluralize(rooms, ["комната", "комнаты", "комнат"])}</span>
+                        <span>{pluralize(rooms, t("roomForms"))}</span>
                     </div>
                 </div>
                 <FadeBg className="img" src={img} />
@@ -86,7 +88,7 @@ export const Desktop = ({h}) => {
             active={ dragging }
             x={ position.x }
             y={ position.y }
-            label={ "[ смотреть ]" }
+            label={ t("look") }
             dark
         />
     </Section>
