@@ -18,6 +18,10 @@ const START_INDEX = SLIDE_COUNT + 2;
 const DESKTOP_MQ = "(min-width: 576px)";
 const SIDE_SCALE = 1.25;
 
+const lines = (text) => String(text).split("\n").map((line, i, arr) => (
+    <React.Fragment key={i}>{line}{i < arr.length - 1 ? <br/> : null}</React.Fragment>
+));
+
 const Section3Gallery = () => {
     const rootRef = useRef(null);
     const apiRef = useRef({ next: () => {}, prev: () => {} });
@@ -294,7 +298,7 @@ export const WeddingContent = () => {
             <div className="line"/>
             <div className="title">
                 <h4>{ t("weOrganize") }</h4>
-                <h2>{ t("forYourDay") }</h2>
+                <h2>{ lines(t("forYourDay")) }</h2>
             </div>
             <div className="images">
                 <div className="img img1"/>
