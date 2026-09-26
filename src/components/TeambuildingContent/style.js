@@ -982,7 +982,7 @@ export const Section6 = styled.section`
     button {
         margin-top: 2.8rem;
         padding: 0;
-        color: rgba(255, 255, 255, 0.40);
+        color: #fff;
         text-align: center;
         font-family: "Playfair Display";
         font-size: 1.6rem;
@@ -998,7 +998,7 @@ export const Section6 = styled.section`
         &:disabled {
             cursor: default;
             pointer-events: none;
-            color: #FFF;
+            color: rgba(255, 255, 255, 0.40);
         }
     }
     @media (min-width: 576px) {

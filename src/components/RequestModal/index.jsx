@@ -172,6 +172,7 @@ export const RequestModal = ({
                                                 required={Boolean(field.required)}
                                                 min={field.type === "number" ? "1" : undefined}
                                                 inputMode={field.type === "number" ? "numeric" : undefined}
+                                                autoComplete="off"
                                             />
                                         )}
                                         {field.type === "date" && <CalendarIcon/>}

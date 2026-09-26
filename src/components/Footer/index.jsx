@@ -56,10 +56,10 @@ export const Footer = () => {
             <form onSubmit={ formHandler }>
                 <div className="form-row">
                     <label>
-                        <input type="text" name="name" placeholder={ t("name") } required/>
+                        <input type="text" name="name" placeholder={ t("name") } autoComplete="off" required/>
                     </label>
                     <label>
-                        <input type="email" name="email" placeholder={ t("email") } required/>
+                        <input type="email" name="email" autoComplete="off" placeholder={ t("email") } required/>
                     </label>
                 </div>
                 <label className="consent">

@@ -22,6 +22,7 @@ export const Container = styled.div`
             font-style: italic;
             font-weight: 400;
             line-height: 110%; /* 39.6px */
+            text-align: center;
         }
         .divider {
             width: .1rem;

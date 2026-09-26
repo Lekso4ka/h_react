@@ -4,6 +4,7 @@ import { useGSAP } from "@gsap/react";
 import { Link } from "../../ui/Link";
 import { Icon } from "../../ui/Icon";
 import { useT } from "../../Ctx";
+import {Link as ReactLink} from "react-router-dom";
 import { Hero, Section1, Section2, Section3, Section4, Section5, Section6 } from "./style";
 
 const lines = (text) => String(text).split("\n").map((line, i, arr) => (
@@ -320,11 +321,11 @@ export const TeambuildingContent = () => {
                 <form className={ sent ? "sent" : "" } onSubmit={ formHandler }>
                     <div className="form-body">
                         <div className="form-fields">
-                            <input type="text" name="name" placeholder={ t("yourName") } required={!sent}/>
-                            <input type="tel" name="phone" placeholder={ t("phone") } required={!sent}/>
+                            <input type="text" name="name" placeholder={ t("yourName") } required={!sent} autoComplete="off"/>
+                            <input type="tel" name="phone" placeholder={ t("phone") } required={!sent} autoComplete="off"/>
                             <label className="consent">
                                 <input type="checkbox" name="consent" required={!sent}/>
-                                { t("consent") } <Link to="">{ t("consentLink") }</Link> { t("consentMid") } <Link to="">{ t("policyLink") }</Link>{ t("consentEnd") }
+                                { t("consent") } <ReactLink to="">{ t("consentLink") }</ReactLink> { t("consentMid") } <ReactLink to="">{ t("policyLink") }</ReactLink>{ t("consentEnd") }
                             </label>
                         </div>
                         { sent && <p className="form-success">{ t("weddingFormSuccess") }</p> }

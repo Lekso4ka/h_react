@@ -325,8 +325,8 @@ export const WeddingContent = () => {
                 <form className={ sent ? "sent" : "" } onSubmit={ formHandler }>
                     <div className="form-body">
                         <div className="form-fields">
-                            <input type="text" name="name" placeholder="Ваше имя" required={!sent}/>
-                            <input type="tel" name="phone" placeholder="Телефон" required={!sent}/>
+                            <input type="text" name="name" placeholder="Ваше имя" required={!sent} autoComplete="off"/>
+                            <input type="tel" name="phone" placeholder="Телефон" required={!sent} autoComplete="off"/>
                             <label className="consent">
                                 <input type="checkbox" name="consent" required={!sent}/>
                                 Даю свое <Link to="">согласие на обработку</Link> моих персональных данных в соответствии с <Link to="">политикой конфиденциальности</Link>.
