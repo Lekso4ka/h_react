@@ -16,6 +16,13 @@ export const Container = styled.div`
         line-height: 110%; /* 48.4px */
         
     }
+    @media (max-width: 575px) {
+        padding: 0 1.6rem 6rem;
+        h1 {
+            font-size: 3.4rem;
+            overflow-wrap: break-word;
+        }
+    }
     @media (min-width: 576px) {
         grid-template-columns: 1fr 140rem;
         h1 {
@@ -41,6 +48,9 @@ export const Content = styled.div`
     align-content: flex-start;
     gap: 2.4rem;
     position: relative;
+    @media (max-width: 575px) {
+        min-width: 0;
+    }
     @media (min-width: 576px) {
         grid-template-columns: repeat(3, 1fr);
         grid-column-start: 2;
@@ -111,6 +121,23 @@ export const Item = styled.article`
         align-self: flex-end;
         width: max-content;
     }
+    @media (max-width: 575px) {
+        min-width: 0;
+        padding: 1.8rem;
+        height: 57.5rem;
+        grid-template-rows: 31rem auto auto 1fr;
+        h5 {
+            top: 2.8rem;
+            left: 2.8rem;
+        }
+        h2 {
+            font-size: 2.4rem;
+            overflow-wrap: break-word;
+        }
+        .time {
+            font-size: 1.8rem;
+        }
+    }
     @media (min-width: 576px) {
         &:nth-of-type(3n-1) {
             transform: translate(0, -14.4rem);
@@ -125,6 +152,7 @@ export const Filter = styled.div`
     align-items: center;
     z-index: 1;
     width: max-content;
+    max-width: 100%;
     overflow: hidden;
     .top {
         display: flex;
