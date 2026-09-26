@@ -6,7 +6,7 @@ import { Icon } from "../../ui/Icon";
 import { useT } from "../../Ctx";
 import {Link as ReactLink} from "react-router-dom";
 import { Hero, Section1, Section2, Section3, Section4, Section5, Section6 } from "./style";
-import { handlePhoneBlur, handlePhoneFocus, handlePhoneInput, lockPhoneAutofill } from "../../utils/phoneMask";
+import { handlePhoneBlur, handlePhoneFocus, handlePhoneInput, isPhoneComplete, lockPhoneAutofill } from "../../utils/phoneMask";
 
 const lines = (text) => String(text).split("\n").map((line, i, arr) => (
     <React.Fragment key={i}>{line}{i < arr.length - 1 ? <br/> : null}</React.Fragment>
@@ -151,8 +151,23 @@ const Section3Gallery = () => {
 
 export const TeambuildingContent = () => {
     const t = useT();
+    const formRef = useRef(null);
     const [sent, setSent] = useState(false);
     const [sending, setSending] = useState(false);
+    const [formReady, setFormReady] = useState(false);
+
+    const scrollToForm = (e) => {
+        e.preventDefault();
+        formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    };
+
+    const syncFormReady = (form) => {
+        const name = form.elements.name.value.trim();
+        const phone = form.elements.phone.value;
+        const consent = form.elements.consent.checked;
+        setFormReady(Boolean(name && isPhoneComplete(phone) && consent));
+    };
+
     const formHandler = async (e) => {
         e.preventDefault();
         if (sent || sending) return;
@@ -202,8 +217,10 @@ export const TeambuildingContent = () => {
             <div className="img1"></div>
             <div className="content">
                 <div className="line"/>
-                <p>{ t("tbCare") }</p>
-                <Link to="">{ t("requestOffer") }</Link>
+                <div className="offer">
+                    <p>{ t("tbCare") }</p>
+                    <Link to="#teambuilding-form" onClick={scrollToForm}>{ t("requestOffer") }</Link>
+                </div>
             </div>
             <div className="img2"></div>
         </Section1>
@@ -255,21 +272,21 @@ export const TeambuildingContent = () => {
                     <div className="img img1"/>
                     <div className="caption">
                         <h3>{ t("tbHalls") }</h3>
-                        <p>{ t("tbHallsText") }</p>
+                        <p>{ lines(t("tbHallsText")) }</p>
                     </div>
                 </li>
                 <li>
                     <div className="img img2"/>
                     <div className="caption">
                         <h3>{ t("tbGala") }</h3>
-                        <p>{ t("tbGalaText") }</p>
+                        <p>{ lines(t("tbGalaText")) }</p>
                     </div>
                 </li>
                 <li>
                     <div className="img img3"/>
                     <div className="caption">
                         <h3>{ t("tbActivities") }</h3>
-                        <p>{ t("tbActivitiesText") }</p>
+                        <p>{ lines(t("tbActivitiesText")) }</p>
                     </div>
                 </li>
             </ul>
@@ -320,12 +337,19 @@ export const TeambuildingContent = () => {
                 </li>
             </ul>
         </Section5>
-        <Section6>
+        <Section6 id="teambuilding-form" ref={formRef}>
             <div className="content">
                 <h4>{ t("tbFormKicker") }</h4>
                 <h2>{ t("tbFormTitle") }</h2>
                 <p>{ t("tbFormLead") }</p>
-                <form className={ sent ? "sent" : "" } autoComplete="off" onSubmit={ formHandler }>
+                <form
+                    className={ sent ? "sent" : "" }
+                    autoComplete="off"
+                    onSubmit={ formHandler }
+                    onInput={ (e) => syncFormReady(e.currentTarget) }
+                    onChange={ (e) => syncFormReady(e.currentTarget) }
+                    onBlur={ (e) => syncFormReady(e.currentTarget) }
+                >
                     <div className="form-body">
                         <div className="form-fields">
                             <input type="text" name="name" placeholder={ t("yourName") } required={!sent} autoComplete="off"/>
@@ -346,12 +370,12 @@ export const TeambuildingContent = () => {
                             />
                             <label className="consent">
                                 <input type="checkbox" name="consent" required={!sent}/>
-                                { t("consent") } <ReactLink to="">{ t("consentLink") }</ReactLink> { t("consentMid") } <ReactLink to="">{ t("policyLink") }</ReactLink>{ t("consentEnd") }
+                                { t("consent") } <ReactLink to="/policy">{ t("consentLink") }</ReactLink> { t("consentMid") } <ReactLink to="/policy">{ t("policyLink") }</ReactLink>{ t("consentEnd") }
                             </label>
                         </div>
                         { sent && <p className="form-success">{ t("weddingFormSuccess") }</p> }
                     </div>
-                    <button type="submit" disabled={ sent || sending }>{ sent ? t("sent") : t("requestOffer") }</button>
+                    <button type="submit" disabled={ !formReady || sent || sending }>{ sent ? t("sent") : t("requestOffer") }</button>
                 </form>
             </div>
         </Section6>
