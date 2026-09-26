@@ -205,9 +205,9 @@ export const WeddingContent = () => {
             <p>{ t("weddingLead") }</p>
             <div className="list">
                 <ul>
-                    <li>{ t("weddingLi1") }</li>
-                    <li>{ t("weddingLi2") }</li>
-                    <li>{ t("weddingLi3") }</li>
+                    <li>{ lines(t("weddingLi1")) }</li>
+                    <li>{ lines(t("weddingLi2")) }</li>
+                    <li>{ lines(t("weddingLi3")) }</li>
                 </ul>
             </div>
         </Hero>
@@ -229,47 +229,47 @@ export const WeddingContent = () => {
         <Section2>
             <div className="content">
                 <h4>{ t("newlyweds") }</h4>
-                <h2>{ t("weddingGift") }</h2>
+                <h2>{ lines(t("weddingGift")) }</h2>
                 <ul>
                     <li>
                         <span>01</span>
-                        <p>{ t("weddingGift1") }</p>
+                        <p>{ lines(t("weddingGift1")) }</p>
                     </li>
                     <li>
                         <span>02</span>
-                        <p>{ t("weddingGift2") }</p>
+                        <p>{ lines(t("weddingGift2")) }</p>
                     </li>
                     <li>
                         <span>03</span>
-                        <p>{ t("weddingGift3") }</p>
+                        <p>{ lines(t("weddingGift3")) }</p>
                     </li>
                     <li>
                         <span>04</span>
-                        <p>{ t("weddingGift4") }</p>
+                        <p>{ lines(t("weddingGift4")) }</p>
                     </li>
                 </ul>
             </div>
             <div className="img">
                 <span>-15%</span>
-                <p>{ t("weddingDiscount") }</p>
+                <p>{ lines(t("weddingDiscount")) }</p>
             </div>
         </Section2>
         <Section3>
             <h4>{ t("uniqueOffer") }</h4>
-            <h2>{ t("viewpoint360") }</h2>
+            <h2>{ lines(t("viewpoint360")) }</h2>
             <p>{ t("viewpointLead") }</p>
             <Section3Gallery/>
             <div className="tooltip tooltip1">
                 <span>360°</span>
-                <p>{ t("viewpointP1") }</p>
+                <p>{ lines(t("viewpointP1")) }</p>
             </div>
             <div className="tooltip tooltip2">
                 <span>100</span>
-                <p>{ t("viewpointP2") }</p>
+                <p>{ lines(t("viewpointP2")) }</p>
             </div>
         </Section3>
         <Section4>
-            <h2>{ t("chooseScenario") }</h2>
+            <h2>{ lines(t("chooseScenario")) }</h2>
             <ul>
                 <li>
                     <div className="img img1"/>
@@ -344,7 +344,7 @@ export const WeddingContent = () => {
             <div className="content">
                 <h4>{ t("weddingTitle") }</h4>
                 <h2>{ t("startWedding") }</h2>
-                <p>{ t("startWeddingLead") }</p>
+                <p>{ lines(t("startWeddingLead")) }</p>
                 <form
                     className={ sent ? "sent" : "" }
                     autoComplete="off"
