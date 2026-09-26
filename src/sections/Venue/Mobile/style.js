@@ -61,7 +61,7 @@ export const Block = styled.div`
     .link {
         display: flex;
         justify-content: center;
-        padding-bottom: 6rem;
+        margin-bottom: 6rem;
     }
     &::after {
         content: "";
@@ -130,6 +130,14 @@ export const Variants = styled.div`
     grid-template-columns: auto auto;
     justify-content: space-between;
     overflow: hidden;
+    h5 {
+        color: var(--Green, #55532E);
+        font-family: Manrope;
+        font-size: 1.4rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 100%; /* 14px */
+    }
     //max-width: calc(100vw - 3.2rem);
     .buttons {
         position: relative;

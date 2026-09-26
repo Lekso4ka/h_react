@@ -30,11 +30,13 @@ export const ActivitiesContent = () => {
             <h1>{ data[activity].name }</h1>
             <div className="but">
                 <HeroLink
-                    isActive={ activity === "summer" }
+                    variant={1}
+                    active={ activity === "summer" }
                     onClick={ () => navigate("/activities/summer") }
                 >{ t("summer") }</HeroLink>
                 <HeroLink
-                    isActive={ activity === "winter" }
+                    variant={1}
+                    active={ activity === "winter" }
                     onClick={ () => navigate("/activities/winter") }
                 >{ t("winter") }</HeroLink>
             </div>

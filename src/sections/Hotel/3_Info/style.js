@@ -44,7 +44,7 @@ export const Section2 = styled.section`
         padding-top: 2rem;
     }
     @media (min-width: 576px) {
-        padding: 15rem 2.4rem 15rem 4.8rem;
+        padding: 23rem 2.4rem 15rem 4.8rem;
         display: grid;
         grid-template-columns: 1fr 92.5rem;
         gap: 4.6rem;

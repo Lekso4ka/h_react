@@ -119,30 +119,71 @@ export const Hero = styled.section`
         }
     }
 `
+const setVariant = ({ theme, variant, active }) => {
+    switch (variant) {
+        case 1:
+            return ({
+                borderColor: active ? "transparent" : theme.colors.light_20,
+                backgroundColor: active ? theme.colors.light_20 : "transparent",
+                color: active ? theme.colors.light : theme.colors.white_40
+            })
+        case 2:
+            return ({
+                borderColor: active ? theme.colors.red : theme.colors.light_20,
+                backgroundColor: active ? "transparent" : theme.colors.c1_10,
+                color: active ? theme.colors.red : theme.colors.text
+            })
+    }
+}
 
-
-export const HeroLink = styled.a`
-    display: flex;
-    cursor: pointer;
-    width: 9.6rem;
-    height: 3.8rem;
+export const HeroLink = styled.button`
+    width: 7.6rem;
+    height: 3.6rem;
     box-sizing: border-box;
-    //padding: .5rem 0 .7rem;
+    display: flex;
+    padding: .6rem 2.4rem .8rem;
     justify-content: center;
     align-items: center;
-    border-radius: 6rem;
-    border: .1rem solid rgba(255, 246, 240, 0.20);
-    ${ ({ isActive }) => isActive ? "background: rgba(255, 246, 240, 0.20)" : "" };
+    border-radius: 5rem;
+    border-width: .1rem;
+    border-style: solid;
     backdrop-filter: blur(8px);
-    color: ${ ({ isActive }) => isActive ? "var(--Beige, #FFF6F0)" : "rgba(255, 255, 255, 0.40)" };
-    color: var(--Beige, #FFF6F0);
-    font-family: "Playfair Display";
-    font-size: 2rem;
+    font-family: ${ ({ theme }) => theme.fonts.display };
+    font-size: 1.6rem;
     font-style: italic;
-    font-weight: 500;
-    line-height: normal;
     text-transform: lowercase;
+    ${ setVariant };
+    @media (min-width: 576px) {
+        width: 9.6rem;
+        height: 3.8rem;
+        font-size: 2rem;
+        padding: .5rem 2.4rem 1rem;
+        font-weight: 500;
+    }
 `
+
+//export const HeroLink = styled.a`
+//    display: flex;
+//    cursor: pointer;
+//    width: 9.6rem;
+//    height: 3.8rem;
+//    box-sizing: border-box;
+//    //padding: .5rem 0 .7rem;
+//    justify-content: center;
+//    align-items: center;
+//    border-radius: 6rem;
+//    border: .1rem solid rgba(255, 246, 240, 0.20);
+//    ${ ({ isActive }) => isActive ? "background: rgba(255, 246, 240, 0.20)" : "" };
+//    backdrop-filter: blur(8px);
+//    color: ${ ({ isActive }) => isActive ? "var(--Beige, #FFF6F0)" : "rgba(255, 255, 255, 0.40)" };
+//    color: var(--Beige, #FFF6F0);
+//    font-family: "Playfair Display";
+//    font-size: 2rem;
+//    font-style: italic;
+//    font-weight: 500;
+//    line-height: normal;
+//    text-transform: lowercase;
+//`
 
 export const Content = styled.section`
     border-top: .1rem solid rgba(150, 40, 31, 0.20);
