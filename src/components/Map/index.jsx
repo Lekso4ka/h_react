@@ -4,15 +4,16 @@ import { MainImage } from "./MainImage";
 import { Block, Content, Links } from "./style";
 
 export const Map = () => {
+    const t = useT();
     return <Block id="contacts">
         <Content>
             <div>
                 <strong className="title">300</strong>
-                <span className="tooltip">м</span>
+                <span className="tooltip">{ t("mapMeters") }</span>
             </div>
             <div>
                 <strong className="title">1</strong>
-                <span className="tooltip">мин</span>
+                <span className="tooltip">{ t("mapMinutes") }</span>
             </div>
             <div>
                 <strong className="title">10+</strong>
@@ -20,14 +21,14 @@ export const Map = () => {
             <div>
                 <strong className="title">365</strong>
             </div>
-            <p>до канатной дороги «Олимпия» и основных подъёмников курорта. Быстрый доступ к трассам без лишних пересадок.</p>
-            <p>до набережной Роза Хутор с ресторанами, террасами и вечерней атмосферой курорта.</p>
-            <p>ресторанов и кафе в шаговой доступности — от завтраков до поздних ужинов.</p>
-            <p>дней активного сезона, зима со склонами, лето с маршрутами и фестивалями.</p>
+            <p>{ t("mapP1") }</p>
+            <p>{ t("mapP2") }</p>
+            <p>{ t("mapP3") }</p>
+            <p>{ t("mapP4") }</p>
         </Content>
         <MainImage/>
         <Links>
-            <span>Маршрут к отелю</span>
+            <span>{ t("mapRoute") }</span>
             <div className="links">
                 <a href="">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 23" fill="none">
