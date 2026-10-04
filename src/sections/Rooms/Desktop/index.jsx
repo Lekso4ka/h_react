@@ -89,7 +89,6 @@ export const Desktop = ({h}) => {
             x={ position.x }
             y={ position.y }
             label={ t("look") }
-            dark
         />
     </Section>
 }

@@ -2,7 +2,7 @@ import React from "react";
 import { createPortal } from "react-dom";
 import styled from "@emotion/styled";
 
-export function Cursor({ visible, active = false, x = 0, y = 0, label, dark }) {
+export function Cursor({ visible, active = false, x = 0, y = 0, label }) {
 	if (typeof document === "undefined") return null;
 
 	return createPortal(
@@ -10,9 +10,7 @@ export function Cursor({ visible, active = false, x = 0, y = 0, label, dark }) {
 			$visible={visible}
 			$active={active}
 			pos={{x, y}}
-			//style={{ transform: `scale(.5)` }}
 			aria-hidden="true"
-			dark={dark}
 		>
 			<Label>{label}</Label>
 		</Crsr>,
@@ -33,10 +31,8 @@ const Crsr = styled.div`
 	justify-content: center;
 	border-radius: 50%;
 	border: 1px solid rgba(255, 246, 240, 0.30);
-	background: ${({dark}) => dark ? "rgba(47,48,52,0.6)": "rgba(255, 243, 227, 0.3)"};
-	backdrop-filter: blur(10px);
-	//color: var(--Black-2, #2F3034);
-	color: #fff;
+	background: #1C1C1C;
+	color: #FFF6F0;
 	text-align: center;
 	font-family: Manrope;
 	font-size: 1.2rem;
