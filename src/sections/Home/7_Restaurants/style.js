@@ -39,25 +39,32 @@ position: relative;
         left: 0;
         right: 0;
         bottom: 0;
-        img {
+            img {
             position: absolute;
             opacity: 0;
             height: 100%;
             width: 100%;
             object-fit: cover;
             object-position: center;
+            transform: scale(1.025);
+            transition: opacity .65s ease, transform 1.2s ease;
             &.active {
                 opacity: 1;
-                transition: opacity .6s;
+                transform: scale(1);
             }
         }
-        &::before {
+            &::before {
             content: "";
             position: absolute;
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.20);
             z-index: 1;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            img {
+                transition-duration: 1ms;
+            }
         }
     }
     .tour {
@@ -86,9 +93,9 @@ position: relative;
 
     .list {
         gap: 1rem;
-        display: grid;
-        grid-template-columns: repeat(9, calc(25% - 3rem / 4));
-        transform: translate(calc(((25% - 3rem / 4) + 1rem) * -1), 0);
+        display: flex;
+        width: 100%;
+        will-change: transform;
     }
 
     .cnt {
@@ -151,8 +158,6 @@ position: relative;
 
         .list {
             gap: 2.2rem;
-            grid-template-columns: repeat(9, calc(25% - 6.6rem / 4));
-            transform: translate(calc(((25% - 6.6rem / 4) + 2.2rem) * -1), 0);
         }
 
         .cnt {
@@ -172,32 +177,15 @@ export const Img = styled.div`
     background-position: center;
     background-size: cover;
     background-image: url("${({bg}) => mediaUrl(bg)}");
+    flex: 0 0 calc((100% - 3rem) / 4);
     height: 5.1rem;
     background-repeat: no-repeat;
     box-sizing: border-box;
-    &.active {
-        transition: transform .5s linear;
-        transform: translate(calc(-100% - 1rem), 0);
-    }
-    &.active-r {
-        transition: transform .5s linear;
-        transform: translate(calc(100% + 1rem), 0);
-    }
-
     border: 1px solid transparent;
     cursor: pointer;
-    &.clicked {
-        border-color: rgba(255, 246, 240, 0.40);
-    }
     @media (min-width: 576px) {
+        flex-basis: calc((100% - 6.6rem) / 4);
         height: 10.4rem;
-
-        &.active {
-            transform: translate(calc(-100% - 2.2rem), 0);
-        }
-        &.active-r {
-            transform: translate(calc(100% + 2.2rem), 0);
-        }
 
         &:hover {
             border-color: rgba(255, 246, 240, 0.40);
