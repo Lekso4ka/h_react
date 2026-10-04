@@ -11,11 +11,14 @@ import {Breadcrumbs} from "../../../ui/Breadcrumbs";
 import { getHotelById } from "../../../data/hotels";
 import { decodeRouteParam, getRoomById } from "../../../data/rooms";
 import { Variants } from "../../../components/Variants";
+import { Lightbox } from "../../../ui/Lightbox";
+import { Cursor, useCursor } from "../../../ui/Cursor";
 import { RoomAside } from "./Aside";
 import { useRoomInfoPin } from "./hook";
 import {
     AsideColumn, Block,
     Caption,
+    Gallery,
     GalleryImage,
     HeaderBlock,
     ImagesBlock,
@@ -33,6 +36,11 @@ export const Desktop = () => {
         const galleryRef = useRef(null);
         const infoRef = useRef(null);
         const asideRef = useRef(null);
+        const zoneRef = useRef(null);
+        const [activeLb, setActiveLb] = useState(false);
+        const [lbIndex, setLbIndex] = useState(0);
+        const { visible, position } = useCursor({ zoneRef });
+        const showCursor = visible && !activeLb;
         
         const room = getRoomById(hotel, id);
         
@@ -42,7 +50,7 @@ export const Desktop = () => {
             if (room[v].images?.length) return room[v].images;
         }, [room[v].images, room.id]);
         
-        const { refreshPin, handleAsideLayoutChange } = useRoomInfoPin({
+        const { refreshPin } = useRoomInfoPin({
             sectionRef,
             galleryRef,
             infoRef,
@@ -79,6 +87,13 @@ export const Desktop = () => {
                 });
             };
         }, [id, galleryImages, refreshPin]);
+
+        useEffect(() => {
+            document.body.style.overflow = activeLb ? "hidden" : "auto";
+            return () => {
+                document.body.style.overflow = "auto";
+            };
+        }, [activeLb]);
         
         return <Block ref={ sectionRef }>
             <div ref={ galleryRef }>
@@ -102,9 +117,20 @@ export const Desktop = () => {
                 </Caption>
                 <ImagesBlock>
                     {room[v].tour_link && <Tour pos link={ room[v].tour_link }/>}
-                    { galleryImages.map((src, i) => (
-                        <GalleryImage key={ i } src={ mediaUrl(src) } alt="" loading={ i === 0 ? "eager" : "lazy" }/>
-                    )) }
+                    <Gallery ref={ zoneRef } $hideCursor={ showCursor }>
+                        { (galleryImages || []).map((src, i) => (
+                            <GalleryImage
+                                key={ i }
+                                src={ mediaUrl(src) }
+                                alt=""
+                                loading={ i === 0 ? "eager" : "lazy" }
+                                onClick={ () => {
+                                    setLbIndex(i);
+                                    setActiveLb(true);
+                                } }
+                            />
+                        )) }
+                    </Gallery>
                 </ImagesBlock>
             </div>
             <AsideColumn ref={ asideRef }>
@@ -112,8 +138,19 @@ export const Desktop = () => {
                     room={ room }
                     infoRef={ infoRef }
                     v={ v }
-                    onLayoutChange={ handleAsideLayoutChange }
                 />
             </AsideColumn>
+            <Cursor
+                visible={ showCursor }
+                x={ position.x }
+                y={ position.y }
+                label={ t("enlarge") }
+            />
+            <Lightbox
+                data={ galleryImages || [] }
+                active={ activeLb }
+                index={ lbIndex }
+                close={ () => setActiveLb(false) }
+            />
         </Block>
 }

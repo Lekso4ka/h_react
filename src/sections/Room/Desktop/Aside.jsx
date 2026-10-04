@@ -1,45 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import { useT } from "../../../Ctx";
-
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
 
 import { Icon } from "../../../ui/Icon";
 import { AccItem } from "./AccItem";
 import { Button, Info, MainText, Options, SecondaryText, TextTop, Opt1, OptLite } from "./style";
 
-gsap.registerPlugin(useGSAP);
-
-export const RoomAside = ({ room, v, infoRef, onLayoutChange }) => {
+export const RoomAside = ({ room, v, infoRef }) => {
     const t = useT();
-    const [isOpen1, setIsOpen1] = useState(false);
-    const [isOpen2, setIsOpen2] = useState(false);
-    const [h, setH] = useState(0)
-    const expandedRef = useRef(0);
-    
-    const notifyLayout = (phase) => {
-        onLayoutChange?.({ phase, expanded: expandedRef.current });
-    };
-    useEffect(() => {
-        const info = infoRef.current;
-        if (info) {
-            setH(info.offsetHeight);
-        }
-    }, [])
-    
-    useEffect(() => {
-        const info = infoRef.current;
-            expandedRef.current = info.offsetHeight - h;
-            notifyLayout("animating");
-            
-            setTimeout(() => {
-                console.log(h, info.offsetHeight - h)
-                expandedRef.current = info.offsetHeight - h;
-                notifyLayout("animating");
-            }, 100)
-        
-    }, [isOpen1, isOpen2])
-    
+
     return <Info ref={ infoRef }>
         <div>
             <TextTop>
@@ -84,19 +52,14 @@ export const RoomAside = ({ room, v, infoRef, onLayoutChange }) => {
                         </ul>
                     </OptLite>) }
                 </Opt1>
-                : <AccItem title={ t("allRoomEquipment") } data={ room[v].all_options } variant={ "opt1" }
-                           cb={ setIsOpen1 }/>
+                : <AccItem title={ t("allRoomEquipment") } data={ room[v].all_options } variant={ "opt1" }/>
             }
             <AccItem
                 title={ t("onRequestServices") }
                 data={ room[v].services }
                 variant={ "opt2" }
-                cb={ setIsOpen2 }
             />
         </div>
         <Button>{ t("checkAvailability") }</Button>
     </Info>
-    
 }
-
-

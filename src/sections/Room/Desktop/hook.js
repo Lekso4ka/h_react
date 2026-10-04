@@ -40,15 +40,6 @@ export function useRoomInfoPin({ sectionRef, galleryRef, infoRef, asideRef, room
         requestAnimationFrame(() => ScrollTrigger.refresh(true));
     }, [syncAsideHeight, applyGalleryCompensation]);
     
-    const handleAsideLayoutChange = useCallback(
-        ({ expanded = 0 }) => {
-            applyGalleryCompensation(expanded);
-            syncAsideHeight();
-            requestAnimationFrame(() => ScrollTrigger.refresh(true));
-        },
-        [applyGalleryCompensation, syncAsideHeight]
-    );
-    
     useGSAP(
         () => {
             const section = sectionRef.current;
@@ -98,5 +89,5 @@ export function useRoomInfoPin({ sectionRef, galleryRef, infoRef, asideRef, room
         { scope: sectionRef, dependencies: [roomId, lang, syncAsideHeight, applyGalleryCompensation] }
     );
     
-    return { pinTriggerRef, refreshPin, handleAsideLayoutChange };
+    return { pinTriggerRef, refreshPin };
 }

@@ -230,6 +230,22 @@ export const ImagesBlock = styled.div`
     }
 `
 
+export const Gallery = styled.div`
+    display: grid;
+    gap: 2rem;
+    ${(p) =>
+        p.$hideCursor
+            ? `
+        cursor: none;
+
+        &,
+        & * {
+            cursor: none !important;
+        }
+    `
+            : ""}
+`
+
 export const Button = styled.button`
     display: flex;
     width: 100%;
@@ -290,7 +306,7 @@ export const AccItemSt = styled.div`
     ${({isOpt2}) => isOpt2 ? "border-bottom: .1rem solid rgba(150, 40, 31, 0.20); margin-bottom: 9.2rem;" : ""}
 `;
 
-export const AccTrigger = styled.button`
+export const AccTrigger = styled.div`
     border-top: .1rem solid rgba(150, 40, 31, 0.20);
     padding: 2.4rem 0;
     color: var(--Black-2, #2F3034);
@@ -302,25 +318,6 @@ export const AccTrigger = styled.button`
         line-height: 110%; /* 19.8px */
     }
     width: 100%;
-    display: grid;
-    grid-template-columns: 1fr auto;
-	cursor: pointer;
-    justify-items: flex-start;
-    align-content: center;
-`;
-
-
-
-export const AccButton = styled.span`
-    display: flex;
-    align-items: center;
-    span {
-        display: flex;
-        height: 1.8rem;
-        svg {
-            height: 100%;
-        }
-    }
 `;
 
 export const AccPanel = styled.div`
