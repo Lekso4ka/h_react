@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useT } from "../../Ctx";
 import { Block, Bottom, Caption, Left, List, Right, Title } from "./style";
+import { armAutofillSubmit, EMAIL_PATTERN, fieldDomName, lockAutofill, noAutofillProps, readField, relockAutofill, unlockAutofill } from "../../utils/noAutofill";
 
 const SUBSCRIBED_KEY = "newsletter-subscribed";
 
@@ -21,8 +22,8 @@ export const Footer = () => {
         const form = e.currentTarget;
         if (!form.elements.consent.checked) return;
         const payload = {
-            name: form.elements.name.value.trim(),
-            email: form.elements.email.value.trim(),
+            name: readField(form, "name").trim(),
+            email: readField(form, "email").trim(),
             source: "newsletter",
         };
         setSending(true);
@@ -41,6 +42,7 @@ export const Footer = () => {
             } catch { /* ignore */ }
             setSubscribed(true);
             form.reset();
+            relockAutofill(form);
         } catch (err) {
             console.error(err);
         } finally {
@@ -54,20 +56,48 @@ export const Footer = () => {
         <Left>
             <Title>{ t("newsletter") }</Title>
             <p>{ t("newsletterText") }</p>
-            <form onSubmit={ formHandler }>
+            <form
+                autoComplete="off"
+                data-no-autofill="true"
+                data-form-type="other"
+                data-1p-ignore="true"
+                data-lpignore="true"
+                onSubmit={ formHandler }
+                onKeyDown={ armAutofillSubmit }
+            >
                 <div className="form-row">
                     <label>
-                        <input type="text" name="name" placeholder={ t("name") } autoComplete="off" required/>
+                        <input
+                            type="text"
+                            name={ fieldDomName("name") }
+                            data-field="name"
+                            placeholder={ t("name") }
+                            required
+                            { ...noAutofillProps }
+                            ref={ lockAutofill }
+                            onFocus={ unlockAutofill }
+                        />
                     </label>
                     <label>
-                        <input type="email" name="email" autoComplete="off" placeholder={ t("email") } required/>
+                        <input
+                            type="text"
+                            inputMode="email"
+                            name={ fieldDomName("email") }
+                            data-field="email"
+                            placeholder={ t("email") }
+                            pattern={ EMAIL_PATTERN }
+                            required
+                            { ...noAutofillProps }
+                            ref={ lockAutofill }
+                            onFocus={ unlockAutofill }
+                        />
                     </label>
                 </div>
                 <label className="consent">
                     <input type="checkbox" name="consent" required={!subscribed}/>
                     <span>{ t("consent") } <Link to="/policy">{ t("consentLink") }</Link> { t("consentMid") } <Link to="/policy">{ t("policyLink") }</Link>{ t("consentEnd") }</span>
                 </label>
-                <button type="submit" disabled={ subscribed || sending }>
+                <button type="submit" disabled={ subscribed || sending } onPointerDown={ armAutofillSubmit }>
                     { subscribed ? t("subscribed") : t("subscribe") }
                 </button>
             </form>

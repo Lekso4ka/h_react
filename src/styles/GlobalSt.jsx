@@ -69,6 +69,27 @@ const globalSt = css`
         color: inherit;
     }
 
+    form[data-no-autofill] input:not([type="checkbox"]):not([type="file"]):not([type="hidden"]),
+    form[data-no-autofill] textarea {
+        transition: background-color 99999s ease-out 0s;
+    }
+
+    form[data-no-autofill] input:-webkit-autofill,
+    form[data-no-autofill] input:-webkit-autofill:hover,
+    form[data-no-autofill] input:-webkit-autofill:focus,
+    form[data-no-autofill] textarea:-webkit-autofill,
+    form[data-no-autofill] textarea:-webkit-autofill:hover,
+    form[data-no-autofill] textarea:-webkit-autofill:focus,
+    form[data-no-autofill] input:autofill,
+    form[data-no-autofill] textarea:autofill {
+        -webkit-text-fill-color: currentColor;
+        caret-color: currentColor;
+        background-color: transparent;
+        -webkit-box-shadow: 0 0 0 1000px transparent inset;
+        box-shadow: 0 0 0 1000px transparent inset;
+        transition: background-color 99999s ease-out 0s;
+    }
+
     ::-webkit-scrollbar {
         width: 6px;
         height: 6px;

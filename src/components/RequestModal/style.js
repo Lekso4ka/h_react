@@ -101,6 +101,9 @@ export const Modal = styled.div`
             &[readonly] {
                 cursor: default;
             }
+            &[data-autofill-locked] {
+                cursor: text;
+            }
             &[type="number"] {
                 -moz-appearance: textfield;
                 &::-webkit-outer-spin-button,

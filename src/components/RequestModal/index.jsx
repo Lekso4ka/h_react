@@ -2,7 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useT } from "../../Ctx";
 import { Modal } from "./style";
-import { handlePhoneBlur, handlePhoneFocus, handlePhoneInput, lockPhoneAutofill } from "../../utils/phoneMask";
+import { handlePhoneBlur, handlePhoneFocus, handlePhoneInput } from "../../utils/phoneMask";
+import { armAutofillSubmit, EMAIL_PATTERN, fieldDomName, lockAutofill, noAutofillProps, readField, relockAutofill, unlockAutofill } from "../../utils/noAutofill";
 
 const CalendarIcon = () => (
     <svg className="calendar-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 25" fill="none" aria-hidden>
@@ -61,6 +62,7 @@ export const RequestModal = ({
         setFileName("");
         setFileError("");
         formRef.current?.reset();
+        relockAutofill(formRef.current);
         if (fileRef.current) fileRef.current.value = "";
     }, [active]);
 
@@ -99,7 +101,7 @@ export const RequestModal = ({
                 payload[field.name] = values[field.name] ?? "";
                 return;
             }
-            payload[field.name] = form.elements[field.name]?.value.trim() ?? "";
+            payload[field.name] = readField(form, field.name).trim();
         });
 
         const selectedFile = file ? fileRef.current?.files?.[0] : null;
@@ -153,46 +155,67 @@ export const RequestModal = ({
                     />
                 </svg>
                 <h3>{title}</h3>
-                <form ref={formRef} className={sent ? "sent" : ""} autoComplete="off" onSubmit={formHandler}>
+                <form
+                    ref={formRef}
+                    className={sent ? "sent" : ""}
+                    autoComplete="off"
+                    data-no-autofill="true"
+                    data-form-type="other"
+                    data-1p-ignore="true"
+                    data-lpignore="true"
+                    onSubmit={formHandler}
+                    onKeyDown={armAutofillSubmit}
+                >
                     <div className="pane">
                         <div className="pane-inner">
                             <div className="fields">
-                                {fields.map((field) => (
+                                {fields.map((field) => {
+                                    const kind = field.type || "text";
+                                    const isPhone = kind === "tel";
+                                    const isEmail = kind === "email";
+                                    const skipLock = kind === "date" || kind === "number";
+                                    return (
                                     <label key={field.name} className={`field${field.type === "date" ? " date-field" : ""}`}>
                                         <span>{field.label}</span>
                                         {field.readOnly ? (
                                             <input
                                                 type="text"
-                                                name={field.name}
+                                                name={fieldDomName(field.name)}
+                                                data-field={field.name}
                                                 value={values[field.name] ?? ""}
                                                 readOnly
+                                                {...noAutofillProps}
                                             />
                                         ) : field.type === "textarea" ? (
                                             <textarea
-                                                name={field.name}
+                                                name={fieldDomName(field.name)}
+                                                data-field={field.name}
                                                 rows={1}
                                                 required={Boolean(field.required)}
+                                                {...noAutofillProps}
+                                                ref={lockAutofill}
+                                                onFocus={unlockAutofill}
                                             />
                                         ) : (
                                             <input
-                                                type={field.type || "text"}
-                                                name={field.name}
+                                                type={isPhone || isEmail ? "text" : kind}
+                                                name={fieldDomName(field.name)}
+                                                data-field={field.name}
                                                 required={Boolean(field.required)}
-                                                min={field.type === "number" ? "1" : undefined}
-                                                inputMode={field.type === "tel" ? "tel" : field.type === "number" ? "numeric" : undefined}
-                                                autoComplete="off"
-                                                autoCorrect={field.type === "tel" ? "off" : undefined}
-                                                autoCapitalize={field.type === "tel" ? "off" : undefined}
-                                                spellCheck={field.type === "tel" ? false : undefined}
-                                                ref={field.type === "tel" ? lockPhoneAutofill : undefined}
-                                                onFocus={field.type === "tel" ? handlePhoneFocus : undefined}
-                                                onInput={field.type === "tel" ? handlePhoneInput : undefined}
-                                                onBlur={field.type === "tel" ? handlePhoneBlur : undefined}
+                                                min={kind === "number" ? "1" : undefined}
+                                                inputMode={isPhone ? "tel" : isEmail ? "email" : kind === "number" ? "numeric" : undefined}
+                                                pattern={isEmail ? EMAIL_PATTERN : undefined}
+                                                {...noAutofillProps}
+                                                ref={skipLock ? undefined : lockAutofill}
+                                                onFocus={isPhone ? handlePhoneFocus : skipLock ? undefined : unlockAutofill}
+                                                onInput={isPhone ? handlePhoneInput : undefined}
+                                                onBlur={isPhone ? handlePhoneBlur : undefined}
                                             />
                                         )}
                                         {field.type === "date" && <CalendarIcon/>}
                                     </label>
-                                ))}
+                                    );
+                                })}
                             </div>
                             {file && (
                                 <div className="file-field">
@@ -207,9 +230,10 @@ export const RequestModal = ({
                                     <input
                                         ref={fileRef}
                                         type="file"
-                                        name={file.name}
+                                        name={fieldDomName(file.name)}
                                         accept={file.accept}
                                         hidden
+                                        autoComplete="off"
                                         onChange={onFileChange}
                                     />
                                     <p className="file-hint">{file.hint}</p>
@@ -229,7 +253,7 @@ export const RequestModal = ({
                             {t("consent")} <Link to="/policy">{t("consentLink")}</Link> {t("consentMid")} <Link to="/policy">{t("policyLink")}</Link>{t("consentEnd")}
                         </span>
                     </label>
-                    <button type="submit" disabled={sent || sending} className={sent ? "sent" : ""}>
+                    <button type="submit" disabled={sent || sending} className={sent ? "sent" : ""} onPointerDown={armAutofillSubmit}>
                         {sent ? t("sent") : t("send")}
                     </button>
                     <p className="required-note">{t("requiredFields")}</p>

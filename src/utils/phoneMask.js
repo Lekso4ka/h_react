@@ -1,3 +1,5 @@
+import { lockAutofill } from "./noAutofill";
+
 const MAX_DIGITS = 15;
 const MIN_INTL_DIGITS = 8;
 
@@ -93,10 +95,7 @@ export function handlePhoneInput(event) {
 }
 
 export function lockPhoneAutofill(node) {
-    if (!node || node.dataset.autofillLocked === "1") return;
-    node.dataset.autofillLocked = "1";
-    node.readOnly = true;
-    node.setAttribute("autocomplete", "off");
+    lockAutofill(node);
 }
 
 export function handlePhoneFocus(event) {

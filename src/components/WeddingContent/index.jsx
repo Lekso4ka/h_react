@@ -6,7 +6,8 @@ import { Icon } from "../../ui/Icon";
 import { Video } from "../../ui/Video";
 import { useT } from "../../Ctx";
 import { Hero, Section1, Section2, Section3, Section4, Section5, Section6 } from "./style";
-import { handlePhoneBlur, handlePhoneFocus, handlePhoneInput, isPhoneComplete, lockPhoneAutofill } from "../../utils/phoneMask";
+import { handlePhoneBlur, handlePhoneFocus, handlePhoneInput, isPhoneComplete } from "../../utils/phoneMask";
+import { armAutofillSubmit, fieldDomName, lockAutofill, noAutofillProps, readField, unlockAutofill } from "../../utils/noAutofill";
 import {Link as ReactLink} from "react-router-dom";
 
 gsap.registerPlugin(useGSAP);
@@ -163,8 +164,8 @@ export const WeddingContent = () => {
     };
 
     const syncFormReady = (form) => {
-        const name = form.elements.name.value.trim();
-        const phone = form.elements.phone.value;
+        const name = readField(form, "name").trim();
+        const phone = readField(form, "phone");
         const consent = form.elements.consent.checked;
         setFormReady(Boolean(name && isPhoneComplete(phone) && consent));
     };
@@ -175,8 +176,8 @@ export const WeddingContent = () => {
         const form = e.currentTarget;
         if (!form.elements.consent.checked) return;
         const payload = {
-            name: form.elements.name.value.trim(),
-            phone: form.elements.phone.value.trim(),
+            name: readField(form, "name").trim(),
+            phone: readField(form, "phone").trim(),
             source: "wedding",
         };
         setSending(true);
@@ -348,28 +349,40 @@ export const WeddingContent = () => {
                 <form
                     className={ sent ? "sent" : "" }
                     autoComplete="off"
+                    data-no-autofill="true"
+                    data-form-type="other"
+                    data-1p-ignore="true"
+                    data-lpignore="true"
                     onSubmit={ formHandler }
+                    onKeyDown={ armAutofillSubmit }
                     onInput={ (e) => syncFormReady(e.currentTarget) }
                     onChange={ (e) => syncFormReady(e.currentTarget) }
                     onBlur={ (e) => syncFormReady(e.currentTarget) }
                 >
                     <div className="form-body">
                         <div className="form-fields">
-                            <input type="text" name="name" placeholder={ t("yourName") } required={!sent} autoComplete="off"/>
                             <input
-                                type="tel"
-                                name="phone"
+                                type="text"
+                                name={ fieldDomName("name") }
+                                data-field="name"
+                                placeholder={ t("yourName") }
+                                required={!sent}
+                                { ...noAutofillProps }
+                                ref={ lockAutofill }
+                                onFocus={ unlockAutofill }
+                            />
+                            <input
+                                type="text"
+                                name={ fieldDomName("phone") }
+                                data-field="phone"
                                 placeholder={ t("phone") }
                                 required={!sent}
                                 inputMode="tel"
-                                autoComplete="off"
-                                autoCorrect="off"
-                                autoCapitalize="off"
-                                spellCheck={false}
-                                ref={lockPhoneAutofill}
-                                onFocus={handlePhoneFocus}
-                                onInput={handlePhoneInput}
-                                onBlur={handlePhoneBlur}
+                                { ...noAutofillProps }
+                                ref={ lockAutofill }
+                                onFocus={ handlePhoneFocus }
+                                onInput={ handlePhoneInput }
+                                onBlur={ handlePhoneBlur }
                             />
                             <label className="consent">
                                 <input type="checkbox" name="consent" required={!sent}/>
@@ -378,7 +391,7 @@ export const WeddingContent = () => {
                         </div>
                         { sent && <p className="form-success">{ t("weddingFormSuccess") }</p> }
                     </div>
-                    <button type="submit" disabled={ !formReady || sent || sending }>{ sent ? t("sent") : t("requestOffer") }</button>
+                    <button type="submit" disabled={ !formReady || sent || sending } onPointerDown={ armAutofillSubmit }>{ sent ? t("sent") : t("requestOffer") }</button>
                 </form>
             </div>
         </Section6>
