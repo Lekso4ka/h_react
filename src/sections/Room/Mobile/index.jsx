@@ -18,7 +18,7 @@ import {
     Options,
     SecondaryText,
     TextTop,
-    OptLite, Opt1, BtnWrap
+    OptLite, Opt1, BtnWrap, ButtonPad
 } from "./style";
 
 export const Mobile = () => {
@@ -102,7 +102,9 @@ export const Mobile = () => {
             <AccItem title={ t("onRequestServices") } data={ room[v].services } variant={ "opt2" }/>
         </Content>
         <BtnWrap>
-            <Button>{ t("checkAvailability") }</Button>
+            <ButtonPad>
+                <Button>{ t("checkAvailability") }</Button>
+            </ButtonPad>
         </BtnWrap>
         
     </Block>

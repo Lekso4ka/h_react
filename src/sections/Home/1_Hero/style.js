@@ -368,26 +368,36 @@ export const HotelCard = styled.div`
     }
 `
 
+export const StickyDock = styled.div`
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 7;
+    box-sizing: border-box;
+    padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+    background: #fff5f0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .4s;
+`
+
 export const Sticky = styled.button`
+    position: relative;
+    display: block;
+    width: 100%;
     height: 7.5rem;
     background-color: transparent;
     background-image: linear-gradient(#96281F, #96281F);
     background-repeat: no-repeat;
     background-size: 100% 100%;
-    position: fixed;
-    bottom: env(safe-area-inset-bottom, 0px);
-    left: 0;
-    right: 0;
-    z-index: 7;
     color: #FFF6F0;
     font-family: "Playfair Display";
     font-weight: 500;
     font-size: 1.4rem;
     letter-spacing: .04em;
     line-height: 1;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity .4s;
+    pointer-events: inherit;
 
     &::before {
         content: "";

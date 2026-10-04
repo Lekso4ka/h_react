@@ -5,7 +5,7 @@ import { ActivityBtn } from "../../../ui/ActivityBtn";
 import { Icon } from "../../../ui/Icon";
 import { Link } from "../../../ui/Link";
 import { Video } from "../../../ui/Video";
-import { ActivityCard, Content, HotelCard, Sticky } from "./style";
+import { ActivityCard, Content, HotelCard, Sticky, StickyDock } from "./style";
 
 const Stars = ({ count }) => (
     <>
@@ -62,10 +62,10 @@ export const Hero = ({ weather, setWeather }) => {
                 const button = btn.current;
                 if (!button) return;
                 const venues = document.getElementById("venues");
-                const venuesTop = venues?.getBoundingClientRect().top;
+                const venuesBottom = venues?.getBoundingClientRect().bottom;
                 const buttonTop = button.getBoundingClientRect().top;
-                const underVenues = venuesTop != null && venuesTop <= buttonTop;
-                const show = window.scrollY >= 320 && !underVenues;
+                const passedVenues = venuesBottom != null && venuesBottom <= buttonTop;
+                const show = window.scrollY >= 320 && !passedVenues;
                 button.style.opacity = show ? "1" : "0";
                 button.style.pointerEvents = show ? "auto" : "none";
             };
@@ -210,6 +210,8 @@ export const Hero = ({ weather, setWeather }) => {
                 >{ t("toActivities") }</Link>
             </div>
         </Content>
-        { mob && <Sticky ref={ btn }>{ t("bookHotel") }</Sticky> }
+        { mob && <StickyDock ref={ btn }>
+            <Sticky>{ t("bookHotel") }</Sticky>
+        </StickyDock> }
     </>
 }

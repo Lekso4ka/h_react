@@ -250,10 +250,18 @@ export const BtnWrap = styled.div`
     position: sticky;
     bottom: 0;
     width: 100%;
-    padding-bottom: calc(.01rem + env(safe-area-inset-bottom, 0px));
-    background: transparent;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    background: #fff5f0;
     display: flex;
     justify-content: center;
+    pointer-events: none;
+`
+
+export const ButtonPad = styled.div`
+    width: 100%;
+    padding-bottom: 8px;
+    background: #fff5f0;
+    display: flex;
     pointer-events: none;
 `
 
