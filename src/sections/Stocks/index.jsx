@@ -35,6 +35,9 @@ export const StocksContent = () => {
         } else {
             document.body.style.overflow = null;
         }
+        return () => {
+            document.body.style.overflow = null;
+        };
     }, [active, questionOpen]);
     return <Container>
         <div className="hero">
@@ -142,10 +145,9 @@ export const StocksContent = () => {
                         </div>
                     </div>
                     <div className="line">
-                        <Link color="dark" hover="dark" to={ `/rooms/${ id }` }>{ t("chooseRoom") }</Link>
+                        <Link color="dark" to={ `/rooms/${ id }` }>{ t("chooseRoom") }</Link>
                         <Link
                             color="dark"
-                            hover="dark"
                             to=""
                             onClick={(e) => {
                                 e.preventDefault();

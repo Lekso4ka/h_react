@@ -215,10 +215,10 @@ export const Modal = styled.div`
         cursor: pointer;
         flex-shrink: 0;
         rect {
-            fill: #2F3034;
+            fill: #FFF6F0;
         }
         path {
-            fill: #FFF6F0;
+            fill: #1C1C1C;
         }
     }
     .consent {
@@ -235,8 +235,7 @@ export const Modal = styled.div`
         cursor: pointer;
         a {
             color: #fff;
-            text-decoration: underline;
-            text-underline-offset: 0.2em;
+            text-decoration: none;
         }
         input[type=checkbox] {
             appearance: none;
