@@ -1,66 +1,140 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Icon } from "../Icon";
-import { Container, Image, Images } from "./style";
+import { Container, Image, Images, Track } from "./style";
 
-export const Lightbox = ({ data, active, index, close }) => {
-    const [img, setImg] = useState(data);
-    const [activeIndex, setActiveIndex] = useState(active + 1);
-    const [right, setRight] = useState(false);
-    const ref = useRef();
-    useEffect(() => {
-        if (active) {
-            const arr = [...data]
-            for (let i = 0; i < index; i++) {
-                arr.push(arr.shift());
-            }
-            arr.unshift(arr[arr.length - 1]);
-            setImg(arr);
-            console.log(arr)
-        }
-    }, [active]);
-    useEffect(() => {
-        if (activeIndex !== 1) {
-            const r = ref.current
-            
-            console.log(activeIndex)
-            if (r) {
-                for (let i = 0; i < r.children.length; i++) {
-                    let img = r.children[i];
-                    img.classList.add(right ? "active-r" : "active");
-                }
-                setTimeout(() => {
-                    let arr = [...img];
-                    console.log(arr)
-                    arr.pop()
-                    if (right) {
-                        arr.unshift(arr.pop())
-                        arr.push(arr[0])
-                    } else {
-                        arr.push(arr.shift())
-                        arr.push(arr[0])
-                    }
-                    console.log(arr)
-                    for (let i = 0; i < r.children.length; i++) {
-                        let img = r.children[i];
-                        img.classList.remove("active");
-                        img.classList.remove("active-r");
-                    }
-                    setImg([...arr]);
-                    setRight(false)
-                    setActiveIndex(1)
-                }, 1000)
-            }
-        }
-    }, [activeIndex]);
-   
-    
-    const arrowHandler = (left) => {
-        setActiveIndex(left
-            ? activeIndex === data.length - 1 ? 0 : activeIndex + 1
-            : activeIndex === 0 ? data.length - 1 : activeIndex - 1);
-        setRight(!left)
+const SLIDE_MS = 600;
+
+function buildOrder(images, index) {
+    const n = images.length;
+    if (!n) return [];
+    const start = ((index % n) + n) % n;
+    const prev = (start - 1 + n) % n;
+    const order = [];
+    for (let i = 0; i < n; i++) {
+        const srcIndex = (prev + i) % n;
+        order.push({ id: String(srcIndex), src: images[srcIndex] });
     }
-    
+    return order;
+}
+
+function withPeek(order) {
+    if (order.length >= 4 || order.length <= 1) return order;
+    const slides = order.slice();
+    let i = 0;
+    while (slides.length < 4) {
+        const item = order[i % order.length];
+        slides.push({
+            id: `peek-${i}-${item.id}`,
+            src: item.src,
+        });
+        i += 1;
+    }
+    return slides;
+}
+
+export const Lightbox = ({ data = [], active, index, close }) => {
+    const [order, setOrder] = useState([]);
+    const [offset, setOffset] = useState(-1);
+    const [motion, setMotion] = useState(false);
+    const [instant, setInstant] = useState(false);
+    const trackRef = useRef(null);
+    const orderRef = useRef([]);
+    const busyRef = useRef(false);
+    const settlingRef = useRef(false);
+    const queueRef = useRef([]);
+    const dirRef = useRef(null);
+    const timerRef = useRef(0);
+    const activeRef = useRef(active);
+    const wasActiveRef = useRef(false);
+    const settleRef = useRef(() => {});
+    activeRef.current = active;
+
+    if (active && !wasActiveRef.current) {
+        wasActiveRef.current = true;
+        const next = buildOrder(data, index);
+        orderRef.current = next;
+        busyRef.current = false;
+        settlingRef.current = false;
+        queueRef.current = [];
+        dirRef.current = null;
+        window.clearTimeout(timerRef.current);
+        setOrder(next);
+        setOffset(-1);
+        setMotion(false);
+        setInstant(false);
+    } else if (!active && wasActiveRef.current) {
+        wasActiveRef.current = false;
+        busyRef.current = false;
+        settlingRef.current = false;
+        queueRef.current = [];
+        dirRef.current = null;
+        window.clearTimeout(timerRef.current);
+    }
+
+    const go = (dir) => {
+        if (!active || orderRef.current.length < 2) return;
+        if (busyRef.current) {
+            queueRef.current.push(dir);
+            return;
+        }
+        busyRef.current = true;
+        dirRef.current = dir;
+        setMotion(true);
+        setOffset(dir === "next" ? -2 : 0);
+        window.clearTimeout(timerRef.current);
+        timerRef.current = window.setTimeout(() => settleRef.current(), SLIDE_MS + 80);
+    };
+
+    settleRef.current = () => {
+        if (!activeRef.current || !busyRef.current || settlingRef.current) return;
+        settlingRef.current = true;
+        window.clearTimeout(timerRef.current);
+
+        const dir = dirRef.current;
+        const arr = orderRef.current.slice();
+        if (dir === "next") arr.push(arr.shift());
+        else if (dir === "prev") arr.unshift(arr.pop());
+        orderRef.current = arr;
+        dirRef.current = null;
+
+        setInstant(true);
+        setMotion(false);
+        setOrder(arr);
+        setOffset(-1);
+
+        requestAnimationFrame(() => {
+            if (!activeRef.current) {
+                settlingRef.current = false;
+                busyRef.current = false;
+                return;
+            }
+            setInstant(false);
+            requestAnimationFrame(() => {
+                settlingRef.current = false;
+                busyRef.current = false;
+                if (!activeRef.current) return;
+                const queued = queueRef.current.shift();
+                if (queued) go(queued);
+            });
+        });
+    };
+
+    useEffect(() => {
+        const track = trackRef.current;
+        if (!track) return;
+        const onEnd = (event) => {
+            if (event.target !== track || event.propertyName !== "transform") return;
+            settleRef.current();
+        };
+        track.addEventListener("transitionend", onEnd);
+        return () => track.removeEventListener("transitionend", onEnd);
+    }, []);
+
+    useEffect(() => () => window.clearTimeout(timerRef.current), []);
+
+    const slides = withPeek(order);
+    const clearIndex = -offset;
+
     return <Container active={active}>
         <svg
             className={"close"}
@@ -76,16 +150,26 @@ export const Lightbox = ({ data, active, index, close }) => {
         </svg>
         <span
             className="arrow"
-            onClick={ () => arrowHandler(true) }
+            onClick={ () => go("prev") }
         ><Icon name={ "arrow" } color="#FFF"/></span>
         <span
             className="arrow right"
-            onClick={ () => arrowHandler() }
+            onClick={ () => go("next") }
         ><Icon name={ "arrow" } left={ false } color="#FFF"/></span>
-        <Images cnt={data.length + 1} >
-            <div className="inner" ref={ref}>
-                { img.map((el, i) => <Image key={i} bg={el} active={activeIndex === i} />) }
-            </div>
+        <Images>
+            <Track
+                ref={trackRef}
+                $count={Math.max(slides.length, 1)}
+                $offset={offset}
+                $motion={motion}
+            >
+                { slides.map((slide, i) => <Image
+                    key={slide.id}
+                    $bg={slide.src}
+                    $clear={i === clearIndex}
+                    $instant={instant}
+                />) }
+            </Track>
         </Images>
     </Container>
 }

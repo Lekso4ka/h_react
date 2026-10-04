@@ -52,38 +52,36 @@ export const Container = styled.div`
         }
     }
 `
+const EASE = "cubic-bezier(0.22, 0.61, 0.36, 1)";
+
 export const Images = styled.div`
     height: 84.2rem;
     margin-left: 9.2rem;
     overflow: hidden;
-    .inner {
-        height: 100%;
-        display: grid;
-        grid-template-columns: repeat(${({cnt}) => cnt}, 155.6rem);
-        gap: 3rem;
-        transform: translate(calc((155.6rem + 3rem) * -1), 0);
-    }
+`
+
+export const Track = styled.div`
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(${({$count}) => $count}, 155.6rem);
+    gap: 3rem;
+    transform: translate3d(calc(${({$offset}) => $offset} * (155.6rem + 3rem)), 0, 0);
+    transition: ${({$motion}) => $motion ? `transform 0.6s ${EASE}` : "none"};
 `
 
 export const Image = styled.div`
     background-position: center;
     background-size: cover;
-    background-image: ${({active, bg}) => (active ?  `url("${mediaUrl(bg)}")` : `linear-gradient(0deg, rgba(0, 0, 0, 0.50) 0%, rgba(0, 0, 0, 0.50) 100%), url("${mediaUrl(bg)}")`)};
+    background-image: url("${({$bg}) => mediaUrl($bg)}");
     position: relative;
-    
-    &.active {
-        background-image: ${({active, bg}) => (active ?  `url("${mediaUrl(bg)}")` : `linear-gradient(0deg, rgba(0, 0, 0, 0.50) 0%, rgba(0, 0, 0, 0.50) 100%), url("${mediaUrl(bg)}")`)};
-        transition-duration: .6s;
-        transition-property: transform, background;
-        transition-timing-function: ease-out, ease-in;
-        transform: translate(calc(-100% - 3rem), 0);
+
+    &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        opacity: ${({$clear}) => $clear ? 0 : 1};
+        transition: ${({$instant}) => $instant ? "none" : `opacity 0.6s ${EASE}`};
+        pointer-events: none;
     }
-    &.active-r {
-        background-image: ${({active, bg}) => (active ?  `url("${mediaUrl(bg)}")` : `linear-gradient(0deg, rgba(0, 0, 0, 0.50) 0%, rgba(0, 0, 0, 0.50) 100%), url("${mediaUrl(bg)}")`)};
-        transition-duration: .6s;
-        transition-property: transform, background;
-        transition-timing-function: ease-out, ease-in;
-        transform: translate(calc(100% + 3rem), 0);
-    }
-    
 `

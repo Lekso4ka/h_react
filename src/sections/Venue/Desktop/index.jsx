@@ -1,14 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useT } from "../../../Ctx";
 import { Tour } from "../../../components/Tour";
 import { Lightbox } from "../../../ui/Lightbox";
+import { Cursor, useCursor } from "../../../ui/Cursor";
 import { Vector } from "../../../ui/Vector";
-import { Content, Info, InfoItem, Options, Variant, Text, Images, Image, Formats } from "./style";
+import { Content, Info, InfoItem, Options, Variant, Text, Images, Image, Formats, Gallery } from "./style";
 
 export const Desktop = ({data, onRequest}) => {
     const t = useT();
     const [activeLb, setActiveLb] = useState(false);
     const [lbIndex, setLbIndex] = useState(0);
+    const zoneRef = useRef(null);
+    const { visible, position } = useCursor({ zoneRef });
+    const showCursor = visible && !activeLb;
     const close = () => {
         setActiveLb(false);
     }
@@ -95,9 +99,17 @@ export const Desktop = ({data, onRequest}) => {
                 <Text>
                     { data.text.map((el, i) => <p key={ i }>{ el }</p>) }
                 </Text>
-                { data.images.map((el, i) => <Image key={ i } bg={ el } onClick={() => open(i)}/>) }
+                <Gallery ref={zoneRef} $hideCursor={showCursor}>
+                    { data.images.map((el, i) => <Image key={ i } bg={ el } onClick={() => open(i)}/>) }
+                </Gallery>
             </Images>
             <a href="" onClick={(e) => {e.preventDefault(); onRequest()} }>{ t("sendRequest") }</a>
+            <Cursor
+                visible={showCursor}
+                x={position.x}
+                y={position.y}
+                label={t("enlarge")}
+            />
             <Lightbox
                 data={data.images}
                 active={activeLb}

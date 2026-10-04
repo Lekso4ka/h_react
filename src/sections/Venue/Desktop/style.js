@@ -1,5 +1,4 @@
 import styled  from "@emotion/styled";
-import c from "../../../assets/cursors"
 
 export const Content = styled.main`
     h1 {
@@ -203,12 +202,27 @@ export const Images = styled.div`
     position: relative;
 `
 
+export const Gallery = styled.div`
+    display: grid;
+    gap: 2rem;
+    ${(p) =>
+        p.$hideCursor
+            ? `
+        cursor: none;
+
+        &,
+        & * {
+            cursor: none !important;
+        }
+    `
+            : ""}
+`
+
 export const Image = styled.div`
     background-image: url(${({ bg }) => `/images/${bg}`});
     background-position: center;
     background-size: cover;
     height: 59.8rem;
-    cursor: url(${c.v1}) 60 60, pointer;
 `
 
 export const Formats = styled.div`
