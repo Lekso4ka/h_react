@@ -256,9 +256,7 @@ export const Section1 = styled.section`
             padding: 0;
             font-size: 1.8rem;
             font-weight: 500;
-            align-self: stretch;
-        }
-        .offer {
+            align-self: start;
             position: sticky;
             top: 9.2rem;
             z-index: 1;
