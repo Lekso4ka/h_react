@@ -370,9 +370,12 @@ export const HotelCard = styled.div`
 
 export const Sticky = styled.button`
     height: 7.5rem;
-    background-color: #96281F;
+    background-color: transparent;
+    background-image: linear-gradient(#96281F, #96281F);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
     position: fixed;
-    bottom: 0;
+    bottom: env(safe-area-inset-bottom, 0px);
     left: 0;
     right: 0;
     z-index: 7;

@@ -13,7 +13,7 @@ import {
   PageTitle,
   SuccessText,
 } from "../components/ui";
-import { getSingleton } from "../config/singletons";
+import { getSingleton, prepareMainItem } from "../config/singletons";
 import { LangTabs } from "../components/LangTabs";
 import { useAdminLang } from "../lang";
 
@@ -39,7 +39,8 @@ export function SingletonFormPage({ singletonKey }) {
       try {
         const data = await fetchSingleton(config.key);
         if (cancelled) return;
-        setItem({ ...createEmptyItem(config.schema), ...(data.data || {}) });
+        const merged = { ...createEmptyItem(config.schema), ...(data.data || {}) };
+        setItem(config.key === "main" ? prepareMainItem(merged) : merged);
       } catch (err) {
         if (!cancelled) setError(err.message);
       } finally {
@@ -65,7 +66,8 @@ export function SingletonFormPage({ singletonKey }) {
     try {
       const payload = cleanItem(config.schema, item);
       const updated = await updateSingleton(config.key, payload);
-      setItem({ ...createEmptyItem(config.schema), ...(updated.item || {}) });
+      const merged = { ...createEmptyItem(config.schema), ...(updated.item || {}) };
+      setItem(config.key === "main" ? prepareMainItem(merged) : merged);
       setSuccess("Изменения сохранены");
     } catch (err) {
       setError(err.message);

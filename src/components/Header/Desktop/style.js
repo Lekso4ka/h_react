@@ -20,7 +20,7 @@ export const HeaderBlock = styled.header`
     position: absolute;
     height: 9.2rem;
     padding: 1.8rem 2.4rem .8rem;
-    top: 0;
+    top: env(safe-area-inset-top, 0px);
     width: 100%;
     z-index: 1;
     color: ${ ({ light }) => light ? "#2F3034" : "#fff" };
@@ -144,7 +144,7 @@ export const HeaderLang = styled.div`
 export const Drop = styled.div`
 	position: fixed;
     box-sizing: border-box;
-    top: 9.2rem;
+    top: calc(9.2rem + env(safe-area-inset-top, 0px));
 	left: 0;
 	right: 0;
 	z-index: 49;

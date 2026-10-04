@@ -236,7 +236,10 @@ export const Button = styled.button`
     height: 6.4rem;
     justify-content: center;
     align-items: center;
-    background: #96281F;
+    background-color: transparent;
+    background-image: linear-gradient(#96281F, #96281F);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
     color: #FFF6F0;
     font-family: "Playfair Display";
     font-size: 1.8rem;
@@ -244,10 +247,11 @@ export const Button = styled.button`
     line-height: 110%; /* 19.8px */
     letter-spacing: 0.036rem;
     position: sticky;
-    bottom: 1.4rem;
+    bottom: calc(1.4rem + env(safe-area-inset-bottom, 0px));
     transition: background-color .2s;
     &:hover {
-        background-color: #A03229;
+        background-color: transparent;
+        background-image: linear-gradient(#A03229, #A03229);
     }
 `
 

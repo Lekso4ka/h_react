@@ -356,6 +356,16 @@ export function Sidebar() {
         </Group>
 
         <Group>
+          <Item
+            to={adminPath("/data/vacancies")}
+            end
+            className={() => classIf(entityKey === "vacancies")}
+          >
+            Вакансии
+          </Item>
+        </Group>
+
+        <Group>
           <GroupTitle>Правовая информация</GroupTitle>
           <Item
             to={adminPath("/data/legal/info")}

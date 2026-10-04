@@ -9,6 +9,56 @@ const hotelCardFields = {
   image: { type: "image", label: "Изображение" },
 };
 
+const promoCardFields = {
+  enabled: {
+    type: "boolean",
+    label: "Показ",
+    checkboxLabel: "Показывать в этом сезоне",
+    default: true,
+  },
+  video_block: {
+    type: "video",
+    label: "Видео",
+    map: {
+      src: "video",
+      preview: "video_preview",
+    },
+  },
+  text: { type: "textarea", label: "Текст" },
+  button_text: {
+    type: "string",
+    label: "Текст кнопки",
+    placeholder: "Например, К активностям",
+  },
+  button_link: {
+    type: "string",
+    label: "Ссылка кнопки",
+    placeholder: "/activities/winter или https://…",
+  },
+};
+
+const promoHint =
+  "Своя реклама для этого сезона. Снимите галочку, чтобы скрыть блок. Пустой текст кнопки оставляет стандартную подпись.";
+
+function hasStoredPromo(card) {
+  return Boolean(card && typeof card === "object" && !Array.isArray(card) && Object.keys(card).length);
+}
+
+export function prepareMainItem(item) {
+  const hero = item?.hero;
+  if (!hero || typeof hero !== "object" || Array.isArray(hero)) return item;
+  const shared = hasStoredPromo(hero.activity_card) ? hero.activity_card : {};
+  const season = (card) => (hasStoredPromo(card) ? card : { ...shared });
+  return {
+    ...item,
+    hero: {
+      ...hero,
+      activity_card_winter: season(hero.activity_card_winter),
+      activity_card_summer: season(hero.activity_card_summer),
+    },
+  };
+}
+
 const activityItemFields = {
   title: { type: "string", label: "Название" },
   text: { type: "textarea", label: "Текст" },
@@ -147,20 +197,17 @@ export const singletons = {
               label: "Тюлип Инн",
               fields: hotelCardFields,
             },
-            activity_card: {
+            activity_card_winter: {
               type: "object",
-              label: "Карточка активности",
-              fields: {
-                video_block: {
-                  type: "video",
-                  label: "Видео",
-                  map: {
-                    src: "video",
-                    preview: "video_preview",
-                  },
-                },
-                text: { type: "textarea", label: "Текст" },
-              },
+              label: "Всплывающая реклама — зима",
+              hint: promoHint,
+              fields: promoCardFields,
+            },
+            activity_card_summer: {
+              type: "object",
+              label: "Всплывающая реклама — лето",
+              hint: promoHint,
+              fields: promoCardFields,
             },
             season_label_winter: { type: "string", label: "Метка сезона зима" },
             season_label_summer: { type: "string", label: "Метка сезона лето" },

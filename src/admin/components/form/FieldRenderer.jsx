@@ -57,6 +57,13 @@ const CheckboxRow = styled.label`
   }
 `;
 
+const Hint = styled.p`
+  margin: 0 0 12px;
+  color: ${theme.colors.gray};
+  font-size: 14px;
+  line-height: 1.45;
+`;
+
 const Remove = styled.button`
   border: 0;
   background: transparent;
@@ -145,7 +152,7 @@ export function cleanByFields(value, fields = {}, root) {
         result[key] = Number(current) || 0;
         break;
       case "boolean":
-        result[key] = Boolean(current);
+        result[key] = current == null ? Boolean(def.default) : Boolean(current);
         break;
       case "stringList":
       case "checkboxList":
@@ -273,7 +280,7 @@ function FieldControl({ def, value, onChange, lockStructure = false }) {
         <label style={{ display: "flex", gap: 10, alignItems: "center" }}>
           <input
             type="checkbox"
-            checked={Boolean(value)}
+            checked={value == null ? Boolean(def.default) : Boolean(value)}
             onChange={(e) => onChange(e.target.checked)}
           />
           <span>{def.checkboxLabel || "Да"}</span>
@@ -370,7 +377,9 @@ function FieldControl({ def, value, onChange, lockStructure = false }) {
         ? stored
         : stored.length > 0
           ? stored
-          : [{}];
+          : def.allowEmpty
+            ? []
+            : [{}];
       if (lockStructure && items.length === 0) {
         return (
           <Label style={{ display: "block" }}>
@@ -380,6 +389,9 @@ function FieldControl({ def, value, onChange, lockStructure = false }) {
       }
       return (
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+          {items.length === 0 && (
+            <Hint style={{ margin: 0 }}>Пока ничего не добавлено</Hint>
+          )}
           {items.map((item, index) => (
             <Nested key={index}>
               <NestedHeader>
@@ -389,10 +401,12 @@ function FieldControl({ def, value, onChange, lockStructure = false }) {
                 {!lockStructure && (
                   <Remove
                     type="button"
-                    disabled={items.length <= 1}
+                    disabled={!def.allowEmpty && items.length <= 1}
                     onClick={() => {
                       if (items.length <= 1) {
-                        onChange([emptyFromFields(def.itemFields)]);
+                        onChange(
+                          def.allowEmpty ? [] : [emptyFromFields(def.itemFields)]
+                        );
                         return;
                       }
                       onChange(items.filter((_, i) => i !== index));
@@ -516,6 +530,7 @@ function FieldsGrid({ fields, value, onChange, root }) {
                   {label}
                 </Label>
               )}
+              {def.hint && <Hint>{def.hint}</Hint>}
               <FieldControl
                 def={def}
                 value={value?.[key]}
@@ -581,8 +596,9 @@ export function SchemaForm({ schema, value, onChange }) {
             <AccordionSection
               key={section.title}
               title={section.title}
-              defaultOpen={index === 0}
+              defaultOpen={Boolean(section.defaultOpen) || index === 0}
             >
+              {section.description && <Hint>{section.description}</Hint>}
               <FieldsGrid
                 fields={section.fields}
                 value={sectionValue}

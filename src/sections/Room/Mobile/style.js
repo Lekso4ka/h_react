@@ -250,7 +250,7 @@ export const BtnWrap = styled.div`
     position: sticky;
     bottom: 0;
     width: 100%;
-    padding-bottom: .01rem;
+    padding-bottom: calc(.01rem + env(safe-area-inset-bottom, 0px));
     background: transparent;
     display: flex;
     justify-content: center;
@@ -264,7 +264,10 @@ export const Button = styled.button`
     height: 5.8rem;
     justify-content: center;
     align-items: center;
-    background: #96281F;
+    background-color: transparent;
+    background-image: linear-gradient(#96281F, #96281F);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
     color: #FFF6F0;
     text-align: center;
     font-family: "Playfair Display";
@@ -275,7 +278,8 @@ export const Button = styled.button`
     letter-spacing: 0.056rem;
     transition: background-color .2s;
     &:hover {
-        background-color: #A03229;
+        background-color: transparent;
+        background-image: linear-gradient(#A03229, #A03229);
     }
 `
 

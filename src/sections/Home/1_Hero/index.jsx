@@ -17,6 +17,15 @@ const Stars = ({ count }) => (
 
 const telHref = (phone) => `tel:${String(phone || "").replace(/[^\d+]/g, "")}`;
 
+function promoForSeason(hero, weather) {
+    const shared = hero.activity_card || {};
+    const specific = weather === "winter" ? hero.activity_card_winter : hero.activity_card_summer;
+    if (specific && typeof specific === "object" && Object.keys(specific).length > 0) {
+        return specific;
+    }
+    return shared;
+}
+
 export const Hero = ({ weather, setWeather }) => {
     const [actGt, setActGt] = useState(false)
     const [actTi, setActTi] = useState(false)
@@ -27,13 +36,25 @@ export const Hero = ({ weather, setWeather }) => {
     const hero = getMain()?.hero || {};
     const golden = hero.golden_tulip || {};
     const tulip = hero.tulip_inn || {};
-    const activity = hero.activity_card || {};
+    const activity = promoForSeason(hero, weather);
+    const showPromo = activity.enabled !== false;
+    const promoLabel = String(activity.button_text || "").trim()
+        || (mob ? t("getPrice") : t("toActivities"));
+    const promoHref = String(activity.button_link || "").trim();
     
     useEffect(() => {
         setTimeout(() => {
             setActive(true)
         }, 4000)
     }, [])
+    const seasonReady = useRef(false)
+    useEffect(() => {
+        if (!seasonReady.current) {
+            seasonReady.current = true
+            return
+        }
+        setActive(true)
+    }, [weather])
     useEffect(() => {
         
         if (btn.current) {
@@ -161,11 +182,13 @@ export const Hero = ({ weather, setWeather }) => {
                         </div>
                     </div>
                 </HotelCard>
-                {<ActivityCard active={active}>
+                {showPromo && <ActivityCard key={ weather } active={active}>
                     <Video data={ activity.video ? [activity.video] : [] }/>
                     <div className="text">
                         <p>{ activity.text }</p>
-                        <Link>{mob ? t("getPrice") : t("toActivities")}</Link>
+                        {promoHref
+                            ? <Link to={promoHref}>{promoLabel}</Link>
+                            : <Link>{promoLabel}</Link>}
                     </div>
                     <button onClick={() => setActive(false)}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10" fill="none">

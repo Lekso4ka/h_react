@@ -658,11 +658,31 @@ export const entities = {
               label: "Требования",
               addLabel: "Добавить",
             },
+          },
+        },
+        {
+          title: "Как связаться",
+          description:
+            "Для каждой вакансии свой список. Оставьте только нужные способы и удалите лишние. Ссылка может быть адресом мессенджера, почтой или телефоном.",
+          fields: {
             links: {
               type: "objectList",
-              label: "Ссылки",
-              addLabel: "Добавить ссылку",
-              itemFields: linkItem,
+              label: "Способы связи",
+              addLabel: "Добавить способ связи",
+              itemLabel: "Способ связи",
+              allowEmpty: true,
+              itemFields: {
+                title: {
+                  type: "string",
+                  label: "Название",
+                  placeholder: "Телеграм, MAX, Почта, Телефон",
+                },
+                link: {
+                  type: "string",
+                  label: "Ссылка",
+                  placeholder: "https://t.me/…, hr@hotel.ru, +7 999 000-00-00",
+                },
+              },
             },
           },
         },

@@ -1,23 +1,25 @@
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
 
-const renderLine = ({variant}) => {
+const renderLine = ({ variant }) => {
     switch (variant) {
-        case "big": return ({
-            height: ".04em",
-            bottom: "-.26em"
-        });
-        default: return ({
-            height: ".1em",
-            bottom: "-.32em"
-        });
+        case "big":
+            return {
+                height: ".04em",
+                bottom: "-.26em",
+            };
+        default:
+            return {
+                height: ".1em",
+                bottom: "-.32em",
+            };
     }
-}
+};
 
-
-export const LinkSt = styled(Link)`
-    color: ${({ theme, color }) => theme.colors[color || "text"]};
-    font-family: ${({ theme }) => theme.fonts.display};
+const linkCss = ({ theme, color, hover, variant }) => css`
+    color: ${theme.colors[color || "text"]};
+    font-family: ${theme.fonts.display};
     font-size: 1.6rem;
     font-style: italic;
     font-weight: 500;
@@ -28,6 +30,7 @@ export const LinkSt = styled(Link)`
     width: max-content;
     transition-duration: 600ms;
     transition-timing-function: cubic-bezier(0.625, 0.05, 0, 1);
+
     &::after {
         content: "";
         position: absolute;
@@ -35,21 +38,32 @@ export const LinkSt = styled(Link)`
         width: 100%;
         transform-origin: right center;
         transform: scaleX(0) rotate(0.001deg);
-        background-color: ${({ theme, color }) => theme.colors[color || "text"]};
+        background-color: ${theme.colors[color || "text"]};
         transition-property: transform, color, background-color;
         transition-duration: 600ms;
         transition-timing-function: cubic-bezier(0.625, 0.05, 0, 1);
-        ${renderLine};
+        ${renderLine({ variant })};
     }
+
     &:hover {
-        color: ${({ theme, hover }) => theme.colors[hover || "red"]};
+        color: ${theme.colors[hover || "red"]};
+
         &::after {
             transform-origin: left center;
             transform: scaleX(1) rotate(0.001deg);
-            background-color: ${({ theme, hover }) => theme.colors[hover || "red"]}
+            background-color: ${theme.colors[hover || "red"]};
         }
     }
+
     @media (min-width: 576px) {
         font-size: 1.8rem;
     }
-`
+`;
+
+export const LinkSt = styled(Link)`
+    ${linkCss}
+`;
+
+export const ExternalLinkSt = styled.a`
+    ${linkCss}
+`;
