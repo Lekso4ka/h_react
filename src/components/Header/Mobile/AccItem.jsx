@@ -91,21 +91,22 @@ export const AccItem = ({
         <AccItemSt ref={rootRef}>
             <AccTrigger
                 type="button"
+                $open={ isOpen }
                 onClick={ () => setIsOpen((v) => !v) }
                 aria-expanded={ isOpen }
                 aria-controls={ panelId }
             >
-                <AccTitle>
+                <AccTitle $open={ isOpen }>
                     { title }
                 </AccTitle>
-                <AccButton aria-hidden="true">
+                <AccButton aria-hidden="true" $open={ isOpen }>
                     <span ref={ iconRef } >
                         <Icon name="plus" />
                     </span>
                 </AccButton>
             </AccTrigger>
             <AccPanel ref={ panelRef } id={panelId} role="region" aria-hidden={!isOpen}>
-                <AccInner ref={innerRef}>
+                <AccInner ref={innerRef} $open={ isOpen }>
                     {
                         data.map(el => <Link to="" key={el.title} onClick={(e) => linkHandler(e, el.href)}>{el.title}</Link>)
                     }

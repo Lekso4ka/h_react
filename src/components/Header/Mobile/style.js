@@ -138,7 +138,7 @@ export const AccItemSt = styled.div`
 `;
 
 export const AccTrigger = styled.button`
-    color: var(--Black-2, #2F3034);
+    color: ${({ $open }) => $open ? "var(--Red, #96281F)" : "var(--Black-2, #2F3034)"};
     font-family: "Playfair Display";
     font-size: 1.6rem;
     font-style: normal;
@@ -164,7 +164,7 @@ export const AccTitle = styled.span`
     align-items: baseline;
     gap: 1rem;
     span {
-        color: var(--Black-2, #2F3034);
+        color: ${({ $open }) => $open ? "var(--Red, #96281F)" : "var(--Black-2, #2F3034)"};
         font-family: "Playfair Display";
         font-size: 2.4rem;
         font-style: italic;
@@ -181,6 +181,9 @@ export const AccButton = styled.span`
         height: 1.4rem;
         svg {
             height: 100%;
+            rect {
+                fill: ${({ $open }) => $open ? "var(--Red, #96281F)" : "#2F3034"};
+            }
         }
     }
 `;
@@ -190,7 +193,7 @@ export const AccPanel = styled.div`
 `;
 
 export const AccInner = styled.div`
-    color: var(--Gray-1, #565861);
+    color: ${({ $open }) => $open ? "var(--Red, #96281F)" : "var(--Gray-1, #565861)"};
     font-family: "Playfair Display";
     padding-top: 1.4rem;
     font-size: 1.6rem;
