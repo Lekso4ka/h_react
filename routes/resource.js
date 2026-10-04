@@ -15,11 +15,27 @@ async function readLocalized(fileName, lang) {
   return syncLocale(await readJsonLang(fileName, "ru"), data);
 }
 
+function nextAutoId(data, idField, prefix) {
+  const used = new Set(
+    data
+      .map((item) => (item && item[idField] != null ? String(item[idField]) : ""))
+      .filter(Boolean)
+  );
+  let n = 1;
+  let id = `${prefix}_${n}`;
+  while (used.has(id)) {
+    n += 1;
+    id = `${prefix}_${n}`;
+  }
+  return id;
+}
+
 /**
  * kind: "object" | "array"
  * idField: for arrays — property used as id when present (e.g. "id")
+ * autoId: assign `${file}_N` when a new array item has no id
  */
-function createResourceRouter({ fileName, kind, idField = null }) {
+function createResourceRouter({ fileName, kind, idField = null, autoId = false }) {
   const router = express.Router();
 
   if (kind === "singleton") {
@@ -171,8 +187,21 @@ function createResourceRouter({ fileName, kind, idField = null }) {
         return res.status(201).json({ id, item });
       }
 
-      if (idField && item[idField] == null && rawId) {
-        item[idField] = rawId;
+      if (idField) {
+        const explicit = String(item[idField] ?? rawId ?? "").trim();
+        if (explicit) item[idField] = explicit;
+        else if (autoId) {
+          const prefix = String(fileName).replace(/\.json$/i, "");
+          item[idField] = nextAutoId(data, idField, prefix);
+        }
+        if (item[idField]) {
+          const exists = data.some(
+            (entry) => entry && String(entry[idField]) === String(item[idField])
+          );
+          if (exists) {
+            return res.status(400).json({ error: "Такой ID уже есть" });
+          }
+        }
       }
 
       data.push(item);

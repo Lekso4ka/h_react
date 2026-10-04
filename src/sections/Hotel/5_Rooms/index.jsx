@@ -12,6 +12,6 @@ export const Rooms = ({data, link, name}) => {
             to={link}
             color={"light"}
             hover={"light"}
-        >{ t("toRooms") } { link }</Link>
+        >{ t("toRooms") }</Link>
     </Section3>
 }

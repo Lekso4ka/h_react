@@ -158,19 +158,28 @@ export const Filter = styled.div`
         display: flex;
         justify-content: flex-end;
         color: var(--Black, #1C1C1C);
-        font-size: 1.8rem;
+        font-size: 1.4rem;
         font-style: normal;
         font-weight: 600;
         line-height: 110%; /* 19.8px */
-        gap: 1.6rem;
+        gap: 1.2rem;
         align-items: center;
         cursor: pointer;
         svg {
             transition: transform .2s linear;
-            width: 1.4rem;
-            height: 1.4rem;
+            width: 1.2rem;
+            height: 1.2rem;
             transform: rotate(${({active}) => active ? 45 : 0}deg);
         }
+        @media (min-width: 576px) {
+            font-size: 1.8rem;
+            gap: 1.6rem;
+            svg {
+                width: 1.4rem;
+                height: 1.4rem;
+            }
+        }
+        
     }
     .bottom {
         border-top: 1px solid #2F3034;

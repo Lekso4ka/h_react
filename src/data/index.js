@@ -12,6 +12,10 @@ export function getAffiche() {
     return getStore().affiche;
 }
 
+export function getAfficheById(id) {
+    return getStore().affiche.find((item) => item && String(item.id) === String(id));
+}
+
 export function getDoings() {
     return getStore().doings;
 }

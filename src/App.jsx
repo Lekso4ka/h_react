@@ -5,6 +5,7 @@ import { Header } from "./components/Header";
 import { Map } from "./components/Map";
 import { Activities } from "./pages/Activities";
 import { Affiche } from "./pages/Affiche";
+import { AfficheEvent } from "./pages/AfficheEvent";
 import { Article } from "./pages/Article";
 import { Doings } from "./pages/Doings";
 import { Events } from "./pages/Events";
@@ -37,6 +38,7 @@ export const App = () => {
             <Route path="/doings" element={ <Doings/> }/>
             <Route path="/article/:article" element={ <Article/> }/>
             <Route path="/affiche" element={ <Affiche/> }/>
+            <Route path="/affiche/:id" element={ <AfficheEvent/> }/>
             
             <Route path="/stock/:id" element={ <Stocks/> }/>
             <Route path="/services/:id" element={ <Services/> }/>

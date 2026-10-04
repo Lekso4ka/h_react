@@ -151,35 +151,30 @@ export const Variants = styled.div`
             background: var(--Green, #55532E);
             
             &:nth-of-type(1) {
-                opacity: 1;
-                animation: pulse1 2s infinite;
+                opacity: .3;
+                animation: pulse1 2s ease-in-out infinite;
             }
             &:nth-of-type(2) {
-                opacity: .3;
+                opacity: 1;
                 margin-left: -.2rem;
-                animation: pulse2 2s infinite;
             }
         }
         @keyframes pulse1 {
-            0% {
-                opacity: 1
+            0%, 20% {
+                opacity: .3;
+                transform: translateX(0);
             }
-            66% {
-                opacity: .3
+            62% {
+                opacity: 0;
+                transform: translateX(calc(100% - .2rem));
             }
-            100% {
-                opacity: 1
-            }
-        }
-        @keyframes pulse2 {
-            0% {
-                opacity: .3
-            }
-            66% {
-                opacity: 1
+            62.01%, 78% {
+                opacity: 0;
+                transform: translateX(0);
             }
             100% {
-                opacity: .3
+                opacity: .3;
+                transform: translateX(0);
             }
         }
     }

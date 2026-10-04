@@ -428,6 +428,10 @@ export const entities = {
     key: "affiche",
     title: "Афиша Роза Хутор",
     kind: "array",
+    recordId: "always",
+    recordIdWhen: {},
+    keyLabel: "ID",
+    idPlaceholder: "например: affiche_1",
     schema: {
       sections: [
         seoSection(),
@@ -450,11 +454,24 @@ export const entities = {
                 "Развлечения на курорте",
               ],
             },
-            title: { type: "string", label: "Название" },
+            title: { type: "textarea", label: "Название" },
             date: { type: "string", label: "Дата", placeholder: "YYYY-MM-DD" },
             time: { type: "string", label: "Время" },
-            link: { type: "string", label: "Ссылка" },
             src: { type: "image", label: "Изображение" },
+          },
+        },
+        {
+          title: "Страница события",
+          description:
+            "Заголовок, абзацы и ссылка «Подробнее о событии» на странице события. Дата, время, название и изображение берутся из блока выше.",
+          fields: {
+            caption: { type: "string", label: "Заголовок" },
+            text: { type: "paragraphs", label: "Абзацы" },
+            more_link: {
+              type: "string",
+              label: "Ссылка «Подробнее о событии»",
+              placeholder: "https://…",
+            },
           },
         },
       ],

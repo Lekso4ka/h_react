@@ -64,7 +64,7 @@ export const Section3 = styled.section`
             background-size: 110% auto;
         }
         &:hover::before {
-            opacity: 0;
+            background-color: rgba(0, 0, 0, 0.20);
         }
         .tooltip {
             padding: 1.2rem 1.6rem;

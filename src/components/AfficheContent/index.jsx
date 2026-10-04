@@ -51,7 +51,7 @@ export const AfficheContent = () => {
                     </VariantItem>) }
                 </div>
             </Filter>
-            {data.filter(el => filters.length > 0 ? filters.includes(el.variant) : true).map((el, i) => <Item key={i} bg={el.src}>
+            {data.filter(el => filters.length > 0 ? filters.includes(el.variant) : true).map((el, i) => <Item key={el.id || i} bg={el.src}>
                 <div className="img"/>
                 <h5>{ afficheLabel(el.variant, t) }</h5>
                 <h2>{el.title}</h2>
@@ -60,7 +60,7 @@ export const AfficheContent = () => {
                     <span className="divider"/>
                     <span>{el.time}</span>
                 </div>
-                <Link to={el.link}>{ t("more") }</Link>
+                <Link to={el.id ? `/affiche/${el.id}` : el.link}>{ t("more") }</Link>
             </Item>)}
         </Content>
         <Line/>

@@ -47,7 +47,12 @@ app.use(
 );
 app.use(
     "/api/affiche",
-    createResourceRouter({ fileName: "affiche.json", kind: "array" })
+    createResourceRouter({
+        fileName: "affiche.json",
+        kind: "array",
+        idField: "id",
+        autoId: true,
+    })
 );
 app.use(
     "/api/doings",

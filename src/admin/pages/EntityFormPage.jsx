@@ -150,9 +150,9 @@ export function EntityFormPage({ entityKey: entityKeyProp } = {}) {
   const { seoSchema, restSchema } = splitSeoSchema(entity.schema);
   const showId =
     entity.kind === "object" ||
-    (isNew &&
-      entity.kind === "array" &&
-      matchesShowWhen(entity.recordIdWhen, item));
+    (entity.kind === "array" &&
+      matchesShowWhen(entity.recordIdWhen, item) &&
+      (isNew || entity.recordId === "always"));
 
   return (
     <form onSubmit={handleSubmit}>
@@ -183,9 +183,10 @@ export function EntityFormPage({ entityKey: entityKeyProp } = {}) {
               value={recordId}
               onChange={(e) => setRecordId(e.target.value)}
               placeholder={
-                entity.kind === "object"
+                entity.idPlaceholder ||
+                (entity.kind === "object"
                   ? "например: winter"
-                  : "например: article_10"
+                  : "например: article_10")
               }
               disabled={
                 (entity.kind === "array" && !isNew) || (lang === "en" && !isNew)
