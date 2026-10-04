@@ -22,9 +22,10 @@ export const Content = styled.section`
     }
 
     p {
+        padding-top: 5.4rem;
         color: var(--Black-2, #2F3034);
         font-family: Manrope;
-        font-size: 1.8rem;
+        font-size: 1.6rem;
         font-style: normal;
         font-weight: 500;
         line-height: 130%; /* 23.4px */

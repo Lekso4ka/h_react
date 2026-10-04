@@ -17,7 +17,8 @@ export const Section2 = styled.section`
         
     }
     span {
-        color: var(--Black-2, #2F3034);
+        //color: var(--Black-2, #2F3034);
+        color: var(--Red, #96281F);
         font-family: Manrope;
         font-size: 1.4rem;
         font-style: normal;
@@ -56,7 +57,6 @@ export const Section2 = styled.section`
         }
 
         span {
-            color: var(--Red, #96281F);
             text-align: center;
             font-size: 1.6rem;
         }

@@ -72,10 +72,10 @@ export const Content = styled.section`
 
     a {
         position: absolute;
+		left: 2.4rem;
         bottom: 7.9rem;
         display: flex;
         justify-content: center;
-        left: 0;
         right: 0;
     }
 
@@ -228,6 +228,7 @@ export const Content = styled.section`
         a {
             position: relative;
             bottom: 0;
+			left: 0;
         }
 
         .list-container {
