@@ -18,7 +18,14 @@ export const Caption = ({ data }) => {
         return arr;
     }
     return <>
-        <Hero bg={ data.banner }>
+        <Hero
+            bg={ data.banner || data.banner_mobile }
+            bgMobile={ data.banner_mobile || data.banner }
+            pos={ data.banner_position }
+            size={ data.banner_size }
+            posMobile={ data.banner_mobile_position }
+            sizeMobile={ data.banner_mobile_size }
+        >
             <Line />
             <div className="divider"/>
         </Hero>

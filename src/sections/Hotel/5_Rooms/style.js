@@ -59,7 +59,10 @@ export const Section3 = styled.section`
         
         justify-content: center;
         align-items: center;
-        transition: background-size 1s;
+        transition:background-size 1s;
+        &::before {
+            transition: background-color 1s;
+        }
         &:hover {
             background-size: 110% auto;
         }

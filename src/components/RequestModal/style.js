@@ -10,6 +10,7 @@ export const Modal = styled.div`
     background: rgba(0, 0, 0, 0.70);
     pointer-events: none;
     opacity: 0;
+    overflow: hidden;
     transition: opacity 0.3s;
     &.active {
         opacity: 1;
@@ -32,7 +33,9 @@ export const Modal = styled.div`
         bottom: 1.6rem;
         display: flex;
         flex-direction: column;
+        overflow-x: hidden;
         overflow-y: auto;
+        max-width: 100%;
         h3 {
             color: #FFF;
             font-family: "Playfair Display";
@@ -48,15 +51,21 @@ export const Modal = styled.div`
         display: flex;
         flex-direction: column;
         margin-top: 4rem;
+        min-width: 0;
+        max-width: 100%;
     }
     .pane {
         position: relative;
         border-top: .1rem solid #FFF6F0;
         border-bottom: .1rem solid #FFF6F0;
+        min-width: 0;
+        max-width: 100%;
     }
     .pane-inner {
         display: flex;
         flex-direction: column;
+        min-width: 0;
+        max-width: 100%;
     }
     .fields:last-child .field:last-child {
         border-bottom: none;
@@ -68,6 +77,8 @@ export const Modal = styled.div`
     }
     .fields {
         display: grid;
+        min-width: 0;
+        max-width: 100%;
     }
     .field {
         display: grid;
@@ -75,6 +86,8 @@ export const Modal = styled.div`
         padding: 1.1rem 0 1rem;
         border-bottom: .1rem solid #FFF6F0;
         position: relative;
+        min-width: 0;
+        max-width: 100%;
         span {
             color: rgba(255, 255, 255, 0.50);
             font-family: Manrope;
@@ -87,6 +100,8 @@ export const Modal = styled.div`
             border: none;
             padding: 0;
             width: 100%;
+            min-width: 0;
+            max-width: 100%;
             box-sizing: border-box;
             color: #FFF;
             font-family: Manrope;
@@ -115,8 +130,15 @@ export const Modal = styled.div`
             &[type="date"] {
                 text-align: left;
                 color-scheme: dark;
+                overflow: hidden;
                 &::-webkit-date-and-time-value {
                     text-align: left;
+                    min-width: 0;
+                }
+                &::-webkit-datetime-edit,
+                &::-webkit-datetime-edit-fields-wrapper {
+                    min-width: 0;
+                    padding: 0;
                 }
             }
         }
@@ -360,18 +382,32 @@ export const Modal = styled.div`
                 font-size: 1.2rem;
             }
             input, textarea {
-                font-size: 1.6rem;
+                font-size: max(1.6rem, 16px);
             }
         }
         .date-field {
+            overflow: hidden;
             input {
                 padding-right: 2.8rem;
+                -webkit-appearance: none;
+                appearance: none;
             }
-            .calendar-icon,
-            input::-webkit-calendar-picker-indicator {
+            .calendar-icon {
                 width: 1.9rem;
                 height: 2.2rem;
                 bottom: 1.2rem;
+            }
+            input::-webkit-calendar-picker-indicator {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: auto;
+                bottom: auto;
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                opacity: 0;
             }
         }
         .x {

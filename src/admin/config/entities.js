@@ -160,9 +160,37 @@ const hotelMainSchema = {
   sections: [
     seoSection(),
     {
+      title: "Hero",
+      description:
+        "Картинка первого экрана. Десктоп и мобильная версия задаются отдельно. Если мобильная картинка не загружена, показывается десктопная. Позиция: center, 50% 20%, left top. Размер: cover, contain, 100% auto. Пустые поля позиции и размера оставляют текущий вид: center и cover.",
+      fields: {
+        banner: { type: "image", label: "Баннер, десктоп" },
+        banner_position: {
+          type: "string",
+          label: "background-position, десктоп",
+          placeholder: "center",
+        },
+        banner_size: {
+          type: "string",
+          label: "background-size, десктоп",
+          placeholder: "cover",
+        },
+        banner_mobile: { type: "image", label: "Баннер, мобильная версия" },
+        banner_mobile_position: {
+          type: "string",
+          label: "background-position, мобильная",
+          placeholder: "center",
+        },
+        banner_mobile_size: {
+          type: "string",
+          label: "background-size, мобильная",
+          placeholder: "cover",
+        },
+      },
+    },
+    {
       title: "Основные параметры",
       fields: {
-        banner: { type: "image", label: "Banner" },
         name: { type: "string", label: "Название" },
         name_tooltip: { type: "string", label: "Подсказка названия" },
         stars: { type: "number", label: "Звёзды" },

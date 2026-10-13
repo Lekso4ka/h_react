@@ -1,10 +1,38 @@
 import styled from "@emotion/styled";
 import { mediaUrl } from "../../../utils/mediaUrl";
+
+const LENGTH = "-?(?:\\d+\\.\\d+|\\d+)(?:%|px|rem|em|vw|vh)|-?0";
+const POSITION_TOKEN = new RegExp(
+    `^(?:center|top|bottom|left|right|${LENGTH})$`,
+    "i"
+);
+const SIZE_TOKEN = new RegExp(`^(?:auto|cover|contain|${LENGTH})$`, "i");
+
+function cssList(value, token, fallback, max) {
+    const raw = String(value ?? "").trim().replace(/\s+/g, " ");
+    if (!raw) return fallback;
+    const parts = raw.split(" ");
+    if (parts.length > max || parts.some((part) => !token.test(part))) {
+        return fallback;
+    }
+    return raw;
+}
+
+function bgImage(value) {
+    const url = mediaUrl(value);
+    if (!url) return "none";
+    return `url("${url.replace(/["\\\n\r]/g, "")}")`;
+}
+
 export const Hero = styled.div`
     height: 84.4rem;
     box-sizing: border-box;
     position: relative;
-    background: url(${ ({ bg }) => mediaUrl(bg) }) lightgray 50% / cover no-repeat;
+    background-color: lightgray;
+    background-image: ${ ({ bgMobile }) => bgImage(bgMobile) };
+    background-repeat: no-repeat;
+    background-position: ${ ({ posMobile }) => cssList(posMobile, POSITION_TOKEN, "center", 4) };
+    background-size: ${ ({ sizeMobile }) => cssList(sizeMobile, SIZE_TOKEN, "cover", 2) };
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -50,6 +78,9 @@ export const Hero = styled.div`
     }
     @media (min-width: 576px) {
         height: 76rem;
+        background-image: ${ ({ bg }) => bgImage(bg) };
+        background-position: ${ ({ pos }) => cssList(pos, POSITION_TOKEN, "center", 4) };
+        background-size: ${ ({ size }) => cssList(size, SIZE_TOKEN, "cover", 2) };
         &::before {
             background-color: #0000004D
         }
