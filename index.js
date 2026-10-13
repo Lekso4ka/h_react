@@ -9,8 +9,10 @@ const roomsRouter = require("./routes/rooms");
 const uploadRouter = require("./routes/upload");
 const authRouter = require("./routes/auth");
 const leadsRouter = require("./routes/leads");
+const staticRouter = require("./routes/static");
 const createResourceRouter = require("./routes/resource");
 const { authRequiredUnlessGet } = require("./middleware/auth");
+const { ensureStaticTables } = require("./lib/staticContent");
 
 const app = exp();
 const PORT = config.port;
@@ -32,6 +34,7 @@ app.use("/api", authRequiredUnlessGet);
 
 app.use("/api/rooms", roomsRouter);
 app.use("/api/upload", uploadRouter);
+app.use("/api/static", staticRouter);
 
 app.use(
     "/api/activities",
@@ -86,6 +89,12 @@ app.get("*splat", (_req, res) => {
     res.sendFile(path.join(__dirname, "static", "index.html"));
 });
 
-app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`);
-});
+ensureStaticTables()
+    .catch((error) => {
+        console.error("static tables:", error.message);
+    })
+    .finally(() => {
+        app.listen(PORT, () => {
+            console.log(`Server running at http://localhost:${PORT}`);
+        });
+    });

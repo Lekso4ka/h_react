@@ -383,6 +383,10 @@ export const StickyDock = styled.div`
 `
 
 export const Sticky = styled.button`
+    cursor: pointer;
+    border: 0;
+    box-sizing: border-box;
+    text-decoration: none;
     position: relative;
     display: block;
     width: 100%;

@@ -23,6 +23,7 @@ function shouldAttachLang(url) {
   if (url.startsWith("/auth")) return false;
   if (url.startsWith("/leads")) return false;
   if (url.startsWith("/upload")) return false;
+  if (url.startsWith("/static")) return false;
   return true;
 }
 

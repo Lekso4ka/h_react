@@ -4,6 +4,7 @@ import { useT } from "../../../Ctx";
 import { Tour } from "../../../components/Tour";
 import { Variants } from "../../../components/Variants";
 import { decodeRouteParam, getRoomById } from "../../../data/rooms";
+import { externalLinkProps } from "../../../utils/externalHref";
 import { Breadcrumbs } from "../../../ui/Breadcrumbs";
 import { Icon } from "../../../ui/Icon";
 import { Line } from "../../../ui/Line";
@@ -103,7 +104,7 @@ export const Mobile = () => {
         </Content>
         <BtnWrap>
             <ButtonPad>
-                <Button>{ t("checkAvailability") }</Button>
+                <Button {...externalLinkProps(room[v].availability_link)}>{ t("checkAvailability") }</Button>
             </ButtonPad>
         </BtnWrap>
         

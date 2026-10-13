@@ -13,6 +13,8 @@ import { ForgotPasswordPage } from "./pages/auth/ForgotPasswordPage";
 import { ResetPasswordPage } from "./pages/auth/ResetPasswordPage";
 import { ChangePasswordPage } from "./pages/auth/ChangePasswordPage";
 import { LeadsPage } from "./pages/LeadsPage";
+import { StaticMediaPage } from "./pages/StaticMediaPage";
+import { StaticTextsPage } from "./pages/StaticTextsPage";
 import { ProtectedRoute } from "./auth/ProtectedRoute";
 import { adminPath } from "./paths";
 
@@ -45,6 +47,8 @@ export default function AdminApp() {
         <Route path="change-password" element={<ChangePasswordPage />} />
 
         <Route path="leads/:leadKey" element={<LeadsPage />} />
+        <Route path="static/media" element={<StaticMediaPage />} />
+        <Route path="static/texts" element={<StaticTextsPage />} />
 
         <Route path="rooms/:hotel" element={<RoomsPage />} />
         <Route path="rooms/:hotel/new" element={<RoomFormPage />} />

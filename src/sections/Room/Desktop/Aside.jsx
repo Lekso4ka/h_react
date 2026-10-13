@@ -1,5 +1,6 @@
 import React from "react";
 import { useT } from "../../../Ctx";
+import { externalLinkProps } from "../../../utils/externalHref";
 
 import { Icon } from "../../../ui/Icon";
 import { AccItem } from "./AccItem";
@@ -60,6 +61,6 @@ export const RoomAside = ({ room, v, infoRef }) => {
                 variant={ "opt2" }
             />
         </div>
-        <Button>{ t("checkAvailability") }</Button>
+        <Button {...externalLinkProps(room[v].availability_link)}>{ t("checkAvailability") }</Button>
     </Info>
 }

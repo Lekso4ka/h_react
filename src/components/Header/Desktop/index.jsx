@@ -20,6 +20,8 @@ import {
 const dark = ["/", "/hotel/golden-tulip", "/hotel/tulip-inn", "/activities/winter", "/activities/summer", "/actions", "/vacancies", "/wedding", "/teambuilding", "/stock/golden-tulip", "/stock/tulip-inn"]
 
 import { getAllMenuNav, getLeftNav, getRightNav } from "../data";
+import { getMenu } from "../../../data";
+import { externalLinkProps } from "../../../utils/externalHref";
 import { useCtx, useT } from "../../../Ctx";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
@@ -224,7 +226,7 @@ export const Desktop = () => {
                     onEnter={ openMenu }
                     onNavigate={ navigateToHash }
                 />) }
-                <HeaderButton>
+                <HeaderButton {...externalLinkProps(getMenu()?.booking_link)}>
                     { t("book") }
                 </HeaderButton>
                 <HeaderLang>

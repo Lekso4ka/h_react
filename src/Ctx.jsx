@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { loadSiteData } from "./data/store";
 import { readStoredLang, t, writeStoredLang } from "./i18n/strings";
+import { staticSlotCss } from "./utils/staticSlots";
 
 const Context = createContext();
 
@@ -50,11 +51,14 @@ export const ContextProvider = ({children}) => {
         setLangState(resolved);
     };
 
+    const slotCss = staticSlotCss();
+
     return <Context.Provider value={{
         mob,
         lang,
         setLang,
     }}>
+        {slotCss ? <style data-static-slots>{`:root{${slotCss}}`}</style> : null}
         {children}
     </Context.Provider>
 }

@@ -1,4 +1,5 @@
 import img from "../assets/img";
+import { mediaOverrideUrl } from "./staticSlots";
 
 const ABSOLUTE =
     /^(?:\/images\/|https?:\/\/|blob:|data:)/i;
@@ -14,6 +15,9 @@ export function mediaUrl(value) {
     if (ABSOLUTE.test(value)) {
         return value;
     }
+
+    const override = mediaOverrideUrl(value);
+    if (override) return override;
 
     // Legacy key from assets/img map (Home, Header, etc.)
     if (img[value]) {

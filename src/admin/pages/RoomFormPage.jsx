@@ -85,6 +85,7 @@ const GroupHeader = styled.div`
 const emptyRoom = {
   seo: { title: "", description: "", keywords: "" },
   tour_link: "",
+  availability_link: "",
   rooms: 1,
   size: 25,
   guests: 2,
@@ -305,6 +306,7 @@ export function RoomFormPage() {
       }))
       .filter((group) => group.title || group.list.length > 0),
     images: Array.isArray(room.images) ? room.images : [],
+    availability_link: String(room.availability_link || "").trim(),
   });
 
   const handleSubmit = async (event) => {
@@ -493,6 +495,16 @@ export function RoomFormPage() {
               <Input
                 value={room.tour_link}
                 onChange={(e) => setField("tour_link", e.target.value)}
+              />
+            </Field>
+          )}
+          {!textOnly && (
+            <Field>
+              <Label>Ссылка «Проверить доступность»</Label>
+              <Input
+                value={room.availability_link}
+                onChange={(e) => setField("availability_link", e.target.value)}
+                placeholder="https://…"
               />
             </Field>
           )}

@@ -1,6 +1,6 @@
 import styled from "@emotion/styled"
 
-import img from "../../assets/img"
+import { slotImage } from "../../utils/staticSlots"
 
 export const Hero = styled.section`
     height: 84.4rem;
@@ -10,7 +10,7 @@ export const Hero = styled.section`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url("${img.tb_1}");
+    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), ${slotImage("tb_1")};
     background-position: center 82%;
     background-size: cover;
     &::before {
@@ -154,7 +154,7 @@ export const Section1 = styled.section`
     display: grid;
     justify-items: center;
     .img1 {
-        background-image: url("${img.tb_2}");
+        background-image: ${slotImage("tb_2")};
         grid-row-start: 1;
         height: 54.4rem;
         background-position: center;
@@ -220,7 +220,7 @@ export const Section1 = styled.section`
         width: calc(100% - 1.2rem);
         margin-top: 10rem;
         height: 54.4rem;
-        background-image: url("${img.tb_3}");
+        background-image: ${slotImage("tb_3")};
         background-position: center;
         background-size: cover;
     }
@@ -331,7 +331,7 @@ export const Section2 = styled.section`
         }
     }
     .img {
-        background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url(${img.tb_4});
+        background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), ${slotImage("tb_4")};
         background-position: center;
         background-size: cover;
         height: 59.4rem;
@@ -488,20 +488,20 @@ export const Section3 = styled.section`
         }
     }
     .img1 {
-        background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url("${img.tb_8}");
+        background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), ${slotImage("tb_8")};
     }
     .img2 {
-        background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url("${img.tb_5}");
+        background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), ${slotImage("tb_5")};
     }
     .img3 {
-        background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url("${img.tb_7}");
+        background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), ${slotImage("tb_7")};
         background-position: center 92% !important;
     }
     .img4 {
-        background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url("${img.tb_17}");
+        background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), ${slotImage("tb_17")};
     }
     .img5 {
-        background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url("${img.tb_18}");
+        background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), ${slotImage("tb_18")};
     }
     .tooltip {
         display: flex;
@@ -624,13 +624,13 @@ export const Section4 = styled.section`
         }
     }
     .img1 {
-        background-image: url("${img.tb_10}");
+        background-image: ${slotImage("tb_10")};
     }
     .img2 {
-        background-image: url("${img.tb_11}");
+        background-image: ${slotImage("tb_11")};
     }
     .img3 {
-        background-image: url("${img.tb_12}");
+        background-image: ${slotImage("tb_12")};
     }
     ul {
         display: grid;
@@ -773,17 +773,17 @@ export const Section5 = styled.section`
     }
 
     .img1 {
-        background-image: url("${ img.tb_13 }");
+        background-image: ${slotImage("tb_13")};
     }
 
     .img2 {
-        background-image: url("${ img.tb_14 }");
+        background-image: ${slotImage("tb_14")};
     }
 
     .img3 {
         grid-column-end: span 2;
         grid-row-start: 1;
-        background-image: url("${ img.tb_15 }");
+        background-image: ${slotImage("tb_15")};
     }
 
     li {
@@ -870,7 +870,7 @@ export const Section6 = styled.section`
     justify-content: center;
     scroll-margin-top: 8.8rem;
     padding: 13.9rem 1.6rem 6rem;
-    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.30) 0%, rgba(0, 0, 0, 0.30) 100%), url("${img.tb_16}");
+    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.30) 0%, rgba(0, 0, 0, 0.30) 100%), ${slotImage("tb_16")};
     background-position: bottom;
     background-size: cover;
     .content {

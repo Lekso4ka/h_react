@@ -4,6 +4,7 @@ import { Icon } from "../../../ui/Icon";
 import { useCtx, useT } from "../../../Ctx";
 import { getAllMenuNav, getMobileNav } from "../data";
 import { getMenu } from "../../../data";
+import { externalLinkProps } from "../../../utils/externalHref";
 import { Dropdown } from "../Desktop/Dropdown";
 import { AccItem } from "./AccItem";
 import { Container, BarBg, NavBlock, Button } from "./style";
@@ -229,7 +230,7 @@ export const Mobile = () => {
                 <h5>{ menu.mobile_address_title }</h5>
                 <p>{ menu.mobile_address }</p>
             </div>
-            <Button>{ t("book") }</Button>
+            <Button {...externalLinkProps(menu?.booking_link)}>{ t("book") }</Button>
         </NavBlock>
         
     </Container>

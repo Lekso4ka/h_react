@@ -388,6 +388,22 @@ export function Sidebar() {
         </Group>
 
         <Group>
+          <GroupTitle>Статичный контент</GroupTitle>
+          <Item
+            to={adminPath("/static/media")}
+            className={() => classIf(location.pathname.startsWith(adminPath("/static/media")))}
+          >
+            Фото и видео
+          </Item>
+          <Item
+            to={adminPath("/static/texts")}
+            className={() => classIf(location.pathname.startsWith(adminPath("/static/texts")))}
+          >
+            Тексты
+          </Item>
+        </Group>
+
+        <Group>
           <Item
             to={adminPath("/menu")}
             className={() => classIf(isMenu)}

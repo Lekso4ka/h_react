@@ -102,6 +102,9 @@ export const HeaderName = styled.div`
     
 `
 export const HeaderButton = styled.button`
+    cursor: pointer;
+    border: 0;
+    text-decoration: none;
     display: flex;
     width: 20rem;
     height: 3.8rem;

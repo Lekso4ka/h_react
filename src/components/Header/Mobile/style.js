@@ -209,6 +209,10 @@ export const AccInner = styled.div`
 `;
 
 export const Button = styled.button`
+    cursor: pointer;
+    border: 0;
+    box-sizing: border-box;
+    text-decoration: none;
     height: 5.1rem;
     width: 100%;
     display: flex;

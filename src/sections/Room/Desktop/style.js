@@ -247,6 +247,10 @@ export const Gallery = styled.div`
 `
 
 export const Button = styled.button`
+    cursor: pointer;
+    border: 0;
+    box-sizing: border-box;
+    text-decoration: none;
     display: flex;
     width: 100%;
     height: 6.4rem;

@@ -355,6 +355,22 @@ CREATE TABLE leads (
 
 CREATE INDEX leads_source_created_idx ON leads (source, created_at DESC);
 
+-- ─── static pages (hardcoded media + i18n copy) ──────────────────────────────
+
+CREATE TABLE static_media (
+  key         text PRIMARY KEY,
+  filename    text NOT NULL,
+  kind        text NOT NULL CHECK (kind IN ('image', 'video')),
+  updated_at  timestamptz NOT NULL DEFAULT now()
+);
+
+CREATE TABLE static_texts (
+  key         text PRIMARY KEY,
+  ru          jsonb,
+  en          jsonb,
+  updated_at  timestamptz NOT NULL DEFAULT now()
+);
+
 -- ─── site content (whole JSON documents, ru + en) ─────────────────────────────
 
 CREATE TABLE content (

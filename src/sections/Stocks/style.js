@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import img from "../../assets/img";
+import { slotImage } from "../../utils/staticSlots";
 import { mediaUrl } from "../../utils/mediaUrl";
 
 export const Container = styled.div`
@@ -12,7 +12,7 @@ export const Container = styled.div`
         justify-content: center;
         justify-items: center;
         gap: 4.6rem;
-        background: linear-gradient(0deg, rgba(0, 0, 0, 0.40) 0%, rgba(0, 0, 0, 0.40) 100%), url(${img["h_banner"]});
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.40) 0%, rgba(0, 0, 0, 0.40) 100%), ${slotImage("h_banner")};
         background-position: center;
         background-size: cover;
         h1 {

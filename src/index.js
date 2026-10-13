@@ -7,6 +7,7 @@ import { App } from "./App";
 import { AdminRoot } from "./admin/AdminRoot";
 import { ContextProvider, useCtx } from "./Ctx";
 import { loadSiteData } from "./data/store";
+import { loadStaticContent } from "./data/staticContent";
 import { readStoredLang, t } from "./i18n/strings";
 import { GlobalStyles } from "./styles/GlobalSt";
 import { theme } from "./styles/theme";
@@ -27,7 +28,10 @@ const PublicRoot = () => {
 
     useEffect(() => {
         let cancelled = false;
-        loadSiteData({ force: true, lang: readStoredLang() })
+        Promise.all([
+            loadSiteData({ force: true, lang: readStoredLang() }),
+            loadStaticContent(),
+        ])
             .then(() => {
                 if (!cancelled) setReady(true);
             })

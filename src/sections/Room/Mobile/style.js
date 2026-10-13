@@ -266,6 +266,10 @@ export const ButtonPad = styled.div`
 `
 
 export const Button = styled.button`
+    cursor: pointer;
+    border: 0;
+    box-sizing: border-box;
+    text-decoration: none;
     pointer-events: auto;
     display: flex;
     width: 100%;

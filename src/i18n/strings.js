@@ -515,6 +515,30 @@ const en = {
 
 export const STRINGS = { ru, en };
 
+const textOverrides = { ru: {}, en: {} };
+
+function usableOverride(value, fallback) {
+    if (value == null || value === "") return fallback;
+    if (Array.isArray(fallback)) {
+        if (!Array.isArray(value) || value.length !== fallback.length) return fallback;
+        if (value.some((item) => typeof item !== "string" || item === "")) return fallback;
+        return value;
+    }
+    if (Array.isArray(value)) return fallback;
+    return value;
+}
+
+export function applyTextOverrides(items) {
+    textOverrides.ru = {};
+    textOverrides.en = {};
+    if (!items || typeof items !== "object") return;
+    for (const [key, value] of Object.entries(items)) {
+        if (!value || typeof value !== "object") continue;
+        if (value.ru != null) textOverrides.ru[key] = value.ru;
+        if (value.en != null) textOverrides.en[key] = value.en;
+    }
+}
+
 export const AFFICHE_FILTERS = [
     { value: "Спорт", key: "afficheSport" },
     { value: "Концерты", key: "afficheConcerts" },
@@ -527,5 +551,8 @@ export const AFFICHE_FILTERS = [
 ];
 
 export function t(lang, key) {
-    return STRINGS[lang]?.[key] ?? STRINGS.ru[key] ?? key;
+    const fallback = STRINGS[lang]?.[key] ?? STRINGS.ru[key] ?? key;
+    const pack = lang === "en" ? textOverrides.en : textOverrides.ru;
+    if (!pack || !Object.prototype.hasOwnProperty.call(pack, key)) return fallback;
+    return usableOverride(pack[key], fallback);
 }

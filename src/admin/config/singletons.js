@@ -165,6 +165,18 @@ export const singletons = {
       sections: [
         seoSection(),
         {
+          title: "Бронирование",
+          description:
+            "Кнопка «Бронировать отель» внизу главной на мобильной версии. Ссылка открывается в новой вкладке. Пустое поле оставляет кнопку без перехода.",
+          fields: {
+            booking_link: {
+              type: "string",
+              label: "Ссылка",
+              placeholder: "https://…",
+            },
+          },
+        },
+        {
           title: "Hero",
           key: "hero",
           fields: {
@@ -349,6 +361,18 @@ export const singletons = {
     schema: {
       sections: [
         seoSection(),
+        {
+          title: "Кнопка «Бронировать»",
+          description:
+            "Кнопка в шапке на десктопе и в мобильном меню. Ссылка открывается в новой вкладке. Пустое поле оставляет кнопку без перехода.",
+          fields: {
+            booking_link: {
+              type: "string",
+              label: "Ссылка",
+              placeholder: "https://…",
+            },
+          },
+        },
         {
           title: "Левое меню",
           fields: {

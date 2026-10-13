@@ -1,3 +1,5 @@
+import { t } from "../i18n/strings";
+
 const MONTHS = {
     ru: [
         "Января", "Февраля", "Марта", "Апреля", "Мая", "Июня",
@@ -27,15 +29,21 @@ const parseSimple = (date) => {
     return `${nToZero(day.getDate())}.${nToZero(day.getMonth() + 1)}.${nToZero(day.getFullYear())}`
 }
 
+function monthNames(lang, key, fallback) {
+    const value = t(lang, key);
+    if (Array.isArray(value) && value.length === fallback.length) return value;
+    return fallback;
+}
+
 const parseWithText = (date, lang = "ru") => {
     const day = new Date(date)
-    const months = MONTHS[lang] || MONTHS.ru;
+    const months = monthNames(lang, "months", MONTHS[lang] || MONTHS.ru);
     return `${nToZero(day.getDate())} ${months[day.getMonth()]} ${nToZero(day.getFullYear())}`
 }
 
 const parseWithShortText = (date, lang = "ru") => {
     const day = new Date(date)
-    const shortMonths = SHORT_MONTHS[lang] || SHORT_MONTHS.ru;
+    const shortMonths = monthNames(lang, "shortMonths", SHORT_MONTHS[lang] || SHORT_MONTHS.ru);
     return `${nToZero(day.getDate())} ${shortMonths[day.getMonth()]} ${nToZero(day.getFullYear())}`
 }
 
