@@ -20,7 +20,7 @@ export const Container = styled.div`
         color: ${ ({ light }) => light ? "#2F3034" : "#fff" };
         button {
             font-family: "Playfair Display";
-            width: 4rem;
+            //width: 4rem;
             font-size: 1.6rem;
             font-style: normal;
             font-weight: 600;

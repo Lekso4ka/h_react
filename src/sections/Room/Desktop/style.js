@@ -348,6 +348,7 @@ export const Opt1 = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4rem 2.3rem;
+    padding-top: 4rem;
     padding-bottom: 4rem;
     align-content: flex-start;
 `;

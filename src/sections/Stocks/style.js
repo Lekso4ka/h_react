@@ -267,7 +267,7 @@ export const Data = styled.div`
     overflow: auto;
     box-sizing: border-box;
     .img {
-        background: url(${({pic}) => mediaUrl(pic)});
+        background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url(${({pic}) => mediaUrl(pic)});
         background-position: center;
         background-size: cover;
         height: 53.6rem;

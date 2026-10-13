@@ -19,7 +19,7 @@ export const Caption = ({ data }) => {
     }
     return <>
         <Hero bg={ data.banner }>
-            <Line/>
+            <Line />
             <div className="divider"/>
         </Hero>
         <Title>

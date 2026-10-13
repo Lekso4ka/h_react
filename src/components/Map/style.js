@@ -26,7 +26,7 @@ export const Content = styled.div`
     padding: 7.8rem 1.6rem 0;
     gap: 3.2rem 2.2rem;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     @media (min-width: 576px) {
         grid-template-columns: repeat(4, 1fr);
         padding: 7rem 2.4rem 10rem;
@@ -49,7 +49,8 @@ export const Content = styled.div`
             &::after {
                 width: .1rem;
                 top: .4rem;
-                right: -.6rem;
+                //right: -.6rem;
+                right: -.7rem;
                 height: 23.2rem;
             }
         }
@@ -57,7 +58,8 @@ export const Content = styled.div`
             &::after {
                 width: .1rem;
                 top: .4rem;
-                right: -.6rem;
+                //right: -.6rem;
+                right: -.7rem;
                 bottom: -1.9rem;
             }
         }
@@ -127,7 +129,8 @@ export const Content = styled.div`
             width: .1rem;
             bottom: .4rem;
             top: -4.2rem;
-            left: -1.65rem;
+            //left: -1.65rem;
+            left: -1.5rem;
         }
 
         &::after {

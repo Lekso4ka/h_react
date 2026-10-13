@@ -83,6 +83,7 @@ export const Info = styled.div`
 export const InfoItem = styled.div`
     display: grid;
     gap: 1.4rem;
+    grid-template-rows: auto 1fr;
     h4 {
         color: var(--Green, #55532E);
         font-family: Manrope;

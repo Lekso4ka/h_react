@@ -23,7 +23,8 @@ export const Hero = styled.div`
         position: relative;
         z-index: 1;
         width: 100%;
-        background-color: rgba(255, 246, 240, 0.30);
+        border-top: 0;
+        border-bottom: .1rem solid ${ ({ theme }) => theme.colors.light_30 };
     }
     .divider {
         position: relative;

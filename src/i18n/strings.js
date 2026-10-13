@@ -18,8 +18,8 @@ export function writeStoredLang(lang) {
 }
 
 const ru = {
-    brandName: "Голден\nТюлип & Тюлип\nИнн",
-    brandFooter: "Голден тюлип & Тюлип инн",
+    brandName: "Golden\nTulip & Tulip\nInn",
+    brandFooter: "Golden Tulip & Tulip Inn",
     book: "Бронировать",
     bookHotel: "Бронировать отель",
     summer: "Лето",
@@ -170,7 +170,7 @@ const ru = {
     navigation: "Навигация",
     information: "Информация",
     socials: "СОЦ. СЕТИ",
-    vk: "Вконтакте",
+    vk: "Max",
     contacts: "Контакты",
     copyright: "© 2026 все права защищены",
     policyLower: "политика конфиденциальности",
@@ -418,7 +418,7 @@ const en = {
     navigation: "Navigation",
     information: "Information",
     socials: "SOCIAL",
-    vk: "VKontakte",
+    vk: "Max",
     contacts: "Contacts",
     copyright: "© 2026 all rights reserved",
     policyLower: "privacy policy",

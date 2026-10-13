@@ -1,7 +1,7 @@
 import styled from "@emotion/styled"
 
 export const Block = styled.a`
-    width: 6.8rem;
+    width: 6.2rem;
     height: 5.8rem;
     ${({pos}) => pos ? `
         position: absolute;

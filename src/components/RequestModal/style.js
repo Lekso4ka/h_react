@@ -113,7 +113,11 @@ export const Modal = styled.div`
                 }
             }
             &[type="date"] {
+                text-align: left;
                 color-scheme: dark;
+                &::-webkit-date-and-time-value {
+                    text-align: left;
+                }
             }
         }
         textarea {
@@ -147,7 +151,7 @@ export const Modal = styled.div`
     .file-field {
         display: grid;
         gap: 1rem;
-        padding-top: 1.8rem;
+        padding: 1.8rem 0;
         span {
             color: rgba(255, 255, 255, 0.50);
             font-family: Manrope;
@@ -378,7 +382,7 @@ export const Modal = styled.div`
         .consent {
             margin-top: auto;
             padding: 1.5rem 0 0 3.4rem;
-            border-top: .1rem solid #FFF6F0;
+            //border-top: .1rem solid #FFF6F0;
             line-height: 1.6rem;
             input[type=checkbox] {
                 top: 1.5rem;

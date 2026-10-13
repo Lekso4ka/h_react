@@ -186,6 +186,9 @@ export const Filter = styled.div`
         margin-top: 1rem;
         transform: translate(${({active}) => active ? 0 : "calc(100% + 2.4rem)" });
         transition: transform .2s linear;
-        
+        font-size: 1.6rem;
+        @media (min-width: 576px) {
+            font-size: 1.8rem;
+        }
     }
 `
