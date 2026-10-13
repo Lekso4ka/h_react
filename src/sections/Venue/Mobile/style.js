@@ -153,27 +153,25 @@ export const Variants = styled.div`
             
             &:nth-of-type(1) {
                 opacity: .3;
+                z-index: 0;
                 animation: pulse1 2s ease-in-out infinite;
             }
             &:nth-of-type(2) {
                 opacity: 1;
                 margin-left: -.2rem;
+                z-index: 1;
             }
         }
         @keyframes pulse1 {
-            0%, 20% {
+            0%, 18% {
                 opacity: .3;
                 transform: translateX(0);
             }
-            62% {
+            50% {
                 opacity: 0;
                 transform: translateX(calc(100% - .2rem));
             }
-            62.01%, 78% {
-                opacity: 0;
-                transform: translateX(0);
-            }
-            100% {
+            82%, 100% {
                 opacity: .3;
                 transform: translateX(0);
             }
