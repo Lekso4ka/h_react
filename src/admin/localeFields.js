@@ -51,6 +51,7 @@ const SHARED_KEYS = new Set([
   "default_season",
   "hasMenu",
   "show_formats",
+  "show_in_rooms",
   "tour_link",
   "menu_link",
   "room_link",

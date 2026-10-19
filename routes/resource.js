@@ -35,7 +35,17 @@ function nextAutoId(data, idField, prefix) {
  * idField: for arrays — property used as id when present (e.g. "id")
  * autoId: assign `${file}_N` when a new array item has no id
  */
-function createResourceRouter({ fileName, kind, idField = null, autoId = false }) {
+function createResourceRouter({
+  fileName,
+  kind,
+  idField = null,
+  autoId = false,
+  assertList = null,
+}) {
+  function listError(list) {
+    if (typeof assertList !== "function") return "";
+    return assertList(list) || "";
+  }
   const router = express.Router();
 
   if (kind === "singleton") {
@@ -204,11 +214,17 @@ function createResourceRouter({ fileName, kind, idField = null, autoId = false }
         }
       }
 
+      const altLang = otherLang(lang);
+      const altData = await readJsonLang(fileName, altLang);
+      const ruList = lang === "ru" ? data.concat(item) : altData.concat(cloneJson(item));
+      const limitMessage = listError(ruList);
+      if (limitMessage) {
+        return res.status(400).json({ error: limitMessage });
+      }
+
       data.push(item);
       await writeJsonLang(fileName, lang, data);
 
-      const altLang = otherLang(lang);
-      const altData = await readJsonLang(fileName, altLang);
       altData.push(cloneJson(item));
       await writeJsonLang(fileName, altLang, altData);
 
@@ -298,6 +314,13 @@ function createResourceRouter({ fileName, kind, idField = null, autoId = false }
           index,
           item: synced,
         });
+      }
+
+      const nextRu = data.slice();
+      nextRu[index] = item;
+      const limitMessage = listError(nextRu);
+      if (limitMessage) {
+        return res.status(400).json({ error: limitMessage });
       }
 
       data[index] = item;

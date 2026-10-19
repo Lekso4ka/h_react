@@ -13,6 +13,7 @@ const staticRouter = require("./routes/static");
 const createResourceRouter = require("./routes/resource");
 const { authRequiredUnlessGet } = require("./middleware/auth");
 const { ensureStaticTables } = require("./lib/staticContent");
+const { roomPromoLimitMessage } = require("./lib/roomPromos");
 
 const app = exp();
 const PORT = config.port;
@@ -63,7 +64,11 @@ app.use(
 );
 app.use(
     "/api/stocks",
-    createResourceRouter({ fileName: "stocks.json", kind: "array" })
+    createResourceRouter({
+        fileName: "stocks.json",
+        kind: "array",
+        assertList: roomPromoLimitMessage,
+    })
 );
 app.use(
     "/api/vacancies",

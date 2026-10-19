@@ -101,7 +101,6 @@ const GROUP_TITLES = [
   ["wedding", "Свадьба"],
   ["teambuilding", "Тимбилдинг"],
   ["vacancies", "Вакансии"],
-  ["promo", "Промо"],
   ["events", "Афиша и события"],
   ["map", "Карта"],
   ["footer", "Подвал и бренд"],
@@ -124,7 +123,6 @@ export function textGroupId(key) {
   }
   if (key.startsWith("tb")) return "teambuilding";
   if (key.startsWith("vacanc")) return "vacancies";
-  if (key.startsWith("promo")) return "promo";
   if (key.startsWith("affiche") || key.startsWith("doings")) return "events";
   if (key.startsWith("map")) return "map";
   return EXACT_INDEX.get(key) || "ui";

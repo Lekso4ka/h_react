@@ -623,6 +623,11 @@ export const entities = {
                 { value: "tulip-inn", label: "Тюлипп Инн" },
               ],
             },
+            show_in_rooms: {
+              type: "boolean",
+              label: "Показывать в номере",
+              checkboxLabel: "Во всех номерах отеля",
+            },
             advantages: {
               type: "stringList",
               label: "Преимущества",
