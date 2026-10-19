@@ -289,15 +289,26 @@ export const Section2 = styled.section`
         padding-top: 1.8rem;
     }
     ul {
-        display: grid;
+        display: flex;
         margin: 4.4rem 0 10rem;
         height: 35.8rem;
-        position: relative;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        overscroll-behavior-x: contain;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        &::-webkit-scrollbar {
+            display: none;
+        }
         li {
-            position: absolute;
+            position: relative;
+            flex: 0 0 100%;
             width: 100%;
             height: 100%;
             box-sizing: border-box;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
             border-left: .1rem solid rgba(150, 40, 31, 0.20);
             border-right: .1rem solid rgba(150, 40, 31, 0.20);
             padding: 1.6rem 6rem;
@@ -322,9 +333,6 @@ export const Section2 = styled.section`
                 font-style: normal;
                 font-weight: 500;
                 line-height: 120%; /* 19.2px */
-            }
-            &:not(:first-of-type) {
-                display: none;
             }
         }
     }
@@ -367,11 +375,16 @@ export const Section2 = styled.section`
             font-size: 6.4rem;
         }
         ul {
+            display: grid;
             margin: 2.4rem 0 15rem;
             height: 56.8rem;
+            overflow: visible;
+            scroll-snap-type: none;
             grid-template-columns: repeat(4, 1fr);
             li {
                 position: static;
+                flex: none;
+                scroll-snap-align: none;
                 padding: 6.1rem 0 4.5rem;
                 &:not(:first-of-type) {
                     display: flex;
