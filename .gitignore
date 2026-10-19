@@ -5,3 +5,4 @@ node_modules
 static
 resumes/*
 !resumes/.gitkeep
+.tmp-figma.png
