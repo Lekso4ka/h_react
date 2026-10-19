@@ -1,8 +1,9 @@
 import React from "react"
-import { Routes, Route } from "react-router"
+import { Route, Routes, useLocation } from "react-router"
 import { CallbackWidget } from "./components/CallbackWidget";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
+import { Lightbox } from "./components/Lightbox";
 import { Map } from "./components/Map";
 import { Activities } from "./pages/Activities";
 import { Affiche } from "./pages/Affiche";
@@ -26,6 +27,9 @@ import { Teambuilding } from "./pages/Teambuilding";
 import { Wedding } from "./pages/Wedding";
 
 export const App = () => {
+    const { pathname } = useLocation();
+    const tulipInn = pathname.split("/").includes("tulip-inn");
+
     return <div>
         <Header/>
         <Routes>
@@ -58,5 +62,6 @@ export const App = () => {
         <Map/>
         <Footer/>
         <CallbackWidget/>
+        <Lightbox active={ tulipInn }/>
     </div>
 }

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useLayoutEffect } from "react";
 import { createPortal } from "react-dom";
 import { useT } from "../../Ctx";
 import { Link } from "../../ui/Link";
@@ -7,7 +7,6 @@ import { Actions, Aside, Overlay, Panel, Text, Title } from "./style";
 const lockScroll = () => {
     const html = document.documentElement;
     const body = document.body;
-    const scrollY = window.scrollY;
     const prev = {
         htmlOverflow: html.style.overflow,
         bodyOverflow: body.style.overflow,
@@ -18,10 +17,11 @@ const lockScroll = () => {
         bodyWidth: body.style.width,
     };
 
+    window.scrollTo(0, 0);
     html.style.overflow = "hidden";
     body.style.overflow = "hidden";
     body.style.position = "fixed";
-    body.style.top = `-${scrollY}px`;
+    body.style.top = "0";
     body.style.left = "0";
     body.style.right = "0";
     body.style.width = "100%";
@@ -42,14 +42,14 @@ const lockScroll = () => {
         body.style.left = prev.bodyLeft;
         body.style.right = prev.bodyRight;
         body.style.width = prev.bodyWidth;
-        window.scrollTo(0, scrollY);
+        window.scrollTo(0, 0);
     };
 };
 
 export const Lightbox = ({ active = true }) => {
     const t = useT();
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (!active) return undefined;
         return lockScroll();
     }, [active]);
