@@ -30,7 +30,8 @@ export const Caption = styled.h4`
     
     @media (min-width: 576px) {
         grid-column-end: span 2;
-        font-size: 11.6rem;
+        //font-size: 11.6rem;
+        font-size: 14rem;
         line-height: 10rem;
         margin-bottom: 9.2rem;
     }
