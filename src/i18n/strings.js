@@ -263,6 +263,10 @@ const ru = {
     afficheTours: "Экскурсии",
     afficheEvening: "Вечерние события",
     afficheResort: "Развлечения на курорте",
+    renovationTitle: "Дорогие гости!<br/>Мы начинаем большое обновление в Tulip Inn, чтобы встретить вас в новом облике.",
+    renovationText: "Мы ждём вас в Golden Tulip 4* - тот же уровень гостеприимства и забота о каждом госте.",
+    renovationHotel: "Смотреть отель",
+    renovationRooms: "Номера",
 };
 
 const en = {
@@ -511,6 +515,10 @@ const en = {
     afficheTours: "Excursions",
     afficheEvening: "Evening events",
     afficheResort: "Resort entertainment",
+    renovationTitle: "Dear guests!<br/>We are starting a major renovation at Tulip Inn, so we can welcome you in a new look.",
+    renovationText: "We look forward to welcoming you at Golden Tulip 4* - the same hospitality and care for every guest.",
+    renovationHotel: "View the hotel",
+    renovationRooms: "Rooms",
 };
 
 export const STRINGS = { ru, en };
