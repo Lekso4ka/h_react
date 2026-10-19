@@ -4,9 +4,6 @@ import { Tour } from "../../../components/Tour";
 import { useT } from "../../../Ctx";
 
 import { Navigate, useParams } from "react-router-dom";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
 import {Breadcrumbs} from "../../../ui/Breadcrumbs";
 import { getHotelById } from "../../../data/hotels";
 import { decodeRouteParam, getRoomById } from "../../../data/rooms";
@@ -14,7 +11,6 @@ import { Variants } from "../../../components/Variants";
 import { Lightbox } from "../../../ui/Lightbox";
 import { Cursor, useCursor } from "../../../ui/Cursor";
 import { RoomAside } from "./Aside";
-import { useRoomInfoPin } from "./hook";
 import {
     AsideColumn, Block,
     Caption,
@@ -24,18 +20,11 @@ import {
     ImagesBlock,
 } from "./style";
 
-gsap.registerPlugin(useGSAP, ScrollTrigger);
-
-
 export const Desktop = () => {
     const t = useT();
     const { hotel, id, variant } = useParams();
         const v = decodeRouteParam(variant)
         
-        const sectionRef = useRef(null);
-        const galleryRef = useRef(null);
-        const infoRef = useRef(null);
-        const asideRef = useRef(null);
         const zoneRef = useRef(null);
         const [activeLb, setActiveLb] = useState(false);
         const [lbIndex, setLbIndex] = useState(0);
@@ -50,44 +39,6 @@ export const Desktop = () => {
             if (room[v].images?.length) return room[v].images;
         }, [room[v].images, room.id]);
         
-        const { refreshPin } = useRoomInfoPin({
-            sectionRef,
-            galleryRef,
-            infoRef,
-            asideRef,
-            id
-        });
-        
-        useEffect(() => {
-            const gallery = galleryRef.current;
-            if (!gallery) return;
-            
-            const images = gallery.querySelectorAll("img");
-            let pending = 0;
-            
-            images.forEach((img) => {
-                if (img.complete) return;
-                pending += 1;
-                img.addEventListener("load", onLoad);
-                img.addEventListener("error", onLoad);
-            });
-            
-            function onLoad() {
-                pending -= 1;
-                if (pending <= 0) refreshPin();
-            }
-            
-            const id = requestAnimationFrame(() => refreshPin());
-            
-            return () => {
-                cancelAnimationFrame(id);
-                images.forEach((img) => {
-                    img.removeEventListener("load", onLoad);
-                    img.removeEventListener("error", onLoad);
-                });
-            };
-        }, [id, galleryImages, refreshPin]);
-
         useEffect(() => {
             document.body.style.overflow = activeLb ? "hidden" : "auto";
             return () => {
@@ -95,8 +46,8 @@ export const Desktop = () => {
             };
         }, [activeLb]);
         
-        return <Block ref={ sectionRef }>
-            <div ref={ galleryRef }>
+        return <Block>
+            <div>
                 <HeaderBlock>
                     <Breadcrumbs data={ [
                         { text: t("home"), link: "/" },
@@ -133,10 +84,9 @@ export const Desktop = () => {
                     </Gallery>
                 </ImagesBlock>
             </div>
-            <AsideColumn ref={ asideRef }>
+            <AsideColumn>
                 <RoomAside
                     room={ room }
-                    infoRef={ infoRef }
                     v={ v }
                 />
             </AsideColumn>

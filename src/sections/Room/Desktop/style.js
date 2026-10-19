@@ -267,7 +267,9 @@ export const Button = styled.button`
     line-height: 110%; /* 19.8px */
     letter-spacing: 0.036rem;
     position: sticky;
-    bottom: calc(1.4rem + env(safe-area-inset-bottom, 0px));
+    top: calc(100svh - 6.4rem - 1.4rem - env(safe-area-inset-bottom, 0px));
+    z-index: 2;
+    flex-shrink: 0;
     transition: background-color .2s;
     &:hover {
         background-color: transparent;
@@ -287,19 +289,21 @@ export const GalleryImage = styled.img`
 
 export const AsideColumn = styled.div`
     position: relative;
-    align-self: start;
 `;
 
 export const Info = styled.aside`
+    position: absolute;
+    inset: 0;
     display: flex;
     flex-direction: column;
-    will-change: transform;
     padding-bottom: 2.4rem;
-    position: relative;
-    flex-shrink: 0;
-    &>div {
-        padding-bottom: 6.4rem;
-    }
+`;
+
+export const Copy = styled.div`
+    position: sticky;
+    margin-top: -6.4rem;
+    padding-bottom: 6.4rem;
+    z-index: 1;
 `;
 
 
@@ -307,7 +311,7 @@ export const Info = styled.aside`
 
 export const AccItemSt = styled.div`
     overflow: hidden;
-    ${({isOpt2}) => isOpt2 ? "border-bottom: .1rem solid rgba(150, 40, 31, 0.20); margin-bottom: 9.2rem;" : ""}
+    ${({isOpt2}) => isOpt2 ? "border-bottom: .1rem solid rgba(150, 40, 31, 0.20);" : ""}
 `;
 
 export const AccTrigger = styled.div`

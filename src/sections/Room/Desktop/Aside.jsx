@@ -1,16 +1,41 @@
-import React from "react";
+import React, { useLayoutEffect, useRef } from "react";
 import { useT } from "../../../Ctx";
 import { externalLinkProps } from "../../../utils/externalHref";
 
 import { Icon } from "../../../ui/Icon";
 import { AccItem } from "./AccItem";
-import { Button, Info, MainText, Options, SecondaryText, TextTop, Opt1, OptLite } from "./style";
+import { Button, Copy, Info, MainText, Options, SecondaryText, TextTop, Opt1, OptLite } from "./style";
 
-export const RoomAside = ({ room, v, infoRef }) => {
+export const RoomAside = ({ room, v }) => {
     const t = useT();
+    const copyRef = useRef(null);
 
-    return <Info ref={ infoRef }>
-        <div>
+    useLayoutEffect(() => {
+        const copy = copyRef.current;
+        const button = copy?.previousElementSibling;
+        if (!copy || !button) return;
+
+        const stick = () => {
+            const buttonTop = parseFloat(getComputedStyle(button).top);
+            if (!Number.isFinite(buttonTop)) return;
+            // Park the copy so its bottom edge, minus the button-sized padding, meets the button.
+            copy.style.top = `${buttonTop + button.offsetHeight - copy.offsetHeight}px`;
+        };
+
+        stick();
+        const observer = new ResizeObserver(stick);
+        observer.observe(copy);
+        window.addEventListener("resize", stick);
+        return () => {
+            observer.disconnect();
+            window.removeEventListener("resize", stick);
+            copy.style.top = "";
+        };
+    }, [room, v]);
+
+    return <Info>
+        <Button {...externalLinkProps(room[v].availability_link)}>{ t("checkAvailability") }</Button>
+        <Copy ref={ copyRef }>
             <TextTop>
                 <h2>{ t("roomParams") }</h2>
                 <div className={ "tl" }>
@@ -60,7 +85,6 @@ export const RoomAside = ({ room, v, infoRef }) => {
                 data={ room[v].services }
                 variant={ "opt2" }
             />
-        </div>
-        <Button {...externalLinkProps(room[v].availability_link)}>{ t("checkAvailability") }</Button>
+        </Copy>
     </Info>
 }
