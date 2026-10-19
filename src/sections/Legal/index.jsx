@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useT } from "../../Ctx";
 import { getLegalPage } from "../../data";
 import { Breadcrumbs } from "../../ui/Breadcrumbs";
+import { Icon } from "../../ui/Icon";
 import { Line } from "../../ui/Line";
 import { SquareItem } from "../../ui/SquareItem";
 import { Buttons, Container } from "./style";
@@ -113,9 +114,26 @@ export const LegalContent = ({ pageKey }) => {
     };
     const sections = data.sections || [];
     const [activeId, setActiveId] = useState(sections[0]?.id || "");
+    const [tocOpen, setTocOpen] = useState(false);
+    const buttonsRef = useRef(null);
 
     useEffect(() => {
         setActiveId(sections[0]?.id || "");
+    }, [pageKey]);
+
+    useLayoutEffect(() => {
+        const root = buttonsRef.current;
+        if (!root) return undefined;
+        const align = () => {
+            const current = root.querySelector(`[data-tab="${pageKey}"]`);
+            if (!current || root.scrollWidth <= root.clientWidth + 1) return;
+            const left = current.offsetLeft - (root.clientWidth - current.offsetWidth) / 2;
+            root.scrollTo({ left: Math.max(0, left) });
+        };
+        align();
+        const observer = new ResizeObserver(align);
+        observer.observe(root);
+        return () => observer.disconnect();
     }, [pageKey]);
 
     useEffect(() => {
@@ -157,10 +175,11 @@ export const LegalContent = ({ pageKey }) => {
                 ]}
             />
             <h1>{data.pageTitle}</h1>
-            <Buttons>
+            <Buttons ref={buttonsRef}>
                 {TABS.map((tab) => (
                     <SquareItem
                         key={tab.id}
+                        data-tab={tab.id}
                         active={tab.id === pageKey}
                         onClick={() => navigate(tab.path)}
                     >
@@ -168,6 +187,37 @@ export const LegalContent = ({ pageKey }) => {
                     </SquareItem>
                 ))}
             </Buttons>
+
+            <nav className="toc-mobile">
+                <button
+                    type="button"
+                    className="toc-mobile-head"
+                    aria-expanded={tocOpen}
+                    onClick={() => setTocOpen((open) => !open)}
+                >
+                    <span>{t("toc")}</span>
+                    <span className={`toc-mobile-icon${tocOpen ? " open" : ""}`}>
+                        <Icon name="plus" color="#2F3034"/>
+                    </span>
+                </button>
+                <div className={`toc-mobile-panel${tocOpen ? " open" : ""}`}>
+                    <div>
+                        <ul className="toc-mobile-list">
+                            {sections.map((section, index) => (
+                                <li key={section.id}>
+                                    <span className="toc-num">{padNum(index)}</span>
+                                    <button
+                                        type="button"
+                                        onClick={() => scrollTo(section.id)}
+                                    >
+                                        {section.title}
+                                    </button>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+            </nav>
 
             <div className="layout">
                 <aside className="sidebar">
@@ -200,7 +250,9 @@ export const LegalContent = ({ pageKey }) => {
                             id={`legal-${section.id}`}
                             key={section.id}
                         >
-                            <h3>{section.title}</h3>
+                            {section.id === "requisites"
+                                ? <h2>{section.title}</h2>
+                                : <h3>{section.title}</h3>}
                             <SectionBody section={section} />
                         </section>
                     ))}
