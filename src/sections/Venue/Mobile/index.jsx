@@ -4,12 +4,16 @@ import { Tour } from "../../../components/Tour";
 import { Line } from "../../../ui/Line";
 import { Link } from "../../../ui/Link";
 import { Vector } from "../../../ui/Vector";
+import { PhotoPopup } from "../../Room/Mobile/PhotoPopup";
 import { Content, Info, InfoItem, Options, Variant, Text, Images, Image, Formats, Block, Variants } from "./style";
 
 export const Mobile = ({ data, onRequest }) => {
     const t = useT();
     const [w, setW] = useState(false);
     const ref = useRef();
+    const imagesRef = useRef(null);
+    const dragRef = useRef({ x: 0, y: 0, moved: false });
+    const [popup, setPopup] = useState(null);
     useEffect(() => {
         const plan = ref.current;
         if (plan) {
@@ -33,15 +37,56 @@ export const Mobile = ({ data, onRequest }) => {
             }
         }
     }, [w])
+    const images = data.images || [];
+    const openPhoto = (index) => {
+        const root = parseFloat(getComputedStyle(document.documentElement).fontSize) || 10;
+        const min = 4.4 * root;
+        const shot = imagesRef.current?.firstElementChild;
+        const top = (shot || imagesRef.current)?.getBoundingClientRect().top ?? 32 * root;
+        setPopup({ index, offset: Math.max(top, min) });
+    };
     return <Content>
         <h1>{ data.name }</h1>
-        <Images cnt={ data.images.length }>
-            { data.images.map((el, i) => <Image key={ i } bg={ el }>{ i === 0 && <Tour
+        <Images
+            ref={ imagesRef }
+            cnt={ images.length }
+            onPointerDown={ (event) => {
+                dragRef.current = { x: event.clientX, y: event.clientY, moved: false, down: true };
+            } }
+            onPointerMove={ (event) => {
+                if (!dragRef.current.down || dragRef.current.moved) return;
+                const dx = Math.abs(event.clientX - dragRef.current.x);
+                const dy = Math.abs(event.clientY - dragRef.current.y);
+                if (dx > 8 || dy > 8) dragRef.current.moved = true;
+            } }
+            onPointerUp={ () => {
+                dragRef.current.down = false;
+            } }
+            onPointerCancel={ () => {
+                dragRef.current.down = false;
+            } }
+        >
+            { images.map((el, i) => <Image
+                key={ i }
+                bg={ el }
+                onClick={ (event) => {
+                    if (event.target.closest("a") || dragRef.current.moved) return;
+                    openPhoto(i);
+                } }
+            >{ i === 0 && <Tour
                 dark
                 link={ data.tour_link }
                 pos/>
             }</Image>) }
         </Images>
+        <PhotoPopup
+            images={ images }
+            active={ Boolean(popup) }
+            index={ popup?.index ?? 0 }
+            offset={ popup?.offset ?? 0 }
+            closeLabel={ t("close") }
+            onClose={ () => setPopup(null) }
+        />
         <Block rotate={ data.plan_rotate }>
             <Info>
                 <InfoItem>

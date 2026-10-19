@@ -30,6 +30,7 @@ export const Image = styled.div`
     background-position: center;
     background-size: cover;
     position: relative;
+    cursor: pointer;
     a {
         top: 1.6rem;
         left: 1.6rem;

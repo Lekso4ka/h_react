@@ -1,4 +1,4 @@
-import React, { useId, useRef, useState } from "react"
+import React, { useRef, useState } from "react"
 import { Navigate, useParams } from "react-router-dom";
 import { useT } from "../../../Ctx";
 import { Tour } from "../../../components/Tour";
@@ -9,6 +9,7 @@ import { Breadcrumbs } from "../../../ui/Breadcrumbs";
 import { Icon } from "../../../ui/Icon";
 import { Line } from "../../../ui/Line";
 import { AccItem } from "./AccItem";
+import { PhotoPopup } from "./PhotoPopup";
 import {
     Block,
     Content,
@@ -27,7 +28,19 @@ export const Mobile = () => {
     const { hotel, id, variant } = useParams();
     const v = decodeRouteParam(variant)
     const room = getRoomById(hotel, id);
+    const imagesRef = useRef(null);
+    const dragRef = useRef({ x: 0, y: 0, moved: false });
+    const [popup, setPopup] = useState(null);
     if (!room) return <Navigate to={ `/rooms/${ hotel }` } replace/>;
+
+    const images = room[v].images || [];
+    const openPhoto = (index) => {
+        const root = parseFloat(getComputedStyle(document.documentElement).fontSize) || 10;
+        const min = 4.4 * root;
+        const shot = imagesRef.current?.firstElementChild;
+        const top = (shot || imagesRef.current)?.getBoundingClientRect().top ?? 32 * root;
+        setPopup({ index, offset: Math.max(top, min) });
+    };
     
     return <Block>
         <div className="wrapper">
@@ -46,12 +59,45 @@ export const Mobile = () => {
             <h1>{ room.name }</h1>
             <Line/>
         </div>
-        <Images cnt={ room[v].images.length }>
-            { room[v].images.map((el, i) => <Image key={ i } bg={ el }>{ (i === 0 && room[v].tour_link) && <Tour
+        <Images
+            ref={ imagesRef }
+            cnt={ images.length }
+            onPointerDown={ (event) => {
+                dragRef.current = { x: event.clientX, y: event.clientY, moved: false, down: true };
+            } }
+            onPointerMove={ (event) => {
+                if (!dragRef.current.down || dragRef.current.moved) return;
+                const dx = Math.abs(event.clientX - dragRef.current.x);
+                const dy = Math.abs(event.clientY - dragRef.current.y);
+                if (dx > 8 || dy > 8) dragRef.current.moved = true;
+            } }
+            onPointerUp={ () => {
+                dragRef.current.down = false;
+            } }
+            onPointerCancel={ () => {
+                dragRef.current.down = false;
+            } }
+        >
+            { images.map((el, i) => <Image
+                key={ i }
+                bg={ el }
+                onClick={ (event) => {
+                    if (event.target.closest("a") || dragRef.current.moved) return;
+                    openPhoto(i);
+                } }
+            >{ (i === 0 && room[v].tour_link) && <Tour
                 link={ room[v].tour_link }
                 pos/>
             }</Image>) }
         </Images>
+        <PhotoPopup
+            images={ images }
+            active={ Boolean(popup) }
+            index={ popup?.index ?? 0 }
+            offset={ popup?.offset ?? 0 }
+            closeLabel={ t("close") }
+            onClose={ () => setPopup(null) }
+        />
         <Content>
             <TextTop>
                 <h2>{ t("roomParams") }</h2>

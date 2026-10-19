@@ -1,3 +1,4 @@
+import { keyframes } from "@emotion/react";
 import styled from "@emotion/styled"
 import { mediaUrl } from "../../../utils/mediaUrl";
 
@@ -64,6 +65,7 @@ export const Image = styled.div`
     background-position: center;
     background-size: cover;
     position: relative;
+    cursor: pointer;
     a {
         top: 1.6rem;
         left: 1.6rem;
@@ -360,6 +362,82 @@ export const Opt1 = styled.div`
     padding-bottom: 6.4rem;
     align-content: flex-start;
 `;
+
+const popupIn = keyframes`
+    from { opacity: 0; }
+    to { opacity: 1; }
+`
+
+export const PopupScroller = styled.div`
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.80);
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    scroll-snap-type: y proximity;
+    scroll-padding-top: ${({ $offset }) => $offset}px;
+    animation: ${popupIn} 0.28s ease;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+`
+
+export const PopupTrack = styled.div`
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    box-sizing: border-box;
+    min-height: 100%;
+    padding: 0 1.6rem max(0px, calc(100dvh - 28rem - ${({ $offset }) => $offset}px));
+`
+
+export const PopupPhoto = styled.div`
+    flex: 0 0 auto;
+    height: 24.4rem;
+    scroll-snap-align: start;
+    img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        pointer-events: none;
+    }
+`
+
+export const PopupEnd = styled.div`
+    flex: 0 0 auto;
+    height: 2rem;
+    background: #FFF6F0;
+`
+
+export const PopupClose = styled.button`
+    position: sticky;
+    z-index: 2;
+    top: 1.6rem;
+    align-self: flex-end;
+    flex: 0 0 auto;
+    width: 2.4rem;
+    height: 2.4rem;
+    margin: ${({ $offset }) => `calc(${$offset}px - 4.4rem)`} 0 .4rem;
+    padding: 0;
+    border: 0;
+    background: #FFF6F0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    svg {
+        display: block;
+        width: 1.2rem;
+        height: 1.2rem;
+        transform: rotate(45deg);
+    }
+`
 
 export const Opt2 = styled.ul`
     display: grid;
