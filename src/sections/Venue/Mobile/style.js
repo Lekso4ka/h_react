@@ -69,7 +69,7 @@ export const Block = styled.div`
         width: .1rem;
         height: 2.4rem;
         position: absolute;
-        left: calc(50% - .05rem);
+        left: calc(50% - .35rem);
         bottom: 0;
         background: var(--Green, #55532E);
     }
