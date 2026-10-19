@@ -24,13 +24,47 @@ router.get("/media", async (_req, res) => {
 router.put("/media/:key", async (req, res) => {
   try {
     const key = cleanKey(req.params.key);
-    const kind = req.body?.kind === "video" ? "video" : req.body?.kind === "image" ? "image" : "";
-    const filename = cleanFilename(req.body?.filename, kind);
-    if (!key || !kind || !filename) {
+    const body = req.body || {};
+    const kind = body.kind === "video" ? "video" : body.kind === "image" ? "image" : "";
+    const filenameSent = Object.prototype.hasOwnProperty.call(body, "filename");
+    const previewSent = Object.prototype.hasOwnProperty.call(body, "preview");
+    if (!key || !kind || (!filenameSent && !previewSent)) {
       return res.status(400).json({ error: "Некорректные данные файла" });
     }
-    await saveMedia(key, filename, kind);
-    res.json({ key, filename, kind });
+
+    let filename;
+    if (filenameSent) {
+      if (body.filename === "" || body.filename == null) {
+        filename = "";
+      } else {
+        filename = cleanFilename(body.filename, kind);
+        if (!filename) {
+          return res.status(400).json({ error: "Некорректные данные файла" });
+        }
+      }
+    }
+
+    let preview;
+    if (previewSent) {
+      if (kind !== "video") {
+        return res.status(400).json({ error: "Превью доступно только для видео" });
+      }
+      if (body.preview === "" || body.preview == null) {
+        preview = "";
+      } else {
+        preview = cleanFilename(body.preview, "image");
+        if (!preview) {
+          return res.status(400).json({ error: "Некорректное превью" });
+        }
+      }
+    }
+
+    if (kind === "image" && !filename) {
+      return res.status(400).json({ error: "Некорректные данные файла" });
+    }
+
+    const saved = await saveMedia(key, { filename, kind, preview });
+    res.json({ key, filename: saved.filename, kind: saved.kind, preview: saved.preview });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

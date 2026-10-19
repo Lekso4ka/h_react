@@ -2,6 +2,12 @@ import React, { useState, useRef, useEffect } from "react";
 import { VideoContainer, VideoWrapper, VideoSt } from "./style";
 
 import { mediaUrl } from "../../utils/mediaUrl";
+import { mediaPreviewUrl } from "../../utils/staticSlots";
+
+function posterOf(video) {
+    if (typeof video !== "string" || !video) return undefined;
+    return mediaPreviewUrl(video) || undefined;
+}
 
 export const Video = ({ data, index, h }) => {
     const [activeIndex, setActiveIndex] = useState(0);
@@ -47,6 +53,7 @@ export const Video = ({ data, index, h }) => {
             <VideoWrapper key={ `video_${index}` } active={ activeIndex === index }>
                 <VideoSt
                     ref={ el => videoRefs.current[index] = el }
+                    poster={ posterOf(video) }
                     muted
                     loop
                     playsInline

@@ -1,5 +1,6 @@
 import React from "react"
 import { Routes, Route } from "react-router"
+import { CallbackWidget } from "./components/CallbackWidget";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 import { Map } from "./components/Map";
@@ -56,5 +57,6 @@ export const App = () => {
         </Routes>
         <Map/>
         <Footer/>
+        <CallbackWidget/>
     </div>
 }

@@ -96,6 +96,24 @@ const Meta = styled.div`
   word-break: break-all;
 `;
 
+const PosterLabel = styled.div`
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: ${theme.colors.gray};
+`;
+
+const PosterEmpty = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 12px;
+`;
+
 const Row = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -126,16 +144,35 @@ const Hidden = styled.input`
   display: none;
 `;
 
+function fileUrl(filename) {
+  return filename ? `/images/${filename}` : "";
+}
+
 function previewOf(key, stored) {
-  if (stored?.filename) return `/images/${stored.filename}`;
+  if (stored?.filename) return fileUrl(stored.filename);
   return img[key] || "";
 }
 
 function MediaCard({ slot, stored, onChange }) {
   const inputRef = useRef(null);
+  const previewRef = useRef(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const src = previewOf(slot.key, stored);
+  const customFile = Boolean(stored?.filename);
+  const posterSrc = fileUrl(stored?.preview);
+
+  const publish = (saved) => {
+    if (!saved?.filename && !saved?.preview) {
+      onChange(slot.key, null);
+      return;
+    }
+    onChange(slot.key, {
+      filename: saved.filename || "",
+      kind: saved.kind,
+      preview: saved.preview || "",
+    });
+  };
 
   const upload = async (file) => {
     if (!file) return;
@@ -147,7 +184,7 @@ function MediaCard({ slot, stored, onChange }) {
         filename: uploaded.filename,
         kind: slot.kind,
       });
-      onChange(slot.key, { filename: saved.filename, kind: saved.kind });
+      publish(saved);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -156,12 +193,55 @@ function MediaCard({ slot, stored, onChange }) {
     }
   };
 
+  const uploadPreview = async (file) => {
+    if (!file) return;
+    setBusy(true);
+    setError("");
+    try {
+      const uploaded = await uploadImage(file);
+      const saved = await saveStaticMedia(slot.key, {
+        kind: "video",
+        preview: uploaded.filename,
+      });
+      publish(saved);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setBusy(false);
+      if (previewRef.current) previewRef.current.value = "";
+    }
+  };
+
+  const clearPreview = async () => {
+    setBusy(true);
+    setError("");
+    try {
+      const saved = await saveStaticMedia(slot.key, {
+        kind: "video",
+        preview: "",
+      });
+      publish(saved);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setBusy(false);
+    }
+  };
+
   const reset = async () => {
     setBusy(true);
     setError("");
     try {
-      await resetStaticMedia(slot.key);
-      onChange(slot.key, null);
+      if (stored?.preview) {
+        const saved = await saveStaticMedia(slot.key, {
+          kind: slot.kind,
+          filename: "",
+        });
+        publish(saved);
+      } else {
+        await resetStaticMedia(slot.key);
+        onChange(slot.key, null);
+      }
     } catch (err) {
       setError(err.message);
     } finally {
@@ -173,7 +253,7 @@ function MediaCard({ slot, stored, onChange }) {
     <Card>
       <Preview>
         {slot.kind === "video" ? (
-          <Film src={src} muted playsInline />
+          <Film src={src} poster={posterSrc || undefined} muted playsInline />
         ) : (
           <Thumb src={src} alt="" />
         )}
@@ -181,19 +261,43 @@ function MediaCard({ slot, stored, onChange }) {
       <Name>{slot.label}</Name>
       <Meta>
         {slot.key}
-        {stored ? " · загружено" : " · файл сайта"}
+        {customFile ? " · загружено" : " · файл сайта"}
       </Meta>
       {error && <ErrorText>{error}</ErrorText>}
       <Row>
         <Btn type="button" disabled={busy} onClick={() => inputRef.current?.click()}>
-          {busy ? "…" : stored ? "Заменить" : "Загрузить"}
+          {busy ? "…" : customFile ? "Заменить" : "Загрузить"}
         </Btn>
-        {stored && (
+        {customFile && (
           <Btn type="button" $ghost disabled={busy} onClick={reset}>
             Сбросить
           </Btn>
         )}
       </Row>
+      {slot.kind === "video" && (
+        <>
+          <PosterLabel>Превью</PosterLabel>
+          <Preview>
+            {posterSrc ? <Thumb src={posterSrc} alt="" /> : <PosterEmpty>Нет превью</PosterEmpty>}
+          </Preview>
+          <Row>
+            <Btn type="button" disabled={busy} onClick={() => previewRef.current?.click()}>
+              {posterSrc ? "Заменить превью" : "Загрузить превью"}
+            </Btn>
+            {posterSrc && (
+              <Btn type="button" $ghost disabled={busy} onClick={clearPreview}>
+                Убрать
+              </Btn>
+            )}
+          </Row>
+          <Hidden
+            ref={previewRef}
+            type="file"
+            accept="image/*"
+            onChange={(event) => uploadPreview(event.target.files?.[0])}
+          />
+        </>
+      )}
       <Hidden
         ref={inputRef}
         type="file"
@@ -239,7 +343,7 @@ export function StaticMediaPage() {
     <div>
       <PageTitle>Фото и видео</PageTitle>
       <PageSubtitle>
-        Материалы, которые не редактируются в остальных разделах. Новый файл сохраняется в images и подставляется на то же место после обновления страницы сайта.
+        Материалы, которые не редактируются в остальных разделах. Новый файл сохраняется в images и подставляется на то же место после обновления страницы сайта. Для видео можно отдельно загрузить превью: оно показывается, пока ролик не начал воспроизведение.
       </PageSubtitle>
       {error && <ErrorText>{error}</ErrorText>}
       {loading ? (
