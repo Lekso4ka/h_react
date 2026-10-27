@@ -25,6 +25,7 @@ export const ActivitiesContent = () => {
         setActiveItems(arr)
         setOther(activity === "winter" ? "summer" : "winter")
     }, [activity])
+    console.log(data[activity].list)
     return <>
         <Hero bg={ data[activity].image }>
             <Line/>
