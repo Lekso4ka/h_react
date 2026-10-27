@@ -504,7 +504,7 @@ export function RoomFormPage() {
               <Input
                 value={room.availability_link}
                 onChange={(e) => setField("availability_link", e.target.value)}
-                placeholder="https://…"
+                placeholder="?tl-booking-open=true&room-type=22068&tl-booking-scenario=3935"
               />
             </Field>
           )}

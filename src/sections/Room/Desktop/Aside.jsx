@@ -1,6 +1,6 @@
 import React, { useLayoutEffect, useRef } from "react";
 import { useT } from "../../../Ctx";
-import { externalLinkProps } from "../../../utils/externalHref";
+import { bookingLinkProps } from "../../../utils/tlBooking";
 
 import { Icon } from "../../../ui/Icon";
 import { AccItem } from "./AccItem";
@@ -35,7 +35,7 @@ export const RoomAside = ({ room, v }) => {
     }, [room, v]);
 
     return <Info>
-        <Button {...externalLinkProps(room[v].availability_link)}>{ lines(t("checkAvailability")) }</Button>
+        <Button {...bookingLinkProps(room[v].availability_link)}>{ lines(t("checkAvailability")) }</Button>
         <Copy ref={ copyRef }>
             <TextTop>
                 <h2>{ lines(t("roomParams")) }</h2>

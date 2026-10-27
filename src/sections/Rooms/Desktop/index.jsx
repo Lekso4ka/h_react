@@ -53,11 +53,11 @@ export const Desktop = ({h}) => {
                     <div>
                         <span>{ lines(t("upTo")) }</span>
                         <span className="digit">{guests}</span>
-                        <span>{pluralize(guests, t("guestForms"))}</span>
+                        <span>{lines(pluralize(guests, t("guestForms")))}</span>
                     </div>
                     <div>
                         <span className="digit">{rooms}</span>
-                        <span>{pluralize(rooms, t("roomForms"))}</span>
+                        <span>{lines(pluralize(rooms, t("roomForms")))}</span>
                     </div>
                 </div>
                 <FadeBg className="img" src={img} />

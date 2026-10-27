@@ -9,6 +9,7 @@ import { ContextProvider, useCtx } from "./Ctx";
 import { loadSiteData } from "./data/store";
 import { loadStaticContent } from "./data/staticContent";
 import { readStoredLang, t } from "./i18n/strings";
+import { lines } from "./utils/lines";
 import { GlobalStyles } from "./styles/GlobalSt";
 import { theme } from "./styles/theme";
 
@@ -47,7 +48,7 @@ const PublicRoot = () => {
     if (error) {
         return (
             <div style={{ padding: 40, fontFamily: "Manrope, sans-serif" }}>
-                {error}
+                {lines(error)}
             </div>
         );
     }

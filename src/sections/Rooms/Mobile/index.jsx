@@ -21,11 +21,11 @@ export const Mobile = ({ id }) => {
                 <div>
                     <span>{ lines(t("upTo")) }</span>
                     <span className="digit">{ el[1][el[1].variants[0] || "default"].guests }</span>
-                    <span>{ pluralize(el[1][el[1].variants[0] || "default"].guests, t("guestForms")) }</span>
+                    <span>{ lines(pluralize(el[1][el[1].variants[0] || "default"].guests, t("guestForms"))) }</span>
                 </div>
                 <div>
                     <span className="digit">{ el[1][el[1].variants[0] || "default"].rooms }</span>
-                    <span>{ pluralize(el[1][el[1].variants[0] || "default"].rooms, t("roomForms")) }</span>
+                    <span>{ lines(pluralize(el[1][el[1].variants[0] || "default"].rooms, t("roomForms"))) }</span>
                 </div>
             </div>
             <div className="img">

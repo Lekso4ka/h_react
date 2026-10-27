@@ -4,7 +4,7 @@ import { Icon } from "../../../ui/Icon";
 import { useCtx, useT } from "../../../Ctx";
 import { getAllMenuNav, getMobileNav } from "../data";
 import { getMenu } from "../../../data";
-import { externalLinkProps } from "../../../utils/externalHref";
+import { bookingLinkProps } from "../../../utils/tlBooking";
 import { Dropdown } from "../Desktop/Dropdown";
 import { AccItem } from "./AccItem";
 import { Container, BarBg, NavBlock, Button } from "./style";
@@ -231,7 +231,7 @@ export const Mobile = () => {
                 <h5>{ lines(menu.mobile_address_title) }</h5>
                 <p>{ lines(menu.mobile_address) }</p>
             </div>
-            <Button {...externalLinkProps(menu?.booking_link)}>{ lines(t("book")) }</Button>
+            <Button {...bookingLinkProps(menu?.booking_link)}>{ lines(t("book")) }</Button>
         </NavBlock>
         
     </Container>

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useCtx, useT } from "../../../Ctx";
 import { getMain } from "../../../data";
-import { externalLinkProps } from "../../../utils/externalHref";
+import { bookingLinkProps } from "../../../utils/tlBooking";
 import { ActivityBtn } from "../../../ui/ActivityBtn";
 import { Icon } from "../../../ui/Icon";
 import { Link } from "../../../ui/Link";
@@ -213,7 +213,7 @@ export const Hero = ({ weather, setWeather }) => {
             </div>
         </Content>
         { mob && <StickyDock ref={ btn }>
-            <Sticky {...externalLinkProps(getMain()?.booking_link)}>{ lines(t("bookHotel")) }</Sticky>
+            <Sticky {...bookingLinkProps(getMain()?.booking_link)}>{ lines(t("bookHotel")) }</Sticky>
         </StickyDock> }
     </>
 }

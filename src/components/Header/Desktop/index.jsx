@@ -21,7 +21,7 @@ const dark = ["/", "/hotel/golden-tulip", "/hotel/tulip-inn", "/activities/winte
 
 import { getAllMenuNav, getLeftNav, getRightNav } from "../data";
 import { getMenu } from "../../../data";
-import { externalLinkProps } from "../../../utils/externalHref";
+import { bookingLinkProps } from "../../../utils/tlBooking";
 import { useCtx, useT } from "../../../Ctx";
 import { lines } from "../../../utils/lines";
 
@@ -227,7 +227,7 @@ export const Desktop = () => {
                     onEnter={ openMenu }
                     onNavigate={ navigateToHash }
                 />) }
-                <HeaderButton {...externalLinkProps(getMenu()?.booking_link)}>
+                <HeaderButton {...bookingLinkProps(getMenu()?.booking_link)}>
                     { lines(t("book")) }
                 </HeaderButton>
                 <HeaderLang>

@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { loadSiteData } from "./data/store";
 import { readStoredLang, t, writeStoredLang } from "./i18n/strings";
+import { lines } from "./utils/lines";
 import { staticSlotCss } from "./utils/staticSlots";
 
 const Context = createContext();
@@ -15,7 +15,7 @@ function withBreaks(value) {
     if (parts.length < 2) return value;
     return parts.map((part, i) => (
         <React.Fragment key={i}>
-            {part}
+            {lines(part)}
             {i < parts.length - 1 ? <br/> : null}
         </React.Fragment>
     ));
@@ -43,12 +43,11 @@ export const ContextProvider = ({children}) => {
         document.documentElement.lang = lang === "en" ? "en" : "ru";
     }, [lang]);
 
-    const setLang = async (next) => {
+    const setLang = (next) => {
         const resolved = next === "en" ? "en" : "ru";
         if (resolved === lang) return;
         writeStoredLang(resolved);
-        await loadSiteData({ force: true, lang: resolved });
-        setLangState(resolved);
+        window.location.reload();
     };
 
     const slotCss = staticSlotCss();
