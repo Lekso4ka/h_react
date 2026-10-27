@@ -1,7 +1,6 @@
 import React from "react";
 
 export function lines(text) {
-    console.log(text.includes("\\n"), text)
     if (typeof text !== "string") return text;
     if (text.includes("\n")) {
         return text.split("\n").map((line, i, arr) => (
