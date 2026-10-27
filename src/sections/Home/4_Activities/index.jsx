@@ -8,6 +8,7 @@ import { Line } from "../../../ui/Line";
 import { Link } from "../../../ui/Link";
 import { HorizontalDragRail } from "./HorizontalDragRail";
 import { Content, Zone } from "./style";
+import { lines } from "../../../utils/lines";
 
 
 export const Activities = ({weather, setWeather}) => {
@@ -31,22 +32,22 @@ export const Activities = ({weather, setWeather}) => {
         >
             <Line/>
             <div className="content">
-                <h4>{ data.label }</h4>
-                <h2>{ season.title } { season.title_accent && <span>{ season.title_accent }</span> }</h2>
-                <p>{ season.text }</p>
+                <h4>{ lines(data.label) }</h4>
+                <h2>{ lines(season.title) } { season.title_accent && <span>{ lines(season.title_accent) }</span> }</h2>
+                <p>{ lines(season.text) }</p>
                 <div className="buttons">
                     <ActivityBtn
                         active={weather === "summer"}
                         onClick={ () => setWeather("summer") }
                         variant={2}
-                    >{ t("summer") }</ActivityBtn>
+                    >{ lines(t("summer")) }</ActivityBtn>
                     <ActivityBtn
                         active={weather === "winter"}
                         onClick={ () => setWeather("winter") }
                         variant={2}
-                    >{ t("winter") }</ActivityBtn>
+                    >{ lines(t("winter")) }</ActivityBtn>
                 </div>
-                <Link to={ `/activities/${ weather }` }>{ t("toActivities") }</Link>
+                <Link to={ `/activities/${ weather }` }>{ lines(t("toActivities")) }</Link>
             </div>
             <div className="list-container">
                 <Zone ref={zoneRef} $hideCursor={hideNativeCursor}>
@@ -57,8 +58,8 @@ export const Activities = ({weather, setWeather}) => {
                     >
                         { items.map((item, index) => (
                             <div className="item" key={ `${item.title}-${index}` }>
-                                <div className={ `img img${ index + 1 }` }>{ item.title }</div>
-                                <p>{ item.text }</p>
+                                <div className={ `img img${ index + 1 }` }>{ lines(item.title) }</div>
+                                <p>{ lines(item.text) }</p>
                             </div>
                         )) }
                     </HorizontalDragRail>

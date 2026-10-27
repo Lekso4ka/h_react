@@ -13,6 +13,7 @@ import { Container, Tabs, Section } from "./style";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { lines } from "../../utils/lines";
 
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
@@ -101,7 +102,7 @@ export const ServicesContent = ({ page }) => {
                     { names.map(el => <SquareItem
                         key={ el }
                         active={ id === el }
-                        onClick={ () => navigate(`/services/${ el }`) }>{ h[el].name }</SquareItem>) }
+                        onClick={ () => navigate(`/services/${ el }`) }>{ lines(h[el].name) }</SquareItem>) }
                 </Tabs>
             </div>
         </> }
@@ -109,22 +110,22 @@ export const ServicesContent = ({ page }) => {
             { mob
                 ? <>
                     <Line/>
-                    <h2>{ h[id].section_6.caption }</h2>
+                    <h2>{ lines(h[id].section_6.caption) }</h2>
                     <div className="text">
-                        <p>{ h[id].section_6.text_1 }</p>
-                        <p>{ h[id].section_6.text_2 }</p>
+                        <p>{ lines(h[id].section_6.text_1) }</p>
+                        <p>{ lines(h[id].section_6.text_2) }</p>
                     </div>
                     <div className="tabs">
                         <SquareItem
                             cnt={ h[id].section_6.include.length }
                             active={ service === "include" }
                             onClick={ () => setService("include") }
-                        >{ t("included") }</SquareItem>
+                        >{ lines(t("included")) }</SquareItem>
                         <SquareItem
                             cnt={ h[id].section_6.additional.length }
                             active={ service === "additional" }
                             onClick={ () => setService("additional") }
-                        >{ t("additional") }</SquareItem>
+                        >{ lines(t("additional")) }</SquareItem>
                     </div>
                     <FadeBg className="img" src={defaultSrc} />
                     <Faq
@@ -136,23 +137,23 @@ export const ServicesContent = ({ page }) => {
                 </>
                 : <>
                     <div className="caption">
-                        <h2>{ h[id].section_6.caption }</h2>
+                        <h2>{ lines(h[id].section_6.caption) }</h2>
                         <div className="tabs">
                             <SquareItem
                                 cnt={ h[id].section_6.include.length }
                                 active={ service === "include" }
                                 onClick={ () => setService("include") }
-                            >{ t("included") }</SquareItem>
+                            >{ lines(t("included")) }</SquareItem>
                             <SquareItem
                                 cnt={ h[id].section_6.additional.length }
                                 active={ service === "additional" }
                                 onClick={ () => setService("additional") }
-                            >{ t("additional") }</SquareItem>
+                            >{ lines(t("additional")) }</SquareItem>
                         </div>
                     </div>
                     <div className="text">
-                        <p>{ h[id].section_6.text_1 }</p>
-                        <p>{ h[id].section_6.text_2 }</p>
+                        <p>{ lines(h[id].section_6.text_1) }</p>
+                        <p>{ lines(h[id].section_6.text_2) }</p>
                     </div>
                     <div ref={ref} className="fix">
                         <div className="img-pin">

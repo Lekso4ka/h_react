@@ -7,6 +7,7 @@ import { Icon } from "../../../ui/Icon";
 import { Link } from "../../../ui/Link";
 import { Video } from "../../../ui/Video";
 import { ActivityCard, Content, HotelCard, Sticky, StickyDock } from "./style";
+import { lines } from "../../../utils/lines";
 
 const Stars = ({ count }) => (
     <>
@@ -92,31 +93,31 @@ export const Hero = ({ weather, setWeather }) => {
                     active={ weather === "summer" }
                     onClick={ () => setWeather("summer") }
                 >
-                    { t("summer") }
+                    { lines(t("summer")) }
                 </ActivityBtn>
                 <ActivityBtn
                     active={ weather === "winter" }
                     onClick={ () => setWeather("winter") }
                 >
-                    { t("winter") }
+                    { lines(t("winter")) }
                 </ActivityBtn>
             </div>
             <h1>
-                { weather === "winter" ? hero.winter_title : hero.summer_title }
+                { weather === "winter" ? lines(hero.winter_title) : lines(hero.summer_title) }
             </h1>
-            <h4>{ hero.subtitle }</h4>
+            <h4>{ lines(hero.subtitle) }</h4>
             <div className="divider"/>
             <div className="hotels">
                 <HotelCard active={ actGt } bg={ golden.image }>
-                    <h2>{ golden.name }</h2>
+                    <h2>{ lines(golden.name) }</h2>
                     <div className="stars">
                         <Stars count={ golden.stars }/>
                     </div>
                     <Link to={ "" } onClick={ (e) => {
                         e.preventDefault();
                         setActGt(true)
-                    } }>{ t("choose") }</Link>
-                    <span>{ golden.tagline }</span>
+                    } }>{ lines(t("choose")) }</Link>
+                    <span>{ lines(golden.tagline) }</span>
                     <div className="card">
                         <div className="content">
                             <div className="top">
@@ -124,36 +125,36 @@ export const Hero = ({ weather, setWeather }) => {
                                     <Stars count={ golden.stars }/>
                                 </div>
                                 <button onClick={ () => setActGt(false) }>
-                                    { t("close") }
+                                    { lines(t("close")) }
                                 </button>
                             </div>
-                            <h2>{ golden.name }</h2>
+                            <h2>{ lines(golden.name) }</h2>
                             <p>
-                                { golden.tagline }
+                                { lines(golden.tagline) }
                                 <span>/</span>
-                                <a href={ telHref(golden.phone) }>{ t("tel") } { golden.phone }</a>
+                                <a href={ telHref(golden.phone) }>{ lines(t("tel")) } { lines(golden.phone) }</a>
                             </p>
                             <div className="img"/>
                             <p className="text">
-                                { golden.text }
+                                { lines(golden.text) }
                             </p>
                             <div className="links">
-                                <Link to="/hotel/golden-tulip">{ t("chooseHotel") }</Link>
-                                <Link to="/rooms/golden-tulip">{ t("rooms") }</Link>
+                                <Link to="/hotel/golden-tulip">{ lines(t("chooseHotel")) }</Link>
+                                <Link to="/rooms/golden-tulip">{ lines(t("rooms")) }</Link>
                             </div>
                         </div>
                     </div>
                 </HotelCard>
                 <HotelCard active={ actTi } bg={ tulip.image }>
-                    <h2>{ tulip.name }</h2>
+                    <h2>{ lines(tulip.name) }</h2>
                     <div className="stars">
                         <Stars count={ tulip.stars }/>
                     </div>
                     <Link to={ "" } onClick={ (e) => {
                         e.preventDefault();
                         setActTi(true)
-                    } }>{ t("choose") }</Link>
-                    <span>{ tulip.tagline }</span>
+                    } }>{ lines(t("choose")) }</Link>
+                    <span>{ lines(tulip.tagline) }</span>
                     <div className="card">
                         <div className="content">
                             <div className="top">
@@ -161,24 +162,24 @@ export const Hero = ({ weather, setWeather }) => {
                                     <Stars count={ tulip.stars }/>
                                 </div>
                                 <button onClick={ () => setActTi(false) }>
-                                    { t("close") }
+                                    { lines(t("close")) }
                                 </button>
                             </div>
-                            <h2>{ tulip.name }</h2>
+                            <h2>{ lines(tulip.name) }</h2>
                             <p>
-                                { tulip.tagline }
+                                { lines(tulip.tagline) }
                                 <span>/</span>
-                                <a href={ telHref(tulip.phone) }>{ t("tel") } { tulip.phone }</a>
+                                <a href={ telHref(tulip.phone) }>{ lines(t("tel")) } { lines(tulip.phone) }</a>
                             </p>
                             <div className="img"/>
                             <p className="text">
-                                { tulip.text }
+                                { lines(tulip.text) }
                                 <br/>
                                 <span style={ { color: "transparent" } }>.</span>
                             </p>
                             <div className="links">
-                                <Link to="/hotel/tulip-inn">{ t("chooseHotel") }</Link>
-                                <Link to="/rooms/tulip-inn">{ t("rooms") }</Link>
+                                <Link to="/hotel/tulip-inn">{ lines(t("chooseHotel")) }</Link>
+                                <Link to="/rooms/tulip-inn">{ lines(t("rooms")) }</Link>
                             </div>
                         </div>
                     </div>
@@ -186,10 +187,10 @@ export const Hero = ({ weather, setWeather }) => {
                 {showPromo && <ActivityCard key={ weather } active={active}>
                     <Video data={ activity.video ? [activity.video] : [] }/>
                     <div className="text">
-                        <p>{ activity.text }</p>
+                        <p>{ lines(activity.text) }</p>
                         {promoHref
-                            ? <Link to={promoHref}>{promoLabel}</Link>
-                            : <Link>{promoLabel}</Link>}
+                            ? <Link to={promoHref}>{lines(promoLabel)}</Link>
+                            : <Link>{lines(promoLabel)}</Link>}
                     </div>
                     <button onClick={() => setActive(false)}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10" fill="none">
@@ -202,17 +203,17 @@ export const Hero = ({ weather, setWeather }) => {
                 </ActivityCard> }
             </div>
             <div className="activities">
-                <span>{ weather === "winter" ? hero.season_label_winter : hero.season_label_summer }</span>
-                <p>{ hero.season_text }</p>
+                <span>{ weather === "winter" ? lines(hero.season_label_winter) : lines(hero.season_label_summer) }</span>
+                <p>{ lines(hero.season_text) }</p>
                 <Link
                     color={ "white" }
                     hover={ "white" }
                     to={ `/activities/${ weather }` }
-                >{ t("toActivities") }</Link>
+                >{ lines(t("toActivities")) }</Link>
             </div>
         </Content>
         { mob && <StickyDock ref={ btn }>
-            <Sticky {...externalLinkProps(getMain()?.booking_link)}>{ t("bookHotel") }</Sticky>
+            <Sticky {...externalLinkProps(getMain()?.booking_link)}>{ lines(t("bookHotel")) }</Sticky>
         </StickyDock> }
     </>
 }

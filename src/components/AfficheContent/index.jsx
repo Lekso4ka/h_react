@@ -8,6 +8,7 @@ import { Breadcrumbs } from "../../ui/Breadcrumbs";
 import { Icon } from "../../ui/Icon";
 import { VariantItem } from "../Variants/VariantItem";
 import { Container, Content, Filter, Item, Line } from "./style";
+import { lines } from "../../utils/lines";
 
 const afficheLabel = (value, t) => {
     const found = AFFICHE_FILTERS.find((item) => item.value === value);
@@ -33,12 +34,12 @@ export const AfficheContent = () => {
             {text: t("home"), link: ""},
             {text: t("poster"), link: ""}
         ]}/>
-        <h1>{ t("afficheTitle") }</h1>
+        <h1>{ lines(t("afficheTitle")) }</h1>
         <Content>
             <Filter active={activeFilter}>
                 <div className="top" onClick={() => setActiveFilter(!activeFilter)}>
                     <Icon name={"plus"}/>
-                    <span>{ t("filter") }</span>
+                    <span>{ lines(t("filter")) }</span>
                 </div>
                 <div className="bottom">
                     { AFFICHE_FILTERS.map((item) => <VariantItem
@@ -47,20 +48,20 @@ export const AfficheContent = () => {
                         isActive={filters.includes(item.value)}
                         clickHandler={() => updFilter(item.value)}
                     >
-                        { t(item.key) }
+                        { lines(t(item.key)) }
                     </VariantItem>) }
                 </div>
             </Filter>
             {data.filter(el => filters.length > 0 ? filters.includes(el.variant) : true).map((el, i) => <Item key={el.id || i} bg={el.src}>
                 <div className="img"/>
-                <h5>{ afficheLabel(el.variant, t) }</h5>
-                <h2>{el.title}</h2>
+                <h5>{ lines(afficheLabel(el.variant, t)) }</h5>
+                <h2>{lines(el.title)}</h2>
                 <div className="time">
                     <span>{parseDate(el.date,"without-year")}</span>
                     <span className="divider"/>
-                    <span>{el.time}</span>
+                    <span>{lines(el.time)}</span>
                 </div>
-                <Link to={el.id ? `/affiche/${el.id}` : el.link}>{ t("more") }</Link>
+                <Link to={el.id ? `/affiche/${el.id}` : el.link}>{ lines(t("more")) }</Link>
             </Item>)}
         </Content>
         <Line/>

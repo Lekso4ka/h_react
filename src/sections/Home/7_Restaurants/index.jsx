@@ -9,6 +9,7 @@ import { Tour } from "../../../components/Tour";
 import { Icon } from "../../../ui/Icon";
 import { Link } from "../../../ui/Link";
 import { Content, Img } from "./style";
+import { lines } from "../../../utils/lines";
 
 gsap.registerPlugin(CustomEase);
 
@@ -231,13 +232,13 @@ export const Restaurants = () => {
             { slides.map((el, i) => <img className={ active === i ? "active" : "" } key={ i } src={ mediaUrl(el.image) }
                                              alt=""/>) }
         </div>
-        <h2 ref={ titleRef }>{ activeSlide.name }</h2>
+        <h2 ref={ titleRef }>{ lines(activeSlide.name) }</h2>
         <Link
             className="link"
             color={ "light" }
             hover={ "light" }
             to={ `/restaurant/${ activeSlide.hotel || "golden-tulip" }` }
-        >{ t("aboutRestaurant") }</Link>
+        >{ lines(t("aboutRestaurant")) }</Link>
         <Tour pos className="tour"/>
         <span
             className="arrow"

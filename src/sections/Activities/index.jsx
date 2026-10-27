@@ -8,6 +8,7 @@ import { Line } from "../../ui/Line";
 import { Video } from "../../ui/Video";
 import { SingleActivity } from "./SingleActivity";
 import { Block, Btn, Content, Hero, HeroLink, Image, ImgItem, Item, List, Other, VideoContainer } from "./style";
+import { lines } from "../../utils/lines";
 
 export const ActivitiesContent = () => {
     const t = useT();
@@ -27,18 +28,18 @@ export const ActivitiesContent = () => {
     return <>
         <Hero bg={ data[activity].image }>
             <Line/>
-            <h1>{ data[activity].name }</h1>
+            <h1>{ lines(data[activity].name) }</h1>
             <div className="but">
                 <HeroLink
                     variant={1}
                     active={ activity === "summer" }
                     onClick={ () => navigate("/activities/summer") }
-                >{ t("summer") }</HeroLink>
+                >{ lines(t("summer")) }</HeroLink>
                 <HeroLink
                     variant={1}
                     active={ activity === "winter" }
                     onClick={ () => navigate("/activities/winter") }
-                >{ t("winter") }</HeroLink>
+                >{ lines(t("winter")) }</HeroLink>
             </div>
             <div className="divider"/>
         </Hero>
@@ -47,7 +48,7 @@ export const ActivitiesContent = () => {
             <Content>
                 { data[activity].list.map((el, i) => <Fragment key={ i }>
                     <Image bg={ el.image }>
-                        <h2>{ el.name }</h2>
+                        <h2>{ lines(el.name) }</h2>
                     </Image>
                     <List>
                         { el.items.map((item, j) => <Item
@@ -55,10 +56,10 @@ export const ActivitiesContent = () => {
                             className={ activeItems[i] === j ? "active" : ""}
                             //isActive={ activeItems[i] === j }
                         >
-                            <h5>{ item.tooltip }</h5>
-                            <h3>{ item.title }</h3>
+                            <h5>{ lines(item.tooltip) }</h5>
+                            <h3>{ lines(item.title) }</h3>
                             <ImgItem bg={ item.image }/>
-                            <p>{ item.text }</p>
+                            <p>{ lines(item.text) }</p>
                             <Icon
                                 name="arrow"
                                 left
@@ -88,7 +89,7 @@ export const ActivitiesContent = () => {
             <div>
                 <Tour dark link={ "" } pos style={ { top: "2.4rem", right: "2.4rem", left: "auto" } }/>
                 <h2>BRANCHE</h2>
-                <Link className="link" to={ "" }>{ t("reserveTable") }</Link>
+                <Link className="link" to={ "" }>{ lines(t("reserveTable")) }</Link>
             </div>
         </VideoContainer>
         <SingleActivity name={ other }/>

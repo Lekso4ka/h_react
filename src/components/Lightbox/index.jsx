@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import { useT } from "../../Ctx";
 import { Link } from "../../ui/Link";
 import { Actions, Aside, Overlay, Panel, Text, Title } from "./style";
+import { lines } from "../../utils/lines";
 
 const lockScroll = () => {
     const html = document.documentElement;
@@ -59,12 +60,12 @@ export const Lightbox = ({ active = true }) => {
     return createPortal(
         <Overlay role="dialog" aria-modal="true" aria-labelledby="renovation-lightbox-title">
             <Panel>
-                <Title id="renovation-lightbox-title">{ t("renovationTitle") }</Title>
+                <Title id="renovation-lightbox-title">{ lines(t("renovationTitle")) }</Title>
                 <Aside>
-                    <Text>{ t("renovationText") }</Text>
+                    <Text>{ lines(t("renovationText")) }</Text>
                     <Actions>
-                        <Link to="/hotel/golden-tulip">{ t("renovationHotel") }</Link>
-                        <Link to="/rooms/golden-tulip">{ t("renovationRooms") }</Link>
+                        <Link to="/hotel/golden-tulip">{ lines(t("renovationHotel")) }</Link>
+                        <Link to="/rooms/golden-tulip">{ lines(t("renovationRooms")) }</Link>
                     </Actions>
                 </Aside>
             </Panel>

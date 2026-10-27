@@ -7,6 +7,7 @@ import { Icon } from "../../ui/Icon";
 import { Line } from "../../ui/Line";
 import { SquareItem } from "../../ui/SquareItem";
 import { Buttons, Container } from "./style";
+import { lines } from "../../utils/lines";
 
 const TABS = [
     { id: "info", path: "/info", labelKey: "legalInfo" },
@@ -26,18 +27,18 @@ function SectionBody({ section }) {
         return (
             <div className="services">
                 <div className="services-col">
-                    {section.freeTitle && <h5>{section.freeTitle}</h5>}
+                    {section.freeTitle && <h5>{lines(section.freeTitle)}</h5>}
                     <ul>
                         {(section.freeItems || []).map((item) => (
-                            <li key={item}>{item}</li>
+                            <li key={item}>{lines(item)}</li>
                         ))}
                     </ul>
                 </div>
                 <div className="services-col">
-                    {section.paidTitle && <h5>{section.paidTitle}</h5>}
+                    {section.paidTitle && <h5>{lines(section.paidTitle)}</h5>}
                     <ul>
                         {(section.paidItems || []).map((item) => (
-                            <li key={item}>{item}</li>
+                            <li key={item}>{lines(item)}</li>
                         ))}
                     </ul>
                 </div>
@@ -50,18 +51,18 @@ function SectionBody({ section }) {
             <>
                 <div className="tariffs">
                     <div className="tariff-head">
-                        <span>{ t("tariffService") }</span>
-                        <span>{ t("tariffPrice") }</span>
+                        <span>{ lines(t("tariffService")) }</span>
+                        <span>{ lines(t("tariffPrice")) }</span>
                     </div>
                     {(section.tariffRows || []).map((row) => (
                         <div className="tariff-row" key={row.name}>
-                            <span>{row.name}</span>
-                            <span>{row.price}</span>
+                            <span>{lines(row.name)}</span>
+                            <span>{lines(row.price)}</span>
                         </div>
                     ))}
                 </div>
                 {(section.text || []).map((p) => (
-                    <p key={p}>{p}</p>
+                    <p key={p}>{lines(p)}</p>
                 ))}
             </>
         );
@@ -70,34 +71,34 @@ function SectionBody({ section }) {
     return (
         <>
             {(section.text || []).map((p, i) => (
-                <p key={`t-${i}`}>{p}</p>
+                <p key={`t-${i}`}>{lines(p)}</p>
             ))}
-            {section.listIntro ? <p className="list-intro">{section.listIntro}</p> : null}
+            {section.listIntro ? <p className="list-intro">{lines(section.listIntro)}</p> : null}
             {(section.listItems || []).length > 0 && (
                 <ul>
                     {section.listItems.map((item, i) => (
-                        <li key={`li-${i}`}>{item}</li>
+                        <li key={`li-${i}`}>{lines(item)}</li>
                     ))}
                 </ul>
             )}
             {(section.textAfter || []).map((p, i) => (
-                <p key={`a-${i}`}>{p}</p>
+                <p key={`a-${i}`}>{lines(p)}</p>
             ))}
             {(section.links || []).length > 0 && (
                 <div className="doc-links">
                     {section.links.map((link, i) =>
                         link.url ? (
                             <a className="doc-link" key={`l-${i}`} href={link.url} target="_blank" rel="noreferrer">
-                                {link.title}
+                                {lines(link.title)}
                             </a>
                         ) : (
-                            <span className="doc-link" key={`l-${i}`}>{link.title}</span>
+                            <span className="doc-link" key={`l-${i}`}>{lines(link.title)}</span>
                         )
                     )}
                 </div>
             )}
             {section.downloadLabel ? (
-                <button type="button" className="download">{section.downloadLabel}</button>
+                <button type="button" className="download">{lines(section.downloadLabel)}</button>
             ) : null}
         </>
     );
@@ -174,7 +175,7 @@ export const LegalContent = ({ pageKey }) => {
                     { text: data.pageTitle || "" },
                 ]}
             />
-            <h1>{data.pageTitle}</h1>
+            <h1>{lines(data.pageTitle)}</h1>
             <Buttons ref={buttonsRef}>
                 {TABS.map((tab) => (
                     <SquareItem
@@ -183,7 +184,7 @@ export const LegalContent = ({ pageKey }) => {
                         active={tab.id === pageKey}
                         onClick={() => navigate(tab.path)}
                     >
-                        {t(tab.labelKey)}
+                        { lines(t(tab.labelKey)) }
                     </SquareItem>
                 ))}
             </Buttons>
@@ -195,7 +196,7 @@ export const LegalContent = ({ pageKey }) => {
                     aria-expanded={tocOpen}
                     onClick={() => setTocOpen((open) => !open)}
                 >
-                    <span>{t("toc")}</span>
+                    <span>{ lines(t("toc")) }</span>
                     <span className={`toc-mobile-icon${tocOpen ? " open" : ""}`}>
                         <Icon name="plus" color="#2F3034"/>
                     </span>
@@ -210,7 +211,7 @@ export const LegalContent = ({ pageKey }) => {
                                         type="button"
                                         onClick={() => scrollTo(section.id)}
                                     >
-                                        {section.title}
+                                        {lines(section.title)}
                                     </button>
                                 </li>
                             ))}
@@ -221,7 +222,7 @@ export const LegalContent = ({ pageKey }) => {
 
             <div className="layout">
                 <aside className="sidebar">
-                    <div className="sidebar-title">{ t("toc") }</div>
+                    <div className="sidebar-title">{ lines(t("toc")) }</div>
                     <ul className="toc">
                         {sections.map((section, index) => (
                             <li key={section.id}>
@@ -231,7 +232,7 @@ export const LegalContent = ({ pageKey }) => {
                                     className={`toc-link${activeId === section.id ? " active" : ""}`}
                                     onClick={() => scrollTo(section.id)}
                                 >
-                                    {section.title}
+                                    {lines(section.title)}
                                 </button>
                             </li>
                         ))}
@@ -240,9 +241,9 @@ export const LegalContent = ({ pageKey }) => {
 
                 <div className="block">
                     <Line className="line-h4" />
-                    <h4>{data.label || data.pageTitle}</h4>
+                    <h4>{lines(data.label || data.pageTitle)}</h4>
                     <Line className="line-h4" />
-                    {data.docTitle ? <h2>{data.docTitle}</h2> : null}
+                    {data.docTitle ? <h2>{lines(data.docTitle)}</h2> : null}
 
                     {sections.map((section) => (
                         <section
@@ -251,8 +252,8 @@ export const LegalContent = ({ pageKey }) => {
                             key={section.id}
                         >
                             {section.id === "requisites"
-                                ? <h2>{section.title}</h2>
-                                : <h3>{section.title}</h3>}
+                                ? <h2>{lines(section.title)}</h2>
+                                : <h3>{lines(section.title)}</h3>}
                             <SectionBody section={section} />
                         </section>
                     ))}

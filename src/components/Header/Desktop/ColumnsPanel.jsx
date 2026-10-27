@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Column, ColumnLink, Grid } from "./style";
+import { lines } from "../../../utils/lines";
 
 export const ColumnsPanel = ({
     data = [],
@@ -21,12 +22,12 @@ export const ColumnsPanel = ({
                             onNavigate(col.href);
                         } }
                     >
-                        <h3>{ col.title }</h3>
+                        <h3>{ lines(col.title) }</h3>
                         <div
                             className="img"
                         >
-                            { col.digit && <span className="digit">{ col.digit }</span> }
-                            { col.seasonLabel && <span className="label">{ col.seasonLabel }</span> }
+                            { col.digit && <span className="digit">{ lines(col.digit) }</span> }
+                            { col.seasonLabel && <span className="label">{ lines(col.seasonLabel) }</span> }
                         </div>
                     </ColumnLink>
                 </Column>

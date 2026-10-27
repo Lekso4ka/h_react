@@ -8,6 +8,7 @@ import { useT } from "../../Ctx";
 import { Hero, Section1, Section2, Section3, Section4, Section5, Section6 } from "./style";
 import { handlePhoneBlur, handlePhoneFocus, handlePhoneInput, isPhoneComplete } from "../../utils/phoneMask";
 import { armAutofillSubmit, fieldDomName, lockAutofill, noAutofillProps, readField, unlockAutofill } from "../../utils/noAutofill";
+import { lines } from "../../utils/lines";
 import {Link as ReactLink} from "react-router-dom";
 
 gsap.registerPlugin(useGSAP);
@@ -18,10 +19,6 @@ const SLIDE_COUNT = SLIDE_NAMES.length;
 const START_INDEX = SLIDE_COUNT + 2;
 const DESKTOP_MQ = "(min-width: 576px)";
 const SIDE_SCALE = 1.25;
-
-const lines = (text) => String(text).split("\n").map((line, i, arr) => (
-    <React.Fragment key={i}>{line}{i < arr.length - 1 ? <br/> : null}</React.Fragment>
-));
 
 const Section3Gallery = () => {
     const rootRef = useRef(null);
@@ -201,9 +198,9 @@ export const WeddingContent = () => {
     return <>
         <Hero>
             <Video data={ ["we_1"] } index={0}/>
-            <h4>{ t("weddingPlace") }</h4>
-            <h1>{ t("weddingTitle") }</h1>
-            <p>{ t("weddingLead") }</p>
+            <h4>{ lines(t("weddingPlace")) }</h4>
+            <h1>{ lines(t("weddingTitle")) }</h1>
+            <p>{ lines(t("weddingLead")) }</p>
             <div className="list">
                 <ul>
                     <li>{ lines(t("weddingLi1")) }</li>
@@ -214,22 +211,22 @@ export const WeddingContent = () => {
         </Hero>
         <Section1>
             <div className="title">
-                <h4>{ t("weddingWhy") }</h4>
-                <h2>{ t("weddingDay") }</h2>
+                <h4>{ lines(t("weddingWhy")) }</h4>
+                <h2>{ lines(t("weddingDay")) }</h2>
             </div>
             <div className="img1"></div>
             <div className="content">
                 <div className="line"/>
                 <div className="offer">
-                    <p>{ t("weddingCare") }</p>
-                    <Link to="#wedding-form" onClick={scrollToForm}>{ t("requestOffer") }</Link>
+                    <p>{ lines(t("weddingCare")) }</p>
+                    <Link to="#wedding-form" onClick={scrollToForm}>{ lines(t("requestOffer")) }</Link>
                 </div>
             </div>
             <div className="img2"></div>
         </Section1>
         <Section2>
             <div className="content">
-                <h4>{ t("newlyweds") }</h4>
+                <h4>{ lines(t("newlyweds")) }</h4>
                 <h2>{ lines(t("weddingGift")) }</h2>
                 <ul>
                     <li>
@@ -256,9 +253,9 @@ export const WeddingContent = () => {
             </div>
         </Section2>
         <Section3>
-            <h4>{ t("uniqueOffer") }</h4>
+            <h4>{ lines(t("uniqueOffer")) }</h4>
             <h2>{ lines(t("viewpoint360")) }</h2>
-            <p>{ t("viewpointLead") }</p>
+            <p>{ lines(t("viewpointLead")) }</p>
             <Section3Gallery/>
             <div className="tooltip tooltip1">
                 <span>360°</span>
@@ -275,22 +272,22 @@ export const WeddingContent = () => {
                 <li>
                     <div className="img img1"/>
                     <div className="caption">
-                        <h3>{ t("outdoorReg") }</h3>
-                        <p>{ t("outdoorRegText") }</p>
+                        <h3>{ lines(t("outdoorReg")) }</h3>
+                        <p>{ lines(t("outdoorRegText")) }</p>
                     </div>
                 </li>
                 <li>
                     <div className="img img2"/>
                     <div className="caption">
-                        <h3>{ t("photoMountains") }</h3>
-                        <p>{ t("photoMountainsText") }</p>
+                        <h3>{ lines(t("photoMountains")) }</h3>
+                        <p>{ lines(t("photoMountainsText")) }</p>
                     </div>
                 </li>
                 <li>
                     <div className="img img3"/>
                     <div className="caption">
-                        <h3>{ t("weddingDinner") }</h3>
-                        <p>{ t("weddingDinnerText") }</p>
+                        <h3>{ lines(t("weddingDinner")) }</h3>
+                        <p>{ lines(t("weddingDinnerText")) }</p>
                     </div>
                 </li>
             </ul>
@@ -298,7 +295,7 @@ export const WeddingContent = () => {
         <Section5>
             <div className="line"/>
             <div className="title">
-                <h4>{ t("weOrganize") }</h4>
+                <h4>{ lines(t("weOrganize")) }</h4>
                 <h2>{ lines(t("forYourDay")) }</h2>
             </div>
             <div className="images">
@@ -309,42 +306,42 @@ export const WeddingContent = () => {
             <ul>
                 <li>
                     <span>01</span>
-                    <p>{ t("outdoorReg") }</p>
+                    <p>{ lines(t("outdoorReg")) }</p>
                 </li>
                 <li>
                     <span>02</span>
-                    <p>{ t("banquet") }</p>
+                    <p>{ lines(t("banquet")) }</p>
                 </li>
                 <li>
                     <span>03</span>
-                    <p>{ t("guestStay") }</p>
+                    <p>{ lines(t("guestStay")) }</p>
                 </li>
                 <li>
                     <span>04</span>
-                    <p>{ t("transfer") }</p>
+                    <p>{ lines(t("transfer")) }</p>
                 </li>
                 <li>
                     <span>05</span>
-                    <p>{ t("weddingCake") }</p>
+                    <p>{ lines(t("weddingCake")) }</p>
                 </li>
                 <li>
                     <span>06</span>
-                    <p>{ t("eventCoord") }</p>
+                    <p>{ lines(t("eventCoord")) }</p>
                 </li>
                 <li>
                     <span>07</span>
-                    <p>{ t("decor") }</p>
+                    <p>{ lines(t("decor")) }</p>
                 </li>
                 <li>
                     <span>08</span>
-                    <p>{ t("photoVideo") }</p>
+                    <p>{ lines(t("photoVideo")) }</p>
                 </li>
             </ul>
         </Section5>
         <Section6 id="wedding-form" ref={formRef}>
             <div className="content">
-                <h4>{ t("weddingTitle") }</h4>
-                <h2>{ t("startWedding") }</h2>
+                <h4>{ lines(t("weddingTitle")) }</h4>
+                <h2>{ lines(t("startWedding")) }</h2>
                 <p>{ lines(t("startWeddingLead")) }</p>
                 <form
                     className={ sent ? "sent" : "" }
@@ -386,12 +383,12 @@ export const WeddingContent = () => {
                             />
                             <label className="consent">
                                 <input type="checkbox" name="consent" required={!sent}/>
-                                { t("consent") } <ReactLink to="/policy">{ t("consentLink") }</ReactLink> { t("consentMid") } <ReactLink to="/policy">{ t("policyLink") }</ReactLink>{ t("consentEnd") }
+                                { lines(t("consent")) } <ReactLink to="/policy">{ lines(t("consentLink")) }</ReactLink> { lines(t("consentMid")) } <ReactLink to="/policy">{ lines(t("policyLink")) }</ReactLink>{ lines(t("consentEnd")) }
                             </label>
                         </div>
-                        { sent && <p className="form-success">{ t("weddingFormSuccess") }</p> }
+                        { sent && <p className="form-success">{ lines(t("weddingFormSuccess")) }</p> }
                     </div>
-                    <button type="submit" disabled={ !formReady || sent || sending } onPointerDown={ armAutofillSubmit }>{ sent ? t("sent") : t("requestOffer") }</button>
+                    <button type="submit" disabled={ !formReady || sent || sending } onPointerDown={ armAutofillSubmit }>{ sent ? lines(t("sent")) : lines(t("requestOffer")) }</button>
                 </form>
             </div>
         </Section6>

@@ -7,6 +7,7 @@ import { SingleActivity } from "../../sections/Activities/SingleActivity";
 import { Article, BtnBlock, Content, Top } from "./style";
 
 import { getDoings } from "../../data";
+import { lines } from "../../utils/lines";
 
 const randomize = (data) => {
     if (Array.isArray(data)) {
@@ -99,25 +100,25 @@ export const DoingsContent = () => {
                 </Article>
             default:
                 return <Article key={ `art_${ i }` } bg={ el.src }>
-                    <h5 id={ el.tooltip }>{ el.tooltip }</h5>
+                    <h5 id={ el.tooltip }>{ lines(el.tooltip) }</h5>
                     <h3 dangerouslySetInnerHTML={ { __html: el.title } }></h3>
                     <div className="img"/>
                     <p dangerouslySetInnerHTML={ { __html: el.text } }/>
-                    <Link to={ `/article/${ el.id }` }>{ t("read") }</Link>
+                    <Link to={ `/article/${ el.id }` }>{ lines(t("read")) }</Link>
                 </Article>
         }
     }
     
     return <>
         <Top>
-            <h3>{ t("rosaKhutor") }</h3>
-            <h1>{ t("doingsTitle") } <span>{ t("doingsTitleAccent") }</span></h1>
+            <h3>{ lines(t("rosaKhutor")) }</h3>
+            <h1>{ lines(t("doingsTitle")) } <span>{ lines(t("doingsTitleAccent")) }</span></h1>
         </Top>
         <Content ref={contentRef}>
             { data.map((el, i) => renderArticle(el, i)) }
             <BtnBlock ref={btnRef}>
                 <button onClick={ () => setShowAll(!showAll) }>
-                    { showAll ? t("hideArticles") : t("allArticles") }
+                    { showAll ? lines(t("hideArticles")) : lines(t("allArticles")) }
                 </button>
             </BtnBlock>
             { showAll && moreData.map((el, i) => renderArticle(el, i)) }

@@ -1,13 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { BrandColumn, BrandLink, BrandSection, ColumnLink, Grid } from "./style";
+import { lines } from "../../../utils/lines";
 
 export const BrandPanel = ({ data = [], onNavigate }) => {
     return (
         <Grid>
             { data.map((brand, index) => (
                 <BrandSection key={ brand.title } $withLeftBorder={ index === 0 } cnt={ brand.items.length }>
-                    <Link className="h3" to={brand.link}>{ brand.title }</Link>
+                    <Link className="h3" to={brand.link}>{ lines(brand.title) }</Link>
                     
                     { brand.items.map((item, itemIndex) => (
                         <BrandColumn key={ item.label } $withLeftBorder={ itemIndex > 0 }>
@@ -23,7 +24,7 @@ export const BrandPanel = ({ data = [], onNavigate }) => {
                                 } }
                             >
                                 <div className="img">
-                                    <div className="label">{ item.label }</div>
+                                    <div className="label">{ lines(item.label) }</div>
                                 </div>
                             </BrandLink>
                         </BrandColumn>

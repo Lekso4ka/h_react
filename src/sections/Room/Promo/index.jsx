@@ -4,6 +4,7 @@ import { useT } from "../../../Ctx";
 import { getStocks } from "../../../data";
 import { Link } from "../../../ui/Link";
 import { Block, Item } from "./style";
+import { lines } from "../../../utils/lines";
 
 function stripTags(value) {
     return String(value || "").replace(/<[^>]+>/g, "");
@@ -62,16 +63,16 @@ export const Promo = () => {
             pic={item.image}
             isLeft={i % 2 === 0}
         >
-            <h5>{item.tooltip}</h5>
+            <h5>{lines(item.tooltip)}</h5>
             <h3>{ item.text.map((el, j) => <span
                 key={j}
                 className={el.includes("color") ? "color" : ""}
             >
-                {item[el]}</span>) }
+                {lines(item[el])}</span>) }
             </h3>
             <div className="img"></div>
-            <p>{item.additional}</p>
-            <Link to={item.link.href}>{item.link.title}</Link>
+            <p>{lines(item.additional)}</p>
+            <Link to={item.link.href}>{lines(item.link.title)}</Link>
         </Item>)  }
     </Block>
 }

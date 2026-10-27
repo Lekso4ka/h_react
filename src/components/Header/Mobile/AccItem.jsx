@@ -5,6 +5,7 @@ import { useGSAP } from "@gsap/react";
 import { Link, useNavigate } from "react-router-dom";
 import { Icon } from "../../../ui/Icon";
 import { AccButton, AccInner, AccItemSt, AccPanel, AccTitle, AccTrigger } from "./style";
+import { lines } from "../../../utils/lines";
 
 gsap.registerPlugin(useGSAP);
 
@@ -97,7 +98,7 @@ export const AccItem = ({
                 aria-controls={ panelId }
             >
                 <AccTitle $open={ isOpen }>
-                    { title }
+                    { lines(title) }
                 </AccTitle>
                 <AccButton aria-hidden="true" $open={ isOpen }>
                     <span ref={ iconRef } >
@@ -108,7 +109,7 @@ export const AccItem = ({
             <AccPanel ref={ panelRef } id={panelId} role="region" aria-hidden={!isOpen}>
                 <AccInner ref={innerRef} $open={ isOpen }>
                     {
-                        data.map(el => <Link to="" key={el.title} onClick={(e) => linkHandler(e, el.href)}>{el.title}</Link>)
+                        data.map(el => <Link to="" key={el.title} onClick={(e) => linkHandler(e, el.href)}>{lines(el.title)}</Link>)
                     }
                 </AccInner>
             </AccPanel>

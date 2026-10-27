@@ -6,6 +6,7 @@ import { Content } from "./style";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { lines } from "../../../utils/lines";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -64,7 +65,7 @@ export const VideoSection = ({ data }) => {
     return <Content
         ref={ sectionRef }
     >
-        <h2>{ data.caption }</h2>
+        <h2>{ lines(data.caption) }</h2>
         <div className="vi" ref={ videoRef } >
             <Video data={ [data.video_link] } index={ 0 } />
         </div>

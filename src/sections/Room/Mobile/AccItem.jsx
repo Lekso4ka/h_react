@@ -4,6 +4,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { Icon } from "../../../ui/Icon";
 import { AccButton, AccItemSt, AccPanel, AccTrigger, Opt1, Opt2, OptLite } from "./style";
+import { lines } from "../../../utils/lines";
 
 gsap.registerPlugin(useGSAP);
 
@@ -87,7 +88,7 @@ export const AccItem = ({
                 aria-controls={ panelId }
             >
                 <h3>
-                    { title }
+                    { lines(title) }
                 </h3>
                 <AccButton aria-hidden="true">
                     <span ref={ iconRef } >
@@ -98,14 +99,14 @@ export const AccItem = ({
             <AccPanel ref={ panelRef } id={panelId} role="region" aria-hidden={!isOpen}>
                 {variant === "opt1" && <Opt1 ref={innerRef}>
                     {data.map(el => <OptLite key={el.title}>
-                        <h4>{el.title}</h4>
+                        <h4>{lines(el.title)}</h4>
                         <ul>
-                            {el.list.map((item, i) => <li key={i}>{item}</li>)}
+                            {el.list.map((item, i) => <li key={i}>{lines(item)}</li>)}
                         </ul>
                     </OptLite>)}
                 </Opt1>}
                 {variant === "opt2" && <Opt2 ref={innerRef}>
-                    {data.map(el => <li key={el}>{el}</li>)}
+                    {data.map(el => <li key={el}>{lines(el)}</li>)}
                 </Opt2>}
             </AccPanel>
         </AccItemSt>

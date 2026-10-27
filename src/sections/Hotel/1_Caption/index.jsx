@@ -5,6 +5,7 @@ import { Line } from "../../../ui/Line";
 import { Link } from "../../../ui/Link";
 import { Hero, Section1, Title } from "./style";
 import { VideoSection } from "../2_Video";
+import { lines } from "../../../utils/lines";
 
 export const Caption = ({ data }) => {
     const {mob} = useCtx()
@@ -34,13 +35,13 @@ export const Caption = ({ data }) => {
                 {!mob && <div className="stars">
                     { renderStars() }
                 </div>}
-                <span>{ data.name_tooltip }</span>
-                <h1>{ data.name }</h1>
+                <span>{ lines(data.name_tooltip) }</span>
+                <h1>{ lines(data.name) }</h1>
             </div>
-            <p>{ data.text_1 }</p>
-            <p>{ data.text_2 }</p>
-            <p className="address">{ data.address }</p>
-            <Link to={ data.room_link }>{ t("chooseRoom") }</Link>
+            <p>{ lines(data.text_1) }</p>
+            <p>{ lines(data.text_2) }</p>
+            <p className="address">{ lines(data.address) }</p>
+            <Link to={ data.room_link }>{ lines(t("chooseRoom")) }</Link>
         </Title>
         
         

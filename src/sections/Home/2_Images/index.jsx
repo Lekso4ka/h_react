@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { getMain } from "../../../data";
 import { Line } from "../../../ui/Line";
 import { Content } from "./style";
+import { lines } from "../../../utils/lines";
 
 export const Images = () => {
     const [isVisibleImg, setIsVisibleImg] = useState(false);
@@ -45,15 +46,15 @@ export const Images = () => {
         visible={isVisibleImg}
     >
         <Line/>
-        <h4>{ data.label }</h4>
+        <h4>{ lines(data.label) }</h4>
         <p>
-            { data.text }{" "}
-            { data.text_accent && <span>{ data.text_accent }</span> }
+            { lines(data.text) }{" "}
+            { data.text_accent && <span>{ lines(data.text_accent) }</span> }
         </p>
         <div className="img img1"></div>
         <div className="img img2" ref={imgRef}></div>
         <div className="img img3"></div>
-        <div className="tooltip">{ data.tooltip }</div>
+        <div className="tooltip">{ lines(data.tooltip) }</div>
         <Line/>
     </Content>
 }

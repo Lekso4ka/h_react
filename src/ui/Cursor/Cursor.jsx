@@ -1,6 +1,7 @@
 import React from "react";
 import { createPortal } from "react-dom";
 import styled from "@emotion/styled";
+import { lines } from "../../utils/lines";
 
 export function Cursor({ visible, active = false, x = 0, y = 0, label }) {
 	if (typeof document === "undefined") return null;
@@ -12,7 +13,7 @@ export function Cursor({ visible, active = false, x = 0, y = 0, label }) {
 			pos={{x, y}}
 			aria-hidden="true"
 		>
-			<Label>{label}</Label>
+			<Label>{lines(label)}</Label>
 		</Crsr>,
 		document.body
 	);

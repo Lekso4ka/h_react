@@ -23,6 +23,7 @@ import { getAllMenuNav, getLeftNav, getRightNav } from "../data";
 import { getMenu } from "../../../data";
 import { externalLinkProps } from "../../../utils/externalHref";
 import { useCtx, useT } from "../../../Ctx";
+import { lines } from "../../../utils/lines";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -216,7 +217,7 @@ export const Desktop = () => {
                     onNavigate={ navigateToHash }
                 />) }
             </HeaderMenu>
-            <HeaderName><Link to={ "/" } state={ { id: "home" } }>{ t("brandName").split("\n").map((line, i, arr) => <React.Fragment key={ i }>{ line }{ i < arr.length - 1 ? <br/> : null }</React.Fragment>) }</Link></HeaderName>
+            <HeaderName><Link to={ "/" } state={ { id: "home" } }>{ lines(t("brandName")) }</Link></HeaderName>
             <HeaderMenu2>
                 { rightNav.map((item) => <NavItem
                     light={ lightHeader }
@@ -227,7 +228,7 @@ export const Desktop = () => {
                     onNavigate={ navigateToHash }
                 />) }
                 <HeaderButton {...externalLinkProps(getMenu()?.booking_link)}>
-                    { t("book") }
+                    { lines(t("book")) }
                 </HeaderButton>
                 <HeaderLang>
                     <span

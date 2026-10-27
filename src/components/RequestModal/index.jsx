@@ -4,6 +4,7 @@ import { useT } from "../../Ctx";
 import { Modal } from "./style";
 import { handlePhoneBlur, handlePhoneFocus, handlePhoneInput } from "../../utils/phoneMask";
 import { armAutofillSubmit, EMAIL_PATTERN, fieldDomName, lockAutofill, noAutofillProps, readField, relockAutofill, unlockAutofill } from "../../utils/noAutofill";
+import { lines } from "../../utils/lines";
 
 const CalendarIcon = () => (
     //<svg className="calendar-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 25" fill="none" aria-hidden>
@@ -164,7 +165,7 @@ export const RequestModal = ({
                         fill="#1C1C1C"
                     />
                 </svg>
-                <h3>{title}</h3>
+                <h3>{lines(title)}</h3>
                 <form
                     ref={formRef}
                     className={sent ? "sent" : ""}
@@ -186,7 +187,7 @@ export const RequestModal = ({
                                     const skipLock = kind === "date" || kind === "number";
                                     return (
                                     <label key={field.name} className={`field${field.type === "date" ? " date-field" : ""}`}>
-                                        <span>{field.label}</span>
+                                        <span>{lines(field.label)}</span>
                                         {field.readOnly ? (
                                             <input
                                                 type="text"
@@ -229,7 +230,7 @@ export const RequestModal = ({
                             </div>
                             {file && (
                                 <div className="file-field">
-                                    <span>{file.label}</span>
+                                    <span>{lines(file.label)}</span>
                                     <button
                                         type="button"
                                         className="file-box"
@@ -246,27 +247,27 @@ export const RequestModal = ({
                                         autoComplete="off"
                                         onChange={onFileChange}
                                     />
-                                    <p className="file-hint">{file.hint}</p>
-                                    {fileError && <p className="file-error">{fileError}</p>}
+                                    <p className="file-hint">{lines(file.hint)}</p>
+                                    {fileError && <p className="file-error">{lines(fileError)}</p>}
                                 </div>
                             )}
                         </div>
                         {sent && (
                             <div className="success">
-                                <p>{successMessage}</p>
+                                <p>{lines(successMessage)}</p>
                             </div>
                         )}
                     </div>
                     <label className="consent">
                         <input type="checkbox" name="consent" required={!sent}/>
                         <span>
-                            {t("consent")} <Link to="/policy">{t("consentLink")}</Link> {t("consentMid")} <Link to="/policy">{t("policyLink")}</Link>{t("consentEnd")}
+                            { lines(t("consent")) } <Link to="/policy">{ lines(t("consentLink")) }</Link> { lines(t("consentMid")) } <Link to="/policy">{ lines(t("policyLink")) }</Link>{ lines(t("consentEnd")) }
                         </span>
                     </label>
                     <button type="submit" disabled={sent || sending} className={sent ? "sent" : ""} onPointerDown={armAutofillSubmit}>
-                        {sent ? t("sent") : t("send")}
+                        {sent ? lines(t("sent")) : lines(t("send"))}
                     </button>
-                    <p className="required-note">{t("requiredFields")}</p>
+                    <p className="required-note">{ lines(t("requiredFields")) }</p>
                 </form>
             </div>
         </Modal>

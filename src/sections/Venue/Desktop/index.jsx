@@ -5,6 +5,7 @@ import { Lightbox } from "../../../ui/Lightbox";
 import { Cursor, useCursor } from "../../../ui/Cursor";
 import { Vector } from "../../../ui/Vector";
 import { Content, Info, InfoItem, Options, Variant, Text, Images, Image, Formats, Gallery } from "./style";
+import { lines } from "../../../utils/lines";
 
 export const Desktop = ({data, onRequest}) => {
     const t = useT();
@@ -29,28 +30,28 @@ export const Desktop = ({data, onRequest}) => {
         }
     }, [activeLb])
     return <Content>
-            <h1>{ data.name }</h1>
+            <h1>{ lines(data.name) }</h1>
             <div className="center">
                 <Info>
                     <InfoItem>
-                        <h4>{ t("hallArea") }</h4>
-                        <p>{ data.size }<span>{ t("sqm") }<sup>2</sup></span></p>
+                        <h4>{ lines(t("hallArea")) }</h4>
+                        <p>{ data.size }<span>{ lines(t("sqm")) }<sup>2</sup></span></p>
                     </InfoItem>
                     <InfoItem>
-                        <h4>{ t("hallCapacity") }</h4>
+                        <h4>{ lines(t("hallCapacity")) }</h4>
                         <p>{ data.guests }</p>
                     </InfoItem>
                     { data.variants.length > 0 && <InfoItem>
-                        <h4>{ t("seatingOptions") }</h4>
+                        <h4>{ lines(t("seatingOptions")) }</h4>
                         <p>{ data.variants.length }</p>
                     </InfoItem> }
                 </Info>
                 { data.show_formats && <Formats>
-                    <h3>{ t("eventFormats") }</h3>
+                    <h3>{ lines(t("eventFormats")) }</h3>
                     <ul>
                         { data.formats.map((el, i) => <li key={ i }>
                             <span>{ i < 9 && 0 }{ i + 1 }</span>
-                            <span className="text">{ el }</span>
+                            <span className="text">{ lines(el) }</span>
                         </li>) }
                     </ul>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 29" fill="none">
@@ -75,35 +76,35 @@ export const Desktop = ({data, onRequest}) => {
                 />
                 <div>
                     { data.variants.map(v => <Variant key={ v.name }>
-                        <h5>{ t("capacity") }</h5>
-                        <h5>{ v.name }</h5>
+                        <h5>{ lines(t("capacity")) }</h5>
+                        <h5>{ lines(v.name) }</h5>
                         <div className="digit">{ v.guests }</div>
                         <Vector name={ v.name }/>
                     </Variant>) }
                 </div>
                 <Options>
                     <h4>{ data.formats.length > 0
-                        ? t("extraOptions")
-                        : t("hallEquipment") }</h4>
+                        ? lines(t("extraOptions"))
+                        : lines(t("hallEquipment")) }</h4>
                     <ul>
                         { data.options.map(el => <li
                             key={ el }
                             dangerouslySetInnerHTML={ { __html: el } }
                         />) }
                     </ul>
-                    {data.formats.length > 0 && <span>{ t("onRequest") }</span>}
+                    {data.formats.length > 0 && <span>{ lines(t("onRequest")) }</span>}
                 </Options>
             </div>
             <Images>
                 <Tour dark link={ data.tour_link } pos style={ { top: 0, left: "-15.8rem" } }/>
                 <Text>
-                    { data.text.map((el, i) => <p key={ i }>{ el }</p>) }
+                    { data.text.map((el, i) => <p key={ i }>{ lines(el) }</p>) }
                 </Text>
                 <Gallery ref={zoneRef} $hideCursor={showCursor}>
                     { data.images.map((el, i) => <Image key={ i } bg={ el } onClick={() => open(i)}/>) }
                 </Gallery>
             </Images>
-            <a href="" onClick={(e) => {e.preventDefault(); onRequest()} }>{ t("sendRequest") }</a>
+            <a href="" onClick={(e) => {e.preventDefault(); onRequest()} }>{ lines(t("sendRequest")) }</a>
             <Cursor
                 visible={showCursor}
                 x={position.x}

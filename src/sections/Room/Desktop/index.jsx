@@ -11,6 +11,7 @@ import { Variants } from "../../../components/Variants";
 import { Lightbox } from "../../../ui/Lightbox";
 import { Cursor, useCursor } from "../../../ui/Cursor";
 import { RoomAside } from "./Aside";
+import { lines } from "../../../utils/lines";
 import {
     AsideColumn, Block,
     Caption,
@@ -63,7 +64,7 @@ export const Desktop = () => {
                     /> }
                 </HeaderBlock>
                 <Caption>
-                    <h1>{ room.name }</h1>
+                    <h1>{ lines(room.name) }</h1>
                     { v !== "default" && <strong>[ { v } ]</strong> }
                 </Caption>
                 <ImagesBlock>

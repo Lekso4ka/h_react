@@ -5,6 +5,7 @@ import { useGSAP } from "@gsap/react";
 import { Icon } from "../../../ui/Icon";
 import { Link } from "../../../ui/Link";
 import { Button, Inner, ItemSt, Panel, Question, Trigger } from "./style";
+import { lines } from "../../../utils/lines";
 
 gsap.registerPlugin(useGSAP);
 
@@ -96,8 +97,8 @@ export const Item = ({
             >
                 <span className="digit">0{ i + 1 }</span>
                 <Question>
-                    { question }
-                    { tooltip && <span>{tooltip}</span>}
+                    { lines(question) }
+                    { tooltip && <span>{lines(tooltip)}</span>}
                 </Question>
                 <Button aria-hidden="true">
                     <Icon name="bracket"/>
@@ -111,7 +112,7 @@ export const Item = ({
                 <Inner ref={innerRef}>
                     <div dangerouslySetInnerHTML={{__html: answer}} />
                     {links.length > 0 && <div className="links">
-                        {links.map((el, i) => <Link key={i} to={el.href}>{el.title}</Link>) }
+                        {links.map((el, i) => <Link key={i} to={el.href}>{lines(el.title)}</Link>) }
                     </div>}
                 </Inner>
             </Panel>

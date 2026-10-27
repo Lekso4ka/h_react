@@ -8,6 +8,7 @@ import { Block, Buttons, Container, Content, Section, Tooltip, Top } from "./sty
 import { Breadcrumbs } from "../../ui/Breadcrumbs";
 import { useT } from "../../Ctx";
 import { getMain } from "../../data";
+import { lines } from "../../utils/lines";
 
 const venues = [
     "viewpoint",
@@ -36,7 +37,7 @@ export const EventsContent = ({ page }) => {
     
     return <Container page={ page } id={ page ? undefined : "venues" }>
         <Line/>
-        { !page && <Tooltip>{ block.label }</Tooltip> }
+        { !page && <Tooltip>{ lines(block.label) }</Tooltip> }
         <Block>
             { page && <div className="bc">
                 <Breadcrumbs data={ [
@@ -45,9 +46,9 @@ export const EventsContent = ({ page }) => {
                 ] }/>
             </div> }
             <Top>
-                <h1>{ block.title }</h1>
-                <p>{ block.text_1 }</p>
-                <p>{ block.text_2 }</p>
+                <h1>{ lines(block.title) }</h1>
+                <p>{ lines(block.text_1) }</p>
+                <p>{ lines(block.text_2) }</p>
             </Top>
             <Section>
                 <Buttons>
@@ -59,12 +60,12 @@ export const EventsContent = ({ page }) => {
                             console.log(type);
                             type !== "venues" && setType("venues")
                         } }
-                    >{ t("venues") }</SquareItem>
+                    >{ lines(t("venues")) }</SquareItem>
                     <SquareItem
                         cnt={ events.length }
                         active={ type === "default" }
                         onClick={ () => setType("default") }
-                    >{ t("events") }</SquareItem>
+                    >{ lines(t("events")) }</SquareItem>
                 </Buttons>
                 <Content cnt={ type === "venues" ? venues.length : events.length }>
                     <div className="wrapper">{ type === "venues"

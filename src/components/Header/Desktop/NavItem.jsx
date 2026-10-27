@@ -2,11 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Icon } from "../../../ui/Icon";
 import { HeaderLink, HeaderLink2 } from "./style";
+import { lines } from "../../../utils/lines";
 
 export const NavItem = ({ item, active, onEnter, onNavigate, light }) => {
     const content = (
         <>
-            {item.label}
+            {lines(item.label)}
             {item.hasMenu && <Icon name="plus" color={light ? "#2F3034" : "#fff"}/>}
         </>
     );

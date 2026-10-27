@@ -7,6 +7,7 @@ import { Cursor, useCursor } from "../../../ui/Cursor";
 import { FadeBg } from "../../../ui/FadeBg";
 import { pluralize } from "../../../utils/pluralize";
 import { Section } from "./style";
+import { lines } from "../../../utils/lines";
 
 export const Desktop = ({h}) => {
     const t = useT();
@@ -47,10 +48,10 @@ export const Desktop = ({h}) => {
                 <div className="tooltips">
                     <div>
                         <span className="digit">{size}</span>
-                        <span>{ t("sqm") }<sup>2</sup></span>
+                        <span>{ lines(t("sqm")) }<sup>2</sup></span>
                     </div>
                     <div>
-                        <span>{ t("upTo") }</span>
+                        <span>{ lines(t("upTo")) }</span>
                         <span className="digit">{guests}</span>
                         <span>{pluralize(guests, t("guestForms"))}</span>
                     </div>
@@ -71,13 +72,13 @@ export const Desktop = ({h}) => {
                     onMouseUp={() => setDragging(false)}
                 >
                     <div className="name">
-                        {el.name}
+                        {lines(el.name)}
                         {el.variants.length > 1 && <sup>[ {el.variants.length} ]</sup>}
                     </div>
                     { el.variants.length > 1 && <div className="variants">
                         {el.variants.map((v,i) => <Fragment key={v}>
                             {i !== 0 && <span className="divider">/</span>}
-                            <span key={v}>{v}</span>
+                            <span key={v}>{lines(v)}</span>
                         </Fragment>)}
                     </div>}
                 </li>) }

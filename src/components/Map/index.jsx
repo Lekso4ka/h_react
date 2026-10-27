@@ -2,6 +2,7 @@ import React from "react";
 import { useT } from "../../Ctx";
 import { MainImage } from "./MainImage";
 import { Block, Content, Links } from "./style";
+import { lines } from "../../utils/lines";
 
 export const Map = () => {
     const t = useT();
@@ -9,11 +10,11 @@ export const Map = () => {
         <Content>
             <div>
                 <strong className="title">300</strong>
-                <span className="tooltip">{ t("mapMeters") }</span>
+                <span className="tooltip">{ lines(t("mapMeters")) }</span>
             </div>
             <div>
                 <strong className="title">1</strong>
-                <span className="tooltip">{ t("mapMinutes") }</span>
+                <span className="tooltip">{ lines(t("mapMinutes")) }</span>
             </div>
             <div>
                 <strong className="title">10+</strong>
@@ -21,14 +22,14 @@ export const Map = () => {
             <div>
                 <strong className="title">365</strong>
             </div>
-            <p>{ t("mapP1") }</p>
-            <p>{ t("mapP2") }</p>
-            <p>{ t("mapP3") }</p>
-            <p>{ t("mapP4") }</p>
+            <p>{ lines(t("mapP1")) }</p>
+            <p>{ lines(t("mapP2")) }</p>
+            <p>{ lines(t("mapP3")) }</p>
+            <p>{ lines(t("mapP4")) }</p>
         </Content>
         <MainImage/>
         <Links>
-            <span>{ t("mapRoute") }</span>
+            <span>{ lines(t("mapRoute")) }</span>
             <div className="links">
                 <a href="">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 23" fill="none">

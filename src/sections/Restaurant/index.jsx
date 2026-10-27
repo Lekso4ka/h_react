@@ -8,6 +8,7 @@ import { SquareItem } from "../../ui/SquareItem";
 import { Desktop } from "./Desktop";
 import { Mobile } from "./Mobile";
 import { Container } from "./style";
+import { lines } from "../../utils/lines";
 
 
 const names = [
@@ -33,7 +34,7 @@ export const RestaurantContent = ({page}) => {
                 { names.map(el => <SquareItem
                     key={ el }
                     active={ id === el }
-                    onClick={ () => navigate(`/restaurant/${ el }`) }>{ h[el].name }</SquareItem>) }
+                    onClick={ () => navigate(`/restaurant/${ el }`) }>{ lines(h[el].name) }</SquareItem>) }
             </div>
         </div> }
         {mob

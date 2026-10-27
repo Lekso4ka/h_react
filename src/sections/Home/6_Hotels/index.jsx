@@ -6,6 +6,7 @@ import { Content } from "./style";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { lines } from "../../../utils/lines";
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export const Hotels = () => {
@@ -81,8 +82,6 @@ export const Hotels = () => {
     
     const data = getMain()?.hotels || {};
     const images = data.images || [];
-    const titleLines = String(data.title || "").split("\n").filter(Boolean);
-
     return <Content
         bg1={ images[0] }
         bg2={ images[1] }
@@ -91,23 +90,16 @@ export const Hotels = () => {
         bg5={ images[4] }
         ref={sectionRef}
     >
-        <h2>
-            { titleLines.map((line, index) => (
-                <React.Fragment key={ index }>
-                    { index > 0 && <br/> }
-                    { line }
-                </React.Fragment>
-            )) }
-        </h2>
+        <h2>{ lines(data.title) }</h2>
         <div className="img img1" ref={r1}/>
         <div className="img img2" ref={r2}/>
         <div className="img img3" ref={r3}/>
         <div className="img img4" ref={r4}/>
         <div className="img img5" ref={r5}/>
-        <p>{ data.text }</p>
+        <p>{ lines(data.text) }</p>
         <div className="links">
-            <Link to="/hotel/golden-tulip">{ t("toGolden") }</Link>
-            <Link to="/hotel/tulip-inn">{ t("toTulip") }</Link>
+            <Link to="/hotel/golden-tulip">{ lines(t("toGolden")) }</Link>
+            <Link to="/hotel/tulip-inn">{ lines(t("toTulip")) }</Link>
         </div>
     </Content>
 }

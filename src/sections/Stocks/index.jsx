@@ -7,6 +7,7 @@ import { Line } from "../../ui/Line";
 import { Link } from "../../ui/Link";
 import { nToZero } from "../../utils/parseDate";
 import { Container, Data, Item, Modal } from "./style";
+import { lines } from "../../utils/lines";
 
 function stripHtml(html) {
     return String(html || "").replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
@@ -41,21 +42,21 @@ export const StocksContent = () => {
     }, [active, questionOpen]);
     return <Container>
         <div className="hero">
-            <h1>{ t("hotelOffers") }</h1>
+            <h1>{ lines(t("hotelOffers")) }</h1>
             <div className="divider"/>
         </div>
         <div className="content">
             { data.map((el, i) => <Item key={ i } pic={ el.img }>
                 { mob ? <>
-                    { el.type === "offer" ? <h4>{ el.tooltip_main }</h4> : <Line/> }
+                    { el.type === "offer" ? <h4>{ lines(el.tooltip_main) }</h4> : <Line/> }
                     <h2 dangerouslySetInnerHTML={ { __html: el.name } }/>
                 </> : <>
-                    { el.type === "offer" ? <h4>{ el.tooltip_main }</h4> : <h5>{ el.tooltip_main }</h5> }
+                    { el.type === "offer" ? <h4>{ lines(el.tooltip_main) }</h4> : <h5>{ lines(el.tooltip_main) }</h5> }
                 </> }
                 <div className="img"/>
                 <div className="left">
                     { !mob && <h2 dangerouslySetInnerHTML={ { __html: el.name } }/> }
-                    <p>{ el.text }</p>
+                    <p>{ lines(el.text) }</p>
                     <ul>
                         { el.type === "offer" ? <>
                             <li>
@@ -66,7 +67,7 @@ export const StocksContent = () => {
                                               fill="white"/>
                                     </svg>
                                 </div>
-                                <span>{ el.advantages[0] }</span>
+                                <span>{ lines(el.advantages[0]) }</span>
                             </li>
                             <li>
                                 <div className="circle">
@@ -76,7 +77,7 @@ export const StocksContent = () => {
                                               fill="white"/>
                                     </svg>
                                 </div>
-                                <span>{ t("stayDatesPrefix") } { getMainDates(el.dates_of_stay) }</span>
+                                <span>{ lines(t("stayDatesPrefix")) } { lines(getMainDates(el.dates_of_stay)) }</span>
                             </li>
                         
                         </> : el.conditions.map((it, j) => <li key={ j }>
@@ -87,15 +88,15 @@ export const StocksContent = () => {
                                           fill="white"/>
                                 </svg>
                             </div>
-                            <span>{ it }</span>
+                            <span>{ lines(it) }</span>
                         </li>) }
                     </ul>
                     <div className="links">
-                        <Link to={`/rooms/${id}`}>{ t("chooseRoom") }</Link>
+                        <Link to={`/rooms/${id}`}>{ lines(t("chooseRoom")) }</Link>
                         { el.type === "offer" && <Link to={""} onClick={(e) => {
                             e.preventDefault()
                             setActive(i)
-                        }}>{ t("more") }</Link>}
+                        }}>{ lines(t("more")) }</Link>}
                     </div>
                 </div>
             </Item>) }
@@ -126,26 +127,26 @@ export const StocksContent = () => {
                 </svg>
                 {typeof active === "number" && <Data pic={ data[active].img }>
                     <div className="img">
-                        <div className="tooltip">{ data[active].tooltip }</div>
+                        <div className="tooltip">{ lines(data[active].tooltip) }</div>
                     </div>
                     <h3 dangerouslySetInnerHTML={ { __html: data[active].name } }/>
-                    <p>{ data[active].text }</p>
-                    <h4>{ t("offerAdvantages") }</h4>
+                    <p>{ lines(data[active].text) }</p>
+                    <h4>{ lines(t("offerAdvantages")) }</h4>
                     <ul className="advantages">
-                        { data[active].advantages.map((el, i) => <li key={ i }>{ el }</li>) }
+                        { data[active].advantages.map((el, i) => <li key={ i }>{ lines(el) }</li>) }
                     </ul>
                     <div className="line">
                         <div>
-                            <h4>{ t("bookingPeriod") } </h4>
-                            <p>{ getDates(data[active].reservation_period) }</p>
+                            <h4>{ lines(t("bookingPeriod")) } </h4>
+                            <p>{ lines(getDates(data[active].reservation_period)) }</p>
                         </div>
                         <div>
-                            <h4>{ t("stayDates") } </h4>
-                            <p>{ getDates(data[active].dates_of_stay) }</p>
+                            <h4>{ lines(t("stayDates")) } </h4>
+                            <p>{ lines(getDates(data[active].dates_of_stay)) }</p>
                         </div>
                     </div>
                     <div className="line">
-                        <Link color="dark" to={ `/rooms/${ id }` }>{ t("chooseRoom") }</Link>
+                        <Link color="dark" to={ `/rooms/${ id }` }>{ lines(t("chooseRoom")) }</Link>
                         <Link
                             color="dark"
                             to=""
@@ -153,9 +154,9 @@ export const StocksContent = () => {
                                 e.preventDefault();
                                 setQuestionOpen(true);
                             }}
-                        >{ t("askQuestion") }</Link>
+                        >{ lines(t("askQuestion")) }</Link>
                     </div>
-                    <h4>{ t("extraConditions") }</h4>
+                    <h4>{ lines(t("extraConditions")) }</h4>
                     <ul className="conditions">
                         { data[active].conditions.map((el, i) => <li key={ i }>
                             <div className="circle">
@@ -165,7 +166,7 @@ export const StocksContent = () => {
                                           fill="white"/>
                                 </svg>
                             </div>
-                            <span>{ el }</span>
+                            <span>{ lines(el) }</span>
                         </li>) }
                     </ul>
                 </Data> }

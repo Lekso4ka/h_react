@@ -10,6 +10,7 @@ import { Icon } from "../../../ui/Icon";
 import { Line } from "../../../ui/Line";
 import { AccItem } from "./AccItem";
 import { PhotoPopup } from "./PhotoPopup";
+import { lines } from "../../../utils/lines";
 import {
     Block,
     Content,
@@ -56,7 +57,7 @@ export const Mobile = () => {
                 id={ id }
             /> }
             <div className="variant">{ v === "default" ? "" : `[ ${ v } ]` }</div>
-            <h1>{ room.name }</h1>
+            <h1>{ lines(room.name) }</h1>
             <Line/>
         </div>
         <Images
@@ -100,37 +101,37 @@ export const Mobile = () => {
         />
         <Content>
             <TextTop>
-                <h2>{ t("roomParams") }</h2>
+                <h2>{ lines(t("roomParams")) }</h2>
                 <div className={ "tl" }>
                     <span>{ room[v].size }</span>
-                    <span>{ t("sqm") }<sup>2</sup></span>
+                    <span>{ lines(t("sqm")) }<sup>2</sup></span>
                 </div>
                 <div className={ "tr" }>
-                    <span>{ t("upTo") }</span>
+                    <span>{ lines(t("upTo")) }</span>
                     <span>{ room[v].guests }</span>
-                    <span>{ t("guests") }</span>
+                    <span>{ lines(t("guests")) }</span>
                 </div>
                 <div className={ "bl" }>
-                    { room[v].beds }
+                    { lines(room[v].beds) }
                 </div>
                 <div className={ "br" }>
-                    { room[v].view }
+                    { lines(room[v].view) }
                 </div>
             </TextTop>
             <MainText>
-                { room[v].text.map((el, i) => <p key={ i }>{ el }</p>) }
+                { room[v].text.map((el, i) => <p key={ i }>{ lines(el) }</p>) }
             </MainText>
             <SecondaryText>
-                { room[v].tooltip }
+                { lines(room[v].tooltip) }
             </SecondaryText>
             { room[v].options.length > 0 && <>
                 <Line/>
                 <Options>
-                    <h2>{ t("roomEquipment") }</h2>
+                    <h2>{ lines(t("roomEquipment")) }</h2>
                     <ul>
                         { room[v].options.map(item => <li key={ item }>
                             <Icon name={ "check-circle" }/>
-                            <span>{ item }</span>
+                            <span>{ lines(item) }</span>
                         </li>) }
                     </ul>
                 </Options>
@@ -138,9 +139,9 @@ export const Mobile = () => {
             { room[v].options.length === 0
                 ? <Opt1>
                     { room[v].all_options.map(el => <OptLite key={ el.title }>
-                        <h4>{ el.title }</h4>
+                        <h4>{ lines(el.title) }</h4>
                         <ul>
-                            { el.list.map((item, i) => <li key={ i }>{ item }</li>) }
+                            { el.list.map((item, i) => <li key={ i }>{ lines(item) }</li>) }
                         </ul>
                     </OptLite>) }
                 </Opt1>
@@ -150,7 +151,7 @@ export const Mobile = () => {
         </Content>
         <BtnWrap>
             <ButtonPad>
-                <Button {...externalLinkProps(room[v].availability_link)}>{ t("checkAvailability") }</Button>
+                <Button {...externalLinkProps(room[v].availability_link)}>{ lines(t("checkAvailability")) }</Button>
             </ButtonPad>
         </BtnWrap>
         

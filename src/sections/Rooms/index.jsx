@@ -7,6 +7,7 @@ import { Line } from "../../ui/Line";
 import { Desktop } from "./Desktop";
 import { Mobile } from "./Mobile";
 import { Container } from "./style";
+import { lines } from "../../utils/lines";
 
 export const RoomsContent = () => {
     const { id } = useParams();
@@ -21,7 +22,7 @@ export const RoomsContent = () => {
             { text: name, link: `/hotel/${ id }` },
             { text: t("rooms"), link: "" }
         ] }/>
-        <h1>{ s3.caption }</h1>
+        <h1>{ lines(s3.caption) }</h1>
         <Line/>
         {mob
             ? <Mobile id={id}/>

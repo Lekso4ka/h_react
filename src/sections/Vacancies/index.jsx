@@ -6,6 +6,7 @@ import { Line } from "../../ui/Line";
 import { Link } from "../../ui/Link";
 import { Video } from "../../ui/Video";
 import { Container, Item } from "./style";
+import { lines } from "../../utils/lines";
 
 const RESUME_MAX_BYTES = Math.round(68.5 * 1024 * 1024);
 
@@ -26,7 +27,7 @@ function VacancyContacts({ links, title }) {
     if (!contacts.length) return null;
 
     return <div className="links">
-        <h3>{ title }</h3>
+        <h3>{ lines(title) }</h3>
         <ul>
             { contacts.map((item, j) => {
                 const href = contactHref(item.link);
@@ -37,7 +38,7 @@ function VacancyContacts({ links, title }) {
                         target={ web ? "_blank" : undefined }
                         rel={ web ? "noreferrer" : undefined }
                     >
-                        { item.title }
+                        { lines(item.title) }
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11 8" fill="none">
                             <path
                                 d="M10.3536 4.03715C10.5488 3.84189 10.5488 3.5253 10.3536 3.33004L7.17157 0.14806C6.97631 -0.0472023 6.65973 -0.0472023 6.46447 0.14806C6.2692 0.343322 6.2692 0.659904 6.46447 0.855167L9.29289 3.68359L6.46447 6.51202C6.2692 6.70728 6.2692 7.02387 6.46447 7.21913C6.65973 7.41439 6.97631 7.41439 7.17157 7.21913L10.3536 4.03715ZM0 3.68359V4.18359H10V3.68359V3.18359H0V3.68359Z"
@@ -59,40 +60,40 @@ export const VacanciesContent = () => {
         <Line/>
         <div className="hero">
             <Video data={ ["vac_banner"] } index={ 0 }/>
-            <h1>{ t("vacancies") }</h1>
-            <p>{ t("vacanciesLead") }</p>
+            <h1>{ lines(t("vacancies")) }</h1>
+            <p>{ lines(t("vacanciesLead")) }</p>
         </div>
         <div className="content">
             { data.map((el, i) => <Item key={ i } pic={ el.images }>
-                <h2>{ el.name }</h2>
+                <h2>{ lines(el.name) }</h2>
                 <div className="text">
-                    <h3>{ t("conditions") }</h3>
+                    <h3>{ lines(t("conditions")) }</h3>
                     <ul>
-                        { el.conditions.map((item, j) => <li key={ j }>{ item }</li>) }
+                        { el.conditions.map((item, j) => <li key={ j }>{ lines(item) }</li>) }
                     </ul>
-                    <h3>{ t("responsibilities") }</h3>
+                    <h3>{ lines(t("responsibilities")) }</h3>
                     <ul>
-                        { el.responsibilities.map((item, j) => <li key={ j }>{ item }</li>) }
+                        { el.responsibilities.map((item, j) => <li key={ j }>{ lines(item) }</li>) }
                     </ul>
-                    <h3>{ t("requirements") }</h3>
+                    <h3>{ lines(t("requirements")) }</h3>
                     <ul>
-                        { el.requirements.map((item, j) => <li key={ j }>{ item }</li>) }
+                        { el.requirements.map((item, j) => <li key={ j }>{ lines(item) }</li>) }
                     </ul>
                 </div>
                 <div className="other">
                     { el.payments && <div className={ "row" }>
                         <h4>
-                            { t("payments") }
-                            <span>{ el.payments.tooltip }</span>
+                            { lines(t("payments")) }
+                            <span>{ lines(el.payments.tooltip) }</span>
                         </h4>
-                        <p>{ el.payments.text }</p>
+                        <p>{ lines(el.payments.text) }</p>
                     </div> }
                     { el.registration && <div className={ "row" }>
                         <h4>
-                            { t("registration") }
-                            <span>{ el.registration.tooltip }</span>
+                            { lines(t("registration")) }
+                            <span>{ lines(el.registration.tooltip) }</span>
                         </h4>
-                        <p>{ el.registration.text }</p>
+                        <p>{ lines(el.registration.text) }</p>
                     </div> }
                 </div>
                 <div className="images">
@@ -109,7 +110,7 @@ export const VacanciesContent = () => {
                         setVacancy(el.name);
                         setFormOpen(true);
                     }}
-                >{ t("feedback") }</Link>
+                >{ lines(t("feedback")) }</Link>
             </Item>) }
         </div>
         <RequestModal

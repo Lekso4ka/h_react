@@ -5,16 +5,7 @@ import { Link } from "../../ui/Link";
 import { parseDate } from "../../utils/parseDate";
 import { Hero } from "../ArticleContent/style";
 import { Section } from "./style";
-
-function Title({ value }) {
-    const parts = String(value || "").split("\n");
-    return parts.map((part, i) => (
-        <React.Fragment key={i}>
-            {i > 0 ? <br/> : null}
-            {part}
-        </React.Fragment>
-    ));
-}
+import { lines } from "../../utils/lines";
 
 function eventWhen(event, lang) {
     const date = event?.date ? parseDate(event.date, "text", lang) : "";
@@ -37,17 +28,17 @@ export const AfficheEventContent = ({ event }) => {
         <Hero>
             <Line/>
             <div className="title">
-                {when ? <h4>{when}</h4> : null}
-                <h1><Title value={event?.title}/></h1>
+                {when ? <h4>{lines(when)}</h4> : null}
+                <h1>{lines(event?.title)}</h1>
             </div>
             <Line/>
         </Hero>
         <Section bg={event?.src}>
             <div className="img"/>
             {hasCopy ? <div className="copy">
-                {caption ? <h3>{caption}</h3> : null}
-                {paragraphs.map((paragraph, i) => <p key={i}>{paragraph}</p>)}
-                {moreLink ? <Link to={moreLink}>{t("moreAboutEvent")}</Link> : null}
+                {caption ? <h3>{lines(caption)}</h3> : null}
+                {paragraphs.map((paragraph, i) => <p key={i}>{lines(paragraph)}</p>)}
+                {moreLink ? <Link to={moreLink}>{ lines(t("moreAboutEvent")) }</Link> : null}
             </div> : null}
         </Section>
     </>

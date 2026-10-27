@@ -1,6 +1,7 @@
 import React from 'react';
 import { useT } from "../../Ctx";
 import { Block } from "./style";
+import { lines } from "../../utils/lines";
 
 export const Tour = ({link, dark, pos, ...rest}) => {
     const t = useT();
@@ -12,7 +13,7 @@ export const Tour = ({link, dark, pos, ...rest}) => {
         className="tour"
         {...rest}
     >
-        <span>{t("tour")}</span>
+        <span>{ lines(t("tour")) }</span>
         <span>360°</span>
     </Block>
 }

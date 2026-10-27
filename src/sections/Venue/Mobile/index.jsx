@@ -6,6 +6,7 @@ import { Link } from "../../../ui/Link";
 import { Vector } from "../../../ui/Vector";
 import { PhotoPopup } from "../../Room/Mobile/PhotoPopup";
 import { Content, Info, InfoItem, Options, Variant, Text, Images, Image, Formats, Block, Variants } from "./style";
+import { lines } from "../../../utils/lines";
 
 export const Mobile = ({ data, onRequest }) => {
     const t = useT();
@@ -46,7 +47,7 @@ export const Mobile = ({ data, onRequest }) => {
         setPopup({ index, offset: Math.max(top, min) });
     };
     return <Content>
-        <h1>{ data.name }</h1>
+        <h1>{ lines(data.name) }</h1>
         <Images
             ref={ imagesRef }
             cnt={ images.length }
@@ -90,29 +91,29 @@ export const Mobile = ({ data, onRequest }) => {
         <Block rotate={ data.plan_rotate }>
             <Info>
                 <InfoItem>
-                    <h4>{ t("hallArea") }</h4>
-                    <p>{ data.size }<span>{ t("sqm") }<sup>2</sup></span></p>
+                    <h4>{ lines(t("hallArea")) }</h4>
+                    <p>{ data.size }<span>{ lines(t("sqm")) }<sup>2</sup></span></p>
                 </InfoItem>
                 { data.variants.length > 0 && <InfoItem>
-                    <h4>{ t("seatingOptions") }</h4>
+                    <h4>{ lines(t("seatingOptions")) }</h4>
                     <p>{ data.variants.length }</p>
                 </InfoItem> }
                 <InfoItem>
-                    <h4>{ t("hallCapacity") }</h4>
+                    <h4>{ lines(t("hallCapacity")) }</h4>
                     <p>{ data.guests }</p>
                 </InfoItem>
             </Info>
             <Line/>
             <Text>
-                { data.text.map((el, i) => <p key={ i }>{ el }</p>) }
+                { data.text.map((el, i) => <p key={ i }>{ lines(el) }</p>) }
             </Text>
             
             { data.show_formats && <Formats>
-                <h3>{ t("eventFormats") }</h3>
+                <h3>{ lines(t("eventFormats")) }</h3>
                 <ul>
                     { data.formats.map((el, i) => <li key={ i }>
                         <span>{ i < 9 && 0 }{ i + 1 }.</span>
-                        <span className="text">{ el }</span>
+                        <span className="text">{ lines(el) }</span>
                     </li>) }
                 </ul>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 29" fill="none">
@@ -133,7 +134,7 @@ export const Mobile = ({ data, onRequest }) => {
             { data.variants.length > 0 && <>
                 <Line/>
                 <Variants cnt={ data.variants.length }>
-                    <h5>{ t("capacity") }</h5>
+                    <h5>{ lines(t("capacity")) }</h5>
                     <div className="buttons">
                         <button/>
                         <button/>
@@ -143,7 +144,7 @@ export const Mobile = ({ data, onRequest }) => {
                             { data.variants.map(v => <Variant key={ v.name }>
                                 <div className="digit">{ v.guests }</div>
                                 <Vector name={ v.name }/>
-                                <h5>{ v.name }</h5>
+                                <h5>{ lines(v.name) }</h5>
                             </Variant>) }
                         </div>
                     </div>
@@ -157,18 +158,18 @@ export const Mobile = ({ data, onRequest }) => {
             
             <Options>
                 <h4>{ data.formats.length > 0
-                    ? t("extraOptions")
-                    : t("hallEquipment") }</h4>
+                    ? lines(t("extraOptions"))
+                    : lines(t("hallEquipment")) }</h4>
                 <ul>
                     { data.options.map(el => <li
                         key={ el }
                         dangerouslySetInnerHTML={ { __html: el } }
                     />) }
                 </ul>
-                { data.formats.length > 0 && <span>{ t("onRequest") }</span> }
+                { data.formats.length > 0 && <span>{ lines(t("onRequest")) }</span> }
             </Options>
             
-            <Link to="" onClick={(e) => { e.preventDefault(); onRequest(); }}>{ t("sendRequest") }</Link>
+            <Link to="" onClick={(e) => { e.preventDefault(); onRequest(); }}>{ lines(t("sendRequest")) }</Link>
             <Line/>
         </Block>
     </Content>

@@ -5,6 +5,7 @@ import { Content } from "./style";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { lines } from "../../../utils/lines";
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export const Images = ({data}) => {
@@ -82,15 +83,15 @@ export const Images = ({data}) => {
         bg={ data.images }
         ref={sectionRef}
     >
-        <h2>{data.caption}</h2>
+        <h2>{lines(data.caption)}</h2>
         <div className="img img1" ref={r1}/>
         <div className="img img2" ref={r2}/>
         <div className="img img3" ref={r3}/>
         <div className="img img4" ref={r4}/>
         <div className="img img5" ref={r5}/>
-        <p>{ data.text }</p>
+        <p>{ lines(data.text) }</p>
         <div className="links">
-            <Link to="#">{ t("toBooking") }</Link>
+            <Link to="#">{ lines(t("toBooking")) }</Link>
         </div>
     </Content>
 }

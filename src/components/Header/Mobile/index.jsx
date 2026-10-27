@@ -11,6 +11,7 @@ import { Container, BarBg, NavBlock, Button } from "./style";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { lines } from "../../../utils/lines";
 const dark = ["/", "/hotel/golden-tulip", "/hotel/tulip-inn", "/activities/winter", "/activities/summer", "/actions", "/vacancies", "/wedding", "/teambuilding", "/stock/golden-tulip", "/stock/tulip-inn"]
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
@@ -210,7 +211,7 @@ export const Mobile = () => {
                 aria-hidden="true"
             />
             <button type="button" onClick={() => setLang(lang === "en" ? "ru" : "en")}>{ lang === "en" ? "RU" : "EN" }</button>
-            <Link to="/">{ t("brandName").split("\n").map((line, i, arr) => <React.Fragment key={ i }>{ line }{ i < arr.length - 1 ? <br/> : null }</React.Fragment>) }</Link>
+            <Link to="/">{ lines(t("brandName")) }</Link>
             <Icon name="burger" onClick={() => {setMenuOpen(!menuOpen)}}/>
         </header>
         <NavBlock
@@ -223,14 +224,14 @@ export const Mobile = () => {
             <nav>
                 {mobileNav.map(el => el.hasMenu
                     ? <AccItem title={el.label} data={el.columns || []} key={el.id} close={closeMenu} />
-                    : <Link to="" key={el.id} onClick={() => linkHandler(e, el.href)}>{el.label}</Link>)}
+                    : <Link to="" key={el.id} onClick={() => linkHandler(e, el.href)}>{lines(el.label)}</Link>)}
             </nav>
             </div>
             <div className="address">
-                <h5>{ menu.mobile_address_title }</h5>
-                <p>{ menu.mobile_address }</p>
+                <h5>{ lines(menu.mobile_address_title) }</h5>
+                <p>{ lines(menu.mobile_address) }</p>
             </div>
-            <Button {...externalLinkProps(menu?.booking_link)}>{ t("book") }</Button>
+            <Button {...externalLinkProps(menu?.booking_link)}>{ lines(t("book")) }</Button>
         </NavBlock>
         
     </Container>

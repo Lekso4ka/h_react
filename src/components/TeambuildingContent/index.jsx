@@ -8,10 +8,7 @@ import {Link as ReactLink} from "react-router-dom";
 import { Hero, Section1, Section2, Section3, Section4, Section5, Section6 } from "./style";
 import { handlePhoneBlur, handlePhoneFocus, handlePhoneInput, isPhoneComplete } from "../../utils/phoneMask";
 import { armAutofillSubmit, fieldDomName, lockAutofill, noAutofillProps, readField, unlockAutofill } from "../../utils/noAutofill";
-
-const lines = (text) => String(text).split("\n").map((line, i, arr) => (
-    <React.Fragment key={i}>{line}{i < arr.length - 1 ? <br/> : null}</React.Fragment>
-));
+import { lines } from "../../utils/lines";
 
 gsap.registerPlugin(useGSAP);
 
@@ -199,9 +196,9 @@ export const TeambuildingContent = () => {
     }
     return <>
         <Hero>
-            <h4>{ t("tbPlace") }</h4>
-            <h1>{ t("tbTitle") }</h1>
-            <p>{ t("tbLead") }</p>
+            <h4>{ lines(t("tbPlace")) }</h4>
+            <h1>{ lines(t("tbTitle")) }</h1>
+            <p>{ lines(t("tbLead")) }</p>
             <div className="list">
                 <ul>
                     <li>{ lines(t("tbLi1")) }</li>
@@ -212,22 +209,22 @@ export const TeambuildingContent = () => {
         </Hero>
         <Section1>
             <div className="title">
-                <h4>{ t("weddingWhy") }</h4>
-                <h2>{ t("tbHeights") }</h2>
+                <h4>{ lines(t("weddingWhy")) }</h4>
+                <h2>{ lines(t("tbHeights")) }</h2>
             </div>
             <div className="img1"></div>
             <div className="content">
                 <div className="line"/>
                 <div className="offer">
-                    <p>{ t("tbCare") }</p>
-                    <Link to="#teambuilding-form" onClick={scrollToForm}>{ t("requestOffer") }</Link>
+                    <p>{ lines(t("tbCare")) }</p>
+                    <Link to="#teambuilding-form" onClick={scrollToForm}>{ lines(t("requestOffer")) }</Link>
                 </div>
             </div>
             <div className="img2"></div>
         </Section1>
         <Section2>
             <div className="content">
-                <h4>{ t("tbOrganizers") }</h4>
+                <h4>{ lines(t("tbOrganizers")) }</h4>
                 <h2>{ lines(t("tbTerms")) }</h2>
                 <ul>
                     <li>
@@ -244,7 +241,7 @@ export const TeambuildingContent = () => {
                     </li>
                     <li>
                         <span>04</span>
-                        <p>{ t("tbGift4") }</p>
+                        <p>{ lines(t("tbGift4")) }</p>
                     </li>
                 </ul>
             </div>
@@ -253,9 +250,9 @@ export const TeambuildingContent = () => {
             </div>
         </Section2>
         <Section3>
-            <h4>{ t("uniqueOffer") }</h4>
-            <h2>{ t("tbSummit") }</h2>
-            <p>{ t("tbSummitLead") }</p>
+            <h4>{ lines(t("uniqueOffer")) }</h4>
+            <h2>{ lines(t("tbSummit")) }</h2>
+            <p>{ lines(t("tbSummitLead")) }</p>
             <Section3Gallery/>
             <div className="tooltip tooltip1">
                 <span>10+</span>
@@ -272,21 +269,21 @@ export const TeambuildingContent = () => {
                 <li>
                     <div className="img img1"/>
                     <div className="caption">
-                        <h3>{ t("tbHalls") }</h3>
+                        <h3>{ lines(t("tbHalls")) }</h3>
                         <p>{ lines(t("tbHallsText")) }</p>
                     </div>
                 </li>
                 <li>
                     <div className="img img2"/>
                     <div className="caption">
-                        <h3>{ t("tbGala") }</h3>
+                        <h3>{ lines(t("tbGala")) }</h3>
                         <p>{ lines(t("tbGalaText")) }</p>
                     </div>
                 </li>
                 <li>
                     <div className="img img3"/>
                     <div className="caption">
-                        <h3>{ t("tbActivities") }</h3>
+                        <h3>{ lines(t("tbActivities")) }</h3>
                         <p>{ lines(t("tbActivitiesText")) }</p>
                     </div>
                 </li>
@@ -295,7 +292,7 @@ export const TeambuildingContent = () => {
         <Section5>
             <div className="line"/>
             <div className="title">
-                <h4>{ t("weOrganize") }</h4>
+                <h4>{ lines(t("weOrganize")) }</h4>
                 <h2>{ lines(t("forYourDay")) }</h2>
             </div>
             <div className="images">
@@ -306,43 +303,43 @@ export const TeambuildingContent = () => {
             <ul>
                 <li>
                     <span>01</span>
-                    <p>{ t("tbAdventure") }</p>
+                    <p>{ lines(t("tbAdventure")) }</p>
                 </li>
                 <li>
                     <span>02</span>
-                    <p>{ t("banquet") }</p>
+                    <p>{ lines(t("banquet")) }</p>
                 </li>
                 <li>
                     <span>03</span>
-                    <p>{ t("guestStay") }</p>
+                    <p>{ lines(t("guestStay")) }</p>
                 </li>
                 <li>
                     <span>04</span>
-                    <p>{ t("transfer") }</p>
+                    <p>{ lines(t("transfer")) }</p>
                 </li>
                 <li>
                     <span>05</span>
-                    <p>{ t("tbWelcome") }</p>
+                    <p>{ lines(t("tbWelcome")) }</p>
                 </li>
                 <li>
                     <span>06</span>
-                    <p>{ t("eventCoord") }</p>
+                    <p>{ lines(t("eventCoord")) }</p>
                 </li>
                 <li>
                     <span>07</span>
-                    <p>{ t("decor") }</p>
+                    <p>{ lines(t("decor")) }</p>
                 </li>
                 <li>
                     <span>08</span>
-                    <p>{ t("photoVideo") }</p>
+                    <p>{ lines(t("photoVideo")) }</p>
                 </li>
             </ul>
         </Section5>
         <Section6 id="teambuilding-form" ref={formRef}>
             <div className="content">
-                <h4>{ t("tbFormKicker") }</h4>
-                <h2>{ t("tbFormTitle") }</h2>
-                <p>{ t("tbFormLead") }</p>
+                <h4>{ lines(t("tbFormKicker")) }</h4>
+                <h2>{ lines(t("tbFormTitle")) }</h2>
+                <p>{ lines(t("tbFormLead")) }</p>
                 <form
                     className={ sent ? "sent" : "" }
                     autoComplete="off"
@@ -383,12 +380,12 @@ export const TeambuildingContent = () => {
                             />
                             <label className="consent">
                                 <input type="checkbox" name="consent" required={!sent}/>
-                                { t("consent") } <ReactLink to="/policy">{ t("consentLink") }</ReactLink> { t("consentMid") } <ReactLink to="/policy">{ t("policyLink") }</ReactLink>{ t("consentEnd") }
+                                { lines(t("consent")) } <ReactLink to="/policy">{ lines(t("consentLink")) }</ReactLink> { lines(t("consentMid")) } <ReactLink to="/policy">{ lines(t("policyLink")) }</ReactLink>{ lines(t("consentEnd")) }
                             </label>
                         </div>
-                        { sent && <p className="form-success">{ t("weddingFormSuccess") }</p> }
+                        { sent && <p className="form-success">{ lines(t("weddingFormSuccess")) }</p> }
                     </div>
-                    <button type="submit" disabled={ !formReady || sent || sending } onPointerDown={ armAutofillSubmit }>{ sent ? t("sent") : t("requestOffer") }</button>
+                    <button type="submit" disabled={ !formReady || sent || sending } onPointerDown={ armAutofillSubmit }>{ sent ? lines(t("sent")) : lines(t("requestOffer")) }</button>
                 </form>
             </div>
         </Section6>
