@@ -7,7 +7,7 @@ import { Hero, Section1, Title } from "./style";
 import { VideoSection } from "../2_Video";
 import { lines } from "../../../utils/lines";
 
-export const Caption = ({ data }) => {
+export const Caption = ({ data, id }) => {
     const {mob} = useCtx()
     const t = useT()
     const renderStars = () => {
@@ -29,6 +29,16 @@ export const Caption = ({ data }) => {
         >
             <Line />
             <div className="divider"/>
+            
+            {/*start TL Search form script*/}
+            <div id="block-search">
+                <div id={ `tl-search-form-${id === "golden-tulip" ? 3934 : 3935}` } className="tl-container">
+                    <a href="https://www.travelline.ru/products/tl-hotel/" rel="nofollow" target="_blank">TravelLine</a>
+                </div>
+            </div>
+            {/*end TL Search form script*/}
+        
+        
         </Hero>
         <Title>
             <div className="title">

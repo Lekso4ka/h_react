@@ -20,12 +20,13 @@ export const Container = styled.div`
         color: ${ ({ light }) => light ? "#2F3034" : "#fff" };
         button {
             font-family: "Playfair Display";
-            //width: 4rem;
+            width: 4rem;
             font-size: 1.6rem;
             font-style: normal;
             font-weight: 600;
             line-height: 98%; /* 15.68px */
             text-transform: uppercase;
+            text-align: left;
         }
         &>a {
             text-align: center;

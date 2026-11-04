@@ -12,8 +12,8 @@ const openPanel = css`
 export const Widget = styled.div`
     --accent: #96281f;
     position: fixed;
-    left: max(var(--callback-left, 3rem), env(safe-area-inset-left, 0px));
-    bottom: calc(var(--callback-bottom, 3rem) + env(safe-area-inset-bottom, 0px));
+    right: max(var(--callback-left, 3rem), env(safe-area-inset-left, 0px));
+    bottom: calc(var(--callback-bottom, 10rem) + env(safe-area-inset-bottom, 0px));
     z-index: 11;
     box-sizing: border-box;
     font-family: "Manrope", sans-serif;
@@ -48,7 +48,7 @@ export const Widget = styled.div`
 
 export const Panel = styled.section`
     position: absolute;
-    left: 0;
+    right: 0;
     bottom: 8.8rem;
     width: 25.8rem;
     height: 35rem;

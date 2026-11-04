@@ -14,7 +14,7 @@ export const HotelContent = () => {
     const { id } = useParams();
     const data = getHotelById(id)
     return <>
-        <Caption data={data}/>
+        <Caption data={data} id={id}/>
         <VideoSection data={data.section_1}/>
         <Info data={data.section_2}/>
         <Images data={data.section_4}/>

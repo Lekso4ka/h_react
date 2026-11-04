@@ -28,7 +28,7 @@ export const Block = styled.div`
             letter-spacing: 0.044rem;
         }
         & > p:first-of-type {
-            width: 122.4rem;
+            width: 162.6rem;
             padding: 8rem 0 9.1rem;
             margin: 0 auto;
 

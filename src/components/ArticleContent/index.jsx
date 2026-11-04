@@ -112,13 +112,13 @@ export const ArticleContent = () => {
                 <Link to={ "/" }>{ lines(t("chooseHotel")) }</Link>
             </div>
             <div className="bottom">
-                <Line/>
-                <div className="tabs">
-                    { a.section_7.tags.map((el, i) => <RouterLink
-                        key={ i }
-                        to={ el.link }
-                    >{ lines(el.text) }</RouterLink>) }
-                </div>
+                {/*<Line/>*/}
+                {/*<div className="tabs">*/}
+                {/*    { a.section_7.tags.map((el, i) => <RouterLink*/}
+                {/*        key={ i }*/}
+                {/*        to={ el.link }*/}
+                {/*    >{ lines(el.text) }</RouterLink>) }*/}
+                {/*</div>*/}
                 <Line/>
             </div>
         </Section7>
