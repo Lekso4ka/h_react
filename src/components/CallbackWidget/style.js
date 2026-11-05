@@ -25,8 +25,10 @@ export const Widget = styled.div`
     }
 
     @media (max-width: 575px) {
-        left: max(var(--callback-left, 1.6rem), env(safe-area-inset-left, 0px));
-        bottom: calc(var(--callback-bottom, 1.6rem) + env(safe-area-inset-bottom, 0px));
+        //left: max(var(--callback-left, 1.6rem), env(safe-area-inset-left, 0px));
+        //bottom: calc(var(--callback-bottom, 1.6rem) + env(safe-area-inset-bottom, 0px));
+        right: max(var(--callback-left, 2rem), env(safe-area-inset-left, 0px));
+        bottom: calc(var(--callback-bottom, 10rem) + env(safe-area-inset-bottom, 0px));
     }
 
     @media (prefers-reduced-motion: reduce) {

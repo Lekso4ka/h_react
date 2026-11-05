@@ -388,7 +388,9 @@ export const Sticky = styled.button`
     box-sizing: border-box;
     text-decoration: none;
     position: relative;
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     height: 7.5rem;
     background-color: transparent;
