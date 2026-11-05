@@ -47,6 +47,19 @@ export const Hero = styled.div`
         bottom: 0;
         background-color: #00000080
     }
+    #block-search {
+        box-sizing: border-box;
+        background: #fff6f0;
+        width: calc(100% - 3.2rem);
+        position: absolute;
+        bottom: 8rem;
+        * {
+            box-sizing: border-box;
+        }
+        .tl-container {
+            padding: 0 3rem;
+        }
+    }
     .line {
         position: relative;
         z-index: 1;
@@ -88,6 +101,9 @@ export const Hero = styled.div`
         .divider {
             display: none;
         }
+        #block-search {
+            width: calc(100% - 4.8rem);
+            bottom: 2.4rem;
     }
 `
 export const Title = styled.section`
