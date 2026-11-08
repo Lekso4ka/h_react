@@ -1,6 +1,15 @@
 import React from "react";
 import { useT } from "../../../Ctx";
-import { getMain, getVenuesCnt } from "../../../data";
+import {
+    getActivitiesCnt,
+    getAfficheCnt,
+    getEventsCnt,
+    getMain,
+    getRestaurantsCnt,
+    getServicesCnt,
+    getStocksCnt,
+    getVenuesCnt,
+} from "../../../data";
 import { Link } from "../../../ui/Link";
 import { Content } from "./style";
 import { lines } from "../../../utils/lines";
@@ -17,7 +26,7 @@ export const Nav = ({weather}) => {
             <Link
                 variant="big"
                 to={ `/activities/${ weather }` }
-            >{ lines(t("activities")) }<span>[ { getVenuesCnt() } ]</span></Link>
+            >{ lines(t("activities")) }<span>[ { getActivitiesCnt(weather) } ]</span></Link>
             <Link
                 variant="big"
                 to=""
@@ -25,15 +34,15 @@ export const Nav = ({weather}) => {
             <Link
                 variant="big"
                 to="/restaurant/golden-tulip"
-            >{ lines(t("restaurants")) }<span>[ 2 ]</span></Link>
+            >{ lines(t("restaurants")) }<span>[ { getRestaurantsCnt() } ]</span></Link>
             <Link
                 variant="big"
                 to="/services/golden-tulip"
-            >{ lines(t("hotelServices")) }</Link>
+            >{ lines(t("hotelServices")) }<span>[ { getServicesCnt("golden-tulip") } ]</span></Link>
             <Link
                 variant="big"
                 to="/events/default"
-            >{ lines(t("events")) }<span>[ 1 ]</span></Link>
+            >{ lines(t("events")) }<span>[ { getEventsCnt() } ]</span></Link>
             <Link
                 variant="big"
                 to="/events/venues"
@@ -41,11 +50,11 @@ export const Nav = ({weather}) => {
             <Link
                 variant="big"
                 to="/stock/golden-tulip"
-            >{ lines(t("offers")) }<span>[ { getVenuesCnt() } ]</span></Link>
+            >{ lines(t("offers")) }<span>[ { getStocksCnt("golden-tulip") } ]</span></Link>
             <Link
                 variant="big"
                 to="/affiche"
-            >{ lines(t("poster")) }<span>[ { getVenuesCnt() } ]</span></Link>
+            >{ lines(t("poster")) }<span>[ { getAfficheCnt() } ]</span></Link>
         </nav>
         <div className="list">
             <div className="room">

@@ -39,6 +39,38 @@ export function getStocks(h) {
     return getStore().stocks.filter(el => el.hotels.includes(h))
 }
 
+function asList(value) {
+    return Array.isArray(value) ? value : [];
+}
+
+export function getActivitiesCnt(season) {
+    return asList(getActivities()?.[season]?.list).reduce(
+        (sum, group) => sum + asList(group?.items).length,
+        0
+    );
+}
+
+export function getRestaurantsCnt() {
+    return Object.values(getHotels() || {}).filter((hotel) => hotel?.section_5).length;
+}
+
+export function getServicesCnt(hotelId) {
+    const section = getHotels()?.[hotelId]?.section_6 || {};
+    return asList(section.include).length + asList(section.additional).length;
+}
+
+export function getEventsCnt() {
+    return asList(getMain()?.events?.items).length;
+}
+
+export function getStocksCnt(hotelId) {
+    return getStocks(hotelId).length;
+}
+
+export function getAfficheCnt() {
+    return asList(getAffiche()).length;
+}
+
 export function decodeRouteParam(value) {
     if (!value) return "";
     try {

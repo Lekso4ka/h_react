@@ -1,15 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useCtx, useT } from "../../../Ctx";
 import { Icon } from "../../../ui/Icon";
 import { Line } from "../../../ui/Line";
 import { Link } from "../../../ui/Link";
+import { embedHotelSearchForm, hotelSearchScenario } from "../../../utils/tlBooking";
 import { Hero, Section1, Title } from "./style";
 import { VideoSection } from "../2_Video";
 import { lines } from "../../../utils/lines";
 
 export const Caption = ({ data, id }) => {
-    const {mob} = useCtx()
+    const { mob, lang } = useCtx()
     const t = useT()
+    const scenario = hotelSearchScenario(id)
+    useEffect(() => {
+        let timer = 0;
+        let stopped = false;
+        const run = () => {
+            if (stopped) return;
+            if (embedHotelSearchForm(id, lang)) return;
+            timer = window.setTimeout(run, 200);
+        };
+        run();
+        return () => {
+            stopped = true;
+            window.clearTimeout(timer);
+        };
+    }, [id, lang]);
     const renderStars = () => {
         const arr = []
         let n = data.stars
@@ -32,7 +48,7 @@ export const Caption = ({ data, id }) => {
             
             {/*start TL Search form script*/}
             <div id="block-search">
-                <div id={ `tl-search-form-${id === "golden-tulip" ? 3934 : 3935}` } className="tl-container">
+                <div key={ scenario } id={ `tl-search-form-${ scenario }` } className="tl-container">
                     <a href="https://www.travelline.ru/products/tl-hotel/" rel="nofollow" target="_blank">TravelLine</a>
                 </div>
             </div>

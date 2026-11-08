@@ -12,23 +12,9 @@
                 if (w.localStorage.getItem("hotel_lang") === "en") lang = "en";
             } catch (e) {}
             if (/^\/admin(\/|$)/.test(w.location.pathname)) return;
-            var q = lang === "en"
-                ? [
-                    ["setContext", "TL-INT-golden-tulip-inn_2026-10-15", "en"],
-                    ["embed", "search-form", { container: "tl-search-form" }],
-                    ["setContext", "TL-INT-golden-tulip-inn_2026-10-15.3934", "en"],
-                    ["embed", "search-form", { container: "tl-search-form-3934" }],
-                    ["setContext", "TL-INT-golden-tulip-inn_2026-10-15.3935", "en"],
-                    ["embed", "search-form", { container: "tl-search-form-3935" }]
-                ]
-                : [
-                    ["setContext", "TL-INT-golden-tulip-inn_2026-10-15", "ru"],
-                    ["embed", "search-form", { container: "tl-search-form" }],
-                    ["setContext", "TL-INT-golden-tulip-inn_2026-10-15.3935", "ru"],
-                    ["embed", "search-form", { container: "tl-search-form-3935" }],
-                    ["setContext", "TL-INT-golden-tulip-inn_2026-10-15.3934", "ru"],
-                    ["embed", "search-form", { container: "tl-search-form-3934" }]
-                ];
+            var q = [
+                ["setContext", "TL-INT-golden-tulip-inn_2026-10-15", lang]
+            ];
             var h = ["ru-ibe.tlintegration.ru", "ibe.tlintegration.ru", "ibe.tlintegration.com"];
             var t = w.travelline = (w.travelline || {}),
                 ti = t.integration = (t.integration || {});

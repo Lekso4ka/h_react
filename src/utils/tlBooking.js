@@ -1,6 +1,26 @@
 import { externalLinkProps } from "./externalHref";
 
 const TRIGGER_ID = "tl-booking-trigger";
+const PROFILE = "TL-INT-golden-tulip-inn_2026-10-15";
+
+export function hotelSearchScenario(hotelId) {
+    return hotelId === "golden-tulip" ? "3934" : "3935";
+}
+
+export function embedHotelSearchForm(hotelId, lang) {
+    const scenario = hotelSearchScenario(hotelId);
+    const container = `tl-search-form-${ scenario }`;
+    const node = document.getElementById(container);
+    if (!node) return false;
+    if (node.querySelector("iframe")) return true;
+    const queue = window.travelline?.integration?.__cq;
+    if (!queue || Array.isArray(queue) || typeof queue.concat !== "function") return false;
+    queue.concat([
+        ["setContext", `${ PROFILE }.${ scenario }`, lang === "en" ? "en" : "ru"],
+        ["embed", "search-form", { container }],
+    ]);
+    return true;
+}
 
 function queryOf(value) {
     const raw = String(value ?? "").trim();
