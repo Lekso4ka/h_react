@@ -25,21 +25,21 @@ export const AfficheEventContent = ({ event }) => {
     const hasCopy = Boolean(caption || paragraphs.length || moreLink);
 
     return <>
-        <Hero>
+        {event?.title && <Hero>
             <Line/>
             <div className="title">
-                {when ? <h4>{lines(when)}</h4> : null}
-                <h1>{lines(event?.title)}</h1>
+                { when ? <h4>{ lines(when) }</h4> : null }
+                <h1>{ lines(event?.title) }</h1>
             </div>
             <Line/>
-        </Hero>
-        <Section bg={event?.src}>
+        </Hero> }
+        {event?.src && <Section bg={ event?.src }>
             <div className="img"/>
-            {hasCopy ? <div className="copy">
-                {caption ? <h3>{lines(caption)}</h3> : null}
-                {paragraphs.map((paragraph, i) => <p key={i}>{lines(paragraph)}</p>)}
-                {moreLink ? <Link to={moreLink}>{ lines(t("moreAboutEvent")) }</Link> : null}
-            </div> : null}
-        </Section>
+            { hasCopy ? <div className="copy">
+                { caption ? <h3>{ lines(caption) }</h3> : null }
+                { paragraphs.map((paragraph, i) => <p key={ i }>{ lines(paragraph) }</p>) }
+                { moreLink ? <Link to={ moreLink }>{ lines(t("moreAboutEvent")) }</Link> : null }
+            </div> : null }
+        </Section> }
     </>
 }

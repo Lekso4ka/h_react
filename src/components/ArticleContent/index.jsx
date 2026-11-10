@@ -23,28 +23,29 @@ export const ArticleContent = () => {
     const [activeImg, setActiveImg] = useState(0);
     const { article } = useParams();
     const { content: a } = getArticleById(article);
+    console.log(a)
     return <>
         
-        <Hero>
+        {a.title.caption && <Hero>
             <Line/>
             <div className="title">
                 <h4>{ lines(a.title.tooltip) }</h4>
                 <h1 dangerouslySetInnerHTML={ { __html: a.title.caption } }/>
             </div>
             <Line/>
-        </Hero>
+        </Hero> }
         
-        <Section1 bg={ a.section_1.img }>
+        { a.section_1.caption_1 && a.section_1.img && <Section1 bg={ a.section_1.img }>
             <h2>{ lines(a.section_1.caption_1) }</h2>
             <div className="img"/>
             <p className="text">{ lines(a.section_1.text_1) }</p>
             <h3>{ lines(a.section_1.caption_2) }</h3>
             { a.section_1.text_2.map((el, i) => <p key={ i }>{ lines(el) }</p>) }
-        </Section1>
-        <SectionC>
-        <Carousel className="carousel" images={ a.carousel }/>
-        </SectionC>
-        <Section2
+        </Section1> }
+        {a.carousel.filter(el => el).length > 0 && <SectionC>
+            <Carousel className="carousel" images={ a.carousel }/>
+        </SectionC> }
+        { a.section_2.caption && a.section_2.img_1 && a.section_2.img_2 && <Section2
             bg1={ a.section_2.img_1 }
             bg2={ a.section_2.img_2 }
         >
@@ -52,10 +53,10 @@ export const ArticleContent = () => {
             <div className="img img2"/>
             <h2>{ lines(a.section_2.caption) }</h2>
             { a.section_2.text.map((el, i) => <p key={ i }>{ lines(el) }</p>) }
-        </Section2>
+        </Section2> }
         
         
-        <Section3>
+        {a.section_3.caption && a.section_3.list.filter(el => el.img).length > 0 && <Section3>
             <h2>{ lines(a.section_3.caption) }</h2>
             <p>{ lines(a.section_3.text) }</p>
             <ul>
@@ -68,10 +69,10 @@ export const ArticleContent = () => {
             </ul>
             <h3 dangerouslySetInnerHTML={ { __html: a.section_3.tooltip } }/>
             <Link to={ a.section_3.link }>{ lines(t("viewRooms")) }</Link>
-        </Section3>
+        </Section3> }
         
         
-        <Section4
+        {a.section_4.caption && a.section_4.img_1 && a.section_4.img_2 && <Section4
             bg1={ a.section_4.img_1 }
             bg2={ a.section_4.img_2 }
         >
@@ -81,16 +82,16 @@ export const ArticleContent = () => {
                 { a.section_4.text.map((el, i) => <p key={ i }>{ lines(el) }</p>) }
             </div>
             <div className="img img2"></div>
-        </Section4>
+        </Section4> }
         
-        <Section5 bg={ a.section_5.img }>
+        {a.section_5.caption && a.section_5.img && <Section5 bg={ a.section_5.img }>
             <h2>{ lines(a.section_5.caption) }</h2>
             <p>{ lines(a.section_5.text) }</p>
             <div className="img"></div>
             <p className="img_text">{ lines(a.section_5.img_text) }</p>
-        </Section5>
+        </Section5> }
         
-        <Section6 bg={ a.section_6.img }>
+        {a.section_6.text && a.section_6.img && <Section6 bg={ a.section_6.img }>
             <div className="text">
                 <Line/>
                 <p>{ lines(a.section_6.text) }
@@ -98,9 +99,9 @@ export const ArticleContent = () => {
                 <Line/>
             </div>
             <div className="img"/>
-        </Section6>
+        </Section6> }
         
-        <Section7>
+        {a.section_7.caption && <Section7>
             <div className="top">
                 <div className="text">
                     <h2>{ lines(a.section_7.caption) }</h2>
@@ -112,16 +113,16 @@ export const ArticleContent = () => {
                 <Link to={ "/" }>{ lines(t("chooseHotel")) }</Link>
             </div>
             <div className="bottom">
-                {/*<Line/>*/}
-                {/*<div className="tabs">*/}
-                {/*    { a.section_7.tags.map((el, i) => <RouterLink*/}
-                {/*        key={ i }*/}
-                {/*        to={ el.link }*/}
-                {/*    >{ lines(el.text) }</RouterLink>) }*/}
-                {/*</div>*/}
+                {/*<Line/>*/ }
+                {/*<div className="tabs">*/ }
+                {/*    { a.section_7.tags.map((el, i) => <RouterLink*/ }
+                {/*        key={ i }*/ }
+                {/*        to={ el.link }*/ }
+                {/*    >{ lines(el.text) }</RouterLink>) }*/ }
+                {/*</div>*/ }
                 <Line/>
             </div>
-        </Section7>
+        </Section7> }
     </>
     
 }
