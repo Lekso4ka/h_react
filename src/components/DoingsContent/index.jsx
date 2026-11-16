@@ -9,23 +9,17 @@ import { Article, BtnBlock, Content, Top } from "./style";
 import { getDoings } from "../../data";
 import { lines } from "../../utils/lines";
 
-const randomize = (data) => {
-    if (Array.isArray(data)) {
-        const n = Math.floor(Math.random() * data.length);
-        return data[n]
-    } else {
-        return Math.floor(Math.random() * data);
-    }
-}
+const PREVIEW_COUNT = 9;
 
 export const DoingsContent = () => {
     const t = useT();
     const [showAll, setShowAll] = useState(false);
-    const [moreData, setMoreData] = useState(false);
     const location = useLocation();
     const contentRef = useRef()
     const btnRef = useRef()
     const data = getDoings()
+    const preview = data.slice(0, PREVIEW_COUNT)
+    const rest = data.slice(PREVIEW_COUNT)
 
     useEffect(() => {
         const hash = location.hash;
@@ -51,32 +45,21 @@ export const DoingsContent = () => {
     useEffect(() => {
         const c = contentRef.current;
         const b = btnRef.current;
-        if (c && b) {
-            let top = b.getBoundingClientRect().top;
-            for (let i = 0; i < c.children.length; i++) {
-                const rect = c.children[i].getBoundingClientRect()
-                let bot = rect.bottom;
-                if (Math.abs(top - bot) < 50) {
-                    c.children[i].style.borderBottom = "none";
-                }
+        if (!c) return;
+
+        for (let i = 0; i < c.children.length; i++) {
+            c.children[i].style.borderBottom = "";
+        }
+        if (!b) return;
+
+        const top = b.getBoundingClientRect().top;
+        for (let i = 0; i < c.children.length; i++) {
+            const bot = c.children[i].getBoundingClientRect().bottom;
+            if (Math.abs(top - bot) < 50) {
+                c.children[i].style.borderBottom = "none";
             }
         }
-    }, [contentRef.current, btnRef.current])
-    
-    useEffect(() => {
-        const arr = []
-        let n = randomize(20), item
-        while (n < 5) {
-            n = randomize(20)
-        }
-        while (n--) {
-            item = { ...randomize(data) };
-            item.type = item.type === "article" ? randomize(["article", "article", "article", "image", "text", "article"]) : item.type;
-            item.order = n
-            arr.push(item)
-        }
-        setMoreData(arr)
-    }, []);
+    }, [showAll, data.length])
     
     const renderArticle = (el, i) => {
         switch (el.type) {
@@ -115,13 +98,15 @@ export const DoingsContent = () => {
             <h1>{ lines(t("doingsTitle")) } <span>{ lines(t("doingsTitleAccent")) }</span></h1>
         </Top>
         <Content ref={contentRef}>
-            { data.map((el, i) => renderArticle(el, i)) }
-            <BtnBlock ref={btnRef}>
-                <button onClick={ () => setShowAll(!showAll) }>
-                    { showAll ? lines(t("hideArticles")) : lines(t("allArticles")) }
-                </button>
-            </BtnBlock>
-            { showAll && moreData.map((el, i) => renderArticle(el, i)) }
+            { preview.map((el, i) => renderArticle(el, `preview-${ el.id ?? i }`)) }
+            { rest.length > 0 && (
+                <BtnBlock ref={btnRef}>
+                    <button onClick={ () => setShowAll((open) => !open) }>
+                        { showAll ? lines(t("hideArticles")) : lines(t("allArticles")) }
+                    </button>
+                </BtnBlock>
+            ) }
+            { showAll && rest.map((el, i) => renderArticle(el, `rest-${ el.id ?? i }`)) }
         </Content>
         <SingleActivity name={ "summer" }/>
     </>

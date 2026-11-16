@@ -70,7 +70,7 @@ export const ServicesContent = ({ page }) => {
                     return Math.max(0, container.offsetHeight - image.offsetHeight);
                 };
                 
-                ScrollTrigger.create({
+                const trigger = ScrollTrigger.create({
                     trigger: container,
                     start: () => `top ${remToPixels(9.2 + 1.8)}`,
                     end: () => `+=${ getFaqHeight() }`,
@@ -80,7 +80,7 @@ export const ServicesContent = ({ page }) => {
                 });
                 
                 return () => {
-                    ScrollTrigger.getAll().forEach(st => st.kill());
+                    trigger.kill();
                 };
             })
             return () => mm.revert();

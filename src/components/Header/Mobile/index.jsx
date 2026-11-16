@@ -124,7 +124,7 @@ export const Mobile = () => {
             
             return () => trigger.kill();
         },
-        { scope: shellRef, dependencies: [isHeroRoute] }
+        { scope: shellRef, dependencies: [isHeroRoute, location.pathname] }
     );
     
     useGSAP(
