@@ -4,12 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "rimraf ./build && webpack --env prod --mode production --config webpack.config.js",
+    "build": "rimraf ./static ./ssr && webpack --mode production --config webpack.config.js && webpack --env ssr --mode production --config webpack.config.js",
     "start": "webpack serve",
     "server": "nodemon index.js"
   },
   "dependencies": {
+    "@emotion/cache": "^11.14.0",
     "@emotion/react": "^11.13.3",
+    "@emotion/server": "^11.11.0",
     "@emotion/styled": "^11.13.0",
     "@fontsource/inter": "^5.1.0",
     "@gsap/react": "^2.1.2",

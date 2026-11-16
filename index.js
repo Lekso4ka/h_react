@@ -1,9 +1,12 @@
 require("./lib/env");
 
+const fs = require("node:fs");
 const path = require("node:path");
 const exp = require("express");
 const cors = require("cors");
 const { config } = require("./lib/env");
+const { loadSitePayload } = require("./lib/siteData");
+const { readTemplate, renderDocument } = require("./lib/renderHtml");
 
 const roomsRouter = require("./routes/rooms");
 const uploadRouter = require("./routes/upload");
@@ -21,7 +24,7 @@ const PORT = config.port;
 app.use(cors());
 app.use(exp.json({ limit: "200mb" }));
 app.use("/images", exp.static(path.join(__dirname, "images")));
-app.use(exp.static("./static"));
+app.use(exp.static(path.join(__dirname, "static"), { index: false }));
 
 app.get("/api/health", (_req, res) => {
     res.json({ ok: true });
@@ -90,8 +93,102 @@ app.use(
     createResourceRouter({ fileName: "menu.json", kind: "singleton" })
 );
 
-app.get("*splat", (_req, res) => {
-    res.sendFile(path.join(__dirname, "static", "index.html"));
+const templatePath = path.join(__dirname, "static", "index.html");
+const rendererPath = path.join(__dirname, "ssr", "server.js");
+
+let rendererCache = null;
+let rendererMtime = 0;
+
+function getRenderer() {
+    if (!fs.existsSync(rendererPath)) return null;
+    const mtime = fs.statSync(rendererPath).mtimeMs;
+    if (!rendererCache || rendererMtime !== mtime) {
+        delete require.cache[require.resolve(rendererPath)];
+        rendererCache = require(rendererPath);
+        rendererMtime = mtime;
+    }
+    return rendererCache;
+}
+
+function requestLang(req) {
+    if (req.query.lang === "en" || req.query.lang === "ru") return req.query.lang;
+    const cookie = String(req.headers.cookie || "");
+    const match = cookie.match(/(?:^|;\s*)hotel_lang=(ru|en)(?:;|$)/);
+    return match ? match[1] : "ru";
+}
+
+function pageUrls(req) {
+    const host = req.get("host");
+    if (!host) return { ru: "", en: "" };
+    const proto = String(req.headers["x-forwarded-proto"] || req.protocol || "http").split(",")[0].trim();
+    const pathname = req.path || "/";
+    return {
+        ru: `${proto}://${host}${pathname}`,
+        en: `${proto}://${host}${pathname}?lang=en`,
+    };
+}
+
+let renderQueue = Promise.resolve();
+
+function renderExclusive(renderer, args) {
+    const job = renderQueue.then(() => renderer.renderPage(args));
+    renderQueue = job.then(() => {}, () => {});
+    return job;
+}
+
+function sendSpa(res) {
+    res.sendFile(templatePath);
+}
+
+app.get("*splat", async (req, res) => {
+    if (path.extname(req.path)) {
+        res.status(404).end();
+        return;
+    }
+    if (!fs.existsSync(templatePath)) {
+        res.status(503).type("text/plain").send("Site bundle is not built");
+        return;
+    }
+    if (req.path === "/admin" || req.path.startsWith("/admin/")) {
+        sendSpa(res);
+        return;
+    }
+
+    const renderer = getRenderer();
+    if (!renderer) {
+        sendSpa(res);
+        return;
+    }
+
+    try {
+        const lang = requestLang(req);
+        const payload = await loadSitePayload(lang);
+        const rendered = await renderExclusive(renderer, {
+            url: req.originalUrl,
+            lang: payload.lang,
+            store: payload.store,
+            media: payload.media,
+            texts: payload.texts,
+        });
+        const html = renderDocument({
+            template: readTemplate(templatePath),
+            html: rendered.html,
+            styles: rendered.styles,
+            seo: rendered.seo,
+            lang: payload.lang,
+            payload,
+            urls: pageUrls(req),
+        });
+        if (req.query.lang === "en" || req.query.lang === "ru" || /(?:^|;\s*)hotel_lang=/.test(String(req.headers.cookie || ""))) {
+            res.setHeader("Set-Cookie", `hotel_lang=${payload.lang}; Path=/; Max-Age=31536000; SameSite=Lax`);
+        }
+        res.setHeader("Content-Type", "text/html; charset=utf-8");
+        res.setHeader("Vary", "Cookie");
+        res.send(html);
+    } catch (error) {
+        console.error("ssr:", error);
+        sendSpa(res);
+    }
 });
 
 ensureStaticTables()

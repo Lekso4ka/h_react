@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useT } from "../../Ctx";
 import { Block, Bottom, Caption, Left, List, Right, Title } from "./style";
@@ -9,13 +9,14 @@ const SUBSCRIBED_KEY = "newsletter-subscribed";
 
 export const Footer = () => {
     const t = useT();
-    const [subscribed, setSubscribed] = useState(() => {
+    const [subscribed, setSubscribed] = useState(false);
+    useEffect(() => {
         try {
-            return sessionStorage.getItem(SUBSCRIBED_KEY) === "1";
+            if (sessionStorage.getItem(SUBSCRIBED_KEY) === "1") setSubscribed(true);
         } catch {
-            return false;
+            /* ignore */
         }
-    });
+    }, []);
     const [sending, setSending] = useState(false);
     const formHandler = async (e) => {
         e.preventDefault();

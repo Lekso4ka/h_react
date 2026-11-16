@@ -490,4 +490,6 @@ router.delete("/:hotel/:categoryKey", async (req, res) => {
   }
 });
 
+router.readPublic = readRoomsOverlay;
+
 module.exports = router;

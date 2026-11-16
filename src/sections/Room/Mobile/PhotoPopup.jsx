@@ -29,7 +29,7 @@ export const PhotoPopup = ({ images = [], active, index, offset, onClose, closeL
         };
     }, [active, onClose]);
 
-    if (!active) return null;
+    if (!active || typeof document === "undefined") return null;
 
     return createPortal(
         <PopupScroller

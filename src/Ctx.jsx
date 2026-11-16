@@ -26,9 +26,11 @@ export const useT = () => {
     return (key) => withBreaks(t(lang, key));
 };
 
-export const ContextProvider = ({children}) => {
+export const ContextProvider = ({ children, initialLang }) => {
     const [mob, setMob] = useState(null);
-    const [lang, setLangState] = useState(readStoredLang);
+    const [lang, setLangState] = useState(() => (
+        initialLang === "en" || initialLang === "ru" ? initialLang : readStoredLang()
+    ));
     useEffect(() => {
         const w = window.outerWidth;
         if (w < 576) {
@@ -47,6 +49,7 @@ export const ContextProvider = ({children}) => {
         const resolved = next === "en" ? "en" : "ru";
         if (resolved === lang) return;
         writeStoredLang(resolved);
+        document.cookie = `hotel_lang=${resolved};path=/;max-age=31536000;samesite=lax`;
         window.location.reload();
     };
 

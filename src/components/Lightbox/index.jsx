@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { useT } from "../../Ctx";
 import { Link } from "../../ui/Link";
@@ -49,13 +49,18 @@ const lockScroll = () => {
 
 export const Lightbox = ({ active = true }) => {
     const t = useT();
+    const [mounted, setMounted] = useState(false);
 
     useLayoutEffect(() => {
-        if (!active) return undefined;
-        return lockScroll();
-    }, [active]);
+        setMounted(true);
+    }, []);
 
-    if (!active || typeof document === "undefined") return null;
+    useLayoutEffect(() => {
+        if (!active || !mounted) return undefined;
+        return lockScroll();
+    }, [active, mounted]);
+
+    if (!active || !mounted) return null;
 
     return createPortal(
         <Overlay role="dialog" aria-modal="true" aria-labelledby="renovation-lightbox-title">

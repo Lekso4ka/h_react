@@ -1,84 +1,70 @@
-import React, { useEffect, useState } from "react";
-import { createRoot } from "react-dom/client";
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+import React from "react";
+import { createRoot, hydrateRoot } from "react-dom/client";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { CacheProvider } from "@emotion/react";
+import createCache from "@emotion/cache";
 import { ThemeProvider } from "@emotion/react";
 
-import { App } from "./App";
 import { AdminRoot } from "./admin/AdminRoot";
-import { ContextProvider, useCtx } from "./Ctx";
-import { loadSiteData } from "./data/store";
-import { loadStaticContent } from "./data/staticContent";
-import { readStoredLang, t } from "./i18n/strings";
-import { lines } from "./utils/lines";
-import { GlobalStyles } from "./styles/GlobalSt";
+import { hydrateSiteData } from "./data/store";
+import { PublicRoot } from "./PublicRoot";
+import { readStoredLang, writeStoredLang } from "./i18n/strings";
+import { applyTextOverrides } from "./i18n/strings";
+import { applyStaticMedia } from "./utils/staticSlots";
 import { theme } from "./styles/theme";
 
-const ScrollToTop = () => {
-    const { pathname } = useLocation();
+const emotionCache = createCache({ key: "css" });
 
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [pathname]);
+function writeLangCookie(lang) {
+    document.cookie = `hotel_lang=${lang};path=/;max-age=31536000;samesite=lax`;
+}
 
-    return null;
-};
+function hasLangCookie() {
+    return /(?:^|;\s*)hotel_lang=(?:ru|en)(?:;|$)/.test(document.cookie);
+}
 
-const PublicRoot = () => {
-    const [ready, setReady] = useState(false);
-    const [error, setError] = useState("");
-
-    useEffect(() => {
-        let cancelled = false;
-        Promise.all([
-            loadSiteData({ force: true, lang: readStoredLang() }),
-            loadStaticContent(),
-        ])
-            .then(() => {
-                if (!cancelled) setReady(true);
-            })
-            .catch((err) => {
-                if (!cancelled) setError(err.message || t(readStoredLang(), "loadError"));
-            });
-
-        return () => {
-            cancelled = true;
-        };
-    }, []);
-
-    if (error) {
-        return (
-            <div style={{ padding: 40, fontFamily: "Manrope, sans-serif" }}>
-                {lines(error)}
-            </div>
-        );
+function preferStoredLang() {
+    const siteLang = window.__SITE__?.lang;
+    if (siteLang !== "en" && siteLang !== "ru") return false;
+    const queryLang = new URLSearchParams(window.location.search).get("lang");
+    if (queryLang === "en" || queryLang === "ru") {
+        writeStoredLang(siteLang);
+        writeLangCookie(siteLang);
+        return false;
     }
-
-    if (!ready) {
-        return null;
+    if (!hasLangCookie() && readStoredLang() !== siteLang) {
+        writeLangCookie(readStoredLang());
+        window.location.reload();
+        return true;
     }
+    if (readStoredLang() !== siteLang) writeStoredLang(siteLang);
+    return false;
+}
 
-    return (
-        <ContextProvider>
-            <ScrollToTop />
-            <GlobalStyles />
-            <PublicApp />
-        </ContextProvider>
-    );
-};
+function bootSiteData() {
+    const site = window.__SITE__;
+    if (!site?.store) return;
+    hydrateSiteData(site.store);
+    applyStaticMedia(site.media || {});
+    applyTextOverrides(site.texts || {});
+}
 
-const PublicApp = () => {
-    const { lang } = useCtx();
-    return <App key={lang} />;
-};
-
-const root = createRoot(document.getElementById("root"));
-root.render(
-    <ThemeProvider theme={theme}>
-        <BrowserRouter>
-            <Routes>
-                <Route path="/admin/*" element={<AdminRoot />} />
-                <Route path="*" element={<PublicRoot />} />
-            </Routes>
-        </BrowserRouter>
-    </ThemeProvider>
+const tree = (
+    <CacheProvider value={emotionCache}>
+        <ThemeProvider theme={theme}>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/admin/*" element={<AdminRoot />} />
+                    <Route path="*" element={<PublicRoot />} />
+                </Routes>
+            </BrowserRouter>
+        </ThemeProvider>
+    </CacheProvider>
 );
+
+const rootEl = document.getElementById("root");
+if (rootEl && !preferStoredLang()) {
+    bootSiteData();
+    if (rootEl.hasChildNodes()) hydrateRoot(rootEl, tree);
+    else createRoot(rootEl).render(tree);
+}

@@ -3,6 +3,7 @@
 .env
 node_modules
 static
+ssr
 resumes/*
 !resumes/.gitkeep
 .tmp-figma.png

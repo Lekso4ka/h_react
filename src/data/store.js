@@ -29,6 +29,23 @@ export function isDataReady() {
     return ready;
 }
 
+export function hydrateSiteData(store = {}) {
+    cache.activities = store.activities || {};
+    cache.affiche = store.affiche || [];
+    cache.doings = store.doings || [];
+    cache.hotels = store.hotels || {};
+    cache.rooms = store.rooms || {};
+    cache.stocks = store.stocks || [];
+    cache.vacancies = store.vacancies || [];
+    cache.venues = store.venues || {};
+    cache.legal = store.legal || {};
+    cache.main = store.main || {};
+    cache.menu = store.menu || {};
+    ready = true;
+    loadPromise = Promise.resolve(cache);
+    return cache;
+}
+
 export function getStore() {
     return cache;
 }
