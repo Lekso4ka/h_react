@@ -263,6 +263,9 @@ const ru = {
     renovationText: "Мы ждём вас в Golden Tulip 4* - тот же уровень гостеприимства и забота о каждом госте.",
     renovationHotel: "Смотреть отель",
     renovationRooms: "Номера",
+    notFoundTitle: "Страница не найдена",
+    notFoundText: "По этому адресу ничего нет. Проверьте ссылку или вернитесь на главную.",
+    notFoundHome: "На главную",
 };
 
 const en = {
@@ -511,6 +514,9 @@ const en = {
     renovationText: "We look forward to welcoming you at Golden Tulip 4* - the same hospitality and care for every guest.",
     renovationHotel: "View the hotel",
     renovationRooms: "Rooms",
+    notFoundTitle: "Page not found",
+    notFoundText: "There is nothing at this address. Check the link or return to the home page.",
+    notFoundHome: "Back to home",
 };
 
 export const STRINGS = { ru, en };

@@ -10,6 +10,7 @@ import { Icon } from "../../../ui/Icon";
 import { Link } from "../../../ui/Link";
 import { Content, Img } from "./style";
 import { lines } from "../../../utils/lines";
+import { siteLink } from "../../../utils/staticLinks";
 
 gsap.registerPlugin(CustomEase);
 
@@ -239,7 +240,7 @@ export const Restaurants = () => {
             hover={ "light" }
             to={ `/restaurant/${ activeSlide.hotel || "golden-tulip" }` }
         >{ lines(t("aboutRestaurant")) }</Link>
-        <Tour pos className="tour"/>
+        <Tour pos className="tour" link={ siteLink("homeRestaurantsTour") || undefined }/>
         <span
             className="arrow"
             onClick={ () => moveRef.current(-1) }

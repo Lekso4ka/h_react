@@ -7,6 +7,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { lines } from "../../../utils/lines";
+import { siteLink } from "../../../utils/staticLinks";
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export const Hotels = () => {
@@ -98,8 +99,8 @@ export const Hotels = () => {
         <div className="img img5" ref={r5}/>
         <p>{ lines(data.text) }</p>
         <div className="links">
-            <Link to="/hotel/golden-tulip">{ lines(t("toGolden")) }</Link>
-            <Link to="/hotel/tulip-inn">{ lines(t("toTulip")) }</Link>
+            <Link to={ siteLink("footerHotelGolden") }>{ lines(t("toGolden")) }</Link>
+            <Link to={ siteLink("footerHotelTulip") }>{ lines(t("toTulip")) }</Link>
         </div>
     </Content>
 }

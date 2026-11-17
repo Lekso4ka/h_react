@@ -401,6 +401,12 @@ export function Sidebar() {
           >
             Тексты
           </Item>
+          <Item
+            to={adminPath("/static/links")}
+            className={() => classIf(location.pathname.startsWith(adminPath("/static/links")))}
+          >
+            Ссылки
+          </Item>
         </Group>
 
         <Group>

@@ -12,6 +12,7 @@ import { Article } from "./pages/Article";
 import { Doings } from "./pages/Doings";
 import { Events } from "./pages/Events";
 import { Home } from "./pages/Home";
+import { NotFound } from "./pages/NotFound";
 import { Hotel } from "./pages/Hotel";
 import { Info } from "./pages/Info";
 import { Policy } from "./pages/Policy";
@@ -58,6 +59,7 @@ export const App = () => {
             <Route path="/info" element={ <Info/> }/>
             <Route path="/rules" element={ <Rules/> }/>
             <Route path="/policy" element={ <Policy/> }/>
+            <Route path="*" element={ <NotFound/> }/>
         </Routes>
         <Map/>
         <Footer/>

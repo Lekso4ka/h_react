@@ -9,6 +9,17 @@ import { lines } from "../../../utils/lines";
 
 gsap.registerPlugin(useGSAP);
 
+function faqHref(raw) {
+    const value = String(raw || "").trim();
+    if (!value) return "";
+    if (/^(https?:|tel:|mailto:|\/|#)/i.test(value)) return value;
+    if (/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(value)) return `mailto:${value}`;
+    const compact = value.replace(/[^\d+]/g, "");
+    if (/^\+?\d{5,}$/.test(compact) && !/[a-z]/i.test(value)) return `tel:${compact}`;
+    if (/^(?:[a-z0-9-]+\.)+[a-z]{2,}(?:[/?#].*)?$/i.test(value)) return `https://${value}`;
+    return value;
+}
+
 const OPEN_DURATION = 0.45;
 const CLOSE_DURATION = 0.35;
 
@@ -111,8 +122,16 @@ export const Item = ({
             <Panel ref={ panelRef } id={panelId} role="region" aria-hidden={!isOpen}>
                 <Inner ref={innerRef}>
                     <div dangerouslySetInnerHTML={{__html: answer}} />
-                    {links.length > 0 && <div className="links">
-                        {links.map((el, i) => <Link key={i} to={el.href}>{lines(el.title)}</Link>) }
+                    {(links || []).some((el) => faqHref(el?.link || el?.href)) && <div className="links">
+                        {(links || []).map((el, i) => {
+                            const href = faqHref(el?.link || el?.href);
+                            if (!href) return null;
+                            return (
+                                <Link key={i} to={href} target="_blank" rel="noreferrer">
+                                    {lines(el.title)}
+                                </Link>
+                            );
+                        })}
                     </div>}
                 </Inner>
             </Panel>

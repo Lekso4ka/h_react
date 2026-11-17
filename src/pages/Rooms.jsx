@@ -1,13 +1,12 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { Container } from "../components/Container";
+import { getHotelById } from "../data";
 import { RoomsContent } from "../sections/Rooms";
+import { NotFound } from "./NotFound";
 
 
 export const Rooms = () => {
-    //const {id} = useParams();
-    //return <Container>
-    //    <RoomsContent id={id}/>
-    //</Container>
+    const { id } = useParams();
+    if (!getHotelById(id)) return <NotFound />;
     return <RoomsContent/>
 }

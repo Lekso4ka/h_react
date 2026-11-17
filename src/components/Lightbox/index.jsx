@@ -4,6 +4,7 @@ import { useT } from "../../Ctx";
 import { Link } from "../../ui/Link";
 import { Actions, Aside, Overlay, Panel, Text, Title } from "./style";
 import { lines } from "../../utils/lines";
+import { siteLink } from "../../utils/staticLinks";
 
 const lockScroll = () => {
     const html = document.documentElement;
@@ -69,8 +70,8 @@ export const Lightbox = ({ active = true }) => {
                 <Aside>
                     <Text>{ lines(t("renovationText")) }</Text>
                     <Actions>
-                        <Link to="/hotel/golden-tulip">{ lines(t("renovationHotel")) }</Link>
-                        <Link to="/rooms/golden-tulip">{ lines(t("renovationRooms")) }</Link>
+                        <Link to={ siteLink("footerHotelGolden") }>{ lines(t("renovationHotel")) }</Link>
+                        <Link to={ siteLink("homeRoomsGolden") }>{ lines(t("renovationRooms")) }</Link>
                     </Actions>
                 </Aside>
             </Panel>

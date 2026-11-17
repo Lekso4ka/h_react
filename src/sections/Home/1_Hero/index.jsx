@@ -8,6 +8,7 @@ import { Link } from "../../../ui/Link";
 import { Video } from "../../../ui/Video";
 import { ActivityCard, Content, HotelCard, Sticky, StickyDock } from "./style";
 import { lines } from "../../../utils/lines";
+import { siteLink } from "../../../utils/staticLinks";
 
 const Stars = ({ count }) => (
     <>
@@ -139,8 +140,8 @@ export const Hero = ({ weather, setWeather }) => {
                                 { lines(golden.text) }
                             </p>
                             <div className="links">
-                                <Link to="/hotel/golden-tulip">{ lines(t("chooseHotel")) }</Link>
-                                <Link to="/rooms/golden-tulip">{ lines(t("rooms")) }</Link>
+                                <Link to={ siteLink("footerHotelGolden") }>{ lines(t("chooseHotel")) }</Link>
+                                <Link to={ siteLink("homeRoomsGolden") }>{ lines(t("rooms")) }</Link>
                             </div>
                         </div>
                     </div>
@@ -178,8 +179,8 @@ export const Hero = ({ weather, setWeather }) => {
                                 <span style={ { color: "transparent" } }>.</span>
                             </p>
                             <div className="links">
-                                <Link to="/hotel/tulip-inn">{ lines(t("chooseHotel")) }</Link>
-                                <Link to="/rooms/tulip-inn">{ lines(t("rooms")) }</Link>
+                                <Link to={ siteLink("footerHotelTulip") }>{ lines(t("chooseHotel")) }</Link>
+                                <Link to={ siteLink("homeRoomsTulip") }>{ lines(t("rooms")) }</Link>
                             </div>
                         </div>
                     </div>

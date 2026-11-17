@@ -4,11 +4,14 @@ import { ArticleContent } from "../components/ArticleContent";
 import { Container } from "../components/Container";
 import { Seo } from "../components/Seo";
 import { getArticleById } from "../data";
+import { NotFound } from "./NotFound";
 
 export const Article = ({}) => {
     const { article } = useParams();
+    const data = getArticleById(article);
+    if (!data) return <NotFound />;
     return <Container hh>
-        <Seo {...getArticleById(article)?.seo} />
+        <Seo {...data.seo} />
         <ArticleContent/>
     </Container>
 }

@@ -11,6 +11,7 @@ import { PublicRoot } from "./PublicRoot";
 import { readStoredLang, writeStoredLang } from "./i18n/strings";
 import { applyTextOverrides } from "./i18n/strings";
 import { applyStaticMedia } from "./utils/staticSlots";
+import { applyStaticLinks } from "./utils/staticLinks";
 import { theme } from "./styles/theme";
 
 const emotionCache = createCache({ key: "css" });
@@ -47,6 +48,7 @@ function bootSiteData() {
     hydrateSiteData(site.store);
     applyStaticMedia(site.media || {});
     applyTextOverrides(site.texts || {});
+    applyStaticLinks(site.links || {});
 }
 
 const tree = (

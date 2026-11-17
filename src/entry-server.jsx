@@ -9,16 +9,20 @@ import { hydrateSiteData } from "./data/store";
 import { applyTextOverrides } from "./i18n/strings";
 import { hasSeo, normalizeSeo, SeoCollectContext } from "./components/Seo";
 import { applyStaticMedia } from "./utils/staticSlots";
+import { applyStaticLinks } from "./utils/staticLinks";
 import { theme } from "./styles/theme";
+import { StatusContext } from "./status";
 
-function renderPage({ url, lang, store, media, texts }) {
+function renderPage({ url, lang, store, media, texts, links }) {
     hydrateSiteData(store);
     applyStaticMedia(media || {});
     applyTextOverrides(texts || {});
+    applyStaticLinks(links || {});
 
     const cache = createCache({ key: "css" });
     const { extractCriticalToChunks, constructStyleTagsFromChunks } = createEmotionServer(cache);
     const seoRef = { current: normalizeSeo(store?.menu?.seo) };
+    const statusRef = { code: 200 };
     const previousError = console.error;
     console.error = (...args) => {
         const text = args.map((item) => String(item)).join(" ");
@@ -32,9 +36,11 @@ function renderPage({ url, lang, store, media, texts }) {
             <CacheProvider value={cache}>
                 <ThemeProvider theme={theme}>
                     <StaticRouter location={url}>
-                        <SeoCollectContext.Provider value={seoRef}>
-                            <PublicRoot initialLang={lang} />
-                        </SeoCollectContext.Provider>
+                        <StatusContext.Provider value={statusRef}>
+                            <SeoCollectContext.Provider value={seoRef}>
+                                <PublicRoot initialLang={lang} />
+                            </SeoCollectContext.Provider>
+                        </StatusContext.Provider>
                     </StaticRouter>
                 </ThemeProvider>
             </CacheProvider>
@@ -47,6 +53,7 @@ function renderPage({ url, lang, store, media, texts }) {
     return {
         html,
         styles,
+        status: statusRef.code,
         seo: hasSeo(seoRef.current) ? seoRef.current : normalizeSeo(null),
     };
 }

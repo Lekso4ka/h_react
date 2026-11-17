@@ -169,7 +169,9 @@ app.get("*splat", async (req, res) => {
             store: payload.store,
             media: payload.media,
             texts: payload.texts,
+            links: payload.links,
         });
+        const status = rendered.status === 404 ? 404 : 200;
         const html = renderDocument({
             template: readTemplate(templatePath),
             html: rendered.html,
@@ -178,10 +180,12 @@ app.get("*splat", async (req, res) => {
             lang: payload.lang,
             payload,
             urls: pageUrls(req),
+            status,
         });
         if (req.query.lang === "en" || req.query.lang === "ru" || /(?:^|;\s*)hotel_lang=/.test(String(req.headers.cookie || ""))) {
             res.setHeader("Set-Cookie", `hotel_lang=${payload.lang}; Path=/; Max-Age=31536000; SameSite=Lax`);
         }
+        res.status(status);
         res.setHeader("Content-Type", "text/html; charset=utf-8");
         res.setHeader("Vary", "Cookie");
         res.send(html);

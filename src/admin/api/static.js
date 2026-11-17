@@ -33,3 +33,20 @@ export function resetStaticText(key) {
     method: "DELETE",
   });
 }
+
+export function fetchStaticLinks() {
+  return apiRequest("/static/links");
+}
+
+export function saveStaticLink(key, payload) {
+  return apiRequest(`/static/links/${encodeURIComponent(key)}`, {
+    method: "PUT",
+    body: JSON.stringify(payload),
+  });
+}
+
+export function resetStaticLink(key) {
+  return apiRequest(`/static/links/${encodeURIComponent(key)}`, {
+    method: "DELETE",
+  });
+}

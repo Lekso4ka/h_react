@@ -4,6 +4,7 @@ import { Carousel } from "../../../components/Carousel";
 import { Link } from "../../../ui/Link";
 import { Section } from "./style";
 import { lines } from "../../../utils/lines";
+import { siteLink } from "../../../utils/staticLinks";
 
 export const Desktop = ({data, page}) => {
     const t = useT();
@@ -17,7 +18,7 @@ export const Desktop = ({data, page}) => {
         <div className="text">
             <p>{ lines(data.text_1) }</p>
             <p>{ lines(data.text_2) }</p>
-            <Link to={ "" }>{ lines(t("reserveTable")) }</Link>
+            <Link to={ siteLink("restaurantReserve") }>{ lines(t("reserveTable")) }</Link>
         </div>
         <div className="menu">
             <div className="img"/>

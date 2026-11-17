@@ -5,6 +5,7 @@ import { Line } from "../../../ui/Line";
 import { Link } from "../../../ui/Link";
 import { Section } from "./style";
 import { lines } from "../../../utils/lines";
+import { siteLink } from "../../../utils/staticLinks";
 
 export const Mobile = ({ data, page }) => {
     const t = useT();
@@ -43,7 +44,7 @@ export const Mobile = ({ data, page }) => {
             </p>) }
             <div className="img"/>
             <Link to={ data.menu_link }>{ lines(t("openMenu")) }</Link>
-            <Link to={""}>{ lines(t("reserveTable")) }</Link>
+            <Link to={ siteLink("restaurantReserve") }>{ lines(t("reserveTable")) }</Link>
         </div>
     </Section>
 }

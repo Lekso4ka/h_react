@@ -9,7 +9,7 @@ import { Hero, Section1, Section2, Section3, Section4, Section5, Section6 } from
 import { handlePhoneBlur, handlePhoneFocus, handlePhoneInput, isPhoneComplete } from "../../utils/phoneMask";
 import { armAutofillSubmit, fieldDomName, lockAutofill, noAutofillProps, readField, unlockAutofill } from "../../utils/noAutofill";
 import { lines } from "../../utils/lines";
-import {Link as ReactLink} from "react-router-dom";
+import { PolicyLink } from "../PolicyLink";
 
 gsap.registerPlugin(useGSAP);
 
@@ -383,7 +383,7 @@ export const WeddingContent = () => {
                             />
                             <label className="consent">
                                 <input type="checkbox" name="consent" required={!sent}/>
-                                { lines(t("consent")) } <ReactLink to="/policy">{ lines(t("consentLink")) }</ReactLink> { lines(t("consentMid")) } <ReactLink to="/policy">{ lines(t("policyLink")) }</ReactLink>{ lines(t("consentEnd")) }
+                                { lines(t("consent")) } <PolicyLink>{ lines(t("consentLink")) }</PolicyLink> { lines(t("consentMid")) } <PolicyLink>{ lines(t("policyLink")) }</PolicyLink>{ lines(t("consentEnd")) }
                             </label>
                         </div>
                         { sent && <p className="form-success">{ lines(t("weddingFormSuccess")) }</p> }

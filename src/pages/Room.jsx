@@ -1,16 +1,18 @@
 import React from "react"
 import { useParams } from "react-router-dom";
 import { Seo } from "../components/Seo";
-import { decodeRouteParam, getRoomById } from "../data";
+import { decodeRouteParam, getRooms } from "../data";
 import { RoomContent } from "../sections/Room";
+import { NotFound } from "./NotFound";
 
 export const Room = () => {
     const { hotel, id, variant } = useParams();
-    const category = getRoomById(hotel, id);
+    const category = getRooms(hotel)?.[id];
     const data = category?.[decodeRouteParam(variant)] || category?.default;
+    if (!data) return <NotFound />;
 
     return <>
-        <Seo {...data?.seo} />
+        <Seo {...data.seo} />
         <RoomContent/>
     </>
 }

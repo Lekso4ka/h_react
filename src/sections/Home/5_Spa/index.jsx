@@ -4,6 +4,7 @@ import { getMain } from "../../../data";
 import { Link } from "../../../ui/Link";
 import { Content } from "./style";
 import { lines } from "../../../utils/lines";
+import { siteLink } from "../../../utils/staticLinks";
 
 export const Spa = () => {
     const t = useT();
@@ -15,7 +16,7 @@ export const Spa = () => {
         <Link
             color={ "light" }
             hover={ "light" }
-            to=""
+            to={ siteLink("homeSpaMore") }
         >{ lines(t("more")) }</Link>
     </Content>
 }

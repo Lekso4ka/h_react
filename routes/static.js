@@ -9,6 +9,11 @@ const {
   listTexts,
   saveText,
   deleteText,
+  cleanHref,
+  cleanLabel,
+  listLinks,
+  saveLink,
+  deleteLink,
 } = require("../lib/staticContent");
 
 const router = express.Router();
@@ -112,6 +117,42 @@ router.delete("/texts/:key", async (req, res) => {
     const key = cleanKey(req.params.key);
     if (!key) return res.status(400).json({ error: "Некорректный ключ" });
     await deleteText(key);
+    res.json({ ok: true });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+router.get("/links", async (_req, res) => {
+  try {
+    res.json({ items: await listLinks() });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+router.put("/links/:key", async (req, res) => {
+  try {
+    const key = cleanKey(req.params.key);
+    const href = cleanHref(req.body?.href);
+    const label = cleanLabel(req.body?.label);
+    if (!key || href == null || label == null) {
+      return res.status(400).json({
+        error: "Ссылка должна начинаться с /, #, ?, https://, mailto: или tel:",
+      });
+    }
+    await saveLink(key, href, label);
+    res.json({ key, href, label });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+router.delete("/links/:key", async (req, res) => {
+  try {
+    const key = cleanKey(req.params.key);
+    if (!key) return res.status(400).json({ error: "Некорректный ключ" });
+    await deleteLink(key);
     res.json({ ok: true });
   } catch (error) {
     res.status(500).json({ error: error.message });

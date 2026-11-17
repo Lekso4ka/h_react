@@ -9,6 +9,16 @@ import { Video } from "../../ui/Video";
 import { SingleActivity } from "./SingleActivity";
 import { Block, Btn, Content, Hero, HeroLink, Image, ImgItem, Item, List, Other, VideoContainer } from "./style";
 import { lines } from "../../utils/lines";
+import { siteLink } from "../../utils/staticLinks";
+
+function ReserveLink({ children }) {
+    const href = siteLink("activitiesReserve");
+    if (/^(https?:|mailto:|tel:)/i.test(href)) {
+        const web = /^https?:/i.test(href);
+        return <a className="link" href={ href } target={ web ? "_blank" : undefined } rel={ web ? "noreferrer" : undefined }>{ children }</a>;
+    }
+    return <Link className="link" to={ href } onClick={ href ? undefined : (event) => event.preventDefault() }>{ children }</Link>;
+}
 
 export const ActivitiesContent = () => {
     const t = useT();
@@ -87,9 +97,9 @@ export const ActivitiesContent = () => {
         <VideoContainer>
             <Video data={ ["vi_gastro"] } index={ 0 }/>
             <div>
-                <Tour dark link={ "" } pos style={ { top: "2.4rem", right: "2.4rem", left: "auto" } }/>
+                <Tour dark link={ siteLink("activitiesTour") } pos style={ { top: "2.4rem", right: "2.4rem", left: "auto" } }/>
                 <h2>BRANCHE</h2>
-                <Link className="link" to={ "" }>{ lines(t("reserveTable")) }</Link>
+                <ReserveLink>{ lines(t("reserveTable")) }</ReserveLink>
             </div>
         </VideoContainer>
         <SingleActivity name={ other }/>

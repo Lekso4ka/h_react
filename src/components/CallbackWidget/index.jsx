@@ -1,11 +1,12 @@
 import React, { useEffect, useId, useLayoutEffect, useRef, useState } from "react";
 import { ChatIcon, CloseToggleIcon, EmailIcon, OrnamentIcon, PhoneToggleIcon, TelIcon } from "./icons";
 import { ContactLink, Heading, Inner, Links, Ornament, Panel, Toggle, Widget } from "./style";
+import { siteLink, siteLinkLabel } from "../../utils/staticLinks";
 
 const LINKS = [
-    { href: "tel:+78622431300", label: "+7 (862) 243-13-00", Icon: TelIcon },
-    { href: "mailto:reservation@gt-hotel.ru", label: "reservation@gt-hotel.ru", Icon: EmailIcon },
-    { href: "https://t.me/gt-hotel", label: "@gt-hotel", Icon: ChatIcon, external: true },
+    { id: "callbackPhone", Icon: TelIcon },
+    { id: "callbackEmail", Icon: EmailIcon },
+    { id: "callbackTelegram", Icon: ChatIcon },
 ];
 
 export const CallbackWidget = () => {
@@ -54,16 +55,21 @@ export const CallbackWidget = () => {
                     <Ornament as={OrnamentIcon} />
                     <Heading id={headingId}>Связаться с нами:</Heading>
                     <Links aria-label="Способы связи">
-                        {LINKS.map(({ href, label, Icon, external }) => (
+                        {LINKS.map(({ id, Icon }) => {
+                            const href = siteLink(id);
+                            const web = /^https?:/i.test(href);
+                            return (
                             <ContactLink
-                                key={href}
-                                href={href}
-                                {...(external ? { target: "_blank", rel: "noopener noreferrer" } : null)}
+                                key={id}
+                                href={href || undefined}
+                                onClick={href ? undefined : (event) => event.preventDefault()}
+                                {...(web ? { target: "_blank", rel: "noopener noreferrer" } : null)}
                             >
                                 <Icon />
-                                <span>{label}</span>
+                                <span>{siteLinkLabel(id)}</span>
                             </ContactLink>
-                        ))}
+                            );
+                        })}
                     </Links>
                 </Inner>
             </Panel>

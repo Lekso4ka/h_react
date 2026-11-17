@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { PolicyLink } from "../PolicyLink";
 import { useT } from "../../Ctx";
 import { Modal } from "./style";
 import { handlePhoneBlur, handlePhoneFocus, handlePhoneInput } from "../../utils/phoneMask";
@@ -261,7 +261,7 @@ export const RequestModal = ({
                     <label className="consent">
                         <input type="checkbox" name="consent" required={!sent}/>
                         <span>
-                            { lines(t("consent")) } <Link to="/policy">{ lines(t("consentLink")) }</Link> { lines(t("consentMid")) } <Link to="/policy">{ lines(t("policyLink")) }</Link>{ lines(t("consentEnd")) }
+                            { lines(t("consent")) } <PolicyLink>{ lines(t("consentLink")) }</PolicyLink> { lines(t("consentMid")) } <PolicyLink>{ lines(t("policyLink")) }</PolicyLink>{ lines(t("consentEnd")) }
                         </span>
                     </label>
                     <button type="submit" disabled={sent || sending} className={sent ? "sent" : ""} onPointerDown={armAutofillSubmit}>

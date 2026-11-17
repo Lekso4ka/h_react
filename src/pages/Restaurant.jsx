@@ -3,11 +3,14 @@ import { useParams } from "react-router-dom";
 import { Seo } from "../components/Seo";
 import { getHotelById } from "../data";
 import { RestaurantContent } from "../sections/Restaurant";
+import { NotFound } from "./NotFound";
 
 export const Restaurant = () => {
     const { id } = useParams();
+    const hotel = getHotelById(id);
+    if (!hotel) return <NotFound />;
     return <>
-        <Seo {...getHotelById(id)?.seo_restaurant} />
+        <Seo {...hotel.seo_restaurant} />
         <RestaurantContent page/>
     </>
 }

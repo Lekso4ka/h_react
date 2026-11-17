@@ -6,7 +6,18 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { lines } from "../../../utils/lines";
+import { siteLink } from "../../../utils/staticLinks";
+import { bookingParams, openTlBooking } from "../../../utils/tlBooking";
 gsap.registerPlugin(useGSAP, ScrollTrigger);
+
+function BookingLink({ children }) {
+    const href = siteLink("hotelBooking");
+    const booking = bookingParams(href);
+    if (booking) {
+        return <Link to="#" onClick={ (event) => openTlBooking(event, booking) }>{ children }</Link>;
+    }
+    return <Link to={ href || "#" }>{ children }</Link>;
+}
 
 export const Images = ({data}) => {
     const t = useT();
@@ -91,7 +102,7 @@ export const Images = ({data}) => {
         <div className="img img5" ref={r5}/>
         <p>{ lines(data.text) }</p>
         <div className="links">
-            <Link to="#">{ lines(t("toBooking")) }</Link>
+            <BookingLink>{ lines(t("toBooking")) }</BookingLink>
         </div>
     </Content>
 }

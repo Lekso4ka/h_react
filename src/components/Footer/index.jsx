@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { PolicyLink } from "../PolicyLink";
 import { useT } from "../../Ctx";
+import { anchorProps, siteLink, siteLinkLabel } from "../../utils/staticLinks";
 import { Block, Bottom, Caption, Left, List, Right, Title } from "./style";
 import { armAutofillSubmit, EMAIL_PATTERN, fieldDomName, lockAutofill, noAutofillProps, readField, relockAutofill, unlockAutofill } from "../../utils/noAutofill";
 import { lines } from "../../utils/lines";
@@ -97,7 +98,7 @@ export const Footer = () => {
                 </div>
                 <label className="consent">
                     <input type="checkbox" name="consent" required={!subscribed}/>
-                    <span>{ lines(t("consent")) } <Link to="/policy">{ lines(t("consentLink")) }</Link> { lines(t("consentMid")) } <Link to="/policy">{ lines(t("policyLink")) }</Link>{ lines(t("consentEnd")) }</span>
+                    <span>{ lines(t("consent")) } <PolicyLink>{ lines(t("consentLink")) }</PolicyLink> { lines(t("consentMid")) } <PolicyLink>{ lines(t("policyLink")) }</PolicyLink>{ lines(t("consentEnd")) }</span>
                 </label>
                 <button type="submit" disabled={ subscribed || sending } onPointerDown={ armAutofillSubmit }>
                     { subscribed ? lines(t("subscribed")) : lines(t("subscribe")) }
@@ -112,50 +113,50 @@ export const Footer = () => {
             <div>
                 <Title>{ lines(t("hotels")) }</Title>
                 <List>
-                    <a href="/hotel/golden-tulip">{ lines(t("hotelGolden")) }</a>
-                    <a href="/hotel/tulip-inn">{ lines(t("hotelTulip")) }</a>
-                    <a href="/vacancies">{ lines(t("vacancies")) }</a>
+                    <a {...anchorProps(siteLink("footerHotelGolden"))}>{ lines(t("hotelGolden")) }</a>
+                    <a {...anchorProps(siteLink("footerHotelTulip"))}>{ lines(t("hotelTulip")) }</a>
+                    <a {...anchorProps(siteLink("footerVacancies"))}>{ lines(t("vacancies")) }</a>
                 </List>
             
             </div>
             <div>
                 <Title>{ lines(t("navigation")) }</Title>
                 <List>
-                    <a href="/activities/summer">{ lines(t("activities")) }</a>
-                    <a href="">{ lines(t("spa")) }</a>
-                    <a href="/restaurant/golden-tulip">{ lines(t("restaurants")) }</a>
-                    <a href="/services/golden-tulip">{ lines(t("hotelServices")) }</a>
-                    <a href="/events/default">{ lines(t("events")) }</a>
-                    <a href="/events/venues">{ lines(t("venues")) }</a>
-                    <a href="/stock/golden-tulip">{ lines(t("offers")) }</a>
-                    <a href="/affiche">{ lines(t("poster")) }</a>
+                    <a {...anchorProps(siteLink("footerActivities"))}>{ lines(t("activities")) }</a>
+                    <a {...anchorProps(siteLink("footerSpa"))}>{ lines(t("spa")) }</a>
+                    <a {...anchorProps(siteLink("footerRestaurants"))}>{ lines(t("restaurants")) }</a>
+                    <a {...anchorProps(siteLink("footerServices"))}>{ lines(t("hotelServices")) }</a>
+                    <a {...anchorProps(siteLink("footerEvents"))}>{ lines(t("events")) }</a>
+                    <a {...anchorProps(siteLink("footerVenues"))}>{ lines(t("venues")) }</a>
+                    <a {...anchorProps(siteLink("footerOffers"))}>{ lines(t("offers")) }</a>
+                    <a {...anchorProps(siteLink("footerAffiche"))}>{ lines(t("poster")) }</a>
                 </List>
             </div>
             <div className="ftrCol">
                 <Title>{ lines(t("information")) }</Title>
                 <List>
-                    <a href="/info">{ lines(t("legalInfo")) }</a>
-                    <a href="/rules">{ lines(t("hotelRules")) }</a>
+                    <a {...anchorProps(siteLink("footerInfo"))}>{ lines(t("legalInfo")) }</a>
+                    <a {...anchorProps(siteLink("footerRules"))}>{ lines(t("hotelRules")) }</a>
                 </List>
             </div>
             <div>
                 <Title>{ lines(t("socials")) }</Title>
                 <List>
-                    <a href="">{ lines(t("vk")) }</a>
+                    <a {...anchorProps(siteLink("footerSocial"))}>{ lines(t("vk")) }</a>
                 </List>
             </div>
             <div>
                 <Title>{ lines(t("contacts")) }</Title>
                 <List>
-                    <a href="mailto:reservation@gt-hotel.ru">reservation@gt-hotel.ru</a>
-                    <a href="tel:+7(862)2431300">+7 (862) 243-13-00</a>
+                    <a {...anchorProps(siteLink("footerEmail"))}>{ siteLinkLabel("footerEmail") }</a>
+                    <a {...anchorProps(siteLink("footerPhone"))}>{ siteLinkLabel("footerPhone") }</a>
                 </List>
             </div>
         </Right>
         
         <Bottom>
             <span>{ lines(t("copyright")) }</span>
-            <a href="/policy">{ lines(t("policyLower")) }</a>
+            <PolicyLink>{ lines(t("policyLower")) }</PolicyLink>
         </Bottom>
     </Block>
 }
